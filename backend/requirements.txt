@@ -1,0 +1,13 @@
+django>=5.0
+djangorestframework
+django-cors-headers
+django-quill-editor
+django-filter
+django-unfold
+pillow
+gunicorn
+psycopg2-binary
+python-dotenv
+requests
+pyotp
+qrcode

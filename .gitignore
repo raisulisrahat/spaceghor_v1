@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+.env
+.env.*.local
+__pycache__/
+*.pyc
+
+# Distribution / Build
+dist/
+build/
+out/
+*.egg-info/
+.next/
+.cache/
+.parcel-cache/
+
+# Databases & Media
+*.sqlite3
+db.sqlite3
+backend/media/
+backend/staticfiles/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.icloud
+
+# IDEs & Editors
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Temporary & Backup files
+*_new.*
+*backup*
+*.bak
+*.tmp
+
+# Project Specific
+web/dist/
+web/node_modules/
+npm-build.log
+*.sqlite3
+*media/*
