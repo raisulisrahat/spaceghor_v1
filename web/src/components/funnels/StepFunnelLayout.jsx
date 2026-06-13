@@ -158,7 +158,7 @@ const StepFunnelLayout = ({
                         </div>
 
                         {/* Description */}
-                        <div className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] prose prose-invert max-w-none">
+                        <div className="bg-white/5 border border-white/10 p-4 sm:p-8 rounded-3xl sm:rounded-[2.5rem] prose prose-invert max-w-none">
                             <h3 className="text-2xl font-black text-white mb-6 tracking-tighter">পণ্যের বিস্তারিত</h3>
                             <div dangerouslySetInnerHTML={{ __html: product.short_description }} className="text-slate-400 font-medium leading-relaxed product-description-content" />
                         </div>
@@ -166,7 +166,7 @@ const StepFunnelLayout = ({
 
                     {/* Right: Checkout Sidebar */}
                     <div className="lg:w-1/2">
-                        <div className="bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl backdrop-blur-sm sticky top-24">
+                        <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-[3rem] p-4 sm:p-8 md:p-12 shadow-2xl backdrop-blur-sm sticky top-24">
                             <div className="space-y-10">
                                 <div>
                                     <div className="flex items-center gap-2 text-brand font-black text-xs uppercase tracking-[0.3em] mb-4">
@@ -203,23 +203,23 @@ const StepFunnelLayout = ({
                                 {selectedVariants?.length > 0 && selectedVariants[0].id !== 'default' && (
                                     <div className="space-y-4 pt-8 border-t border-white/10">
                                         <p className="text-xs font-black uppercase tracking-widest text-white/30">অপশন সিলেক্ট করুন</p>
-                                        <div className="grid grid-cols-1 gap-3">
+                                        <div className="space-y-3">
                                             {selectedVariants.map((variant) => (
                                                 <div
                                                     key={variant.id}
                                                     onClick={() => handleVariantSelect(variant.id)}
-                                                    className={`cursor-pointer flex items-center justify-between p-4 rounded-2xl border-2 transition-all ${variant.quantity > 0 ? 'border-brand bg-brand/10' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
+                                                    className={`cursor-pointer flex items-center justify-between p-2 sm:p-3.5 rounded-2xl border-2 transition-all gap-2 sm:gap-3 ${variant.quantity > 0 ? 'border-brand bg-brand/10' : 'border-white/5 bg-white/5 hover:border-white/20'}`}
                                                 >
-                                                    <div className="flex items-center gap-4">
-                                                        <img src={variant.image} alt="" className="w-12 h-12 rounded-xl object-cover bg-white" />
-                                                        <span className="font-bold text-white">{variant.color?.name || variant.size?.name}</span>
+                                                    <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+                                                        <img src={variant.image} alt="" className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover bg-white shrink-0" />
+                                                        <span className="font-bold text-white text-xs sm:text-sm truncate w-full block">{[variant.color?.name, variant.size?.name].filter(Boolean).join(' ') || 'Standard'}</span>
                                                     </div>
-                                                    <div className="flex items-center gap-6" onClick={e => e.stopPropagation()}>
-                                                        <span className="font-black text-brand">৳{Math.floor(variant.price)}</span>
+                                                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 shrink-0 ml-2" onClick={e => e.stopPropagation()}>
+                                                        <span className="font-black text-brand text-xs sm:text-sm">৳{Math.floor(variant.price)}</span>
                                                         <div className="flex items-center bg-black/40 rounded-xl border border-white/10 overflow-hidden">
-                                                            <button type="button" onClick={() => handleVariantQuantityChange(variant.id, -1)} className="px-4 py-2 hover:bg-white/10 text-white font-black">-</button>
-                                                            <span className="px-3 font-black text-white">{variant.quantity}</span>
-                                                            <button type="button" onClick={() => handleVariantQuantityChange(variant.id, 1)} className="px-4 py-2 hover:bg-white/10 text-white font-black">+</button>
+                                                            <button type="button" onClick={() => handleVariantQuantityChange(variant.id, -1)} className="px-2.5 sm:px-4 py-1 sm:py-2 hover:bg-white/10 text-white font-black text-xs sm:text-sm">-</button>
+                                                            <span className="px-2 sm:px-3 font-black text-white text-xs sm:text-sm min-w-[1.2rem] sm:min-w-[2rem] text-center">{variant.quantity}</span>
+                                                            <button type="button" onClick={() => handleVariantQuantityChange(variant.id, 1)} className="px-2.5 sm:px-4 py-1 sm:py-2 hover:bg-white/10 text-white font-black text-xs sm:text-sm">+</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,7 +239,7 @@ const StepFunnelLayout = ({
                                                 type="text"
                                                 name="customer_name"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
                                                 placeholder="আপনার নাম লিখুন"
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
@@ -249,7 +249,7 @@ const StepFunnelLayout = ({
                                                     type="tel"
                                                     name="phone_number"
                                                     required
-                                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
+                                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
                                                     placeholder="মোবাইল নম্বর"
                                                     value={formData.phone_number}
                                                     onChange={handleChange}
@@ -257,7 +257,7 @@ const StepFunnelLayout = ({
                                                 <input
                                                     type="email"
                                                     name="email"
-                                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
+                                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
                                                     placeholder="ইমেইল (অপশনাল)"
                                                     value={formData.email}
                                                     onChange={handleChange}
@@ -269,11 +269,11 @@ const StepFunnelLayout = ({
                                             <select
                                                 name="district"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold text-white"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold text-white"
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
-                                                <option value="" className="bg-slate-900">জেলা সিলেক্ট করুন</option>
+                                                <option value="" className="bg-slate-900">{t('select_district')}</option>
                                                 {districts.map(d => {
                                                     const displayName = d.name.includes('|')
                                                         ? (language === 'bn' ? d.name.split('|')[0].trim() : d.name.split('|')[1].trim())
@@ -284,12 +284,12 @@ const StepFunnelLayout = ({
                                             <select
                                                 name="upazila"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold text-white disabled:opacity-50"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold text-white disabled:opacity-50"
                                                 value={formData.upazila}
                                                 onChange={handleChange}
                                                 disabled={!formData.district}
                                             >
-                                                <option value="" className="bg-slate-900">থানা সিলেক্ট করুন</option>
+                                                <option value="" className="bg-slate-900">{t('select_area')}</option>
                                                 {upazilas.map(u => {
                                                     const displayName = u.name.includes('|')
                                                         ? (language === 'bn' ? u.name.split('|')[0].trim() : u.name.split('|')[1].trim())
@@ -303,8 +303,8 @@ const StepFunnelLayout = ({
                                             name="address"
                                             required
                                             rows={2}
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
-                                            placeholder="আপনার পূর্ণ ঠিকানা লিখুন"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
+                                            placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         />
@@ -312,7 +312,7 @@ const StepFunnelLayout = ({
                                         <textarea
                                             name="order_note"
                                             rows={1}
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
                                             placeholder="অর্ডার নোট (অপশনাল)"
                                             value={formData.order_note}
                                             onChange={handleChange}
@@ -337,7 +337,7 @@ const StepFunnelLayout = ({
                                         <button
                                             type="submit"
                                             disabled={submitting}
-                                            className="w-full bg-brand hover:bg-[#3a5bd9] text-white font-black text-2xl py-6 rounded-2xl shadow-2xl shadow-brand/20 transform transition-all active:scale-95 flex items-center justify-center gap-3 group disabled:opacity-70"
+                                            className="w-full bg-brand hover:bg-brand text-white font-black text-2xl py-6 rounded-2xl shadow-2xl shadow-brand/20 transform transition-all active:scale-95 flex items-center justify-center gap-3 group disabled:opacity-70"
                                         >
                                             {submitting ? 'অর্ডার হচ্ছে...' : (
                                                 <>অর্ডার কনফার্ম করুন <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" /></>
@@ -448,13 +448,13 @@ const StepFunnelLayout = ({
             <footer className="py-12 bg-[#080b12] border-t border-white/5 text-center">
                 <div className="container mx-auto px-4">
                     <div className="text-xl font-black text-slate-300 mb-4 tracking-tighter uppercase">Spaceghor</div>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; 2026 Spaceghor. Developed  by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors">Cyber and Tech Solution</a>.</p>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; 2026 Spaceghor. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors">Cyber and Tech Solution</a>.</p>
                 </div>
             </footer>
             
             <style dangerouslySetInnerHTML={{ __html: `
-                .swiper-pagination-bullet-active { background: #5173FB !important; }
-                .swiper-button-next, .swiper-button-prev { color: #5173FB !important; }
+                .swiper-pagination-bullet-active { background: #C0561F !important; }
+                .swiper-button-next, .swiper-button-prev { color: #C0561F !important; }
             `}} />
         </div>
     );

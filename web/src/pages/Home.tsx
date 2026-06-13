@@ -260,7 +260,7 @@ const Home = () => {
                   <span className="text-neutral-400 font-medium">Loading premium deals...</span>
                 </div>
               ) : (
-                <div className="w-full h-full bg-gradient-to-r from-brand to-[#809BFF] flex flex-col justify-center p-8 md:p-12 text-white space-y-4">
+                <div className="w-full h-full bg-gradient-to-r from-[#C0561F] to-[#809BFF] flex flex-col justify-center p-8 md:p-12 text-white space-y-4">
                   <h2 className="text-3xl md:text-5xl font-extrabold leading-tight max-w-lg">
                     Premium Gadgets & Accessories
                   </h2>
@@ -454,7 +454,7 @@ const Home = () => {
               pagination={{
                 clickable: true,
                 renderBullet: function (index, className) {
-                  return '<span class="' + className + ' custom-number-bullet">' + (index + 1) + '</span>';
+                  return '<span class=""></span>';
                 },
               }}
               autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -493,11 +493,6 @@ const Home = () => {
               </div>
             </Link>
           ))}
-          {/* Fallback mockups if less than 2 banners */}
-          {/* {Array.from({ length: Math.max(0, 2 - promoBanners.length) }).map((_, index) => (
-                        <div key={`placeholder-${index}`} className={`relative h-[220px] md:h-[300px] lg:h-[350px] rounded-3xl overflow-hidden group shadow-xl flex items-center justify-center text-white p-10 text-center ${index === 0 ? 'bg-gradient-to-br from-indigo-900 to-purple-900' : 'bg-gradient-to-br from-amber-700 to-orange-900'}`}>
-                        </div>
-                    ))} */}
         </div>
       </div>
 

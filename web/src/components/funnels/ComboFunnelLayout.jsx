@@ -224,45 +224,45 @@ const ComboFunnelLayout = ({
                                     <div
                                         key={variant.id}
                                         onClick={() => handleVariantSelect(variant.id)}
-                                        className={`cursor-pointer flex items-center justify-between p-3.5 rounded-xl border-2 transition-all duration-300 gap-3 ${variant.quantity > 0 ? 'border-[#3D1625] bg-[#FAF6ED] shadow-md' : 'border-[#3D1625]/10 bg-white hover:border-[#3D1625]/30'}`}
+                                        className={`cursor-pointer flex items-center justify-between p-2 sm:p-3.5 rounded-xl border-2 transition-all duration-300 gap-2 sm:gap-3 ${variant.quantity > 0 ? 'border-[#3D1625] bg-[#FAF6ED] shadow-md' : 'border-[#3D1625]/10 bg-white hover:border-[#3D1625]/30'}`}
                                     >
-                                        <div className="flex items-center gap-3 min-w-0">
+                                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                                             {/* Radio Bullet Indicator */}
                                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#3D1625] bg-white' : 'border-slate-300'}`}>
                                                 <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${variant.quantity > 0 ? 'bg-[#3D1625] scale-100' : 'bg-transparent scale-0'}`} />
                                             </div>
-                                            <div className="w-14 h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
+                                            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                 <img src={variant.image} alt={variant.color ? variant.color.name : product.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = product.images?.[0]?.image || ''; }} loading="eager" />
                                             </div>
-                                            <div className="flex flex-col items-start text-left min-w-0">
-                                                <h4 className="font-bold text-[#3D1625] leading-tight truncate w-full">
+                                            <div className="flex flex-col items-start text-left min-w-0 flex-1">
+                                                <h4 className="font-bold text-[#3D1625] text-xs sm:text-sm leading-tight truncate w-full">
                                                     {variant.product_id === product.id ? product.name : (funnel?.product_two_details?.name || product.name)}
                                                 </h4>
-                                                <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                                    <p className="text-xs text-slate-500 font-bold">
-                                                        {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ')}
+                                                <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1 flex-wrap">
+                                                    <p className="text-[10px] sm:text-xs text-slate-500 font-bold truncate max-w-full">
+                                                        {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ') || 'Standard'}
                                                     </p>
-                                                    <span className="text-[10px] font-black text-[#3D1625] bg-[#3D1625]/5 px-1.5 py-0.5 rounded">৳{Math.floor(variant.price)}</span>
+                                                    <span className="text-[9px] sm:text-[10px] font-black text-[#3D1625] bg-[#3D1625]/5 px-1 sm:px-1.5 py-0.5 rounded shrink-0">৳{Math.floor(variant.price)}</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="shrink-0" onClick={e => e.stopPropagation()}>
+                                        <div className="shrink-0 ml-2" onClick={e => e.stopPropagation()}>
                                             <div className="flex items-center bg-white rounded-lg border border-[#3D1625]/20 overflow-hidden">
                                                 <button
                                                     type="button"
                                                     onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }}
-                                                    className="px-2.5 py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-sm"
+                                                    className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-xs sm:text-sm"
                                                 >
                                                     -
                                                 </button>
-                                                <span className="px-2 py-1 text-[#3D1625] font-bold min-w-[1.8rem] text-center border-x border-[#3D1625]/10 text-sm">
+                                                <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[#3D1625] font-bold min-w-[1.2rem] sm:min-w-[1.8rem] text-center border-x border-[#3D1625]/10 text-xs sm:text-sm">
                                                     {variant.quantity}
                                                 </span>
                                                 <button
                                                     type="button"
                                                     onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }}
-                                                    className="px-2.5 py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-sm"
+                                                    className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-xs sm:text-sm"
                                                 >
                                                     +
                                                 </button>
@@ -276,7 +276,7 @@ const ComboFunnelLayout = ({
                                         <div className="space-y-6">
                                             {/* Primary Product Selection */}
                                             {primaryVars.length > 0 && (
-                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                                     <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-2 text-left">
                                                         আপনার পছন্দের {product.name} সিলেক্ট করুন <span className="text-red-500">*</span>
                                                     </h3>
@@ -288,7 +288,7 @@ const ComboFunnelLayout = ({
 
                                             {/* Secondary Product Selection */}
                                             {secondaryVars.length > 0 && (
-                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                                     <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-2 text-left">
                                                         আপনার পছন্দের {funnel?.product_two_details?.name || 'আইটেম'} সিলেক্ট করুন <span className="text-red-500">*</span>
                                                     </h3>
@@ -303,7 +303,7 @@ const ComboFunnelLayout = ({
 
                                 // Fallback
                                 return (
-                                    <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                    <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                         <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-2 text-left">
                                             আপনার পছন্দের সাইজ/কালার সিলেক্ট করুন <span className="text-red-500">*</span>
                                         </h3>
@@ -447,15 +447,15 @@ const ComboFunnelLayout = ({
                                                 const varProdName = variant.product_id === product.id ? product.name : (funnel?.product_two_details?.name || product.name);
                                                 return (
                                                     <div key={variant.id} className="flex justify-between items-center gap-4 py-1">
-                                                        <div className="flex gap-3 items-center min-w-0">
+                                                        <div className="flex gap-3 items-center min-w-0 flex-1">
                                                             <div className="w-12 h-12 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                                 <img src={resolveImageUrl(variant.image || product.image || product.images?.[0]?.image)} alt={varProdName} className="w-full h-full object-cover" loading="eager" />
                                                             </div>
-                                                            <div className="flex flex-col items-start min-w-0">
-                                                                <span className="font-bold text-[#3D1625] truncate text-sm">
+                                                            <div className="flex flex-col items-start min-w-0 flex-1">
+                                                                <span className="font-bold text-[#3D1625] truncate text-sm block w-full">
                                                                     {varProdName}
                                                                 </span>
-                                                                <span className="text-xs text-slate-500 font-semibold">
+                                                                <span className="text-xs text-slate-500 font-semibold truncate block w-full">
                                                                     {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ')} (x{variant.quantity})
                                                                 </span>
                                                             </div>
@@ -468,16 +468,16 @@ const ComboFunnelLayout = ({
                                             })
                                         ) : (
                                             <div className="flex justify-between items-center gap-4 py-1">
-                                                <div className="flex gap-3 items-center min-w-0">
+                                                <div className="flex gap-3 items-center min-w-0 flex-1">
                                                     <div className="w-12 h-12 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                         <img src={resolveImageUrl(activeVariant?.image || product.image || product.images?.[0]?.image)} alt={product.name} className="w-full h-full object-cover" loading="eager" />
                                                     </div>
-                                                    <div className="flex flex-col items-start min-w-0">
-                                                        <span className="font-bold text-[#3D1625] truncate text-sm">
+                                                    <div className="flex flex-col items-start min-w-0 flex-1">
+                                                        <span className="font-bold text-[#3D1625] truncate text-sm block w-full">
                                                             {product.name}
                                                         </span>
                                                         {activeVariant && activeVariant.id !== 'default' && (
-                                                            <span className="text-xs text-slate-500 font-semibold">
+                                                            <span className="text-xs text-slate-500 font-semibold truncate block w-full">
                                                                 {[activeVariant.color?.name, activeVariant.size?.name].filter(Boolean).join(' ')}
                                                             </span>
                                                         )}
@@ -679,8 +679,8 @@ const ComboFunnelLayout = ({
                     )}
 
                     {/* Centered Premium Bangla description text below bullets */}
-                    <div className="hero-text-anim text-green-900 text-lg sm:text-xl font-extrabold max-w-3xl mx-auto leading-relaxed space-y-4">
-                        <p className="whitespace-pre-line">{product.short_description}</p>
+                    <div className="hero-text-anim text-green-900 text-lg sm:text-xl font-extrabold max-w-3xl mx-auto leading-relaxed space-y-4 text-left">
+                        <div dangerouslySetInnerHTML={{ __html: product.short_description }} className="product-description-content" />
                         {funnel?.product_two_details?.short_description && (
                             <>
                                 <div className="flex items-center justify-center gap-4 py-2">
@@ -688,7 +688,7 @@ const ComboFunnelLayout = ({
                                     <span className="text-green-600 font-black text-2xl">&</span>
                                     <div className="h-[2px] bg-green-900/20 w-16" />
                                 </div>
-                                <p className="whitespace-pre-line">{funnel.product_two_details.short_description}</p>
+                                <div dangerouslySetInnerHTML={{ __html: funnel.product_two_details.short_description }} className="product-description-content" />
                             </>
                         )}
                     </div>
@@ -799,45 +799,45 @@ const ComboFunnelLayout = ({
                                     <div
                                         key={variant.id}
                                         onClick={() => handleVariantSelect(variant.id)}
-                                        className={`cursor-pointer flex items-center justify-between p-3.5 rounded-xl border-2 transition-all duration-300 gap-3 ${variant.quantity > 0 ? 'border-[#3D1625] bg-[#FAF6ED] shadow-md' : 'border-[#3D1625]/10 bg-white hover:border-[#3D1625]/30'}`}
+                                        className={`cursor-pointer flex items-center justify-between p-2 sm:p-3.5 rounded-xl border-2 transition-all duration-300 gap-2 sm:gap-3 ${variant.quantity > 0 ? 'border-[#3D1625] bg-[#FAF6ED] shadow-md' : 'border-[#3D1625]/10 bg-white hover:border-[#3D1625]/30'}`}
                                     >
-                                        <div className="flex items-center gap-3 min-w-0">
+                                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                                             {/* Radio Bullet Indicator */}
                                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#3D1625] bg-white' : 'border-slate-300'}`}>
                                                 <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${variant.quantity > 0 ? 'bg-[#3D1625] scale-100' : 'bg-transparent scale-0'}`} />
                                             </div>
-                                            <div className="w-14 h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
+                                            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                 <img src={variant.image} alt={variant.color ? variant.color.name : product.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = product.images?.[0]?.image || ''; }} loading="eager" />
                                             </div>
-                                            <div className="flex flex-col items-start text-left min-w-0">
-                                                <h4 className="font-bold text-[#3D1625] leading-tight truncate w-full">
+                                            <div className="flex flex-col items-start text-left min-w-0 flex-1">
+                                                <h4 className="font-bold text-[#3D1625] text-xs sm:text-sm leading-tight truncate w-full">
                                                     {variant.product_id === product.id ? product.name : (funnel?.product_two_details?.name || product.name)}
                                                 </h4>
-                                                <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                                    <p className="text-xs text-slate-500 font-bold">
-                                                        {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ')}
+                                                <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5 sm:mt-1 flex-wrap">
+                                                    <p className="text-[10px] sm:text-xs text-slate-500 font-bold truncate max-w-full">
+                                                        {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ') || 'Standard'}
                                                     </p>
-                                                    <span className="text-[10px] font-black text-[#3D1625] bg-[#3D1625]/5 px-1.5 py-0.5 rounded">৳{Math.floor(variant.price)}</span>
+                                                    <span className="text-[9px] sm:text-[10px] font-black text-[#3D1625] bg-[#3D1625]/5 px-1 sm:px-1.5 py-0.5 rounded shrink-0">৳{Math.floor(variant.price)}</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="shrink-0" onClick={e => e.stopPropagation()}>
+                                        <div className="shrink-0 ml-2" onClick={e => e.stopPropagation()}>
                                             <div className="flex items-center bg-white rounded-lg border border-[#3D1625]/20 overflow-hidden">
                                                 <button
                                                     type="button"
                                                     onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }}
-                                                    className="px-2.5 py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-sm"
+                                                    className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-xs sm:text-sm"
                                                 >
                                                     -
                                                 </button>
-                                                <span className="px-2 py-1 text-[#3D1625] font-bold min-w-[1.8rem] text-center border-x border-[#3D1625]/10 text-sm">
+                                                <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[#3D1625] font-bold min-w-[1.2rem] sm:min-w-[1.8rem] text-center border-x border-[#3D1625]/10 text-xs sm:text-sm">
                                                     {variant.quantity}
                                                 </span>
                                                 <button
                                                     type="button"
                                                     onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }}
-                                                    className="px-2.5 py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-sm"
+                                                    className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[#3D1625] hover:bg-slate-100 transition-colors font-bold text-xs sm:text-sm"
                                                 >
                                                     +
                                                 </button>
@@ -851,7 +851,7 @@ const ComboFunnelLayout = ({
                                         <div className="space-y-6">
                                             {/* Primary Product Selection */}
                                             {primaryVars.length > 0 && (
-                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                                     <div className="text-left">
                                                         <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-1">
                                                             আপনার পছন্দের {product.name} সিলেক্ট করুন <span className="text-red-500">*</span>
@@ -865,7 +865,7 @@ const ComboFunnelLayout = ({
 
                                             {/* Secondary Product Selection */}
                                             {secondaryVars.length > 0 && (
-                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                                <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                                     <div className="text-left">
                                                         <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-1">
                                                             আপনার পছন্দের {funnel?.product_two_details?.name || 'আইটেম'} সিলেক্ট করুন <span className="text-red-500">*</span>
@@ -882,7 +882,7 @@ const ComboFunnelLayout = ({
 
                                 // Fallback
                                 return (
-                                    <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-5 space-y-4">
+                                    <div className="bg-[#FAF6ED] border-2 border-[#3D1625] rounded-2xl p-3 sm:p-5 space-y-4">
                                         <h3 className="text-sm font-black text-[#3D1625] uppercase tracking-wider mb-2 text-left">
                                             আপনার পছন্দের সাইজ/কালার সিলেক্ট করুন <span className="text-red-500">*</span>
                                         </h3>
@@ -1026,15 +1026,15 @@ const ComboFunnelLayout = ({
                                                 const varProdName = variant.product_id === product.id ? product.name : (funnel?.product_two_details?.name || product.name);
                                                 return (
                                                     <div key={variant.id} className="flex justify-between items-center gap-4 py-1">
-                                                        <div className="flex gap-3 items-center min-w-0">
+                                                        <div className="flex gap-3 items-center min-w-0 flex-1">
                                                             <div className="w-12 h-12 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                                 <img src={resolveImageUrl(variant.image || product.image || product.images?.[0]?.image)} alt={varProdName} className="w-full h-full object-cover" loading="eager" />
                                                             </div>
-                                                            <div className="flex flex-col items-start min-w-0">
-                                                                <span className="font-bold text-[#3D1625] truncate text-sm">
+                                                            <div className="flex flex-col items-start min-w-0 flex-1">
+                                                                <span className="font-bold text-[#3D1625] truncate text-sm block w-full">
                                                                     {varProdName}
                                                                 </span>
-                                                                <span className="text-xs text-slate-500 font-semibold">
+                                                                <span className="text-xs text-slate-500 font-semibold truncate block w-full">
                                                                     {[variant.color?.name, variant.size?.name].filter(Boolean).join(' ')} (x{variant.quantity})
                                                                 </span>
                                                             </div>
@@ -1047,16 +1047,16 @@ const ComboFunnelLayout = ({
                                             })
                                         ) : (
                                             <div className="flex justify-between items-center gap-4 py-1">
-                                                <div className="flex gap-3 items-center min-w-0">
+                                                <div className="flex gap-3 items-center min-w-0 flex-1">
                                                     <div className="w-12 h-12 rounded-lg overflow-hidden bg-white shrink-0 border border-slate-200">
                                                         <img src={resolveImageUrl(activeVariant?.image || product.image || product.images?.[0]?.image)} alt={product.name} className="w-full h-full object-cover" loading="eager" />
                                                     </div>
-                                                    <div className="flex flex-col items-start min-w-0">
-                                                        <span className="font-bold text-[#3D1625] truncate text-sm">
+                                                    <div className="flex flex-col items-start min-w-0 flex-1">
+                                                        <span className="font-bold text-[#3D1625] truncate text-sm block w-full">
                                                             {product.name}
                                                         </span>
                                                         {activeVariant && activeVariant.id !== 'default' && (
-                                                            <span className="text-xs text-slate-500 font-semibold">
+                                                            <span className="text-xs text-slate-500 font-semibold truncate block w-full">
                                                                 {[activeVariant.color?.name, activeVariant.size?.name].filter(Boolean).join(' ')}
                                                             </span>
                                                         )}
@@ -1104,7 +1104,7 @@ const ComboFunnelLayout = ({
             {/* Footer */}
             <div className="bg-green-900 text-white/50 py-12 text-center text-xs font-semibold border-t border-white/10">
                 <div className="container mx-auto px-4 max-w-4xl space-y-2">
-                    <p className="mb-2 font-medium text-white">© 2026 Spaceghor. Developed  by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className='text-white hover:text-slate-300 transition-colors'>Cyber and Tech Solution</a>.</p>
+                    <p className="mb-2 font-medium text-white">© 2026 Spaceghor. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className='text-white hover:text-slate-300 transition-colors'>Cyber and Tech Solution</a>.</p>
                 </div>
             </div>
 

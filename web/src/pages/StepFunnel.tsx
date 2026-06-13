@@ -350,7 +350,7 @@ const StepFunnel = () => {
             <p className="text-slate-600 text-xl mb-10 max-w-lg">আপনার অর্ডারটি আমরা পেয়েছি। আমাদের প্রতিনিধি শীঘ্রই কল করে আপনার অর্ডারটি কনফার্ম করবেন। আমাদের সাথে থাকার জন্য ধন্যবাদ।</p>
             <button 
                 onClick={() => navigate('/')} 
-                className="bg-brand text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-[#5173FB]/20 hover:scale-105 transition-transform"
+                className="bg-brand text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-brand/20 hover:scale-105 transition-transform"
             >
                 আরো কেনাকাটা করুন
             </button>
@@ -374,7 +374,7 @@ const StepFunnel = () => {
             {/* Main Header */}
             <header className="py-6 border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-40">
                 <div className="container mx-auto px-4 flex justify-between items-center max-w-6xl">
-                    <div className="text-2xl font-black tracking-tighter text-brand">{siteSettings?.site_title}</div>
+                    <div className="text-2xl font-black tracking-tighter text-brand">{siteSettings?.site_title || 'Qbamart'}</div>
                     <div className="flex gap-4 md:gap-8 items-center text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest">
                         <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-brand" /> 100% Secure</span>
                         <span className="flex items-center gap-1.5"><Truck size={14} className="text-brand" /> Cash on Delivery</span>
@@ -475,7 +475,7 @@ const StepFunnel = () => {
                                                 name="customer_name"
                                                 required
                                                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
-                                                placeholder="আপনার নাম লিখুন"
+                                                placeholder={t('full_name')}
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
                                             />
@@ -484,7 +484,7 @@ const StepFunnel = () => {
                                                 name="phone_number"
                                                 required
                                                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
-                                                placeholder="আপনার মোবাইল নম্বর"
+                                                placeholder={t('phone_number')}
                                                 value={formData.phone_number}
                                                 onChange={handleChange}
                                             />
@@ -498,7 +498,7 @@ const StepFunnel = () => {
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
-                                                <option value="" className="bg-slate-900">জেলা সিলেক্ট করুন</option>
+                                                <option value="" className="bg-slate-900">{t('select_district')}</option>
                                                 {districts.map(d => (
                                                     <option key={d.id} value={d.id} className="bg-slate-900">{d.name.split('|')[language === 'bn' ? 0 : 1] || d.name}</option>
                                                 ))}
@@ -511,7 +511,7 @@ const StepFunnel = () => {
                                                 onChange={handleChange}
                                                 disabled={!formData.district}
                                             >
-                                                <option value="" className="bg-slate-900">থানা সিলেক্ট করুন</option>
+                                                <option value="" className="bg-slate-900">{t('select_area')}</option>
                                                 {upazilas.map(u => (
                                                     <option key={u.id} value={u.id} className="bg-slate-900">{u.name.split('|')[language === 'bn' ? 0 : 1] || u.name}</option>
                                                 ))}
@@ -523,7 +523,7 @@ const StepFunnel = () => {
                                             required
                                             rows={2}
                                             className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
-                                            placeholder="আপনার পূর্ণ ঠিকানা লিখুন"
+                                            placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         />
@@ -548,7 +548,7 @@ const StepFunnel = () => {
                                             ref={submitBtnRef}
                                             type="submit"
                                             disabled={submitting}
-                                            className="w-full bg-brand hover:bg-[#3a5bd9] text-white font-black text-2xl py-6 rounded-2xl shadow-2xl shadow-[#5173FB]/20 transform transition-all active:scale-95 flex items-center justify-center gap-3 group disabled:opacity-70"
+                                            className="w-full bg-brand hover:bg-[#3a5bd9] text-white font-black text-2xl py-6 rounded-2xl shadow-2xl shadow-brand/20 transform transition-all active:scale-95 flex items-center justify-center gap-3 group disabled:opacity-70"
                                         >
                                             {submitting ? 'অর্ডার হচ্ছে...' : (
                                                 <>অর্ডার কনফার্ম করুন <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" /></>
@@ -556,7 +556,7 @@ const StepFunnel = () => {
                                         </button>
                                         
                                         <p className="text-center text-[10px] uppercase tracking-widest text-white/30 font-black">
-                                            100% Secure Checkout | Verified by {siteSettings?.site_title}
+                                            100% Secure Checkout | Verified by {siteSettings?.site_title || 'Qbamart'}
                                         </p>
                                     </form>
                                 </div>
@@ -577,7 +577,7 @@ const StepFunnel = () => {
                     >
                         <a 
                             href="#order-form" 
-                            className="w-full bg-brand text-white font-black py-4 rounded-2xl flex items-center justify-center gap-2 shadow-2xl shadow-[#5173FB]/30"
+                            className="w-full bg-brand text-white font-black py-4 rounded-2xl flex items-center justify-center gap-2 shadow-2xl shadow-brand/30"
                             onClick={(e) => {
                                 e.preventDefault();
                                 document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -592,14 +592,14 @@ const StepFunnel = () => {
             {/* Footer */}
             <footer className="py-12 bg-slate-50 border-t border-slate-100 text-center">
                 <div className="container mx-auto px-4">
-                    <div className="text-xl font-black text-slate-300 mb-4 tracking-tighter uppercase">{siteSettings?.site_title}</div>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} {siteSettings?.site_title} | All Rights Reserved</p>
+                    <div className="text-xl font-black text-slate-300 mb-4 tracking-tighter uppercase">{siteSettings?.site_title || 'Qbamart'}</div>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} {siteSettings?.site_title || 'Qbamart'} | All Rights Reserved</p>
                 </div>
             </footer>
             
             <style dangerouslySetInnerHTML={{ __html: `
-                .swiper-pagination-bullet-active { background: #5173FB !important; }
-                .swiper-button-next, .swiper-button-prev { color: #5173FB !important; }
+                .swiper-pagination-bullet-active { background: #C0561F !important; }
+                .swiper-button-next, .swiper-button-prev { color: #C0561F !important; }
             `}} />
             <ChatBubble />
         </div>

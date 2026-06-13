@@ -247,8 +247,8 @@ const EzyFunnelLayout = ({
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes pulse-glow {
-                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
-                    50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(255, 0, 60, 0.7); }
+                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(174, 0, 255, 0.4); }
+                    50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(38, 0, 255, 0.7); }
                 }
                 .pulse-btn {
                     animation: pulse-glow 2.5s infinite ease-in-out;
@@ -319,7 +319,7 @@ const EzyFunnelLayout = ({
                     backdrop-filter: blur(4px) !important;
                 }
                 .video-js .vjs-big-play-button:hover {
-                    background-color: #5173FB !important; /* solid premium brand orange */
+                    background-color: #C0561F !important; /* solid premium brand orange */
                     transform: translate(-50%, -50%) scale(1.12) !important;
                     box-shadow: 0 0 35px rgba(81, 115, 251, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.4) !important;
                     border-color: #ffffff !important;
@@ -480,7 +480,7 @@ const EzyFunnelLayout = ({
                     {/* Promo Ribbon */}
                     <button
                         onClick={() => document.getElementById('pricing-box-container')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="pulse-btn shimmer-overlay bg-brand hover:bg-brand/90 text-white font-black text-lg sm:text-2xl py-5 px-10 rounded-full flex items-center justify-center gap-3 mx-auto transition-transform w-full sm:w-auto"
+                        className="pulse-btn shimmer-overlay bg-brand hover:bg-brand text-white font-black text-lg sm:text-2xl py-5 px-10 rounded-full flex items-center justify-center gap-3 mx-auto transition-transform w-full sm:w-auto"
                     >
                         <ShoppingCart size={22} className="fill-white" />
                         <span>অর্ডার করতে ক্লিক করুন</span>
@@ -515,7 +515,7 @@ const EzyFunnelLayout = ({
                 <div className="text-center">
                     <button
                         onClick={() => document.getElementById('pricing-box-container')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="pulse-btn shimmer-overlay bg-brand hover:bg-brand/90 text-white font-black text-lg sm:text-2xl py-5 px-10 rounded-full flex items-center justify-center gap-3 mx-auto transition-transform w-full sm:w-auto"
+                        className="pulse-btn shimmer-overlay bg-brand hover:bg-brand text-white font-black text-lg sm:text-2xl py-5 px-10 rounded-full flex items-center justify-center gap-3 mx-auto transition-transform w-full sm:w-auto"
                     >
                         <ShoppingCart size={22} className="fill-white" />
                         <span>মূল্য জানতে চাই</span>
@@ -583,7 +583,7 @@ const EzyFunnelLayout = ({
                                         <div className="container mx-auto px-4 max-w-6xl">
                                             {/* Section Header */}
                                             <div className="text-center mb-16 space-y-4">
-                                                <div className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
+                                                <div className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
                                                     <h5 className="text-xl md:text-2xl font-black tracking-tight uppercase">
                                                         আমাদের কাস্টমার রিভিউ
                                                     </h5>
@@ -652,7 +652,7 @@ const EzyFunnelLayout = ({
                                             <div className="mt-10 text-center">
                                                 <button 
                                                     onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                                    className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                                                    className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
                                                 >
                                                     <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
                                                 </button>
@@ -706,12 +706,12 @@ const EzyFunnelLayout = ({
                     </div>
 
                     {/* F. High Conversion Order Form */}
-                    <div id="order-form-anchor" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 sm:p-12 shadow-2xl space-y-8">
+                    <div id="order-form-anchor" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 sm:p-10 shadow-2xl space-y-8">
                         <form onSubmit={handleFormSubmit} className="space-y-8">
                             
                             {/* Variant Selection List */}
                             {selectedVariants?.length > 0 && selectedVariants[0].id !== 'default' && (
-                                <div className="space-y-4 bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
+                                <div className="space-y-4 bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-5 backdrop-blur-sm">
                                     <label className="block text-sm font-black tracking-wider text-slate-200 uppercase">
                                         ১. আপনার পছন্দের ভেরিয়েন্ট বা কালার নির্বাচন করুন: <span className="text-[#ff003c]">*</span>
                                     </label>
@@ -720,43 +720,43 @@ const EzyFunnelLayout = ({
                                             <div
                                                 key={variant.id}
                                                 onClick={() => handleVariantSelect(variant.id)}
-                                                className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#ff003c] bg-white/10 shadow-[0_0_15px_rgba(255,0,60,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
+                                                className={`cursor-pointer flex items-center justify-between p-2 sm:p-3.5 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#ff003c] bg-white/10 shadow-[0_0_15px_rgba(255,0,60,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
                                             >
-                                                <div className="flex items-center gap-4">
+                                                <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                                                     {/* Radio Indicator */}
                                                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-white bg-white/10' : 'border-white/20'}`}>
                                                         <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${variant.quantity > 0 ? 'bg-white scale-100' : 'bg-transparent scale-0'}`} />
                                                     </div>
-                                                    <div className="w-14 h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-white/20">
+                                                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-white shrink-0 border border-white/20">
                                                         <img src={resolveImageUrl(variant.image || product.image || product.images?.[0]?.image)} alt={variant.color ? variant.color.name : product.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = product.images?.[0]?.image || ''; }} loading="eager" />
                                                     </div>
-                                                    <div className="flex flex-col items-start text-left">
-                                                        <h4 className="font-bold text-white leading-tight max-w-[120px] sm:max-w-[200px] truncate">
+                                                    <div className="flex flex-col items-start text-left min-w-0 flex-1">
+                                                        <h4 className="font-bold text-white leading-tight text-sm sm:text-base truncate w-full">
                                                             {product.name}
                                                         </h4>
-                                                        <p className="text-xs text-slate-300 font-medium">
+                                                        <p className="text-[10px] sm:text-xs text-slate-300 font-medium truncate w-full">
                                                             {variant.color?.name || variant.size?.name || 'Standard'}
                                                         </p>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-col items-end gap-2 shrink-0">
-                                                    <span className="font-black text-white">৳ {language === 'bn' ? toBanglaNumber(Math.floor(variant.price)) : Math.floor(variant.price)}</span>
+                                                <div className="flex flex-col items-end gap-1.5 sm:gap-2 shrink-0 ml-2">
+                                                    <span className="font-black text-white text-sm sm:text-base">৳ {language === 'bn' ? toBanglaNumber(Math.floor(variant.price)) : Math.floor(variant.price)}</span>
                                                     <div className="flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden" onClick={e => e.stopPropagation()}>
                                                         <button
                                                             type="button"
                                                             onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }}
-                                                            className="px-3 py-1 text-white hover:bg-white/20 transition-colors font-bold text-lg"
+                                                            className="px-2 sm:px-3 py-0.5 sm:py-1 text-white hover:bg-white/20 transition-colors font-bold text-base sm:text-lg"
                                                         >
                                                             -
                                                         </button>
-                                                        <span className="px-3 py-1 text-white font-bold min-w-[2rem] text-center border-x border-white/10 text-sm">
+                                                        <span className="px-2 sm:px-3 py-0.5 sm:py-1 text-white font-bold min-w-[1.5rem] sm:min-w-[2rem] text-center border-x border-white/10 text-xs sm:text-sm">
                                                             {language === 'bn' ? toBanglaNumber(variant.quantity) : variant.quantity}
                                                         </span>
                                                         <button
                                                             type="button"
                                                             onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }}
-                                                            className="px-3 py-1 text-white hover:bg-white/20 transition-colors font-bold text-lg"
+                                                            className="px-2 sm:px-3 py-0.5 sm:py-1 text-white hover:bg-white/20 transition-colors font-bold text-base sm:text-lg"
                                                         >
                                                             +
                                                         </button>
@@ -868,7 +868,7 @@ const EzyFunnelLayout = ({
                                             required
                                             rows="2"
                                             className="w-full pl-5 pr-12 py-4 bg-slate-900/50 border border-white/20 rounded-2xl focus:border-[#ff003c] focus:bg-slate-900/80 focus:ring-4 focus:ring-[#ff003c]/10 text-white placeholder-slate-500 outline-none font-bold transition-all duration-300 resize-none"
-                                            placeholder="গ্রাম/পাড়া, রোড নম্বর, বাসা নম্বর ইত্যাদি লিখুন"
+                                            placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         />
@@ -915,7 +915,7 @@ const EzyFunnelLayout = ({
                                     <div className="flex justify-between items-center text-slate-300 font-bold">
                                         <span>প্রোডাক্ট নাম</span>
                                         <div className='flex gap-3 items-center text-right justify-end max-w-[200px] sm:max-w-xs'>
-                                            <span className="font-extrabold text-white truncate text-xs sm:text-sm">
+                                            <span className="font-extrabold text-white truncate text-xs sm:text-sm block">
                                                 {product.name}
                                                 {activeVariant && activeVariant.id !== 'default' ? ` - ${activeVariant.color?.name || ''} ${activeVariant.size?.name || ''}`.trim() : ''}
                                             </span>
@@ -956,7 +956,7 @@ const EzyFunnelLayout = ({
                                 ref={submitBtnRef}
                                 type="submit"
                                 disabled={submitting}
-                                className="pulse-btn shimmer-overlay w-full bg-brand hover:bg-brand/90 text-white font-black text-xl sm:text-2xl py-6 rounded-2xl transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 disabled:opacity-75 disabled:cursor-not-allowed border-0 outline-0"
+                                className="pulse-btn shimmer-overlay w-full bg-brand hover:bg-brand text-white font-black text-xl sm:text-2xl py-6 rounded-2xl transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 disabled:opacity-75 disabled:cursor-not-allowed border-0 outline-0"
                             >
                                 <ShoppingCart size={24} className="fill-white" />
                                 <span>{submitting ? 'অর্ডার প্রসেস হচ্ছে...' : 'অর্ডার কনফার্ম করুন'}</span>
@@ -973,7 +973,7 @@ const EzyFunnelLayout = ({
                     {/* Developer Credits */}
                     <div className="space-y-2 text-xs sm:text-sm">
                         <p className="font-bold text-slate-400">
-                            © 2026 Qbamart. Powered by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
+                            © 2026 Spaceghor. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
                         </p>
                     </div>
                 </div>
@@ -987,7 +987,7 @@ const EzyFunnelLayout = ({
                 </div>
                 <a
                     href="#pricing-box-container"
-                    className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-brand text-white font-black py-4 rounded-xl text-sm shadow-lg shadow-[#ff003c]/20 hover:bg-[#3a5bd9] active:scale-95 transition-all text-center uppercase tracking-wide"
+                    className="flex-1 max-w-[200px] flex items-center justify-center gap-2 bg-brand text-white font-black py-4 rounded-xl text-sm shadow-lg shadow-[#ff003c]/20 hover:bg-brand active:scale-95 transition-all text-center uppercase tracking-wide"
                 >
                     <ShoppingCart size={16} />
                     <span>অর্ডার করুন</span>

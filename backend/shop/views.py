@@ -2024,6 +2024,64 @@ class MediaManagerView(APIView):
             for chunk in file_obj.chunks():
                 destination.write(chunk)
 
+        # Video Compression logic if file is big
+        ext_lower = ext.lower()
+        is_video = ext_lower in ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv']
+        
+        if is_video:
+            try:
+                file_size = os.path.getsize(file_path)
+            except Exception:
+                file_size = 0
+            
+            # Target size threshold for "big" video: 5MB
+            if file_size > 5 * 1024 * 1024:
+                try:
+                    import subprocess
+                    import imageio_ffmpeg
+                    
+                    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+                    
+                    # Generate a unique path for the compressed MP4
+                    compressed_name = f"{base}_compressed.mp4"
+                    compressed_path = os.path.join(upload_dir, compressed_name)
+                    counter = 1
+                    while os.path.exists(compressed_path):
+                        compressed_name = f"{base}_compressed_{counter}.mp4"
+                        compressed_path = os.path.join(upload_dir, compressed_name)
+                        counter += 1
+                        
+                    # ffmpeg command to compress
+                    # Scale to max width 1280 (keeps resolution reasonable for mobile)
+                    # crf 28 (very good compression ratio, still looks good)
+                    cmd = [
+                        ffmpeg_exe,
+                        '-y',
+                        '-i', file_path,
+                        '-vcodec', 'libx264',
+                        '-crf', '28',
+                        '-preset', 'fast',
+                        '-vf', "scale='min(1280,iw)':-2",
+                        '-acodec', 'aac',
+                        '-b:a', '128k',
+                        compressed_path
+                    ]
+                    
+                    result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
+                    if result.returncode == 0 and os.path.exists(compressed_path) and os.path.getsize(compressed_path) > 0:
+                        # Remove the original uncompressed file
+                        try:
+                            os.remove(file_path)
+                        except Exception:
+                            pass
+                        
+                        # Update references to point to the compressed file
+                        name = compressed_name
+                        file_path = compressed_path
+                        ext = '.mp4'
+                except Exception as e:
+                    print(f"Video compression failed, using original file: {e}")
+
         url = settings.MEDIA_URL + 'uploads/' + name
         return Response({
             'name': name,

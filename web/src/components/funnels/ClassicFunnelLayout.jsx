@@ -671,7 +671,7 @@ const ClassicFunnelLayout = ({
                         <div className="bg-gradient-to-r p-3 sm:p-5 text-center shadow-md relative z-10">
                             {/* Variant Selection List */}
                                 {selectedVariants?.length > 0 && selectedVariants[0].id !== 'default' && (
-                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm space-y-4">
+                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-3 sm:p-5 backdrop-blur-sm space-y-4">
                                         <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-2">
                                             {t('select_variant')} <span className="text-red-400">*</span>
                                         </h3>
@@ -680,44 +680,44 @@ const ClassicFunnelLayout = ({
                                                 <div
                                                     key={variant.id}
                                                     onClick={() => handleVariantSelect(variant.id)}
-                                                    className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
+                                                    className={`cursor-pointer flex items-center justify-between p-2 sm:p-3.5 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
                                                 >
-                                                    <div className="flex items-center gap-4">
+                                                    <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                                                         {/* Radio Bullet Indicator */}
                                                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-white bg-white/10' : 'border-white/20'}`}>
                                                             <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${variant.quantity > 0 ? 'bg-white scale-100' : 'bg-transparent scale-0'}`} />
                                                         </div>
-                                                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-white shrink-0">
+                                                        <div className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg overflow-hidden bg-white shrink-0">
                                                             <img src={variant.image} alt={variant.color ? variant.color.name : product.name} className="w-full h-full object-cover" onError={(e) => { e.target.src = product.images?.[0]?.image || ''; }} loading="eager" />
                                                         </div>
-                                                        <div className="flex flex-col items-start text-left">
-                                                            <h4 className="font-bold text-white leading-tight max-w-[150px] md:max-w-[200px] truncate">
+                                                        <div className="flex flex-col items-start text-left min-w-0 flex-1">
+                                                            <h4 className="font-bold text-white leading-tight text-sm sm:text-base truncate w-full">
                                                                 {product.name}
                                                             </h4>
-                                                            <p className="text-sm text-white font-medium">
-                                                                {variant.color?.name || variant.size?.name}
+                                                            <p className="text-[10px] sm:text-xs text-slate-300 font-medium truncate w-full">
+                                                                {variant.color?.name || variant.size?.name || 'Standard'}
                                                             </p>
                                                         </div>
                                                     </div>
 
-                                                    <div className="flex flex-col items-end gap-2 shrink-0">
-                                                        <span className="font-black text-white">৳{Math.floor(variant.price)}</span>
+                                                    <div className="flex flex-col items-end gap-1.5 sm:gap-2 shrink-0 ml-2">
+                                                        <span className="font-black text-white text-sm sm:text-base">৳{Math.floor(variant.price)}</span>
                                                         <div className="flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden" onClick={e => e.stopPropagation()}>
                                                             <button
                                                                 type="button"
                                                                 onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }}
-                                                                className="px-3 py-1 text-white hover:bg-white/20 transition-colors font-bold"
+                                                                className="px-2 sm:px-3 py-0.5 sm:py-1 text-white hover:bg-white/20 transition-colors font-bold text-base sm:text-lg"
                                                             >
                                                                 -
                                                             </button>
-                                                            <span className="px-3 py-1 text-white font-bold min-w-[2.5rem] text-center border-x border-white/10">
+                                                            <span className="px-2 sm:px-3 py-0.5 sm:py-1 text-white font-bold min-w-[1.5rem] sm:min-w-[2.5rem] text-center border-x border-white/10 text-xs sm:text-sm">
                                                                 {variant.quantity}
                                                             </span>
                                                             <button
                                                                 type="button"
                                                                 onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }}
-                                                                className="px-3 py-1 text-white hover:bg-white/20 transition-colors font-bold"
-                                                            >
+                                                                className="px-2 sm:px-3 py-0.5 sm:py-1 text-white hover:bg-white/20 transition-colors font-bold text-base sm:text-lg"
+                                                             >
                                                                 +
                                                             </button>
                                                         </div>

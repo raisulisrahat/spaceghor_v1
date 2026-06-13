@@ -21,7 +21,7 @@ const PremiumFunnelLayout = ({
     siteSettings,
     funnel,
 }) => {
-    const { language } = useLanguage();
+    const { t, language } = useLanguage();
     const [currentTime, setCurrentTime] = useState('04:59:59');
 
     const whyBuyFromUs = [
@@ -117,7 +117,7 @@ const PremiumFunnelLayout = ({
                 </div>
 
                 {/* Benefits / Social Proof */}
-                <div className="bg-neutral-50 rounded-[4rem] p-12 md:p-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div className="bg-neutral-50 rounded-3xl sm:rounded-[4rem] p-6 sm:p-12 md:p-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
                     <div className="space-y-4">
                         <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-brand">
                             <Truck size={32} />
@@ -142,7 +142,7 @@ const PremiumFunnelLayout = ({
                 </div>
 
                 {/* Features Checklist */}
-                <div className="bg-neutral-50 rounded-[4rem] p-12 md:p-20 space-y-12">
+                <div className="bg-neutral-50 rounded-3xl sm:rounded-[4rem] p-6 sm:p-12 md:p-20 space-y-12">
                     <div className="text-center space-y-4">
                         <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-neutral-900">
                             {funnel?.top_header_line_2 || "Why Choose Premium?"}
@@ -166,13 +166,13 @@ const PremiumFunnelLayout = ({
                 </div>
 
                 {/* Checkout Form */}
-                <div id="order-form" className="bg-white rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(81, 115, 251,0.15)] border border-neutral-100 max-w-4xl mx-auto">
+                <div id="order-form" className="bg-white rounded-3xl sm:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(81, 115, 251,0.15)] border border-neutral-100 max-w-4xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2">
                         {/* Order Summary Side */}
-                        <div className="bg-brand p-12 text-white space-y-10">
+                        <div className="bg-brand p-6 sm:p-12 text-white space-y-10">
                             <div>
-                                <h2 className="text-4xl font-black tracking-tighter leading-none mb-4">Confirm Your Order</h2>
-                                <p className="text-white/60 font-medium">Please fill in the form correctly to ensure smooth delivery.</p>
+                                <h2 className="text-4xl font-black tracking-tighter leading-none mb-4">{t('complete_order')}</h2>
+                                <p className="text-white/60 font-medium">{t('fill_in_details_desc')}</p>
                             </div>
 
                             <div className="space-y-6">
@@ -188,15 +188,15 @@ const PremiumFunnelLayout = ({
 
                                 <div className="space-y-4 pt-6 border-t border-white/10">
                                     <div className="flex justify-between font-bold">
-                                        <span className="text-white/50">Subtotal</span>
+                                        <span className="text-white/50">{t('subtotal')}</span>
                                         <span>৳{subtotal}</span>
                                     </div>
                                     <div className="flex justify-between font-bold">
-                                        <span className="text-white/50">Delivery</span>
+                                        <span className="text-white/50">{t('shipping')}</span>
                                         <span>৳{shippingCost}</span>
                                     </div>
                                     <div className="flex justify-between items-center pt-4">
-                                        <span className="text-lg font-black tracking-tight">Total Amount</span>
+                                        <span className="text-lg font-black tracking-tight">{t('total_amount')}</span>
                                         <span className="text-4xl font-black tracking-tighter">৳{finalTotal}</span>
                                     </div>
                                 </div>
@@ -209,16 +209,45 @@ const PremiumFunnelLayout = ({
                         </div>
 
                         {/* Form Side */}
-                        <div className="p-12">
+                        <div className="p-6 sm:p-12">
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-4">
+                                    {/* Variant Selection List */}
+                                    {selectedVariants?.length > 0 && selectedVariants[0].id !== 'default' && (
+                                        <div className="space-y-4">
+                                            <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest ml-1">Select Variation</p>
+                                            <div className="space-y-3">
+                                                {selectedVariants.map((variant) => (
+                                                    <div
+                                                        key={variant.id}
+                                                        onClick={() => handleVariantSelect(variant.id)}
+                                                        className={`cursor-pointer flex items-center justify-between p-2 sm:p-3 rounded-2xl border-2 transition-all gap-2 sm:gap-3 ${variant.quantity > 0 ? 'border-brand bg-brand/5' : 'border-neutral-100 hover:border-neutral-200'}`}
+                                                    >
+                                                        <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+                                                            <img src={variant.image} alt="" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover border border-neutral-200 shrink-0" />
+                                                            <span className="font-bold text-neutral-800 text-xs sm:text-sm truncate w-full block">{[variant.color?.name, variant.size?.name].filter(Boolean).join(' ') || 'Standard'}</span>
+                                                        </div>
+                                                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 shrink-0 ml-2">
+                                                            <span className="font-black text-xs sm:text-sm">৳{Math.floor(variant.price)}</span>
+                                                            <div className="flex items-center bg-white rounded-lg border border-neutral-200" onClick={e => e.stopPropagation()}>
+                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }} className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold text-xs sm:text-sm">-</button>
+                                                                <span className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold border-x border-neutral-100 text-xs sm:text-sm min-w-[1.2rem] sm:min-w-[2rem] text-center">{variant.quantity}</span>
+                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }} className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold text-xs sm:text-sm">+</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     <div className="relative group">
                                         <input
                                             type="text"
                                             name="customer_name"
                                             required
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
-                                            placeholder="Full Name *"
+                                            className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
+                                            placeholder={`${t('full_name')} *`}
                                             value={formData.customer_name}
                                             onChange={handleChange}
                                         />
@@ -228,16 +257,16 @@ const PremiumFunnelLayout = ({
                                             type="tel"
                                             name="phone_number"
                                             required
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
-                                            placeholder="Mobile Number *"
+                                            className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
+                                            placeholder={`${t('phone_number')} *`}
                                             value={formData.phone_number}
                                             onChange={handleChange}
                                         />
                                         <input
                                             type="email"
                                             name="email"
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
-                                            placeholder="Email (Optional)"
+                                            className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
+                                            placeholder="ইমেইল (অপশনাল)"
                                             value={formData.email}
                                             onChange={handleChange}
                                         />
@@ -247,11 +276,11 @@ const PremiumFunnelLayout = ({
                                             <select
                                                 name="district"
                                                 required
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
+                                                className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">District</option>
+                                                <option value="">{t('district')}</option>
                                                 {districts.map(d => {
                                                     const displayName = d.name.includes('|')
                                                         ? (language === 'bn' ? d.name.split('|')[0].trim() : d.name.split('|')[1].trim())
@@ -263,11 +292,11 @@ const PremiumFunnelLayout = ({
                                                 name="upazila"
                                                 required
                                                 disabled={!formData.district}
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none disabled:opacity-50"
+                                                className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none disabled:opacity-50"
                                                 value={formData.upazila}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">Area</option>
+                                                <option value="">{t('area_upazila')}</option>
                                                 {upazilas.map(u => {
                                                     const displayName = u.name.includes('|')
                                                         ? (language === 'bn' ? u.name.split('|')[0].trim() : u.name.split('|')[1].trim())
@@ -283,11 +312,11 @@ const PremiumFunnelLayout = ({
                                             <select
                                                 name="shipping_zone"
                                                 required
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
+                                                className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
                                                 value={formData.shipping_zone}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">Select Shipping Area</option>
+                                                <option value="">{t('select_area')}</option>
                                                 {shippingZones.map(zone => (
                                                     <option key={zone.id} value={zone.id}>
                                                         {zone.name} (+ ৳{parseFloat(zone.shipping_cost).toFixed(0)})
@@ -300,16 +329,16 @@ const PremiumFunnelLayout = ({
                                     <textarea
                                         name="address"
                                         required
-                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
-                                        placeholder="Full Delivery Address *"
+                                        className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
+                                        placeholder={t('write_full_address')}
                                         rows={2}
                                         value={formData.address}
                                         onChange={handleChange}
                                     ></textarea>
                                     <textarea
                                         name="order_note"
-                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
-                                        placeholder="Order Note (Optional)"
+                                        className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
+                                        placeholder="অর্ডার নোট (অপশনাল)"
                                         rows={1}
                                         value={formData.order_note}
                                         onChange={handleChange}
@@ -319,17 +348,17 @@ const PremiumFunnelLayout = ({
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-brand hover:bg-[#3a5bd9] text-white font-black text-xl py-6 rounded-2xl shadow-xl shadow-red-700/20 transform transition-all active:scale-95 disabled:opacity-70 uppercase tracking-widest flex items-center justify-center gap-3"
+                                    className="w-full bg-brand hover:bg-brand text-white font-black text-xl py-6 rounded-2xl shadow-xl shadow-red-700/20 transform transition-all active:scale-95 disabled:opacity-70 uppercase tracking-widest flex items-center justify-center gap-3"
                                 >
-                                    {submitting ? 'PROCESSING...' : (
+                                    {submitting ? 'অর্ডার হচ্ছে...' : (
                                         <>
-                                            Complete Order <ArrowRight size={24} />
+                                            {t('place_order')} <ArrowRight size={24} />
                                         </>
                                     )}
                                 </button>
 
                                 <div className="text-center">
-                                    <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">Estimated Delivery: 2-3 Days</p>
+                                    <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">সম্ভাব্য ডেলিভারি: ২-৩ দিন</p>
                                 </div>
                             </form>
                         </div>
@@ -391,7 +420,7 @@ const PremiumFunnelLayout = ({
 
                 {/* Final Trust Signal */}
                 <div className="text-center space-y-6 pt-20">
-                     <p className="text-sm font-bold text-neutral-400 uppercase tracking-widest">© 2026 Spaceghor. Developed  by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">Cyber and Tech Solution</a>.</p>
+                     <p className="text-sm font-bold text-neutral-400 uppercase tracking-widest">© 2026 Spaceghor. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">Cyber and Tech Solution</a>.</p>
                      <div className="flex justify-center gap-10 opacity-30 grayscale">
                          <img src="/payment-icons.png" className="h-8 w-auto grayscale" alt="" />
                          <ShieldCheck size={32} />

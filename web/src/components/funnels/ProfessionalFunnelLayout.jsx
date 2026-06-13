@@ -26,7 +26,7 @@ const ProfessionalFunnelLayout = ({
     handleVariantSelect,
     siteSettings,
 }) => {
-    const { language } = useLanguage();
+    const { t, language } = useLanguage();
     const [selectedImage, setSelectedImage] = useState(product.images?.[0]?.image || '');
     
     const whyBuyFromUs = [
@@ -51,7 +51,7 @@ const ProfessionalFunnelLayout = ({
             {/* Main Navigation Mockup */}
             <nav className="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center sticky top-0 z-50 shadow-sm">
                 <div className="text-2xl font-black text-[#800000] tracking-tighter uppercase italic">
-                    {siteSettings?.site_title || 'Spaceghor'}
+                    {siteSettings?.site_title}
                 </div>
                 <div className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
                     <span className="text-[#800000]">Product Info</span>
@@ -130,32 +130,32 @@ const ProfessionalFunnelLayout = ({
                         <div id="order-form" className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden sticky top-28">
                             <div className="p-8 md:p-10 space-y-8">
                                 <div className="text-center space-y-2 border-b border-slate-100 pb-8">
-                                    <h2 className="text-3xl font-black text-[#800000] tracking-tight">Complete Your Order</h2>
-                                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest font-sans">Fast & Secure Checkout</p>
+                                    <h2 className="text-3xl font-black text-[#800000] tracking-tight">{t('complete_order')}</h2>
+                                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest font-sans">{t('safe_secure_checkout')}</p>
                                 </div>
 
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     {/* Variant Selection Component */}
                                     {selectedVariants?.length > 0 && selectedVariants[0].id !== 'default' && (
                                         <div className="space-y-4">
-                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sans ml-1">Select Variation</p>
-                                            <div className="grid grid-cols-1 gap-3">
+                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-sans ml-1">{t('select_variant')}</p>
+                                            <div className="space-y-3">
                                                 {selectedVariants.map((variant) => (
                                                     <div
                                                         key={variant.id}
                                                         onClick={() => handleVariantSelect(variant.id)}
-                                                        className={`cursor-pointer flex items-center justify-between p-3 rounded-2xl border-2 transition-all font-sans ${variant.quantity > 0 ? 'border-[#800000] bg-[#800000]/5' : 'border-slate-100 hover:border-slate-200'}`}
+                                                        className={`cursor-pointer flex items-center justify-between p-2 sm:p-3 rounded-2xl border-2 transition-all font-sans gap-2 sm:gap-3 ${variant.quantity > 0 ? 'border-[#800000] bg-[#800000]/5' : 'border-slate-100 hover:border-slate-200'}`}
                                                     >
-                                                        <div className="flex items-center gap-4">
-                                                            <img src={variant.image} alt="" className="w-12 h-12 rounded-lg object-cover border border-slate-200" />
-                                                            <span className="font-bold text-slate-900">{variant.color?.name || variant.size?.name}</span>
+                                                        <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+                                                            <img src={variant.image} alt="" className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover border border-slate-200 shrink-0" />
+                                                            <span className="font-bold text-slate-900 text-xs sm:text-sm truncate w-full block">{[variant.color?.name, variant.size?.name].filter(Boolean).join(' ') || 'Standard'}</span>
                                                         </div>
-                                                        <div className="flex items-center gap-4">
-                                                            <span className="font-black">৳{Math.floor(variant.price)}</span>
+                                                        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 shrink-0 ml-2">
+                                                            <span className="font-black text-xs sm:text-sm">৳{Math.floor(variant.price)}</span>
                                                             <div className="flex items-center bg-white rounded-lg border border-slate-200" onClick={e => e.stopPropagation()}>
-                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }} className="px-3 py-1 font-bold">-</button>
-                                                                <span className="px-3 py-1 font-bold border-x border-slate-100">{variant.quantity}</span>
-                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }} className="px-3 py-1 font-bold">+</button>
+                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, -1); }} className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold text-xs sm:text-sm">-</button>
+                                                                <span className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold border-x border-slate-100 text-xs sm:text-sm min-w-[1.2rem] sm:min-w-[2rem] text-center">{variant.quantity}</span>
+                                                                <button type="button" onClick={(e) => { e.stopPropagation(); handleVariantQuantityChange(variant.id, 1); }} className="px-1.5 sm:px-3 py-0.5 sm:py-1 font-bold text-xs sm:text-sm">+</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -171,7 +171,7 @@ const ProfessionalFunnelLayout = ({
                                                 name="customer_name"
                                                 required
                                                 className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold"
-                                                placeholder="Full Name *"
+                                                placeholder={`${t('full_name')} *`}
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
                                             />
@@ -182,7 +182,7 @@ const ProfessionalFunnelLayout = ({
                                                 name="phone_number"
                                                 required
                                                 className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold"
-                                                placeholder="Phone Number *"
+                                                placeholder={`${t('phone_number')} *`}
                                                 value={formData.phone_number}
                                                 onChange={handleChange}
                                             />
@@ -190,7 +190,7 @@ const ProfessionalFunnelLayout = ({
                                                 type="email"
                                                 name="email"
                                                 className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold"
-                                                placeholder="Email (Optional)"
+                                                placeholder="ইমেইল (অপশনাল)"
                                                 value={formData.email}
                                                 onChange={handleChange}
                                             />
@@ -204,7 +204,7 @@ const ProfessionalFunnelLayout = ({
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">District</option>
+                                                <option value="">{t('district')}</option>
                                                 {districts.map(d => {
                                                     const displayName = d.name.includes('|')
                                                         ? (language === 'bn' ? d.name.split('|')[0].trim() : d.name.split('|')[1].trim())
@@ -220,7 +220,7 @@ const ProfessionalFunnelLayout = ({
                                                 value={formData.upazila}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">Area</option>
+                                                <option value="">{t('area_upazila')}</option>
                                                 {upazilas.map(u => {
                                                     const displayName = u.name.includes('|')
                                                         ? (language === 'bn' ? u.name.split('|')[0].trim() : u.name.split('|')[1].trim())
@@ -234,7 +234,7 @@ const ProfessionalFunnelLayout = ({
                                             name="address"
                                             required
                                             className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold resize-none"
-                                            placeholder="Shipping Address *"
+                                            placeholder={t('write_full_address')}
                                             rows={2}
                                             value={formData.address}
                                             onChange={handleChange}
@@ -242,7 +242,7 @@ const ProfessionalFunnelLayout = ({
                                         <textarea
                                             name="order_note"
                                             className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold resize-none"
-                                            placeholder="Order Note (Optional)"
+                                            placeholder="অর্ডার নোট (অপশনাল)"
                                             rows={1}
                                             value={formData.order_note}
                                             onChange={handleChange}
@@ -303,16 +303,16 @@ const ProfessionalFunnelLayout = ({
                                     {/* Order Totals */}
                                     <div className="bg-[#800000]/5 rounded-[2rem] p-8 space-y-4 border border-[#800000]/10 font-sans">
                                         <div className="flex justify-between font-bold text-slate-500">
-                                            <span>Subtotal</span>
+                                            <span>{t('subtotal')}</span>
                                             <span>৳{subtotal}</span>
                                         </div>
                                         <div className="flex justify-between font-bold text-slate-500">
-                                            <span>Delivery Charge</span>
+                                            <span>{t('shipping')}</span>
                                             <span>৳{shippingCost}</span>
                                         </div>
                                         <div className="h-px bg-[#800000]/10 my-4"></div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-xl font-black text-slate-900 tracking-tight">Amount to Pay</span>
+                                            <span className="text-xl font-black text-slate-900 tracking-tight">{t('total_amount')}</span>
                                             <span className="text-4xl font-black text-[#800000]">৳{finalTotal}</span>
                                         </div>
                                     </div>
@@ -322,9 +322,9 @@ const ProfessionalFunnelLayout = ({
                                         disabled={submitting}
                                         className="w-full bg-[#800000] hover:bg-black text-white font-black text-xl py-6 rounded-2xl shadow-xl shadow-[#800000]/20 transform transition-all active:scale-95 disabled:opacity-70 uppercase tracking-widest font-sans flex items-center justify-center gap-3"
                                     >
-                                        {submitting ? 'Processing...' : (
+                                        {submitting ? 'অর্ডার হচ্ছে...' : (
                                             <>
-                                                Confirm Order <ChevronRight size={24} />
+                                                {t('place_order')} <ChevronRight size={24} />
                                             </>
                                         )}
                                     </button>
@@ -342,14 +342,14 @@ const ProfessionalFunnelLayout = ({
             <footer className="bg-slate-900 text-white py-20 px-4 mt-20">
                 <div className="max-w-4xl mx-auto text-center space-y-8">
                     <div className="text-3xl font-black tracking-tighter uppercase italic text-[#800000]">
-                         {siteSettings?.site_title || 'Spaceghor'}
+                         {siteSettings?.site_title}
                     </div>
                     <div className="h-px bg-white/10 w-24 mx-auto"></div>
                     <div className="flex justify-center gap-10 text-xs font-bold uppercase tracking-widest text-slate-400">
                          <span>Privacy</span> <span>Terms</span> <span>Returns</span>
                     </div>
                     <p className="text-slate-600 text-[10px] font-bold tracking-widest uppercase">
-                         © 2026 Spaceghor. Developed  by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
+                         © 2026 Spaceghor. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
                     </p>
                 </div>
             </footer>
