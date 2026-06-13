@@ -105,10 +105,24 @@ const ProductForm = ({ product, onSave, onCancel }) => {
         if (galleryTarget === 'thumbnail') {
             setThumbnail(url);
             setThumbnailPreview(url);
+            setMediaModalOpen(false);
+            setGalleryTarget(null);
         } else if (galleryTarget === 'gallery_image') {
             setGalleryImagesFromLibrary(prev => [...prev, { url, color: null }]);
+            // Don't close modal — allow further single selections
         } else if (galleryTarget === 'gallery_video') {
             setGalleryVideosFromLibrary(prev => [...prev, url]);
+        }
+    };
+
+    const handleGallerySelectMultiple = (urls: string[]) => {
+        if (galleryTarget === 'thumbnail' && urls.length > 0) {
+            setThumbnail(urls[0]);
+            setThumbnailPreview(urls[0]);
+        } else if (galleryTarget === 'gallery_image') {
+            setGalleryImagesFromLibrary(prev => [...prev, ...urls.map(url => ({ url, color: null }))]);
+        } else if (galleryTarget === 'gallery_video') {
+            setGalleryVideosFromLibrary(prev => [...prev, ...urls]);
         }
         setMediaModalOpen(false);
         setGalleryTarget(null);
@@ -2596,7 +2610,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                     onClick={() => handleRemoveExistingGalleryImage(img.id, i)}
 
-                                                    className="absolute top-1 right-1 bg-brand/90 hover:bg-brand text-white rounded-full p-1 opacity-100 transition-all shadow-sm"
+                                                    className="absolute top-1 right-1 bg-brand/90 hover:bg-brand text-white rounded-full p-1 opacity-100 transition-all shadow-sm z-10"
 
                                                     title="Delete Image"
 
@@ -2680,7 +2694,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                 onClick={() => removeGalleryImage(idx)}
 
-                                                className="absolute top-1 right-1 bg-brand/90 hover:bg-brand text-white rounded-full p-1 opacity-100 transition-all shadow-sm"
+                                                className="absolute top-1 right-1 bg-brand/90 hover:bg-brand text-white rounded-full p-1 opacity-100 transition-all shadow-sm z-10"
 
                                             >
 
@@ -3729,6 +3743,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                                     <MediaManager 
                                         selectMode={true}
                                         onSelect={(url) => handleGallerySelect(url)}
+                                        onSelectMultiple={(urls) => handleGallerySelectMultiple(urls)}
                                     />
                                 </div>
                             )}

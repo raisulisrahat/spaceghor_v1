@@ -26,10 +26,11 @@ interface MediaFile {
 
 interface MediaManagerProps {
     onSelect?: (url: string) => void;
+    onSelectMultiple?: (urls: string[]) => void;
     selectMode?: boolean;
 }
 
-const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) => {
+const MediaManager = ({ onSelect, onSelectMultiple, selectMode = false }: MediaManagerProps = {}) => {
     const { token } = useAuth();
     const [media, setMedia] = useState<MediaFile[]>([]);
     const [selectedPaths, setSelectedPaths] = useState<string[]>([]);
@@ -199,6 +200,17 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
         }
     };
 
+    const handleAddSelected = () => {
+        const selectedFiles = media.filter(item => selectedPaths.includes(item.path));
+        const urls = selectedFiles.map(file => file.url.startsWith('http') ? file.url : `${BASE_URL}${file.url}`);
+        if (onSelectMultiple) {
+            onSelectMultiple(urls);
+        } else if (onSelect && urls.length > 0) {
+            urls.forEach(url => onSelect(url));
+        }
+        setSelectedPaths([]);
+    };
+
     const totalStorageBytes = media.reduce((acc, curr) => acc + (curr.size || 0), 0);
 
     return (
@@ -315,13 +327,24 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                         <span className="text-xs font-bold uppercase tracking-wider">{selectedPaths.length} items selected</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <button 
-                            onClick={handleBulkDownload}
-                            className="flex items-center gap-1.5 px-4 py-2 bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer"
-                        >
-                            <Download size={14} />
-                            <span>Download</span>
-                        </button>
+                        {selectMode && (
+                            <button 
+                                onClick={handleAddSelected}
+                                className="flex items-center gap-1.5 px-4 py-2 bg-brand hover:bg-blue-700 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer border border-blue-700"
+                            >
+                                <Plus size={14} />
+                                <span>Add assets</span>
+                            </button>
+                        )}
+                        {!selectMode && (
+                            <button 
+                                onClick={handleBulkDownload}
+                                className="flex items-center gap-1.5 px-4 py-2 bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer"
+                            >
+                                <Download size={14} />
+                                <span>Download</span>
+                            </button>
+                        )}
                         <button 
                             onClick={handleBulkDelete}
                             className="flex items-center gap-1.5 px-4 py-2 bg-rose-600 hover:bg-rose-700 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer"
@@ -363,8 +386,8 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                             <div 
                                 key={idx}
                                 onClick={() => {
-                                    if (selectMode && onSelect) {
-                                        onSelect(fullUrl);
+                                    if (selectMode) {
+                                        toggleSelect(file.path);
                                     } else {
                                         setPreviewFile(file);
                                     }
@@ -508,8 +531,8 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                     <tr 
                                         key={idx}
                                         onClick={() => {
-                                            if (selectMode && onSelect) {
-                                                onSelect(fullUrl);
+                                            if (selectMode) {
+                                                toggleSelect(file.path);
                                             } else {
                                                 setPreviewFile(file);
                                             }

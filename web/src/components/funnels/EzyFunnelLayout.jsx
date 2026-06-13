@@ -34,6 +34,8 @@ const EzyFunnelLayout = ({
     const [isHovered, setIsHovered] = useState(false);
     const [shippingError, setShippingError] = useState('');
     const [showMobileCTA, setShowMobileCTA] = useState(true);
+    const [videoRatio, setVideoRatio] = useState(null);
+    const [isPortrait, setIsPortrait] = useState(false);
     const submitBtnRef = useRef(null);
 
     // Active Variant for Summary and display
@@ -226,6 +228,14 @@ const EzyFunnelLayout = ({
         }]
     } : null;
 
+    // For YouTube embeds, use standard 16/9 (can't detect dimensions from iframe)
+    useEffect(() => {
+        if (youtubeEmbedUrl && !activeVideoFile) {
+            setVideoRatio('16/9');
+            setIsPortrait(false);
+        }
+    }, [youtubeEmbedUrl, activeVideoFile]);
+
     // Format prices for displays
     const regPriceStr = language === 'bn' ? toBanglaNumber(Math.floor(product.regular_price)) : Math.floor(product.regular_price);
     const salePriceStr = language === 'bn' ? toBanglaNumber(Math.floor(product.sale_price || product.regular_price)) : Math.floor(product.sale_price || product.regular_price);
@@ -331,7 +341,7 @@ const EzyFunnelLayout = ({
             `}} />
 
             {/* B. Hero / Video Section */}
-            <section className="bg-brand text-white pt-10 pb-16 px-4 relative overflow-hidden">
+            <section className="bg-[#0d0f4b] text-white pt-10 pb-16 px-4 relative overflow-hidden">
                 {/* Premium Grainy Silk Gradient Background (Matches reference image) */}
                 <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                     <svg className="w-full h-full object-cover opacity-95" viewBox="0 0 1000 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -402,10 +412,30 @@ const EzyFunnelLayout = ({
                     </p>
 
                     {/* Media Container: Responsive YouTube Video, Uploaded Video, or Product Swiper Slider */}
-                    <div className="max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-900 aspect-video relative group">
+                    <div 
+                        className={`mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-900 relative group transition-all duration-350 ${
+                            isPortrait ? 'max-w-md' : 'max-w-3xl'
+                        }`}
+                        style={{ aspectRatio: videoRatio || '16/9' }}
+                    >
                         {videoOptions ? (
                             <VideoPlayer
                                 options={videoOptions}
+                                onReady={(player) => {
+                                    // Read dimensions once metadata is available — no extra network request,
+                                    // this fires on the same stream the player is already loading
+                                    const readDimensions = () => {
+                                        const w = player.videoWidth();
+                                        const h = player.videoHeight();
+                                        if (w && h) {
+                                            setVideoRatio(`${w}/${h}`);
+                                            setIsPortrait(h > w);
+                                        }
+                                    };
+                                    player.on('loadedmetadata', readDimensions);
+                                    // Also try immediately in case metadata is already available
+                                    readDimensions();
+                                }}
                                 className="w-full h-full"
                             />
                         ) : youtubeEmbedUrl ? (
@@ -430,7 +460,16 @@ const EzyFunnelLayout = ({
                                         <img
                                             src={resolveImageUrl(img.image)}
                                             alt={`${product.name} - ${idx + 1}`}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-cover"
+                                            onLoad={(e) => {
+                                                if (idx === 0 && !videoRatio) {
+                                                    const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                                                    if (w && h) {
+                                                        setVideoRatio(`${w}/${h}`);
+                                                        setIsPortrait(h > w);
+                                                    }
+                                                }
+                                            }}
                                         />
                                     </SwiperSlide>
                                 ))}
@@ -544,7 +583,7 @@ const EzyFunnelLayout = ({
                                         <div className="container mx-auto px-4 max-w-6xl">
                                             {/* Section Header */}
                                             <div className="text-center mb-16 space-y-4">
-                                                <div className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
+                                                <div className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
                                                     <h5 className="text-xl md:text-2xl font-black tracking-tight uppercase">
                                                         আমাদের কাস্টমার রিভিউ
                                                     </h5>
@@ -613,7 +652,7 @@ const EzyFunnelLayout = ({
                                             <div className="mt-10 text-center">
                                                 <button 
                                                     onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                                    className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                                                    className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
                                                 >
                                                     <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
                                                 </button>
@@ -934,7 +973,7 @@ const EzyFunnelLayout = ({
                     {/* Developer Credits */}
                     <div className="space-y-2 text-xs sm:text-sm">
                         <p className="font-bold text-slate-400">
-                            © 2026 Spaceghor. Developed  by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
+                            © 2026 Qbamart. Powered by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cyber and Tech Solution</a>.
                         </p>
                     </div>
                 </div>
