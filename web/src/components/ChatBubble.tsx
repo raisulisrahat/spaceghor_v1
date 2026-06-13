@@ -33,7 +33,7 @@ const ChatBubble: React.FC = () => {
                 href={`tel:${settings.support_phone}`}
                 className="flex items-center gap-3 px-3 py-2 bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-full group hover:bg-brand transition-all duration-300 transform hover:-translate-x-1"
               >
-                <div className="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-[#5173FB] transition-colors shadow-sm">
+                <div className="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-brand transition-colors shadow-sm">
                   <Phone size={20} fill="currentColor" />
                 </div>
                 <div className="flex flex-col pr-2">

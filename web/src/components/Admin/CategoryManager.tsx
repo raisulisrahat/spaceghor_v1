@@ -328,7 +328,7 @@ const CategoryManager = () => {
                             <input
                                 type="text"
                                 placeholder={`Search ${activeTab}...`}
-                                className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                                className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -362,7 +362,7 @@ const CategoryManager = () => {
                                     <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mr-2">{selectedIds.length} Selected</span>
                                     <button 
                                         onClick={handleBulkExport}
-                                        className="px-3 py-1.5 bg-brand/10 text-[#5173FB] rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-brand/20 transition-all"
+                                        className="px-3 py-1.5 bg-brand/10 text-brand rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-brand/20 transition-all"
                                     >
                                         Export
                                     </button>
@@ -390,7 +390,7 @@ const CategoryManager = () => {
                                         type="checkbox"
                                         onChange={handleSelectAll}
                                         checked={filteredItems().length > 0 && selectedIds.length === filteredItems().length}
-                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                     />
                                 </th>
                                 {activeTab === 'parents' || activeTab === 'subcategories' ? (
@@ -421,7 +421,7 @@ const CategoryManager = () => {
                                     <tr 
                                         key={item.id} 
                                         onClick={() => handleEdit(item)}
-                                        className={`group hover:bg-zinc-100/80 transition-all cursor-pointer border-l-2 ${selectedIds.includes(item.id) ? 'border-[#5173FB] bg-zinc-50' : 'border-transparent hover:border-[#5173FB]'}`}
+                                        className={`group hover:bg-zinc-100/80 transition-all cursor-pointer border-l-2 ${selectedIds.includes(item.id) ? 'border-brand bg-zinc-50' : 'border-transparent hover:border-brand'}`}
                                     >
                                         <td className="px-6 py-4">
                                             <input
@@ -429,7 +429,7 @@ const CategoryManager = () => {
                                                 checked={selectedIds.includes(item.id)}
                                                 onChange={(e) => handleSelectOne(e, item.id)}
                                                 onClick={(e) => e.stopPropagation()}
-                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                             />
                                         </td>
                                         <td className="px-6 py-4">
@@ -468,14 +468,14 @@ const CategoryManager = () => {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <p className="text-sm font-bold text-zinc-900 tracking-tight group-hover:text-[#5173FB] transition-colors">{item.name}</p>
+                                            <p className="text-sm font-bold text-zinc-900 tracking-tight group-hover:text-brand transition-colors">{item.name}</p>
                                             <p className="text-[10px] font-medium text-zinc-400">ID: #{item.id}</p>
                                         </td>
                                         
                                         {activeTab === 'parents' || activeTab === 'subcategories' ? (
                                             <>
                                                 <td className="px-6 py-4 hidden sm:table-cell">
-                                                    <span className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${item.parent ? 'bg-zinc-50 text-zinc-400 border-zinc-100' : 'bg-brand text-white border-[#5173FB]'}`}>
+                                                    <span className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${item.parent ? 'bg-zinc-50 text-zinc-400 border-zinc-100' : 'bg-brand text-white border-brand'}`}>
                                                         {item.parent_name || 'Root Master'}
                                                     </span>
                                                 </td>

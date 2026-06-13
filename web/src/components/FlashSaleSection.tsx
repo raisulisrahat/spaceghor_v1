@@ -61,7 +61,7 @@ const FlashSaleSection = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand"></span>
                 </div>
-                <h2 className="text-[9px] font-black text-[#5173FB] uppercase tracking-[0.2em]">Flash Sale</h2>
+                <h2 className="text-[9px] font-black text-brand uppercase tracking-[0.2em]">Flash Sale</h2>
               </div>
               <h3 className="text-base md:text-lg font-bold text-neutral-900 tracking-tight leading-tight">
                 {activeSale.title}
@@ -165,7 +165,7 @@ const FlashSaleSection = () => {
                   <div className="px-0.5 space-y-1">
                     <div className="flex justify-between text-[9px] font-bold uppercase tracking-wider">
                       <span className="text-neutral-400 font-black">{stock > 0 ? `${stock} Left` : 'Sold Out'}</span>
-                      <span className="text-[#5173FB]">{soldPercentage}% Sold</span>
+                      <span className="text-brand">{soldPercentage}% Sold</span>
                     </div>
                     <div className="h-1 w-full bg-neutral-50 rounded-full overflow-hidden">
                       <motion.div 

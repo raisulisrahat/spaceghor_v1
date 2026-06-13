@@ -266,7 +266,7 @@ const GardenFunnelLayout = ({
                                             <div
                                                 key={variant.id}
                                                 onClick={() => handleVariantSelect(variant.id)}
-                                                className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#5173FB] bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
+                                                className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
                                             >
                                                 <div className="flex items-center gap-4">
                                                     {/* Radio Bullet Indicator */}
@@ -326,7 +326,7 @@ const GardenFunnelLayout = ({
                                                 type="text"
                                                 name="customer_name"
                                                 required
-                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder={t('full_name')}
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
@@ -340,12 +340,12 @@ const GardenFunnelLayout = ({
                                                 type="tel"
                                                 name="phone_number"
                                                 required
-                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder="017XXXXXXXX"
                                                 value={formData.phone_number}
                                                 onChange={handlePhoneChange}
                                             />
-                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors" size={20} />
+                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors" size={20} />
                                         </div>
                                     </div>
                                 </div>
@@ -359,7 +359,7 @@ const GardenFunnelLayout = ({
                                                 <select
                                                     name="district"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
                                                     value={formData.district}
                                                     onChange={handleChange}
                                                 >
@@ -371,7 +371,7 @@ const GardenFunnelLayout = ({
                                                         return <option key={dist.id} value={dist.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                         <div className="space-y-3">
@@ -380,7 +380,7 @@ const GardenFunnelLayout = ({
                                                 <select
                                                     name="upazila"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
                                                     value={formData.upazila}
                                                     onChange={handleChange}
                                                     disabled={!formData.district}
@@ -393,7 +393,7 @@ const GardenFunnelLayout = ({
                                                         return <option key={upz.id} value={upz.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                     </div>
@@ -406,12 +406,12 @@ const GardenFunnelLayout = ({
                                             name="address"
                                             required
                                             rows="2"
-                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
+                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
                                             placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         ></textarea>
-                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                     </div>
                                 </div>
 
@@ -478,7 +478,7 @@ const GardenFunnelLayout = ({
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-[#5173FB] to-[#3a5bd9] hover:from-[#3a5bd9] hover:to-[#5173FB] text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81, 115, 251,0.3)] hover:shadow-[0_0_50px_rgba(81, 115, 251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="w-full bg-gradient-to-r from-brand to-[#3a5bd9] hover:from-[#3a5bd9] hover:to-brand text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81, 115, 251,0.3)] hover:shadow-[0_0_50px_rgba(81, 115, 251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
                                     <div className="absolute inset-0 w-[50%] h-full bg-white/30 skew-x-[-20deg] translate-x-[-200%] group-hover:animate-[shimmer_2s_infinite]"></div>
                                     {submitting ? '...' : (
@@ -511,7 +511,7 @@ const GardenFunnelLayout = ({
     return (
         <div className="bg-[#f8f9ff] min-h-screen font-sans text-slate-800 overflow-x-hidden">
             {/* Top Limited Offer Strip */}
-            <div className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white py-3 px-4 shadow-md relative z-30 border-b border-white/10">
+            <div className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white py-3 px-4 shadow-md relative z-30 border-b border-white/10">
                 <div className="max-w-xl mx-auto flex items-center gap-3">
                     <Zap size={15} className="text-yellow-400 fill-yellow-400 shrink-0 animate-pulse" />
                     <div className="whitespace-pre-line text-center text-xs sm:text-sm font-extrabold leading-relaxed tracking-wider flex-1 uppercase">
@@ -542,7 +542,7 @@ const GardenFunnelLayout = ({
                 `}} />
 
                 {/* Left Animated Side Shape */}
-                <div className="absolute left-[-3rem] md:left-[-4rem] top-[15%] z-0 text-[#5173FB]/15 w-36 h-36 md:w-52 md:h-52 pointer-events-none select-none float-gentle-anim">
+                <div className="absolute left-[-3rem] md:left-[-4rem] top-[15%] z-0 text-brand/15 w-36 h-36 md:w-52 md:h-52 pointer-events-none select-none float-gentle-anim">
                     <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="1" className="w-full h-full">
                         {/* Abstract organic fluid background */}
                         <path d="M30,100 C30,40 80,20 130,40 C180,60 170,140 120,160 C70,180 30,160 30,100 Z" fill="currentColor" opacity="0.4" />
@@ -570,7 +570,7 @@ const GardenFunnelLayout = ({
                 <div className="container mx-auto px-4 z-10 relative max-w-6xl text-center space-y-8">
                     {/* Top Brand Subtitle */}
                     {funnel?.top_header_line_1 && (
-                        <div className="hero-text-anim text-[#5173FB] font-black text-sm uppercase tracking-widest">
+                        <div className="hero-text-anim text-brand font-black text-sm uppercase tracking-widest">
                             {funnel.top_header_line_1}
                         </div>
                     )}
@@ -617,7 +617,7 @@ const GardenFunnelLayout = ({
                             `}} />
                             {heroSliderImages.map((imgUrl, idx) => (
                                 <SwiperSlide key={idx}>
-                                    <div className="bg-white border-2 border-[#5173FB]/25 rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-4 shadow-md transition-all duration-300">
+                                    <div className="bg-white border-2 border-brand/25 rounded-2xl overflow-hidden aspect-square flex items-center justify-center p-4 shadow-md transition-all duration-300">
                                         <img 
                                             src={imgUrl} 
                                             alt={`${product.name} - ${idx + 1}`} 
@@ -633,7 +633,7 @@ const GardenFunnelLayout = ({
                     <div className="hero-text-anim flex justify-center pt-2">
                         <button
                             onClick={() => document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' })}
-                            className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] hover:opacity-90 text-white font-extrabold text-lg px-12 py-4.5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center gap-2"
+                            className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] hover:opacity-90 text-white font-extrabold text-lg px-12 py-4.5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center gap-2"
                         >
                             <ShoppingCart size={20} /> এখনই অর্ডার করুন
                         </button>
@@ -644,7 +644,7 @@ const GardenFunnelLayout = ({
 
             {/* 3D Realistic Torn Paper Notebook Strip */}
             <div className="price-strip-trigger w-full py-14 relative z-20 bg-gradient-to-b from-[#f3f4ff] to-[#f9fafb] flex justify-center px-4 overflow-hidden border-b border-slate-100">
-                <div className="relative w-full max-w-lg bg-white shadow-[0_20px_50px_rgba(81, 115, 251,0.08)] rounded-[3rem_1rem_3rem_1rem] border-2 border-[#5173FB]/25 p-8 py-10 flex flex-col items-center justify-center select-none overflow-visible">
+                <div className="relative w-full max-w-lg bg-white shadow-[0_20px_50px_rgba(81, 115, 251,0.08)] rounded-[3rem_1rem_3rem_1rem] border-2 border-brand/25 p-8 py-10 flex flex-col items-center justify-center select-none overflow-visible">
                     
                     {/* Top-Left Floating Botanical Leaf Accent */}
                     <div className="absolute -top-6 -left-6 z-10 text-[#8B5CF6]/30 w-16 h-16 pointer-events-none select-none">
@@ -658,7 +658,7 @@ const GardenFunnelLayout = ({
                     </div>
 
                     {/* Bottom-Right Floating Botanical Leaf Accent */}
-                    <div className="absolute -bottom-6 -right-6 z-10 text-[#5173FB]/30 w-16 h-16 pointer-events-none select-none">
+                    <div className="absolute -bottom-6 -right-6 z-10 text-brand/30 w-16 h-16 pointer-events-none select-none">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-full h-full transform rotate-[165deg]">
                             <path d="M12 2C12 2 15 7 12 12C9 17 12 22 12 22" />
                             <path d="M12 5C14 6 16 9 15 11" />
@@ -683,7 +683,7 @@ const GardenFunnelLayout = ({
                         </div>
 
                         {/* Special Asymmetric Highlight Plaque for Offer Price */}
-                        <div className="relative inline-block px-10 py-5 mx-auto bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white shadow-xl rounded-[2rem_0.5rem_2rem_0.5rem] border border-[#5173FB]/30 transform rotate-[-1deg] max-w-sm">
+                        <div className="relative inline-block px-10 py-5 mx-auto bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white shadow-xl rounded-[2rem_0.5rem_2rem_0.5rem] border border-brand/30 transform rotate-[-1deg] max-w-sm">
                             <div className="font-black text-lg md:text-xl tracking-wide flex items-center justify-center gap-2 flex-wrap text-white/95">
                                 {language === 'bn' ? 'অফার প্রাইস মাত্র' : 'Discount Price Only'}
                                 <span className="relative z-10 font-black text-yellow-400 text-2xl md:text-3xl drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.6)] px-1">
@@ -717,7 +717,7 @@ const GardenFunnelLayout = ({
                             </div>
                             <button 
                                 onClick={() => document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' })}
-                                className="bg-gradient-to-r from-[#5173FB] to-[#8B5CF6] hover:opacity-90 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all shadow-md"
+                                className="bg-gradient-to-r from-brand to-[#8B5CF6] hover:opacity-90 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all shadow-md"
                             >
                                 এখনই অর্ডার করুন
                             </button>
@@ -747,7 +747,7 @@ const GardenFunnelLayout = ({
                                 </div>
                                 <button 
                                     onClick={() => document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' })}
-                                    className="bg-gradient-to-r from-[#5173FB] to-[#8B5CF6] hover:opacity-90 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all shadow-md"
+                                    className="bg-gradient-to-r from-brand to-[#8B5CF6] hover:opacity-90 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all shadow-md"
                                 >
                                     এখনই অর্ডার করুন
                                 </button>
@@ -800,7 +800,7 @@ const GardenFunnelLayout = ({
                                                     <img src={section.image} alt={section.title} className="w-auto h-auto rounded-2xl" loading="eager" />
                                                 ) : (
                                                     <div className="w-full aspect-square bg-brand/5 flex items-center justify-center rounded-2xl">
-                                                        <Zap className="text-[#5173FB]/20" size={36} />
+                                                        <Zap className="text-brand/20" size={36} />
                                                     </div>
                                                 )}
                                             </div>
@@ -846,7 +846,7 @@ const GardenFunnelLayout = ({
                                             <div
                                                 key={variant.id}
                                                 onClick={() => handleVariantSelect(variant.id)}
-                                                className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#5173FB] bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
+                                                className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
                                             >
                                                 <div className="flex items-center gap-4">
                                                     {/* Radio Bullet Indicator */}
@@ -906,7 +906,7 @@ const GardenFunnelLayout = ({
                                                 type="text"
                                                 name="customer_name"
                                                 required
-                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder={t('full_name')}
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
@@ -920,12 +920,12 @@ const GardenFunnelLayout = ({
                                                 type="tel"
                                                 name="phone_number"
                                                 required
-                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder="017XXXXXXXX"
                                                 value={formData.phone_number}
                                                 onChange={handlePhoneChange}
                                             />
-                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors" size={20} />
+                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors" size={20} />
                                         </div>
                                     </div>
                                 </div>
@@ -939,7 +939,7 @@ const GardenFunnelLayout = ({
                                                 <select
                                                     name="district"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
                                                     value={formData.district}
                                                     onChange={handleChange}
                                                 >
@@ -951,7 +951,7 @@ const GardenFunnelLayout = ({
                                                         return <option key={dist.id} value={dist.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                         <div className="space-y-3">
@@ -960,7 +960,7 @@ const GardenFunnelLayout = ({
                                                 <select
                                                     name="upazila"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
                                                     value={formData.upazila}
                                                     onChange={handleChange}
                                                     disabled={!formData.district}
@@ -973,7 +973,7 @@ const GardenFunnelLayout = ({
                                                         return <option key={upz.id} value={upz.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                     </div>
@@ -986,12 +986,12 @@ const GardenFunnelLayout = ({
                                             name="address"
                                             required
                                             rows="2"
-                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
+                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
                                             placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         ></textarea>
-                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                     </div>
                                 </div>
 
@@ -1059,7 +1059,7 @@ const GardenFunnelLayout = ({
                                     ref={submitBtnRef}
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81,115,251,0.3)] hover:shadow-[0_0_50px_rgba(81,115,251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="w-full bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81,115,251,0.3)] hover:shadow-[0_0_50px_rgba(81,115,251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
                                     <div className="absolute inset-0 w-[50%] h-full bg-white/30 skew-x-[-20deg] translate-x-[-200%] group-hover:animate-[shimmer_2s_infinite]"></div>
                                     {submitting ? '...' : (

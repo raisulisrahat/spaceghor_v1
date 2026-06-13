@@ -150,7 +150,7 @@ const ReviewManager = () => {
                 {[
                     { label: 'Total Reviews', value: reviews.length, icon: MessageSquare, color: 'text-blue-500' },
                     { label: 'Pending Approval', value: reviews.filter(r => !r.is_approved).length, icon: ShieldCheck, color: 'text-amber-500' },
-                    { label: 'Avg. Rating', value: reviews.length > 0 ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1) : '0.0', icon: Star, color: 'text-[#5173FB]' },
+                    { label: 'Avg. Rating', value: reviews.length > 0 ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1) : '0.0', icon: Star, color: 'text-brand' },
                     { label: 'Verified Buyers', value: reviews.filter(r => r.is_verified).length, icon: CheckCircle, color: 'text-emerald-500' }
                 ].map((stat, i) => (
                     <div key={i} className="next-panel p-4 flex items-center gap-4">
@@ -173,7 +173,7 @@ const ReviewManager = () => {
                         <input
                             type="text"
                             placeholder="Search reviews or products..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
@@ -198,7 +198,7 @@ const ReviewManager = () => {
                                         type="checkbox"
                                         onChange={handleSelectAll}
                                         checked={filteredReviews.length > 0 && selectedIds.length === filteredReviews.length}
-                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                     />
                                 </th>
                                 <th className="px-6 py-4">Reviewer</th>
@@ -232,7 +232,7 @@ const ReviewManager = () => {
                                                 type="checkbox"
                                                 checked={selectedIds.includes(review.id)}
                                                 onChange={() => handleSelectOne(review.id)}
-                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                             />
                                         </td>
                                         <td className="px-6 py-4">
@@ -252,7 +252,7 @@ const ReviewManager = () => {
                                         <td className="px-6 py-4">
                                             <div className="max-w-md">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className="text-[11px] font-bold text-[#5173FB] uppercase tracking-wider">{review.product_name}</span>
+                                                    <span className="text-[11px] font-bold text-brand uppercase tracking-wider">{review.product_name}</span>
                                                     {review.is_verified && (
                                                         <span className="flex items-center gap-1 text-[9px] font-black bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full border border-emerald-100 uppercase tracking-widest">
                                                             <CheckCircle size={8} className="fill-current" /> Verified
@@ -279,7 +279,7 @@ const ReviewManager = () => {
                                                     <Star 
                                                         key={i} 
                                                         size={12} 
-                                                        className={i < review.rating ? 'fill-[#5173FB] text-[#5173FB]' : 'text-zinc-200'} 
+                                                        className={i < review.rating ? 'fill-brand text-brand' : 'text-zinc-200'} 
                                                     />
                                                 ))}
                                             </div>
@@ -404,7 +404,7 @@ const ReviewManager = () => {
                                                 <Star 
                                                     key={i} 
                                                     size={16} 
-                                                    className={i < selectedReview.rating ? 'fill-[#5173FB] text-[#5173FB]' : 'text-zinc-200'} 
+                                                    className={i < selectedReview.rating ? 'fill-brand text-brand' : 'text-zinc-200'} 
                                                 />
                                             ))}
                                         </div>
@@ -428,7 +428,7 @@ const ReviewManager = () => {
                                                 href={resolveImageUrl(img.image)} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="aspect-square rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-50 hover:border-[#5173FB] transition-all group"
+                                                className="aspect-square rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-50 hover:border-brand transition-all group"
                                             >
                                                 <img src={resolveImageUrl(img.image)} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </a>

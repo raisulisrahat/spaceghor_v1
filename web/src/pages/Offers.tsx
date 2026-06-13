@@ -40,7 +40,7 @@ const Offers = () => {
     if (isLoading) {
         return (
             <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-                <Loader2 className="w-10 h-10 text-[#5173FB] animate-spin" />
+                <Loader2 className="w-10 h-10 text-brand animate-spin" />
                 <p className="text-neutral-500 font-bold tracking-wide animate-pulse">
                     {language === 'bn' ? 'অফারগুলো লোড হচ্ছে...' : 'Loading special offers...'}
                 </p>
@@ -87,14 +87,14 @@ const Offers = () => {
                         {language === 'bn' ? 'হোম' : 'Home'}
                     </Link>
                     <ChevronRight className="w-3.5 h-3.5" />
-                    <span className="text-[#5173FB] font-bold">
+                    <span className="text-brand font-bold">
                         {language === 'bn' ? 'স্পেশাল অফার' : 'Special Offers'}
                     </span>
                 </div>
 
                 {/* Page Header */}
                 <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-                    <span className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-brand/10 text-[#5173FB] text-xs font-bold uppercase tracking-wider">
+                    <span className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-bold uppercase tracking-wider">
                         <Sparkles className="w-3.5 h-3.5" />
                         <span>{language === 'bn' ? 'সীমিত সময়ের অফার' : 'Limited Time Deals'}</span>
                     </span>
@@ -130,7 +130,7 @@ const Offers = () => {
                         </div>
                         <Link
                             to="/products"
-                            className="inline-flex items-center space-x-2 bg-brand text-white px-6 py-3 rounded-xl font-bold hover:bg-[#3a5bd9] transition-colors shadow-lg shadow-[#5173FB]/15"
+                            className="inline-flex items-center space-x-2 bg-brand text-white px-6 py-3 rounded-xl font-bold hover:bg-[#3a5bd9] transition-colors shadow-lg shadow-brand/15"
                         >
                             <span>{language === 'bn' ? 'পণ্য সমূহ দেখুন' : 'Explore Products'}</span>
                             <ChevronRight className="w-4 h-4" />
@@ -182,7 +182,7 @@ const Offers = () => {
 
                                         {/* Title & product name */}
                                         <div className="space-y-1">
-                                            <h3 className="text-lg font-black text-neutral-900 tracking-tight leading-snug group-hover:text-[#5173FB] transition-colors line-clamp-1">
+                                            <h3 className="text-lg font-black text-neutral-900 tracking-tight leading-snug group-hover:text-brand transition-colors line-clamp-1">
                                                 {funnel.title}
                                             </h3>
                                             <p className="text-neutral-500 text-xs font-medium line-clamp-1">
@@ -215,7 +215,7 @@ const Offers = () => {
                                         {/* CTA */}
                                         <Link
                                             to={`/offer/${funnel.slug}`}
-                                            className="w-full bg-brand hover:bg-neutral-950 text-white py-3.5 rounded-2xl font-black uppercase tracking-wider text-xs shadow-lg shadow-[#5173FB]/10 hover:shadow-xl hover:shadow-black/10 transition-all duration-300 flex items-center justify-center space-x-2 mt-auto"
+                                            className="w-full bg-brand hover:bg-neutral-950 text-white py-3.5 rounded-2xl font-black uppercase tracking-wider text-xs shadow-lg shadow-brand/10 hover:shadow-xl hover:shadow-black/10 transition-all duration-300 flex items-center justify-center space-x-2 mt-auto"
                                         >
                                             <span>{language === 'bn' ? 'অফারটি লুফে নিন' : 'Claim Special Offer'}</span>
                                             <ChevronRight className="w-4 h-4 animate-pulse" />

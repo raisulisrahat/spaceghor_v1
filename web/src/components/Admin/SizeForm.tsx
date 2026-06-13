@@ -79,7 +79,7 @@ const SizeForm = ({ size, categories = [], onSave, onCancel }) => {
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/30">
                 <div>
                     <h3 className="text-sm font-bold text-zinc-900 tracking-tight">
-                        {size ? 'Update' : 'Create New'} <span className="text-[#5173FB]">Dimension</span>
+                        {size ? 'Update' : 'Create New'} <span className="text-brand">Dimension</span>
                     </h3>
                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">Physical Attribute Configuration</p>
                 </div>
@@ -98,12 +98,12 @@ const SizeForm = ({ size, categories = [], onSave, onCancel }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                         <div className="space-y-1.5">
-                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Size Name <span className="text-[#5173FB] font-black">*</span></label>
+                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Size Name <span className="text-brand font-black">*</span></label>
                             <div className="relative group">
-                                <Type className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-[#5173FB] transition-colors" size={14} />
+                                <Type className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-brand transition-colors" size={14} />
                                 <input
                                     type="text"
-                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="e.g., Extra Large, US 10"
@@ -115,10 +115,10 @@ const SizeForm = ({ size, categories = [], onSave, onCancel }) => {
                         <div className="space-y-1.5">
                             <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Size Code <span className="text-zinc-400 font-medium">(Short identifier)</span></label>
                             <div className="relative group">
-                                <Ruler className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-[#5173FB] transition-colors" size={14} />
+                                <Ruler className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-brand transition-colors" size={14} />
                                 <input
                                     type="text"
-                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                                     value={code}
                                     onChange={(e) => setCode(e.target.value)}
                                     placeholder="e.g., XL, 42"
@@ -149,7 +149,7 @@ const SizeForm = ({ size, categories = [], onSave, onCancel }) => {
                                             type="checkbox"
                                             checked={selectedCategories.includes(cat.id)}
                                             onChange={() => handleToggleCategory(cat.id)}
-                                            className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                            className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                         />
                                         <div className="flex flex-col">
                                             <span className="text-xs font-semibold text-zinc-700 group-hover:text-zinc-900">{cat.name}</span>

@@ -85,7 +85,7 @@ const UserLayout = () => {
               className="relative w-full max-w-lg bg-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-neutral-100 overflow-hidden text-center"
             >
               {/* Top Accent Pattern */}
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-[#5173FB] to-red-500" />
+              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-500 via-brand to-red-500" />
 
               {/* Close Button */}
               <button
@@ -97,7 +97,7 @@ const UserLayout = () => {
 
               {/* Security Icon Header */}
               <div className="relative mx-auto w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-8 shadow-inner">
-                <KeyRound className="w-10 h-10 text-[#5173FB]" />
+                <KeyRound className="w-10 h-10 text-brand" />
                 <motion.div
                   animate={{ scale: [1, 1.15, 1] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
@@ -135,7 +135,7 @@ const UserLayout = () => {
                 </button>
                 <button
                   onClick={handleGoToChange}
-                  className="w-full sm:w-1/2 py-4 bg-brand hover:bg-[#3a5bd9] text-white font-extrabold rounded-2xl transition-all shadow-lg shadow-[#5173FB]/20 active:scale-[0.97] flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-1/2 py-4 bg-brand hover:bg-[#3a5bd9] text-white font-extrabold rounded-2xl transition-all shadow-lg shadow-brand/20 active:scale-[0.97] flex items-center justify-center gap-2 group"
                 >
                   <span>পরিবর্তন করুন / Change</span>
                   <ShieldCheck className="w-5 h-5 transition-transform group-hover:scale-110" />

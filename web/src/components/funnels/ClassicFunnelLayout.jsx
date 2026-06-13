@@ -200,7 +200,7 @@ const ClassicFunnelLayout = ({
                                             type="text"
                                             name="customer_name"
                                             required
-                                            className="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 text-white placeholder-slate-500 outline-none font-medium transition-all"
+                                            className="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 text-white placeholder-slate-500 outline-none font-medium transition-all"
                                             placeholder={t('full_name')}
                                             value={formData.customer_name}
                                             onChange={handleChange}
@@ -212,7 +212,7 @@ const ClassicFunnelLayout = ({
                                             type="tel"
                                             name="phone_number"
                                             required
-                                            className="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 text-white placeholder-slate-500 outline-none font-medium transition-all"
+                                            className="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 text-white placeholder-slate-500 outline-none font-medium transition-all"
                                             placeholder="017XXXXXXXX"
                                             value={formData.phone_number}
                                             onChange={handlePhoneChange}
@@ -229,11 +229,11 @@ const ClassicFunnelLayout = ({
                                                 <div
                                                     key={variant.id}
                                                     onClick={() => handleVariantSelect(variant.id)}
-                                                    className={`cursor-pointer flex items-center justify-between p-3 rounded-2xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#5173FB] bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/5 bg-black/20 hover:border-white/20'}`}
+                                                    className={`cursor-pointer flex items-center justify-between p-3 rounded-2xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/5 bg-black/20 hover:border-white/20'}`}
                                                 >
                                                    <div className="flex items-center gap-4">
                                                        {/* Radio Bullet Indicator */}
-                                                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#5173FB] bg-white/10' : 'border-white/20'}`}>
+                                                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10' : 'border-white/20'}`}>
                                                            <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${variant.quantity > 0 ? 'bg-brand scale-100' : 'bg-transparent scale-0'}`} />
                                                        </div>
                                                        <div className="w-16 h-16 rounded-xl overflow-hidden bg-white shrink-0">
@@ -242,7 +242,7 @@ const ClassicFunnelLayout = ({
                                                        <span className="text-white font-bold text-sm tracking-tight">{variant.color?.name || variant.size?.name}</span>
                                                    </div>
                                                    <div className="flex items-center gap-4" onClick={e => e.stopPropagation()}>
-                                                       <span className="text-[#5173FB] font-black">৳{variant.price}</span>
+                                                       <span className="text-brand font-black">৳{variant.price}</span>
                                                        <div className="flex items-center bg-black/40 rounded-lg border border-white/10 overflow-hidden">
                                                             <button type="button" onClick={() => handleVariantQuantityChange(variant.id, -1)} className="px-3 py-1 text-white hover:bg-white/20">-</button>
                                                             <span className="px-2 text-white font-bold text-xs">{variant.quantity}</span>
@@ -312,12 +312,12 @@ const ClassicFunnelLayout = ({
                                     </div>
                                     <div className="flex justify-between items-center mb-4">
                                         <span className="text-white/60 text-sm">{t('shipping')}</span>
-                                        <span className="text-[#5173FB] font-bold">৳{shippingCost}</span>
+                                        <span className="text-brand font-bold">৳{shippingCost}</span>
                                     </div>
                                     <div className="h-px bg-white/10 mb-4" />
                                     <div className="flex justify-between items-center">
                                         <span className="text-white font-black text-lg">{t('total_amount')}</span>
-                                        <span className="text-[#5173FB] font-black text-3xl">৳{finalTotal}</span>
+                                        <span className="text-brand font-black text-3xl">৳{finalTotal}</span>
                                     </div>
                                 </div>
 
@@ -325,7 +325,7 @@ const ClassicFunnelLayout = ({
                                     ref={submitBtnRef}
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] py-6 rounded-2xl text-white font-black text-2xl uppercase tracking-tighter hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#5173FB]/20 disabled:opacity-50"
+                                    className="w-full bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] py-6 rounded-2xl text-white font-black text-2xl uppercase tracking-tighter hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand/20 disabled:opacity-50"
                                 >
                                     {submitting ? '...' : t('place_order')}
                                 </button>
@@ -680,7 +680,7 @@ const ClassicFunnelLayout = ({
                                                 <div
                                                     key={variant.id}
                                                     onClick={() => handleVariantSelect(variant.id)}
-                                                    className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-[#5173FB] bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
+                                                    className={`cursor-pointer flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${variant.quantity > 0 ? 'border-brand bg-white/10 shadow-[0_0_15px_rgba(81, 115, 251,0.2)]' : 'border-white/10 bg-black/20 hover:border-white/30 hover:bg-white/5'}`}
                                                 >
                                                     <div className="flex items-center gap-4">
                                                         {/* Radio Bullet Indicator */}
@@ -740,7 +740,7 @@ const ClassicFunnelLayout = ({
                                                 type="text"
                                                 name="customer_name"
                                                 required
-                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder={t('full_name')}
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
@@ -754,12 +754,12 @@ const ClassicFunnelLayout = ({
                                                 type="tel"
                                                 name="phone_number"
                                                 required
-                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
+                                                className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
                                                 placeholder="017XXXXXXXX"
                                                 value={formData.phone_number}
                                                 onChange={handlePhoneChange}
                                             />
-                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors" size={20} />
+                                            <Phone className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors" size={20} />
                                         </div>
                                     </div>
                                 </div>
@@ -775,7 +775,7 @@ const ClassicFunnelLayout = ({
                                                 <select
                                                     name="district"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none"
                                                     value={formData.district}
                                                     onChange={handleChange}
                                                 >
@@ -787,7 +787,7 @@ const ClassicFunnelLayout = ({
                                                         return <option key={dist.id} value={dist.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                         <div className="space-y-3">
@@ -796,7 +796,7 @@ const ClassicFunnelLayout = ({
                                                 <select
                                                     name="upazila"
                                                     required
-                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    className="w-full pl-5 pr-12 py-4 bg-slate-800/50 border border-white/20 rounded-2xl focus:border-brand focus:bg-slate-800 text-white outline-none font-medium transition-all duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
                                                     value={formData.upazila}
                                                     onChange={handleChange}
                                                     disabled={!formData.district}
@@ -809,7 +809,7 @@ const ClassicFunnelLayout = ({
                                                         return <option key={upz.id} value={upz.id} className="bg-slate-800 text-white">{displayYear}</option>
                                                     })}
                                                 </select>
-                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                                <MapPin className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                             </div>
                                         </div>
                                     </div>
@@ -822,12 +822,12 @@ const ClassicFunnelLayout = ({
                                             name="address"
                                             required
                                             rows="2"
-                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-[#5173FB] focus:bg-white/10 focus:ring-4 focus:ring-[#5173FB]/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
+                                            className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
                                             placeholder={t('write_full_address')}
                                             value={formData.address}
                                             onChange={handleChange}
                                         ></textarea>
-                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-[#5173FB] transition-colors pointer-events-none" size={20} />
+                                        <MapPin className="absolute right-5 top-6 text-slate-400 group-focus-within:text-brand transition-colors pointer-events-none" size={20} />
                                     </div>
                                 </div>
 
@@ -919,7 +919,7 @@ const ClassicFunnelLayout = ({
 
             {/* Mobile Sticky CTA */}
             <div className={`fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md p-4 border-t border-slate-200 lg:hidden z-50 transition-transform duration-300 ${showMobileCTA ? 'translate-y-0' : 'translate-y-full'}`}>
-                <a href="#order-form" className="flex items-center justify-center w-full bg-brand text-white font-black py-4 rounded-xl text-lg shadow-lg shadow-[#5173FB]/30 animate-pulse hover:bg-[#3a5bd9] active:scale-95 transition-all">
+                <a href="#order-form" className="flex items-center justify-center w-full bg-brand text-white font-black py-4 rounded-xl text-lg shadow-lg shadow-brand/30 animate-pulse hover:bg-[#3a5bd9] active:scale-95 transition-all">
                     অর্ডার করুন - ৳{finalTotal}
                 </a>
             </div>

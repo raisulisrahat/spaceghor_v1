@@ -38,7 +38,7 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAF9F6]">
         <div className="relative flex items-center justify-center">
-          <div className="w-12 h-12 border-4 border-zinc-100 border-t-[#5173FB] rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-zinc-100 border-t-brand rounded-full animate-spin"></div>
           <div className="absolute w-8 h-8 border border-neutral-100 rounded-full bg-brand/5 animate-ping"></div>
         </div>
         <p className="text-zinc-400 font-black uppercase tracking-widest text-[10px] mt-6">Loading Article...</p>
@@ -51,7 +51,7 @@ const BlogDetail = () => {
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAF9F6] px-6 text-center">
         <h2 className="text-3xl font-black text-zinc-900 mb-4 tracking-tight uppercase">Article Not Found</h2>
         <p className="text-zinc-500 text-xs mb-8 max-w-xs leading-relaxed">The article you are looking for might have been removed or is temporarily unavailable.</p>
-        <Link to="/blogs" className="px-8 py-3.5 bg-zinc-900 text-white hover:bg-brand rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl shadow-zinc-950/10 hover:shadow-[#5173FB]/20 transition-all duration-300">
+        <Link to="/blogs" className="px-8 py-3.5 bg-zinc-900 text-white hover:bg-brand rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl shadow-zinc-950/10 hover:shadow-brand/20 transition-all duration-300">
           Back to Journal
         </Link>
       </div>
@@ -59,7 +59,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen pb-32 font-sans selection:bg-brand/10 selection:text-[#5173FB] overflow-x-hidden">
+    <div className="bg-[#FAF9F6] min-h-screen pb-32 font-sans selection:bg-brand/10 selection:text-brand overflow-x-hidden">
       <SEO 
         title={post.title} 
         description={post.summary || post.content?.replace(/<[^>]*>?/gm, '').slice(0, 160)}
@@ -83,16 +83,16 @@ const BlogDetail = () => {
       <div className="max-w-4xl mx-auto px-6 py-8 md:py-10 flex items-center justify-between border-b border-zinc-200/50">
         <Link 
           to="/blogs" 
-          className="group flex items-center space-x-3 text-zinc-500 hover:text-[#5173FB] transition-all"
+          className="group flex items-center space-x-3 text-zinc-500 hover:text-brand transition-all"
         >
-          <div className="w-9 h-9 rounded-full bg-white border border-zinc-100 flex items-center justify-center group-hover:bg-brand/5 group-hover:border-[#5173FB]/15 transition-all">
+          <div className="w-9 h-9 rounded-full bg-white border border-zinc-100 flex items-center justify-center group-hover:bg-brand/5 group-hover:border-brand/15 transition-all">
             <ChevronLeft size={16} />
           </div>
           <span className="text-xs font-black uppercase tracking-widest">Blogs list</span>
         </Link>
         
         <div className="flex items-center space-x-3">
-          <span className="px-3 py-1 bg-white text-[#5173FB] text-xs font-black uppercase tracking-widest rounded-full border border-orange-100 shadow-sm flex items-center gap-1">
+          <span className="px-3 py-1 bg-white text-brand text-xs font-black uppercase tracking-widest rounded-full border border-orange-100 shadow-sm flex items-center gap-1">
             <BookOpen size={10} /> {post.category_name || 'Lifestyle'}
           </span>
         </div>
@@ -116,12 +116,12 @@ const BlogDetail = () => {
           className="flex items-center justify-center space-x-6 text-[9px] font-black text-zinc-400 uppercase tracking-widest pb-10 border-b border-zinc-200/40"
         >
           <div className="flex items-center space-x-1.5">
-            <Calendar size={12} className="text-[#5173FB]" />
+            <Calendar size={12} className="text-brand" />
             <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
           </div>
           <span className="w-1.5 h-1.5 bg-zinc-200 rounded-full"></span>
           <div className="flex items-center space-x-1.5">
-            <Eye size={12} className="text-[#5173FB]" />
+            <Eye size={12} className="text-brand" />
             <span>{post.views || 0} Reads</span>
           </div>
         </motion.div>
@@ -161,15 +161,15 @@ const BlogDetail = () => {
           <div className="flex items-center space-x-6">
             <button 
               onClick={handleShare}
-              className="flex items-center space-x-2 text-zinc-400 hover:text-[#5173FB] transition-all group px-4 py-2 bg-white rounded-full border border-zinc-100 shadow-sm"
+              className="flex items-center space-x-2 text-zinc-400 hover:text-brand transition-all group px-4 py-2 bg-white rounded-full border border-zinc-100 shadow-sm"
             >
-              <Share2 size={13} className="group-hover:scale-110 transition-transform text-[#5173FB]" />
+              <Share2 size={13} className="group-hover:scale-110 transition-transform text-brand" />
               <span className="text-[9px] font-black uppercase tracking-widest">Share story</span>
             </button>
           </div>
           <div className="flex items-center space-x-4 bg-white px-6 py-4 rounded-3xl border border-zinc-100 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-brand/5 overflow-hidden flex items-center justify-center border border-[#5173FB]/10">
-              <User size={18} className="text-[#5173FB]" />
+            <div className="w-10 h-10 rounded-full bg-brand/5 overflow-hidden flex items-center justify-center border border-brand/10">
+              <User size={18} className="text-brand" />
             </div>
             <div className="flex flex-col">
               <span className="text-[8px] font-black text-zinc-400 uppercase tracking-widest leading-none mb-1">Published by</span>

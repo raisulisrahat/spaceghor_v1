@@ -260,7 +260,7 @@ const Home = () => {
                   <span className="text-neutral-400 font-medium">Loading premium deals...</span>
                 </div>
               ) : (
-                <div className="w-full h-full bg-gradient-to-r from-[#5173FB] to-[#809BFF] flex flex-col justify-center p-8 md:p-12 text-white space-y-4">
+                <div className="w-full h-full bg-gradient-to-r from-brand to-[#809BFF] flex flex-col justify-center p-8 md:p-12 text-white space-y-4">
                   <h2 className="text-3xl md:text-5xl font-extrabold leading-tight max-w-lg">
                     Premium Gadgets & Accessories
                   </h2>

@@ -11,9 +11,10 @@ const formatAddressForAdmin = (address) => {
 };
 
 const OrderManager = () => {
-    const { token } = useAuth();
+    const { token, user } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const userRole = user?.user?.role || user?.profile?.role;
     
     const queryParams = new URLSearchParams(location.search);
     const initialView = queryParams.get('view') || 'real';
@@ -660,7 +661,7 @@ const OrderManager = () => {
                             <input
                                 type="text"
                                 placeholder="Search hash, customer, phone..."
-                                className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                                className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -843,7 +844,7 @@ const OrderManager = () => {
                                                     <div className={`w-1 h-1 rounded-full ${
                                                         order.status === 'delivered' ? 'bg-emerald-500' : 
                                                         order.status === 'partial_delivered' ? 'bg-amber-500' : 
-                                                        order.status === 'cancelled' ? 'bg-rose-500' : 
+                                                        order.status === 'cancelled' ? 'bg-red-900' : 
                                                         'bg-zinc-500'
                                                     }`} />
                                                     {order.status}
@@ -882,7 +883,7 @@ const OrderManager = () => {
                                         </td>
                                     )}
                                     <td className="px-6 py-4 text-center">
-                                        <span className={`text-xs font-bold ${order.notes?.length > 0 ? 'text-[#5173FB]' : 'text-zinc-300'}`}>
+                                        <span className={`text-xs font-bold ${order.notes?.length > 0 ? 'text-brand' : 'text-zinc-300'}`}>
                                             {order.notes?.length || 0}
                                         </span>
                                     </td>
@@ -893,9 +894,9 @@ const OrderManager = () => {
                                             </button>
                                             {activeView === 'real' ? (
                                                 <>
-                                                    {!order.courier_consignment_id && (
+                                                    {!order.courier_consignment_id && userRole !== 'moderator' && (
                                                         <>
-                                                            <button onClick={() => handleSendToSteadfast(order)} disabled={isDispatching} className="p-2 text-zinc-400 bg-green-600/30 hover:text-[#5173FB] hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all" title="Sync with Steadfast">
+                                                            <button onClick={() => handleSendToSteadfast(order)} disabled={isDispatching} className="p-2 text-zinc-400 bg-green-600/30 hover:text-brand hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all" title="Sync with Steadfast">
                                                                 <Truck size={14} />
                                                             </button>
                                                             <button onClick={() => handleSendToCarrybee(order)} disabled={isDispatching} className="p-2 text-zinc-400 bg-yellow-400/30 hover:text-purple-600 hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all" title="Sync with Carrybee">
@@ -948,7 +949,7 @@ const OrderManager = () => {
                                             onClick={() => setCurrentPage(Number(page))}
                                             className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all ${
                                                 currentPage === page 
-                                                    ? 'bg-brand text-white border-[#5173FB] shadow-sm shadow-[#5173FB]/10' 
+                                                    ? 'bg-brand text-white border-brand shadow-sm shadow-brand/10' 
                                                     : 'bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50'
                                             }`}
                                         >
@@ -1044,8 +1045,8 @@ const OrderManager = () => {
                                 <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Fulfillment Information</h4>
                                 {isEditingDetails ? (
                                     <div className="space-y-3">
-                                        <input className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none" value={editForm.customer_name} onChange={e => setEditForm({...editForm, customer_name: e.target.value})} placeholder="Customer Name" />
-                                        <textarea className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none min-h-[100px]" value={editForm.address} onChange={e => setEditForm({...editForm, address: e.target.value})} placeholder="Shipping Address" />
+                                        <input className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-brand/5 transition-all outline-none" value={editForm.customer_name} onChange={e => setEditForm({...editForm, customer_name: e.target.value})} placeholder="Customer Name" />
+                                        <textarea className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-brand/5 transition-all outline-none min-h-[100px]" value={editForm.address} onChange={e => setEditForm({...editForm, address: e.target.value})} placeholder="Shipping Address" />
                                     </div>
                                 ) : (
                                     <div className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100 relative group">
@@ -1121,7 +1122,7 @@ const OrderManager = () => {
                             </div>
 
                             {/* Logistics Sync */}
-                            {selectedOrder.status !== 'draft' && (
+                            {selectedOrder.status !== 'draft' && (selectedOrder.courier_consignment_id || userRole !== 'moderator') && (
                                 <div className="space-y-3">
                                     {!selectedOrder.courier_consignment_id ? (
                                         <div className="grid grid-cols-2 gap-3">
@@ -1203,12 +1204,22 @@ const OrderManager = () => {
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">
                                     <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order Summary</h4>
-                                    <button 
-                                        onClick={() => handleCopyOrderSummary(selectedOrder)}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
-                                    >
-                                        <Copy size={12} /> Copy Summary
-                                    </button>
+                                    <div className="flex items-center gap-2">
+                                        {!isEditingDetails && (
+                                            <button 
+                                                onClick={handleEditDetailsClick}
+                                                className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
+                                            >
+                                                <Edit size={12} /> Edit Details
+                                            </button>
+                                        )}
+                                        <button 
+                                            onClick={() => handleCopyOrderSummary(selectedOrder)}
+                                            className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
+                                        >
+                                            <Copy size={12} /> Copy Summary
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden">
                                     <table className="w-full text-left">
@@ -1248,7 +1259,7 @@ const OrderManager = () => {
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
-                                                                className="w-16 px-2 py-1 bg-white border border-zinc-300 rounded text-center font-bold text-zinc-900 focus:ring-2 focus:ring-[#5173FB]/5 outline-none" 
+                                                                className="w-16 px-2 py-1 bg-white border border-zinc-300 rounded text-center font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                 value={item.quantity} 
                                                                 onChange={(e) => handleItemChange(item.id, 'quantity', Number(e.target.value))} 
                                                             />
@@ -1259,7 +1270,7 @@ const OrderManager = () => {
                                                                 <input 
                                                                     type="number" 
                                                                     min="0" 
-                                                                    className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-[#5173FB]/5 outline-none" 
+                                                                    className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                     value={item.price} 
                                                                     onChange={(e) => handleItemChange(item.id, 'price', Number(e.target.value))} 
                                                                 />
@@ -1315,7 +1326,7 @@ const OrderManager = () => {
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
-                                                                className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-[#5173FB]/5 outline-none" 
+                                                                className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                 value={editForm.shipping_cost} 
                                                                 onChange={(e) => handleShippingChange(Number(e.target.value))} 
                                                             />
@@ -1325,6 +1336,43 @@ const OrderManager = () => {
                                                     )}
                                                 </td>
                                             </tr>
+                                            {isEditingDetails ? (
+                                                (() => {
+                                                    const subtotal = editForm.items?.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0) || 0;
+                                                    const shipping = Number(editForm.shipping_cost) || 0;
+                                                    const total = Number(editForm.total_amount) || 0;
+                                                    const difference = subtotal + shipping - total;
+                                                    if (difference !== 0) {
+                                                        return (
+                                                            <tr>
+                                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Discount / Adjustment</td>
+                                                                <td className="px-5 py-3 text-right text-rose-600 font-bold font-mono">
+                                                                    {difference > 0 ? '-' : '+'}৳{Math.abs(difference).toLocaleString()}
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                    return null;
+                                                })()
+                                            ) : (
+                                                (() => {
+                                                    const subtotal = (selectedOrder.items || selectedOrder.cart_items)?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0;
+                                                    const shipping = Number(selectedOrder.shipping_cost) || 0;
+                                                    const total = Number(selectedOrder.total_amount) || 0;
+                                                    const difference = subtotal + shipping - total;
+                                                    if (difference !== 0) {
+                                                        return (
+                                                            <tr>
+                                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Discount / Adjustment</td>
+                                                                <td className="px-5 py-3 text-right text-rose-600 font-bold font-mono">
+                                                                    {difference > 0 ? '-' : '+'}৳{Math.abs(difference).toLocaleString()}
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                    return null;
+                                                })()
+                                            )}
                                             <tr className="bg-brand text-white font-black">
                                                 <td colSpan={2} className="px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
                                                 <td className="px-5 py-4 text-right text-base">
@@ -1367,7 +1415,7 @@ const OrderManager = () => {
                                             value={noteText} 
                                             onChange={e => setNoteText(e.target.value)} 
                                             placeholder="Add operational note..." 
-                                            className="flex-1 px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold focus:ring-2 focus:ring-[#5173FB]/5 outline-none" 
+                                            className="flex-1 px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold focus:ring-2 focus:ring-brand/5 outline-none" 
                                         />
                                         <button onClick={handleAddNote} disabled={!noteText.trim() || isSubmittingNote} className="px-5 py-2.5 bg-brand text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all disabled:opacity-30">Add</button>
                                     </div>
@@ -1411,7 +1459,7 @@ const OrderManager = () => {
                                 <button 
                                     key={status} 
                                     onClick={() => setNewStatus(status)} 
-                                    className={`w-full py-3 px-5 rounded-xl flex items-center justify-between border-2 transition-all ${newStatus === status ? 'border-[#5173FB] bg-zinc-50 text-zinc-900' : 'border-transparent bg-zinc-50 text-zinc-400 hover:bg-zinc-100'}`}
+                                    className={`w-full py-3 px-5 rounded-xl flex items-center justify-between border-2 transition-all ${newStatus === status ? 'border-brand bg-zinc-50 text-zinc-900' : 'border-transparent bg-zinc-50 text-zinc-400 hover:bg-zinc-100'}`}
                                 >
                                     <span className="text-[10px] font-bold uppercase tracking-widest">{status}</span>
                                     {newStatus === status && <CheckCircle size={16} className="text-zinc-900" />}
@@ -1432,7 +1480,7 @@ const OrderManager = () => {
 const getStatusStyle = (status) => {
     switch (status) {
         case 'pending': return 'bg-zinc-50 text-zinc-500 border-zinc-200';
-        case 'processing': return 'bg-brand/10 text-[#5173FB] border-zinc-200';
+        case 'processing': return 'bg-brand/10 text-brand border-zinc-200';
         case 'shipped': return 'bg-indigo-50 text-indigo-700 border-indigo-100';
         case 'delivered': return 'bg-emerald-50 text-emerald-700 border-emerald-100';
         case 'partial_delivered': return 'bg-amber-50 text-amber-700 border-amber-100';

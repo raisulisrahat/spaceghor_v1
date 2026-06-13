@@ -80,9 +80,9 @@ export const useSettings = () => {
   
   return {
     ...context,
-    siteTitle: settings?.site_title || 'QBAMART',
+    siteTitle: settings?.site_title,
     siteLogo: settings?.site_logo || defaultLogo,
     footerLogo: settings?.footer_logo || settings?.site_logo || defaultLogo,
-    favicon: settings?.site_favicon || '/favicon.ico',
+    favicon: settings?.site_favicon,
   };
 };

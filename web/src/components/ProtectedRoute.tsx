@@ -9,7 +9,7 @@ const ProtectedRoute = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-        <Loader2 className="w-10 h-10 animate-spin text-[#5173FB]" />
+        <Loader2 className="w-10 h-10 animate-spin text-brand" />
       </div>
     );
   }

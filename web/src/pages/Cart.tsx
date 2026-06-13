@@ -17,7 +17,7 @@ const Cart = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-md mx-auto space-y-8"
         >
-          <div className="w-24 h-24 bg-brand/5 rounded-full flex items-center justify-center mx-auto text-[#5173FB]">
+          <div className="w-24 h-24 bg-brand/5 rounded-full flex items-center justify-center mx-auto text-brand">
              <ShoppingBag className="w-10 h-10" />
           </div>
           <div className="space-y-2">
@@ -26,7 +26,7 @@ const Cart = () => {
           </div>
           <Link 
             to="/products" 
-            className="inline-flex items-center space-x-3 bg-brand text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl shadow-[#5173FB]/20 hover:bg-[#3a5bd9] hover:-translate-y-1 active:scale-95"
+            className="inline-flex items-center space-x-3 bg-brand text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl shadow-brand/20 hover:bg-[#3a5bd9] hover:-translate-y-1 active:scale-95"
           >
             <span>Start Shopping</span>
             <ArrowRight className="w-5 h-5" />
@@ -68,7 +68,7 @@ const Cart = () => {
                 
                 <div className="flex-grow min-w-0 space-y-1">
                   <div className="flex items-start justify-between gap-4">
-                    <Link to={`/product/${item.slug}`} className="text-[14px] font-bold text-neutral-900 hover:text-[#5173FB] transition-colors leading-tight line-clamp-2">
+                    <Link to={`/product/${item.slug}`} className="text-[14px] font-bold text-neutral-900 hover:text-brand transition-colors leading-tight line-clamp-2">
                       {item.name}
                     </Link>
                     <p className="text-base font-bold text-neutral-900 whitespace-nowrap">
@@ -153,13 +153,13 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between text-[13px]">
                    <span className="text-neutral-500 font-medium">Delivery</span>
-                   <span className="text-[#5173FB] font-bold">৳60</span>
+                   <span className="text-brand font-bold">৳60</span>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
                   <span className="font-bold text-neutral-900 text-base">Total amount</span>
-                  <span className="text-xl font-bold text-[#5173FB]">৳{(cartTotal + 60).toLocaleString()}</span>
+                  <span className="text-xl font-bold text-brand">৳{(cartTotal + 60).toLocaleString()}</span>
               </div>
 
               {cart.some(i => i.stock !== undefined && i.stock <= 0) && (

@@ -544,7 +544,7 @@ const EzyFunnelLayout = ({
                                         <div className="container mx-auto px-4 max-w-6xl">
                                             {/* Section Header */}
                                             <div className="text-center mb-16 space-y-4">
-                                                <div className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
+                                                <div className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
                                                     <h5 className="text-xl md:text-2xl font-black tracking-tight uppercase">
                                                         আমাদের কাস্টমার রিভিউ
                                                     </h5>
@@ -613,7 +613,7 @@ const EzyFunnelLayout = ({
                                             <div className="mt-10 text-center">
                                                 <button 
                                                     onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                                    className="bg-gradient-to-r from-[#5173FB] via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                                                    className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
                                                 >
                                                     <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
                                                 </button>

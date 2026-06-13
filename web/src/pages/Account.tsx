@@ -202,7 +202,7 @@ const Account = () => {
                   <div className="bg-white rounded-[2rem] shadow-sm border border-neutral-100 overflow-hidden">
                     <div className="p-8 border-b border-neutral-50 flex items-center justify-between">
                       <h3 className="text-xl font-black text-neutral-900 tracking-tight">Recent Orders</h3>
-                      <Link to="/account/orders" className="text-sm font-bold text-[#5173FB] hover:underline">View All</Link>
+                      <Link to="/account/orders" className="text-sm font-bold text-brand hover:underline">View All</Link>
                     </div>
                     <div className="p-8">
                       {orders?.length > 0 ? (
@@ -211,10 +211,10 @@ const Account = () => {
                             <Link 
                               key={order.id} 
                               to={`/account/orders/${order.id}`}
-                              className="flex items-center justify-between p-4 bg-neutral-50 rounded-2xl border border-neutral-100 group hover:border-[#5173FB] hover:bg-white transition-all shadow-sm hover:shadow-md block"
+                              className="flex items-center justify-between p-4 bg-neutral-50 rounded-2xl border border-neutral-100 group hover:border-brand hover:bg-white transition-all shadow-sm hover:shadow-md block"
                             >
                               <div className="flex items-center space-x-4">
-                                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-neutral-400 overflow-hidden border border-neutral-100 group-hover:border-[#5173FB]/20 transition-colors">
+                                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-neutral-400 overflow-hidden border border-neutral-100 group-hover:border-brand/20 transition-colors">
                                   {order.items?.[0]?.product_image ? (
                                     <img 
                                       src={order.items[0].product_image ? (order.items[0].product_image.startsWith('http') ? order.items[0].product_image : `${BASE_URL}${order.items[0].product_image}`) : ''} 
@@ -226,18 +226,18 @@ const Account = () => {
                                   )}
                                 </div>
                                 <div>
-                                  <p className="text-sm font-black text-neutral-900 group-hover:text-[#5173FB] transition-colors">Order #{String(order.id).padStart(6, '0')}</p>
+                                  <p className="text-sm font-black text-neutral-900 group-hover:text-brand transition-colors">Order #{String(order.id).padStart(6, '0')}</p>
                                   <p className="text-xs text-neutral-500">{new Date(order.created_at).toLocaleDateString()}</p>
                                 </div>
                               </div>
                               <div className="text-right flex items-center space-x-4">
                                 <div>
-                                  <p className="text-sm font-black text-[#5173FB]">TK. {order.total_amount}</p>
+                                  <p className="text-sm font-black text-brand">TK. {order.total_amount}</p>
                                   <span className="inline-block px-2 py-0.5 bg-green-50 text-green-600 rounded-md text-[10px] font-bold uppercase tracking-wider mt-1">
                                     {order.status}
                                   </span>
                                 </div>
-                                <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#5173FB] group-hover:translate-x-1 transition-all" />
+                                <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-brand group-hover:translate-x-1 transition-all" />
                               </div>
                             </Link>
                           ))}
@@ -290,7 +290,7 @@ const Account = () => {
                           onChange={(e) => setFormData({...formData, full_name: e.target.value})}
                           className={`w-full pl-12 pr-4 py-4 rounded-2xl text-sm font-bold transition-all outline-none border-2 ${
                             isEditing 
-                              ? 'bg-white border-[#5173FB]/20 focus:border-[#5173FB]' 
+                              ? 'bg-white border-brand/20 focus:border-brand' 
                               : 'bg-neutral-50 border-transparent text-neutral-500'
                           }`}
                         />
@@ -319,7 +319,7 @@ const Account = () => {
                           rows={3}
                           className={`w-full pl-12 pr-4 py-4 rounded-2xl text-sm font-bold transition-all outline-none border-2 resize-none ${
                             isEditing 
-                              ? 'bg-white border-[#5173FB]/20 focus:border-[#5173FB]' 
+                              ? 'bg-white border-brand/20 focus:border-brand' 
                               : 'bg-neutral-50 border-transparent text-neutral-500'
                           }`}
                         />
@@ -334,7 +334,7 @@ const Account = () => {
                         onChange={(e) => setFormData({...formData, city: e.target.value})}
                         className={`w-full px-5 py-4 rounded-2xl text-sm font-bold transition-all outline-none border-2 ${
                           isEditing 
-                            ? 'bg-white border-[#5173FB]/20 focus:border-[#5173FB]' 
+                            ? 'bg-white border-brand/20 focus:border-brand' 
                             : 'bg-neutral-50 border-transparent text-neutral-500'
                         }`}
                       />
@@ -348,7 +348,7 @@ const Account = () => {
                         onChange={(e) => setFormData({...formData, zip_code: e.target.value})}
                         className={`w-full px-5 py-4 rounded-2xl text-sm font-bold transition-all outline-none border-2 ${
                           isEditing 
-                            ? 'bg-white border-[#5173FB]/20 focus:border-[#5173FB]' 
+                            ? 'bg-white border-brand/20 focus:border-brand' 
                             : 'bg-neutral-50 border-transparent text-neutral-500'
                         }`}
                       />
@@ -390,12 +390,12 @@ const Account = () => {
                       className="flex items-center justify-between p-4 bg-neutral-50 hover:bg-brand/5 rounded-2xl border border-neutral-100 hover:border-red-200 transition-colors group"
                     >
                       <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-white rounded-xl text-neutral-400 group-hover:text-[#5173FB] shadow-sm">
+                        <div className="p-2 bg-white rounded-xl text-neutral-400 group-hover:text-brand shadow-sm">
                           <ShieldCheck className="w-4 h-4" />
                         </div>
                         <span className="text-sm font-bold text-neutral-700 group-hover:text-neutral-900">Change Password</span>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-neutral-400 group-hover:text-[#5173FB]" />
+                      <ChevronRight className="w-4 h-4 text-neutral-400 group-hover:text-brand" />
                     </Link>
 
                     {(user?.user?.is_staff || user?.user?.is_superuser || ['admin', 'moderator'].includes(user?.profile?.role)) && (
@@ -453,7 +453,7 @@ const Account = () => {
                                       value={verificationCode}
                                       onChange={(e) => setVerificationCode(e.target.value)}
                                       placeholder="e.g. 123456"
-                                      className="flex-grow px-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold text-center tracking-widest font-mono focus:border-[#5173FB] focus:outline-none"
+                                      className="flex-grow px-4 py-2 bg-white border border-neutral-200 rounded-xl text-sm font-bold text-center tracking-widest font-mono focus:border-brand focus:outline-none"
                                       maxLength={6}
                                     />
                                     <button

@@ -60,7 +60,7 @@ const BlogList = () => {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center bg-white">
         <div className="relative flex items-center justify-center">
-          <div className="animate-spin w-10 h-10 border-2 border-[#5173FB] border-t-transparent rounded-full"></div>
+          <div className="animate-spin w-10 h-10 border-2 border-brand border-t-transparent rounded-full"></div>
           <div className="absolute w-6 h-6 border border-neutral-100 rounded-full bg-brand/5 animate-ping"></div>
         </div>
         <p className="text-[10px] uppercase tracking-widest font-black text-neutral-400 mt-6 animate-pulse">Loading Journal...</p>
@@ -85,8 +85,8 @@ const BlogList = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/70 backdrop-blur-md rounded-full border border-orange-100 shadow-sm mb-6"
           >
-            <Sparkles size={10} className="text-[#5173FB] animate-pulse" />
-            <span className="text-[9px] font-black uppercase tracking-widest text-[#5173FB]">{siteTitle} Journal</span>
+            <Sparkles size={10} className="text-brand animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-widest text-brand">{siteTitle} Journal</span>
           </motion.div>
           
           <motion.h1 
@@ -95,7 +95,7 @@ const BlogList = () => {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tighter mb-6 uppercase leading-none"
           >
-            Insights <span className="text-[#5173FB]">&</span> Stories
+            Insights <span className="text-brand">&</span> Stories
           </motion.h1>
           
           <motion.p 
@@ -137,7 +137,7 @@ const BlogList = () => {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-neutral-50/50 border border-neutral-200 rounded-full text-[11px] font-medium focus:ring-1 focus:ring-[#5173FB]/20 focus:border-[#5173FB] focus:bg-white outline-none transition-all placeholder:text-neutral-400"
+              className="w-full pl-9 pr-4 py-2 bg-neutral-50/50 border border-neutral-200 rounded-full text-[11px] font-medium focus:ring-1 focus:ring-brand/20 focus:border-brand focus:bg-white outline-none transition-all placeholder:text-neutral-400"
             />
           </div>
         </div>
@@ -151,7 +151,7 @@ const BlogList = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-16 bg-white border border-neutral-100 rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.02)] group hover:shadow-[0_25px_60px_rgba(81, 115, 251,0.04)] hover:border-[#5173FB]/10 transition-all duration-500"
+            className="mb-16 bg-white border border-neutral-100 rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.02)] group hover:shadow-[0_25px_60px_rgba(81, 115, 251,0.04)] hover:border-brand/10 transition-all duration-500"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
               {/* Left Column: Image with premium hover zoom */}
@@ -164,7 +164,7 @@ const BlogList = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent"></div>
                   <div className="absolute top-6 left-6 z-10">
-                    <span className="px-4 py-1.5 bg-white/90 backdrop-blur-sm text-[#5173FB] text-[9px] font-black uppercase tracking-widest rounded-full border border-orange-100 shadow-sm">
+                    <span className="px-4 py-1.5 bg-white/90 backdrop-blur-sm text-brand text-[9px] font-black uppercase tracking-widest rounded-full border border-orange-100 shadow-sm">
                       Featured Story
                     </span>
                   </div>
@@ -179,7 +179,7 @@ const BlogList = () => {
                   <span>{featuredPost.views || 0} Reads</span>
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-black text-neutral-900 tracking-tight leading-tight mb-4 group-hover:text-[#5173FB] transition-colors duration-300">
+                <h2 className="text-2xl md:text-3xl font-black text-neutral-900 tracking-tight leading-tight mb-4 group-hover:text-brand transition-colors duration-300">
                   <Link to={`/blog/${featuredPost.slug}`}>
                     {featuredPost.title}
                   </Link>
@@ -195,7 +195,7 @@ const BlogList = () => {
                 <div className="flex items-center justify-between pt-6 border-t border-neutral-50">
                   <Link 
                     to={`/blog/${featuredPost.slug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand shadow-lg shadow-neutral-950/10 hover:shadow-[#5173FB]/20 active:scale-95 transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand shadow-lg shadow-neutral-950/10 hover:shadow-brand/20 active:scale-95 transition-all duration-300"
                   >
                     Read Full Story <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

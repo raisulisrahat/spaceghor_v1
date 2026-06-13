@@ -66,7 +66,7 @@ const PremiumFunnelLayout = ({
                         <Clock size={16} />
                         <span className="text-sm font-black font-mono tracking-widest">{currentTime}</span>
                     </div>
-                    <a href="#order-form" className="bg-white text-[#5173FB] px-6 py-2 rounded-full text-xs font-black uppercase hover:bg-neutral-100 transition-colors">Claim Offer</a>
+                    <a href="#order-form" className="bg-white text-brand px-6 py-2 rounded-full text-xs font-black uppercase hover:bg-neutral-100 transition-colors">Claim Offer</a>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@ const PremiumFunnelLayout = ({
                 {/* Hero / Main Product Showcase */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div className="space-y-8">
-                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/5 text-[#5173FB] rounded-full text-xs font-black uppercase tracking-widest">
+                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/5 text-brand rounded-full text-xs font-black uppercase tracking-widest">
                              <Sparkles size={14} /> Luxury Collection 2026
                          </div>
                          <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-neutral-900">
@@ -86,18 +86,18 @@ const PremiumFunnelLayout = ({
                          </p>
                          
                          <div className="flex items-baseline gap-6 pt-4">
-                             <span className="text-6xl font-black text-[#5173FB] tracking-tighter">৳{Math.floor(product.sale_price || product.regular_price)}</span>
+                             <span className="text-6xl font-black text-brand tracking-tighter">৳{Math.floor(product.sale_price || product.regular_price)}</span>
                              <span className="text-2xl font-bold text-neutral-300 line-through tracking-tighter">৳{Math.floor(product.regular_price)}</span>
                          </div>
 
                          <div className="grid grid-cols-2 gap-4">
                               <div className="p-6 bg-neutral-50 rounded-3xl border border-neutral-100 flex flex-col gap-2">
-                                  <TrendingUp className="text-[#5173FB]" size={24} />
+                                  <TrendingUp className="text-brand" size={24} />
                                   <p className="text-[10px] font-black uppercase text-neutral-400">Demand</p>
                                   <p className="font-bold">High (34 Sold Today)</p>
                               </div>
                               <div className="p-6 bg-neutral-50 rounded-3xl border border-neutral-100 flex flex-col gap-2">
-                                  <ShieldCheck className="text-[#5173FB]" size={24} />
+                                  <ShieldCheck className="text-brand" size={24} />
                                   <p className="text-[10px] font-black uppercase text-neutral-400">Protection</p>
                                   <p className="font-bold">Official Warranty</p>
                               </div>
@@ -119,21 +119,21 @@ const PremiumFunnelLayout = ({
                 {/* Benefits / Social Proof */}
                 <div className="bg-neutral-50 rounded-[4rem] p-12 md:p-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                     <div className="space-y-4">
-                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-[#5173FB]">
+                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-brand">
                             <Truck size={32} />
                         </div>
                         <h3 className="text-xl font-black tracking-tight">Express Shipping</h3>
                         <p className="text-neutral-500 font-medium text-sm">Delivery within 24-72 hours across Bangladesh.</p>
                     </div>
                     <div className="space-y-4">
-                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-[#5173FB]">
+                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-brand">
                             <Zap size={32} />
                         </div>
                         <h3 className="text-xl font-black tracking-tight">Cash on Delivery</h3>
                         <p className="text-neutral-500 font-medium text-sm">No advance payment needed. Pay after you check.</p>
                     </div>
                     <div className="space-y-4">
-                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-[#5173FB]">
+                        <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-brand">
                             <TrendingUp size={32} />
                         </div>
                         <h3 className="text-xl font-black tracking-tight">Satisfaction</h3>
@@ -154,7 +154,7 @@ const PremiumFunnelLayout = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {dynamicWhyBuyList.map((reason, idx) => (
                             <div key={idx} className="flex items-start gap-4 p-6 bg-white rounded-3xl border border-neutral-100 shadow-sm hover:shadow-md transition-shadow">
-                                <span className="w-10 h-10 rounded-2xl bg-brand/5 text-[#5173FB] flex items-center justify-center shrink-0 shadow-inner">
+                                <span className="w-10 h-10 rounded-2xl bg-brand/5 text-brand flex items-center justify-center shrink-0 shadow-inner">
                                     <CheckCircle size={20} />
                                 </span>
                                 <div className="space-y-1">
@@ -217,7 +217,7 @@ const PremiumFunnelLayout = ({
                                             type="text"
                                             name="customer_name"
                                             required
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold"
+                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
                                             placeholder="Full Name *"
                                             value={formData.customer_name}
                                             onChange={handleChange}
@@ -228,7 +228,7 @@ const PremiumFunnelLayout = ({
                                             type="tel"
                                             name="phone_number"
                                             required
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold"
+                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
                                             placeholder="Mobile Number *"
                                             value={formData.phone_number}
                                             onChange={handleChange}
@@ -236,7 +236,7 @@ const PremiumFunnelLayout = ({
                                         <input
                                             type="email"
                                             name="email"
-                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold"
+                                            className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold"
                                             placeholder="Email (Optional)"
                                             value={formData.email}
                                             onChange={handleChange}
@@ -247,7 +247,7 @@ const PremiumFunnelLayout = ({
                                             <select
                                                 name="district"
                                                 required
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold appearance-none"
+                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
@@ -263,7 +263,7 @@ const PremiumFunnelLayout = ({
                                                 name="upazila"
                                                 required
                                                 disabled={!formData.district}
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold appearance-none disabled:opacity-50"
+                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none disabled:opacity-50"
                                                 value={formData.upazila}
                                                 onChange={handleChange}
                                             >
@@ -283,7 +283,7 @@ const PremiumFunnelLayout = ({
                                             <select
                                                 name="shipping_zone"
                                                 required
-                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold appearance-none"
+                                                className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold appearance-none"
                                                 value={formData.shipping_zone}
                                                 onChange={handleChange}
                                             >
@@ -300,7 +300,7 @@ const PremiumFunnelLayout = ({
                                     <textarea
                                         name="address"
                                         required
-                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold resize-none"
+                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
                                         placeholder="Full Delivery Address *"
                                         rows={2}
                                         value={formData.address}
@@ -308,7 +308,7 @@ const PremiumFunnelLayout = ({
                                     ></textarea>
                                     <textarea
                                         name="order_note"
-                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-[#5173FB] outline-none transition-all font-bold resize-none"
+                                        className="w-full px-6 py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
                                         placeholder="Order Note (Optional)"
                                         rows={1}
                                         value={formData.order_note}

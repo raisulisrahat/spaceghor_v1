@@ -203,7 +203,7 @@ const ConfigManager = () => {
                                     name="site_title"
                                     value={config.site_title || ''}
                                     onChange={handleChange}
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                     placeholder="Your Company Name"
                                 />
                             </div>
@@ -236,7 +236,7 @@ const ConfigManager = () => {
                                     value={config.meta_description || ''}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
                                     placeholder="Brief description for search engines..."
                                 />
                                 <p className="text-[9px] text-zinc-400 font-bold uppercase text-right">{config.meta_description?.length || 0} / 160</p>
@@ -295,7 +295,7 @@ const ConfigManager = () => {
                                         name="whatsapp_number"
                                         value={config.whatsapp_number || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                         placeholder="+8801700000000"
                                     />
                                 </div>
@@ -306,7 +306,7 @@ const ConfigManager = () => {
                                         name="support_phone"
                                         value={config.support_phone || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                         placeholder="+8801516542909"
                                     />
                                 </div>
@@ -317,7 +317,7 @@ const ConfigManager = () => {
                                         value={config.whatsapp_message || ''}
                                         onChange={handleChange}
                                         rows={3}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
                                         placeholder="Hello! I'm interested in your products."
                                     />
                                 </div>
@@ -331,7 +331,7 @@ const ConfigManager = () => {
                                         name="messenger_url"
                                         value={config.messenger_url || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                         placeholder="https://m.me/yourpage"
                                     />
                                 </div>
@@ -365,7 +365,7 @@ const ConfigManager = () => {
                                 name="facebook_pixel_id"
                                 value={config.facebook_pixel_id || ''}
                                 onChange={handleChange}
-                                className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                 placeholder="2717976234992377"
                             />
                             <p className="text-[10px] text-zinc-400 font-medium mt-1">Site-wide Facebook Pixel ID. This will automatically enable PageView tracking.</p>
@@ -378,7 +378,7 @@ const ConfigManager = () => {
                                 name="google_tag_id"
                                 value={config.google_tag_id || ''}
                                 onChange={handleChange}
-                                className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                 placeholder="G-X06QEH8RN6"
                             />
                             <p className="text-[10px] text-zinc-400 font-medium mt-1">Google Tag ID for tracking and Google Analytics integration.</p>
@@ -435,7 +435,7 @@ const ConfigManager = () => {
                                         value={config.steadfast_api_key || ''} 
                                         onChange={handleChange} 
                                         placeholder="Enter Steadfast API Key" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -446,7 +446,7 @@ const ConfigManager = () => {
                                         value={config.steadfast_secret_key || ''} 
                                         onChange={handleChange} 
                                         placeholder="Enter Steadfast Secret Key" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                             </div>
@@ -466,7 +466,7 @@ const ConfigManager = () => {
                                         value={config.carrybee_base_url || ''} 
                                         onChange={handleChange} 
                                         placeholder="https://developers.carrybee.com" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -477,7 +477,7 @@ const ConfigManager = () => {
                                         value={config.carrybee_client_id || ''} 
                                         onChange={handleChange} 
                                         placeholder="Enter Carrybee Client ID" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -488,7 +488,7 @@ const ConfigManager = () => {
                                         value={config.carrybee_client_secret || ''} 
                                         onChange={handleChange} 
                                         placeholder="Enter Carrybee Client Secret" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -499,7 +499,7 @@ const ConfigManager = () => {
                                         value={config.carrybee_client_context || ''} 
                                         onChange={handleChange} 
                                         placeholder="Enter Carrybee Client Context" 
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                     />
                                 </div>
                             </div>
@@ -544,7 +544,7 @@ const ConfigManager = () => {
                                         name="webhook_auth_token"
                                         value={config.webhook_auth_token || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-mono text-zinc-900 text-xs"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-mono text-zinc-900 text-xs"
                                         placeholder="Secret bearer token..."
                                     />
                                 </div>
@@ -595,7 +595,7 @@ const ConfigManager = () => {
                                         name="sms_api_key"
                                         value={config.sms_api_key || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                         placeholder="Enter your API Key"
                                     />
                                 </div>
@@ -606,7 +606,7 @@ const ConfigManager = () => {
                                         name="sms_sender_id"
                                         value={config.sms_sender_id || ''}
                                         onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
                                         placeholder="8809617626322"
                                     />
                                 </div>
@@ -620,7 +620,7 @@ const ConfigManager = () => {
                                         value={config.otp_format || ''}
                                         onChange={handleChange}
                                         rows={3}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
+                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm resize-none"
                                         placeholder="Your {site_title} OTP is {otp}"
                                     />
                                     <p className="text-[10px] text-zinc-400 font-medium">Use {"{site_title}"} and {"{otp}"} as placeholders.</p>
@@ -680,7 +680,7 @@ const ConfigManager = () => {
                                     value={config.bkash_base_url || ''} 
                                     onChange={handleChange} 
                                     placeholder="https://checkout.sandbox.bhash.com/v1.2.0-beta" 
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                 />
                             </div>
                             <div className="space-y-2">
@@ -691,7 +691,7 @@ const ConfigManager = () => {
                                     value={config.bkash_app_key || ''} 
                                     onChange={handleChange} 
                                     placeholder="Enter bKash App Key" 
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                 />
                             </div>
                             <div className="space-y-2">
@@ -702,7 +702,7 @@ const ConfigManager = () => {
                                     value={config.bkash_app_secret || ''} 
                                     onChange={handleChange} 
                                     placeholder="Enter bKash App Secret" 
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                 />
                             </div>
                             <div className="space-y-2">
@@ -713,7 +713,7 @@ const ConfigManager = () => {
                                     value={config.bkash_username || ''} 
                                     onChange={handleChange} 
                                     placeholder="Enter bKash Username" 
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                 />
                             </div>
                             <div className="space-y-2">
@@ -724,7 +724,7 @@ const ConfigManager = () => {
                                     value={config.bkash_password || ''} 
                                     onChange={handleChange} 
                                     placeholder="Enter bKash Password" 
-                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
+                                    className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm" 
                                 />
                             </div>
                         </div>
@@ -804,7 +804,7 @@ const SocialInput = ({ icon, label, name, value, onChange }) => (
                 name={name}
                 value={value || ''}
                 onChange={onChange}
-                className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold text-zinc-900 text-xs"
+                className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-xs"
                 placeholder={`https://${label.toLowerCase()}.com/...`}
             />
         </div>

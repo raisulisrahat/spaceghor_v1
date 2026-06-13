@@ -152,7 +152,7 @@ const FlashSaleManager = () => {
                         <input
                             type="text"
                             placeholder="Search campaigns..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -271,7 +271,7 @@ const FlashSaleManager = () => {
                                 <input
                                     type="text"
                                     required
-                                    className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all"
+                                    className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
                                     value={formData.title}
                                     onChange={e => setFormData({ ...formData, title: e.target.value })}
                                     placeholder="e.g. Midnight Madness"
@@ -284,7 +284,7 @@ const FlashSaleManager = () => {
                                     <input
                                         type="datetime-local"
                                         required
-                                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all"
+                                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
                                         value={formData.start_time}
                                         onChange={e => setFormData({ ...formData, start_time: e.target.value })}
                                     />
@@ -294,7 +294,7 @@ const FlashSaleManager = () => {
                                     <input
                                         type="datetime-local"
                                         required
-                                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all"
+                                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
                                         value={formData.end_time}
                                         onChange={e => setFormData({ ...formData, end_time: e.target.value })}
                                     />
@@ -308,7 +308,7 @@ const FlashSaleManager = () => {
                                     min="0"
                                     max="100"
                                     step="0.01"
-                                    className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all"
+                                    className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
                                     value={formData.discount_percentage}
                                     onChange={e => setFormData({ ...formData, discount_percentage: e.target.value })}
                                     placeholder="25.00"

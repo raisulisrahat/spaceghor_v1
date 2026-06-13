@@ -55,8 +55,8 @@ const BannerManager = () => {
 
     const getTypeColor = (type) => {
         switch (type) {
-            case 'hero': return 'bg-brand text-white border-[#5173FB]';
-            case 'side_top': return 'bg-brand/10 text-[#5173FB] border-zinc-200';
+            case 'hero': return 'bg-brand text-white border-brand';
+            case 'side_top': return 'bg-brand/10 text-brand border-zinc-200';
             case 'footer': return 'bg-zinc-50 text-zinc-500 border-zinc-100';
             default: return 'bg-zinc-50 text-zinc-500 border-zinc-100';
         }
@@ -129,7 +129,7 @@ const BannerManager = () => {
                         <input
                             type="text"
                             placeholder="Search media assets..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />

@@ -227,7 +227,7 @@ const StaffDashboard = ({ role }) => {
                             <input
                                 type="text"
                                 placeholder="Search system..."
-                                className="pl-9 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm w-64 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                className="pl-9 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm w-64 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                 value={searchQuery}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 onFocus={() => searchQuery.length >= 2 && setShowSearchResults(true)}
@@ -239,7 +239,7 @@ const StaffDashboard = ({ role }) => {
                                     <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-zinc-200 rounded-xl shadow-2xl z-50 overflow-hidden min-w-[320px] animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="px-4 py-3 border-b border-zinc-100 bg-zinc-50/50 flex justify-between items-center">
                                             <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Search Results</span>
-                                            {isLoadingSearch && <div className="w-3 h-3 border-2 border-[#5173FB] border-t-transparent rounded-full animate-spin" />}
+                                            {isLoadingSearch && <div className="w-3 h-3 border-2 border-brand border-t-transparent rounded-full animate-spin" />}
                                         </div>
                                         <div className="max-h-[400px] overflow-y-auto luxury-scrollbar">
                                             {searchResults.length > 0 ? (
@@ -277,7 +277,7 @@ const StaffDashboard = ({ role }) => {
                         <div className="relative">
                             <button 
                                 onClick={() => setShowNotifications(!showNotifications)}
-                                className={`p-2 transition-all relative rounded-lg ${showNotifications ? 'bg-brand/10 text-[#5173FB]' : 'text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50'}`}
+                                className={`p-2 transition-all relative rounded-lg ${showNotifications ? 'bg-brand/10 text-brand' : 'text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50'}`}
                             >
                                 <Bell size={18} />
                                 {unreadCount > 0 && (
@@ -377,7 +377,7 @@ const SidebarItem = ({ icon, label, id, activeTab, onClick }) => (
         onClick={() => onClick(id)}
         className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-[13px] font-medium transition-all duration-200 ${
             activeTab === id
-                ? 'bg-brand/10 text-[#5173FB]'
+                ? 'bg-brand/10 text-brand'
                 : 'text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50'
         }`}
     >

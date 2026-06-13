@@ -516,7 +516,7 @@ const ProductDetail = () => {
                                                 alert('Link copied to clipboard!');
                                             }
                                         }}
-                                        className="p-3 bg-white shadow-sm border border-neutral-100 rounded-xl text-neutral-400 hover:text-[#5173FB] hover:border-[#5173FB] transition-all active:scale-95"
+                                        className="p-3 bg-white shadow-sm border border-neutral-100 rounded-xl text-neutral-400 hover:text-brand hover:border-brand transition-all active:scale-95"
                                         title="Share Product"
                                     >
                                         <Share2 className="w-5 h-5" />
@@ -569,7 +569,7 @@ const ProductDetail = () => {
                                                     const imgIdx = gallery.findIndex((img: any) => img.color === color.id);
                                                     if (imgIdx !== -1) setActiveImage(imgIdx);
                                                 }}
-                                                className={`group relative w-12 h-12 lg:w-14 lg:h-14 rounded-xl overflow-hidden border-2 transition-all ${isActive ? 'border-[#5173FB] shadow-lg ring-2 ring-red-100' : 'border-neutral-100 hover:border-neutral-200'}`}
+                                                className={`group relative w-12 h-12 lg:w-14 lg:h-14 rounded-xl overflow-hidden border-2 transition-all ${isActive ? 'border-brand shadow-lg ring-2 ring-red-100' : 'border-neutral-100 hover:border-neutral-200'}`}
                                             >
                                                 <img src={resolveImageUrl(colorImg)} className="w-full h-full object-cover" alt={color.name} />
                                                 {isActive && (
@@ -599,7 +599,7 @@ const ProductDetail = () => {
                                             <button
                                                 key={size.id}
                                                 onClick={() => setSelectedSize(size)}
-                                                className={`min-w-[50px] h-9 flex shadow-sm shadow-red-700/20 items-center justify-center px-3 rounded-lg border-2  font-black text-[10px] uppercase tracking-widest transition-all ${isActive ? 'border-[#5173FB] bg-brand text-white shadow-lg shadow-red-700/20' : 'border-neutral-100 text-neutral-400 hover:border-neutral-200 bg-neutral-50/50'}`}
+                                                className={`min-w-[50px] h-9 flex shadow-sm shadow-red-700/20 items-center justify-center px-3 rounded-lg border-2  font-black text-[10px] uppercase tracking-widest transition-all ${isActive ? 'border-brand bg-brand text-white shadow-lg shadow-red-700/20' : 'border-neutral-100 text-neutral-400 hover:border-neutral-200 bg-neutral-50/50'}`}
                                             >
                                                 {size.code}
                                             </button>
@@ -712,7 +712,7 @@ const ProductDetail = () => {
                                                 handleAddToCart();
                                                 setIsCartOpen(true);
                                             }}
-                                            className="flex-1 bg-white border-2 border-[#5173FB] text-[#5173FB] font-black h-12 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2"
+                                            className="flex-1 bg-white border-2 border-brand text-brand font-black h-12 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2"
                                         >
                                             <ShoppingCart className="w-4 h-4" />
                                             <span className="text-[10px] uppercase font-bold">Add to Cart</span>
@@ -940,7 +940,7 @@ const ProductDetail = () => {
                                         handleAddToCart();
                                         setIsCartOpen(true);
                                     }}
-                                    className="flex-1 bg-white border-2 border-[#5173FB] text-[#5173FB] font-black h-13 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2"
+                                    className="flex-1 bg-white border-2 border-brand text-brand font-black h-13 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2"
                                 >
                                     <ShoppingCart className="w-4 h-4" />
                                     <span className="text-[10px] uppercase font-bold">Add to Cart</span>

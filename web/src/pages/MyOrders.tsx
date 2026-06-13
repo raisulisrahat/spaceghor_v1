@@ -89,7 +89,7 @@ const MyOrders = () => {
     if (isLoading) {
         return (
             <div className="min-h-[60vh] flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-[#5173FB] animate-spin" />
+                <Loader2 className="w-8 h-8 text-brand animate-spin" />
             </div>
         );
     }
@@ -237,7 +237,7 @@ const MyOrders = () => {
                                             <div className="flex items-center space-x-6">
                                                 <div>
                                                     <p className="text-[11px] font-medium text-neutral-500 uppercase tracking-wider mb-0.5">Total</p>
-                                                    <p className="text-base font-semibold text-[#5173FB]">TK. {order.total_amount}</p>
+                                                    <p className="text-base font-semibold text-brand">TK. {order.total_amount}</p>
                                                 </div>
                                                 <div className="h-8 w-px bg-neutral-200 hidden sm:block"></div>
                                                 <div className="hidden sm:block">
@@ -276,7 +276,7 @@ const MyOrders = () => {
                                                 <button
                                                     key={page}
                                                     onClick={() => setCurrentPage(page as number)}
-                                                    className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${currentPage === page ? 'bg-brand text-white shadow-lg shadow-[#5173FB]/20' : 'text-neutral-500 hover:bg-neutral-50 bg-white border border-neutral-200'}`}
+                                                    className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${currentPage === page ? 'bg-brand text-white shadow-lg shadow-brand/20' : 'text-neutral-500 hover:bg-neutral-50 bg-white border border-neutral-200'}`}
                                                 >
                                                     {page}
                                                 </button>

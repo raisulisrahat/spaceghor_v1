@@ -38,7 +38,7 @@ const ScrollToTopButton: React.FC = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-52 right-6 md:bottom-24 md:right-8 z-[98] w-9 h-9 bg-white/80 backdrop-blur-md border border-neutral-200 text-[#5173FB] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-white transition-colors duration-300 group"
+          className="fixed bottom-52 right-6 md:bottom-24 md:right-8 z-[98] w-9 h-9 bg-white/80 backdrop-blur-md border border-neutral-200 text-brand rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-white transition-colors duration-300 group"
           aria-label="Scroll to top"
         >
           <ChevronUp size={24} className="group-hover:-translate-y-0.5 transition-transform duration-300" />

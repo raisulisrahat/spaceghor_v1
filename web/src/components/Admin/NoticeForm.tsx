@@ -158,7 +158,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                     name="display_type"
                                     value={formData.display_type}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                 >
                                     <option value="ticker">Marquee Ticker Only</option>
                                     <option value="popup">Pop-up Ad Only</option>
@@ -174,7 +174,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                     onChange={handleChange}
                                     required
                                     rows={3}
-                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none resize-none"
+                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none resize-none"
                                     placeholder="Enter the ticker message..."
                                 />
                             </div>
@@ -188,7 +188,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                             name="title"
                                             value={formData.title}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                            className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                             placeholder="Special Offer Title"
                                         />
                                     </div>
@@ -200,7 +200,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                             value={formData.description}
                                             onChange={handleChange}
                                             rows={4}
-                                            className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none resize-none"
+                                            className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none resize-none"
                                             placeholder="Detailed description for the pop-up..."
                                         />
                                     </div>
@@ -218,13 +218,13 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                             <button
                                                 type="button"
                                                 onClick={() => setMediaModalOpen(true)}
-                                                className="text-[9px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
+                                                className="text-[9px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
                                             >
                                                 <ImageIcon size={11} /> Gallery
                                             </button>
                                         </div>
                                         <div className="relative group">
-                                            <div className="aspect-video w-full bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-2xl flex flex-col items-center justify-center overflow-hidden group-hover:border-[#5173FB]/30 transition-all">
+                                            <div className="aspect-video w-full bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-2xl flex flex-col items-center justify-center overflow-hidden group-hover:border-brand/30 transition-all">
                                                 {imagePreview ? (
                                                     <img src={imagePreview} className="w-full h-full object-cover" alt="Preview" />
                                                 ) : (
@@ -251,7 +251,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                                 name="button_text"
                                                 value={formData.button_text}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                             />
                                         </div>
                                         <div className="space-y-2">
@@ -261,7 +261,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                                                 name="button_link"
                                                 value={formData.button_link}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                                 placeholder="/products/slug"
                                             />
                                         </div>
@@ -317,7 +317,7 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
                             <div>
-                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Choose <span className="text-[#5173FB]">Notice Image</span></h3>
+                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Choose <span className="text-brand">Notice Image</span></h3>
                                 <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-0.5">Select or upload your announcement visual</p>
                             </div>
                             <button 
@@ -355,8 +355,8 @@ const NoticeForm = ({ notice, onSave, onCancel }) => {
                         {/* Modal Body */}
                         <div className="flex-grow overflow-y-auto p-6 min-h-[400px]">
                             {activeModalTab === 'upload' ? (
-                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-[#5173FB] rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
-                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-[#5173FB]">
+                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-brand rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
+                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-brand">
                                         {uploadingImage ? <RefreshCw size={36} className="animate-spin" /> : <Upload size={36} />}
                                     </div>
                                     <h4 className="text-sm font-bold text-zinc-900">

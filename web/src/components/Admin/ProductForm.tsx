@@ -1815,7 +1815,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                     onChange={(e) => setIsFlashSale(e.target.checked)}
 
-                                    className="h-4 w-4 text-zinc-900 rounded border-zinc-300 focus:ring-[#5173FB]"
+                                    className="h-4 w-4 text-zinc-900 rounded border-zinc-300 focus:ring-brand"
 
                                 />
 
@@ -2122,9 +2122,9 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                     <div className="flex items-center gap-2">
 
-                                        <div className="p-1.5 bg-brand/10 text-[#5173FB] rounded-lg">
+                                        <div className="p-1.5 bg-brand/10 text-brand rounded-lg">
 
-                                            <Globe size={14} className="text-[#5173FB]" />
+                                            <Globe size={14} className="text-brand" />
 
                                         </div>
 
@@ -2142,7 +2142,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                 type="text"
 
-                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold"
+                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold"
 
                                                 value={linkedFunnel.top_header_line_1 || ''}
 
@@ -2162,7 +2162,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                 type="text"
 
-                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold"
+                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold"
 
                                                 value={linkedFunnel.top_header_line_2 || ''}
 
@@ -2182,7 +2182,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                 type="text"
 
-                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold"
+                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold"
 
                                                 value={linkedFunnel.top_header_line_3 || ''}
 
@@ -2202,7 +2202,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                                 type="text"
 
-                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-semibold"
+                                                className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold"
 
                                                 value={linkedFunnel.top_header_line_4 || ''}
 
@@ -2224,7 +2224,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                             rows={6}
 
-                                            className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all font-medium custom-scrollbar"
+                                            className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/5 outline-none transition-all font-medium custom-scrollbar"
 
                                             value={linkedFunnel.features_list || ''}
 
@@ -2444,7 +2444,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 onChange={handleChange}
 
-                                className="h-5 w-5 text-zinc-900 rounded border-zinc-300 focus:ring-[#5173FB] transition-colors"
+                                className="h-5 w-5 text-zinc-900 rounded border-zinc-300 focus:ring-brand transition-colors"
 
                             />
 
@@ -2464,7 +2464,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 onChange={handleChange}
 
-                                className="h-5 w-5 text-zinc-900 rounded border-zinc-300 focus:ring-[#5173FB] transition-colors"
+                                className="h-5 w-5 text-zinc-900 rounded border-zinc-300 focus:ring-brand transition-colors"
 
                             />
 
@@ -2496,7 +2496,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 }}
 
-                                className="text-[10px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
+                                className="text-[10px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
 
                             >
 
@@ -2552,7 +2552,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 }}
 
-                                className="text-[10px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
+                                className="text-[10px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
 
                             >
 
@@ -2748,7 +2748,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 }}
 
-                                className="text-[10px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
+                                className="text-[10px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1 font-semibold"
 
                             >
 
@@ -2882,7 +2882,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                             <button
                                 type="button"
                                 onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
-                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all flex justify-between items-center text-left"
+                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-brand/5 outline-none transition-all flex justify-between items-center text-left"
                             >
                                 <span className="truncate text-zinc-700 font-semibold">
                                     {formData.categories.length > 0
@@ -2944,7 +2944,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                                                                 : [...formData.categories, cat.id];
                                                             setFormData(prev => ({ ...prev, categories: newCats }));
                                                         }}
-                                                        className="h-4 w-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/30"
+                                                        className="h-4 w-4 rounded border-zinc-300 text-brand focus:ring-brand/30"
                                                     />
                                                     <span className={`${cat.depth === 0 ? 'font-bold text-zinc-900' : 'text-zinc-600 font-medium'}`}>
                                                         {cat.name}
@@ -3473,7 +3473,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                             <button
                                 type="button"
                                 onClick={() => setShowSizeDropdown(!showSizeDropdown)}
-                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 outline-none transition-all flex justify-between items-center text-left"
+                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-brand/5 outline-none transition-all flex justify-between items-center text-left"
                             >
                                 <span className="truncate text-zinc-700 font-semibold">
                                     {formData.sizes.length > 0
@@ -3501,7 +3501,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                                                             : [...formData.sizes, s.id];
                                                         setFormData(prev => ({ ...prev, sizes: newSizes }));
                                                     }}
-                                                    className="h-4 w-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/30"
+                                                    className="h-4 w-4 rounded border-zinc-300 text-brand focus:ring-brand/30"
                                                 />
                                                 <span className="font-semibold text-zinc-700">{s.name}</span>
                                             </label>
@@ -3653,7 +3653,7 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                         <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
                             <div>
                                 <h3 className="text-base font-black text-zinc-950 tracking-tight">
-                                    Choose <span className="text-[#5173FB]">
+                                    Choose <span className="text-brand">
                                         {galleryTarget === 'thumbnail' ? 'Main Image' : galleryTarget === 'gallery_image' ? 'Gallery Image' : 'Gallery Video'}
                                     </span>
                                 </h3>
@@ -3697,8 +3697,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                         {/* Modal Body */}
                         <div className="flex-grow overflow-y-auto p-6 min-h-[400px]">
                             {activeModalTab === 'upload' ? (
-                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-[#5173FB] rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
-                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-[#5173FB]">
+                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-brand rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
+                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-brand">
                                         {uploadingImage ? <RefreshCw size={36} className="animate-spin" /> : <Upload size={36} />}
                                     </div>
                                     <h4 className="text-sm font-bold text-zinc-900">

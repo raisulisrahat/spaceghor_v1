@@ -400,8 +400,8 @@ const Login = () => {
               onSubmit={handleTwoFactorSubmit} 
               className="space-y-6"
             >
-              <div className="bg-brand/5 border border-[#5173FB]/10 p-4 rounded-xl text-neutral-800 text-xs leading-relaxed text-left">
-                <p className="font-bold mb-1.5 text-[#5173FB]">Google Authenticator 2FA</p>
+              <div className="bg-brand/5 border border-brand/10 p-4 rounded-xl text-neutral-800 text-xs leading-relaxed text-left">
+                <p className="font-bold mb-1.5 text-brand">Google Authenticator 2FA</p>
                 {twoFactorSetupRequired ? (
                   <div className="space-y-3">
                     <p>Scan this QR code with Google Authenticator on your mobile device to complete configuration:</p>

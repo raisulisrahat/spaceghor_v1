@@ -179,7 +179,7 @@ const BlogPostManager = () => {
                         <input
                             type="text"
                             placeholder="Search articles..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -196,7 +196,7 @@ const BlogPostManager = () => {
                                 <th className="px-6 py-4 w-12 text-center">
                                     <input 
                                         type="checkbox"
-                                        className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20 cursor-pointer accent-[#5173FB]"
+                                        className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20 cursor-pointer accent-brand"
                                         checked={filteredPosts.length > 0 && selectedSlugs.length === filteredPosts.length}
                                         onChange={handleSelectAll}
                                         onClick={(e) => e.stopPropagation()}
@@ -219,12 +219,12 @@ const BlogPostManager = () => {
                                     <tr 
                                         key={post.id} 
                                         onClick={() => handleEdit(post)}
-                                        className={`group hover:bg-zinc-50/50 transition-colors cursor-pointer border-l-2 ${selectedSlugs.includes(post.slug) ? 'bg-orange-50/20 border-[#5173FB]' : 'border-transparent hover:border-[#5173FB]'}`}
+                                        className={`group hover:bg-zinc-50/50 transition-colors cursor-pointer border-l-2 ${selectedSlugs.includes(post.slug) ? 'bg-orange-50/20 border-brand' : 'border-transparent hover:border-brand'}`}
                                     >
                                         <td className="px-6 py-4 text-center w-12" onClick={(e) => e.stopPropagation()}>
                                             <input 
                                                 type="checkbox"
-                                                className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20 cursor-pointer accent-[#5173FB]"
+                                                className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20 cursor-pointer accent-brand"
                                                 checked={selectedSlugs.includes(post.slug)}
                                                 onChange={(e) => handleSelectRow(e, post.slug)}
                                             />
@@ -243,7 +243,7 @@ const BlogPostManager = () => {
                                                     )}
                                                 </div>
                                                 <div className="max-w-[200px]">
-                                                    <p className="text-sm font-bold text-zinc-900 tracking-tight truncate group-hover:text-[#5173FB] transition-colors">{post.title}</p>
+                                                    <p className="text-sm font-bold text-zinc-900 tracking-tight truncate group-hover:text-brand transition-colors">{post.title}</p>
                                                     <p className="text-[10px] font-medium text-zinc-400 uppercase tracking-tighter">SLUG: {post.slug}</p>
                                                 </div>
                                             </div>

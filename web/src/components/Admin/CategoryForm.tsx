@@ -264,7 +264,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                 <input 
                                     type="text" 
                                     placeholder="Search existing brands..." 
-                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-[#5173FB]/20 focus:border-[#5173FB] outline-none"
+                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-brand/20 focus:border-brand outline-none"
                                     onChange={(e) => setBrandSearch(e.target.value)}
                                 />
                                 <div className="max-h-[120px] overflow-y-auto space-y-1">
@@ -274,7 +274,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                             <button 
                                                 type="button"
                                                 onClick={() => setShowModal('brand')}
-                                                className="mt-2 text-[9px] font-bold text-[#5173FB] hover:underline uppercase tracking-widest"
+                                                className="mt-2 text-[9px] font-bold text-brand hover:underline uppercase tracking-widest"
                                             >
                                                 + Create New Brand
                                             </button>
@@ -288,7 +288,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                                         type="checkbox"
                                                         checked={formData.brands.includes(brand.id)}
                                                         onChange={() => handleToggle('brands', brand.id)}
-                                                        className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                                        className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                                     />
                                                     <div className="flex items-center gap-2">
                                                         {brand.logo && <img src={brand.logo.startsWith('http') ? brand.logo : `${BASE_URL}${brand.logo}`} className="w-5 h-5 object-contain" alt="" />}
@@ -316,7 +316,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                 <input 
                                     type="text" 
                                     placeholder="Search existing colors..." 
-                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-[#5173FB]/20 focus:border-[#5173FB] outline-none"
+                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-brand/20 focus:border-brand outline-none"
                                     onChange={(e) => setColorSearch(e.target.value)}
                                 />
                                 <div className="max-h-[120px] overflow-y-auto space-y-1">
@@ -326,7 +326,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                             <button 
                                                 type="button"
                                                 onClick={() => setShowModal('color')}
-                                                className="mt-2 text-[9px] font-bold text-[#5173FB] hover:underline uppercase tracking-widest"
+                                                className="mt-2 text-[9px] font-bold text-brand hover:underline uppercase tracking-widest"
                                             >
                                                 + Create New Color
                                             </button>
@@ -340,7 +340,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                                         type="checkbox"
                                                         checked={formData.colors.includes(color.id)}
                                                         onChange={() => handleToggle('colors', color.id)}
-                                                        className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                                        className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                                     />
                                                     <div className="flex items-center gap-2">
                                                         <div className="w-4 h-4 rounded-full border border-zinc-200 shadow-sm" style={{ backgroundColor: color.hex_code }} />
@@ -368,7 +368,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                 <input 
                                     type="text" 
                                     placeholder="Search existing sizes..." 
-                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-[#5173FB]/20 focus:border-[#5173FB] outline-none"
+                                    className="w-full px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-[10px] focus:ring-1 focus:ring-brand/20 focus:border-brand outline-none"
                                     onChange={(e) => setSizeSearch(e.target.value)}
                                 />
                                 <div className="max-h-[120px] overflow-y-auto space-y-1">
@@ -378,7 +378,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                             <button 
                                                 type="button"
                                                 onClick={() => setShowModal('size')}
-                                                className="mt-2 text-[9px] font-bold text-[#5173FB] hover:underline uppercase tracking-widest"
+                                                className="mt-2 text-[9px] font-bold text-brand hover:underline uppercase tracking-widest"
                                             >
                                                 + Create New Size
                                             </button>
@@ -392,7 +392,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                                         type="checkbox"
                                                         checked={formData.sizes.includes(size.id)}
                                                         onChange={() => handleToggle('sizes', size.id)}
-                                                        className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                                        className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                                     />
                                                     <div className="flex items-center gap-2">
                                                         <span className="text-xs font-bold text-zinc-400 bg-zinc-100 px-1.5 py-0.5 rounded text-[9px]">{size.code || size.name.substring(0, 2).toUpperCase()}</span>
@@ -467,7 +467,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                     <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
                         <div className="p-6 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
                             <h4 className="text-sm font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2">
-                                <Plus size={16} className="text-[#5173FB]" /> Add New <span className="text-[#5173FB] capitalize">{showModal}</span>
+                                <Plus size={16} className="text-brand" /> Add New <span className="text-brand capitalize">{showModal}</span>
                             </h4>
                             <button onClick={() => setShowModal(null)} className="p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-all">
                                 <X size={18} />
@@ -482,7 +482,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                     required
                                     value={modalData.name}
                                     onChange={(e) => setModalData(prev => ({ ...prev, name: e.target.value }))}
-                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                                     placeholder={`Enter ${showModal} name`}
                                     autoFocus
                                 />
@@ -503,7 +503,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                             required
                                             value={modalData.hex_code}
                                             onChange={(e) => setModalData(prev => ({ ...prev, hex_code: e.target.value }))}
-                                            className="flex-grow px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-mono font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                                            className="flex-grow px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-mono font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                                             placeholder="#000000"
                                         />
                                     </div>
@@ -517,7 +517,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                         type="text"
                                         value={modalData.code}
                                         onChange={(e) => setModalData(prev => ({ ...prev, code: e.target.value }))}
-                                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                                        className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-2xl text-sm font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                                         placeholder="e.g. XL, 42"
                                     />
                                 </div>
@@ -562,7 +562,7 @@ const CategoryForm = ({ category, onSave, onCancel }) => {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="flex-1 px-6 py-3 bg-brand text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all shadow-lg shadow-[#5173FB]/10 active:scale-95"
+                                    className="flex-1 px-6 py-3 bg-brand text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all shadow-lg shadow-brand/10 active:scale-95"
                                 >
                                     {loading ? 'Creating...' : `Add ${showModal}`}
                                 </button>

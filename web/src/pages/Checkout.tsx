@@ -422,7 +422,7 @@ const Checkout = () => {
              <h2 className="text-3xl font-extrabold text-neutral-900 tracking-tight">Order Placed!</h2>
              <p className="text-neutral-500 text-lg">
                Thank you, <span className="font-bold text-neutral-900">{formData.name}</span>. 
-               We've sent a confirmation to <span className="text-[#5173FB] font-medium">{formData.phone}</span>.
+               We've sent a confirmation to <span className="text-brand font-medium">{formData.phone}</span>.
              </p>
           </div>
 
@@ -480,7 +480,7 @@ const Checkout = () => {
         <h2 className="text-3xl font-black text-neutral-900 uppercase">Your cart is empty</h2>
         <Link 
             to="/products" 
-            className="inline-block bg-brand text-white font-black py-4 px-10 rounded-xl shadow-lg shadow-[#5173FB]/20 active:scale-95 transition-all"
+            className="inline-block bg-brand text-white font-black py-4 px-10 rounded-xl shadow-lg shadow-brand/20 active:scale-95 transition-all"
         >
             Explore our Shop
         </Link>
@@ -535,7 +535,7 @@ const Checkout = () => {
                       required
                       type="text" 
                       placeholder="যেমন: রহিম আহমেদ" 
-                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
+                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
                     />
@@ -548,7 +548,7 @@ const Checkout = () => {
                       required
                       type="tel" 
                       placeholder="যেমন: 01XXXXXXXXX" 
-                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
+                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 11)})}
                     />
@@ -562,7 +562,7 @@ const Checkout = () => {
                         <div className="relative">
                             <select 
                                 required
-                                className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] outline-none appearance-none cursor-pointer"
+                                className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none appearance-none cursor-pointer"
                                 value={formData.district}
                                 onChange={e => setFormData({...formData, district: e.target.value, upazila: ''})}
                             >
@@ -581,7 +581,7 @@ const Checkout = () => {
                             <select 
                                 required
                                 disabled={!formData.district || isLoadingLocations}
-                                className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] outline-none appearance-none cursor-pointer disabled:opacity-50"
+                                className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none appearance-none cursor-pointer disabled:opacity-50"
                                 value={formData.upazila}
                                 onChange={e => setFormData({...formData, upazila: e.target.value})}
                             >
@@ -601,7 +601,7 @@ const Checkout = () => {
                       <div className="relative">
                         <select 
                             required
-                            className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] outline-none appearance-none cursor-pointer"
+                            className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none appearance-none cursor-pointer"
                             value={shippingZoneId || ''}
                             onChange={e => {
                                 const zoneId = parseInt(e.target.value);
@@ -629,7 +629,7 @@ const Checkout = () => {
                       required
                       rows={2}
                       placeholder="গ্রাম/মহল্লা, ইউনিয়ন, সুনির্দিষ্ট ল্যান্ডমার্ক সহ বিস্তারিত ঠিকানা লিখুন" 
-                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-[#5173FB] outline-none resize-none placeholder:text-neutral-400"
+                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none resize-none placeholder:text-neutral-400"
                       value={formData.address}
                       onChange={e => setFormData({...formData, address: e.target.value})}
                     />
@@ -657,7 +657,7 @@ const Checkout = () => {
                       onClick={() => setSelectedPaymentMethod(method.id)}
                       className={`relative border-2 p-5 rounded-xl flex items-center justify-between cursor-pointer group transition-all ${
                         selectedPaymentMethod === method.id 
-                        ? 'border-[#5173FB] bg-brand/5/20' 
+                        ? 'border-brand bg-brand/5/20' 
                         : 'border-neutral-100 bg-neutral-50/50 hover:border-neutral-200'
                       }`}
                     >
@@ -671,7 +671,7 @@ const Checkout = () => {
                                 <span className={`block font-bold text-base transition-colors ${
                                     selectedPaymentMethod === method.id ? 'text-neutral-900' : 'text-neutral-500'
                                 }`}>{method.name.toLowerCase().includes('cash') ? 'ক্যাশ অন ডেলিভারি' : method.name}</span>
-                                <span className="text-[10px] font-bold text-[#5173FB] uppercase tracking-wider">
+                                <span className="text-[10px] font-bold text-brand uppercase tracking-wider">
                                     {method.name.toLowerCase().includes('cash') ? 'পণ্য হাতে পেয়ে পেমেন্ট' : 'অগ্রিম পেমেন্ট'}
                                 </span>
                             </div>
@@ -739,13 +739,13 @@ const Checkout = () => {
                   <span>ডেলিভারি চার্জ ({
                       shippingZones.find(z => z.id === shippingZoneId)?.name || 'ঢাকা শহরের ভেতরে'
                   })</span>
-                  <span className="text-[#5173FB] font-bold">৳{shippingCost}</span>
+                  <span className="text-brand font-bold">৳{shippingCost}</span>
                 </div>
                 
                 <div className="pt-4 flex items-center justify-between">
                   <h4 className="text-lg font-bold text-neutral-900">সর্বমোট পরিশোধযোগ্য</h4>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-[#5173FB]">৳{(cartTotal + shippingCost).toLocaleString()}</div>
+                    <div className="text-2xl font-bold text-brand">৳{(cartTotal + shippingCost).toLocaleString()}</div>
                   </div>
                 </div>
               </div>

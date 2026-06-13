@@ -23,7 +23,7 @@ const MobileBottomNav = () => {
               <Heart 
                 className={`w-6 h-6 transition-colors duration-300 ${
                   isActive('/wishlist') 
-                    ? 'text-[#5173FB] fill-[#5173FB]' 
+                    ? 'text-brand fill-brand' 
                     : 'text-neutral-400 group-hover:text-neutral-600'
                 }`} 
               />
@@ -35,7 +35,7 @@ const MobileBottomNav = () => {
             )}
           </div>
           {/* <span className={`text-[10px] font-bold mt-0.5 transition-colors duration-300 ${
-            isActive('/wishlist') ? 'text-[#5173FB]' : 'text-neutral-400'
+            isActive('/wishlist') ? 'text-brand' : 'text-neutral-400'
           }`}>
             Wishlist
           </span> */}
@@ -51,7 +51,7 @@ const MobileBottomNav = () => {
               <Home 
                 className={`w-6 h-6 transition-colors duration-300 ${
                   isActive('/') 
-                    ? 'text-[#5173FB] fill-[#5173FB]/10' 
+                    ? 'text-brand fill-brand/10' 
                     : 'text-neutral-400 group-hover:text-neutral-600'
                 }`} 
               />
@@ -64,7 +64,7 @@ const MobileBottomNav = () => {
             )}
           </div>
           {/* <span className={`text-[10px] font-bold mt-0.5 transition-colors duration-300 ${
-            isActive('/') ? 'text-[#5173FB]' : 'text-neutral-400'
+            isActive('/') ? 'text-brand' : 'text-neutral-400'
           }`}>
             Home
           </span> */}
@@ -86,7 +86,7 @@ const MobileBottomNav = () => {
               <User 
                 className={`w-6 h-6 transition-colors duration-300 ${
                   isAccountActive 
-                    ? 'text-[#5173FB] fill-[#5173FB]/10' 
+                    ? 'text-brand fill-brand/10' 
                     : 'text-neutral-400 group-hover:text-neutral-600'
                 }`} 
               />
@@ -99,7 +99,7 @@ const MobileBottomNav = () => {
             )}
           </div>
           {/* <span className={`text-[10px] font-bold mt-0.5 transition-colors duration-300 ${
-            isAccountActive ? 'text-[#5173FB]' : 'text-neutral-400'
+            isAccountActive ? 'text-brand' : 'text-neutral-400'
           }`}>
             Profile
           </span> */}

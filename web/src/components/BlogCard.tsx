@@ -29,7 +29,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group flex flex-col h-full bg-white border border-zinc-100 rounded-3xl overflow-hidden hover:border-[#5173FB]/20 hover:shadow-[0_20px_40px_rgba(81, 115, 251,0.06)] transition-all duration-500 relative"
+      className="group flex flex-col h-full bg-white border border-zinc-100 rounded-3xl overflow-hidden hover:border-brand/20 hover:shadow-[0_20px_40px_rgba(81, 115, 251,0.06)] transition-all duration-500 relative"
     >
       <Link to={`/blog/${post.slug}`} className="relative aspect-[16/10] overflow-hidden bg-zinc-50 block">
         <img 
@@ -38,7 +38,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className="absolute top-4 left-4 z-10">
-          <span className="px-3 py-1 bg-white/80 backdrop-blur-md text-[#5173FB] text-[9px] font-black uppercase tracking-widest rounded-full border border-[#5173FB]/10 shadow-sm">
+          <span className="px-3 py-1 bg-white/80 backdrop-blur-md text-brand text-[9px] font-black uppercase tracking-widest rounded-full border border-brand/10 shadow-sm">
             {post.category_name}
           </span>
         </div>
@@ -51,7 +51,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
           <span>{post.views || 0} Reads</span>
         </div>
 
-        <h3 className="text-sm md:text-base font-black text-zinc-900 group-hover:text-[#5173FB] transition-colors line-clamp-2 leading-snug mb-3 tracking-tight">
+        <h3 className="text-sm md:text-base font-black text-zinc-900 group-hover:text-brand transition-colors line-clamp-2 leading-snug mb-3 tracking-tight">
           <Link to={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
 
@@ -69,7 +69,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         <div className="pt-4 mt-5 border-t border-zinc-50 flex items-center justify-between">
           <Link 
             to={`/blog/${post.slug}`} 
-            className="text-[9px] font-black uppercase tracking-widest text-zinc-900 group-hover:text-[#5173FB] flex items-center gap-1 transition-all"
+            className="text-[9px] font-black uppercase tracking-widest text-zinc-900 group-hover:text-brand flex items-center gap-1 transition-all"
           >
             Read Story <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </Link>

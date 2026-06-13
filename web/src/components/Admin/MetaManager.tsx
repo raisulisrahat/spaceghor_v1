@@ -61,7 +61,7 @@ const CustomTooltip = ({ active, payload, label, currencySymbol = '৳' }: any) 
                     <p className="flex justify-between items-center"><span className="text-zinc-500">Ad Spend:</span> <span className="font-bold text-zinc-100">{currencySymbol}{spend.toLocaleString()}</span></p>
                     <p className="flex justify-between items-center"><span className="text-zinc-500">Revenue:</span> <span className="font-bold text-emerald-400">{currencySymbol}{revenue.toLocaleString()}</span></p>
                     <div className="h-px bg-zinc-800 my-2" />
-                    <p className="flex justify-between items-center"><span className="text-zinc-500">Daily ROAS:</span> <span className="font-bold text-[#5173FB]">{roas}x</span></p>
+                    <p className="flex justify-between items-center"><span className="text-zinc-500">Daily ROAS:</span> <span className="font-bold text-brand">{roas}x</span></p>
                 </div>
             </div>
         );
@@ -617,7 +617,7 @@ const MetaManager = () => {
                     >
                         <div className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${toast.type === 'success' ? 'bg-zinc-900' : 'bg-red-500'}`} />
                         <div>
-                            <p className="font-bold tracking-tight">{toast.type === 'success' ? 'Qbamart / Meta Deploy' : 'System Alert'}</p>
+                            <p className="font-bold tracking-tight">{toast.type === 'success' ? 'Meta Deploy' : 'System Alert'}</p>
                             <p className="text-zinc-500 mt-0.5 leading-snug">{toast.text}</p>
                         </div>
                     </div>
@@ -715,7 +715,7 @@ const MetaManager = () => {
 
                         <div className="bg-white border border-zinc-200 p-5 rounded-lg relative overflow-hidden shadow-sm">
                             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block font-mono">Cost Per Purchase (CPA)</span>
-                            <span className="text-xl font-bold font-mono tracking-tight text-[#5173FB] block mt-2">{currencySymbol}{Math.round(totals.cpa).toLocaleString()}</span>
+                            <span className="text-xl font-bold font-mono tracking-tight text-brand block mt-2">{currencySymbol}{Math.round(totals.cpa).toLocaleString()}</span>
                             <div className="text-[9px] text-zinc-400 font-mono uppercase tracking-wide mt-2">Average acquisition cost</div>
                         </div>
                     </div>
@@ -1254,7 +1254,7 @@ const MetaManager = () => {
                     <div className="px-6 py-5 border-b border-zinc-200 bg-zinc-50 flex items-center gap-3">
                         <div className="p-2 bg-white border border-zinc-200 rounded"><Settings className="w-4 h-4 text-zinc-900" /></div>
                         <div>
-                            <h3 className="text-xs font-bold font-mono text-zinc-900 uppercase tracking-wider">Qbamart Meta Configuration</h3>
+                            <h3 className="text-xs font-bold font-mono text-zinc-900 uppercase tracking-wider">Meta Configuration</h3>
                             <p className="text-[10px] text-zinc-400 mt-1 font-mono">Setup tracking credentials for frontend pixel triggers and Conversion API server relays.</p>
                         </div>
                     </div>

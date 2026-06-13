@@ -96,7 +96,7 @@ const BrandForm = ({ brand, categories = [], onSave, onCancel }) => {
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/30">
                 <div>
                     <h3 className="text-sm font-bold text-zinc-900 tracking-tight">
-                        {brand ? 'Update' : 'Initialize'} <span className="text-[#5173FB]">Brand Identity</span>
+                        {brand ? 'Update' : 'Initialize'} <span className="text-brand">Brand Identity</span>
                     </h3>
                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">Brand Asset Configuration</p>
                 </div>
@@ -115,10 +115,10 @@ const BrandForm = ({ brand, categories = [], onSave, onCancel }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                         <div className="space-y-1.5">
-                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Brand Name <span className="text-[#5173FB] font-black">*</span></label>
+                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Brand Name <span className="text-brand font-black">*</span></label>
                             <input
                                 type="text"
-                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="e.g., Nike, Samsung"
@@ -129,7 +129,7 @@ const BrandForm = ({ brand, categories = [], onSave, onCancel }) => {
                         {/* Image Upload */}
                         <div className="space-y-1.5">
                             <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1 mb-1">Brand Mark / Logo</label>
-                            <div className="group relative border-2 border-dashed border-zinc-200 rounded-2xl p-4 text-center hover:bg-zinc-50 hover:border-[#5173FB] transition-all bg-zinc-50/50 flex flex-col items-center justify-center min-h-[180px]">
+                            <div className="group relative border-2 border-dashed border-zinc-200 rounded-2xl p-4 text-center hover:bg-zinc-50 hover:border-brand transition-all bg-zinc-50/50 flex flex-col items-center justify-center min-h-[180px]">
                                 <input type="file" onChange={handleImageChange} className="absolute inset-0 opacity-0 cursor-pointer z-10" accept="image/*" />
                                 {preview ? (
                                     <div className="relative h-32 w-full p-2 bg-white rounded-xl shadow-inner flex items-center justify-center">
@@ -142,7 +142,7 @@ const BrandForm = ({ brand, categories = [], onSave, onCancel }) => {
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center gap-3 group-hover:scale-110 transition-transform">
-                                        <div className="p-3 bg-white rounded-2xl shadow-sm text-zinc-300 group-hover:text-[#5173FB] group-hover:rotate-12 transition-all">
+                                        <div className="p-3 bg-white rounded-2xl shadow-sm text-zinc-300 group-hover:text-brand group-hover:rotate-12 transition-all">
                                             <ImageIcon size={24} />
                                         </div>
                                         <div>
@@ -167,7 +167,7 @@ const BrandForm = ({ brand, categories = [], onSave, onCancel }) => {
                                             type="checkbox"
                                             checked={selectedCategories.includes(cat.id)}
                                             onChange={() => handleToggleCategory(cat.id)}
-                                            className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                            className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                         />
                                         <div className="flex flex-col">
                                             <span className="text-xs font-semibold text-zinc-700 group-hover:text-zinc-900">{cat.name}</span>

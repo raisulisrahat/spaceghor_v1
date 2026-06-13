@@ -48,7 +48,7 @@ const BrandCarousel = ({ brands }: { brands: any[] }) => {
             {showLeft && (
                 <button 
                     onClick={() => scroll('left')}
-                    className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white border border-neutral-100 flex items-center justify-center shadow-lg hover:bg-neutral-50 hover:scale-105 active:scale-95 transition-all text-neutral-600 hover:text-[#5173FB]"
+                    className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white border border-neutral-100 flex items-center justify-center shadow-lg hover:bg-neutral-50 hover:scale-105 active:scale-95 transition-all text-neutral-600 hover:text-brand"
                 >
                     <ChevronLeft size={18} />
                 </button>
@@ -65,7 +65,7 @@ const BrandCarousel = ({ brands }: { brands: any[] }) => {
                     >
                         <Link 
                             to={`/products?brand=${brand.id}`}
-                            className="group block bg-white border border-neutral-100 rounded-2xl p-4 hover:border-[#5173FB]/20 hover:shadow-lg transition-all duration-300 text-center relative overflow-hidden h-full flex flex-col items-center justify-center"
+                            className="group block bg-white border border-neutral-100 rounded-2xl p-4 hover:border-brand/20 hover:shadow-lg transition-all duration-300 text-center relative overflow-hidden h-full flex flex-col items-center justify-center"
                         >
                             <div className="w-full aspect-square flex items-center justify-center mb-3 p-4 bg-neutral-50 rounded-xl group-hover:bg-white group-hover:shadow-sm transition-all duration-300">
                                 {brand.logo ? (
@@ -78,8 +78,8 @@ const BrandCarousel = ({ brands }: { brands: any[] }) => {
                                     <Zap className="w-6 h-6 text-neutral-200" />
                                 )}
                             </div>
-                            <h3 className="text-[11px] font-bold text-neutral-900 group-hover:text-[#5173FB] transition-colors tracking-tight truncate w-full">{brand.name}</h3>
-                            <div className="mt-2 flex items-center justify-center gap-1.5 text-[8px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-[#5173FB] transition-all opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0">
+                            <h3 className="text-[11px] font-bold text-neutral-900 group-hover:text-brand transition-colors tracking-tight truncate w-full">{brand.name}</h3>
+                            <div className="mt-2 flex items-center justify-center gap-1.5 text-[8px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-brand transition-all opacity-0 group-hover:opacity-100 transform translate-y-1 group-hover:translate-y-0">
                                 <span>Browse</span>
                                 <ArrowRight size={8} />
                             </div>
@@ -91,7 +91,7 @@ const BrandCarousel = ({ brands }: { brands: any[] }) => {
             {showRight && (
                 <button 
                     onClick={() => scroll('right')}
-                    className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white border border-neutral-100 flex items-center justify-center shadow-lg hover:bg-neutral-50 hover:scale-105 active:scale-95 transition-all text-neutral-600 hover:text-[#5173FB]"
+                    className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white border border-neutral-100 flex items-center justify-center shadow-lg hover:bg-neutral-50 hover:scale-105 active:scale-95 transition-all text-neutral-600 hover:text-brand"
                 >
                     <ChevronRight size={18} />
                 </button>
@@ -189,7 +189,7 @@ const Brands = () => {
         return (
             <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
                 <SEO title="Our Brands" />
-                <Loader2 className="w-10 h-10 text-[#5173FB] animate-spin" />
+                <Loader2 className="w-10 h-10 text-brand animate-spin" />
                 <p className="text-sm font-bold text-neutral-400 uppercase tracking-widest">Discovering Brands...</p>
             </div>
         );
@@ -206,10 +206,10 @@ const Brands = () => {
                 <div className="max-w-xl">
                     <div className="flex items-center gap-2 mb-4">
                         <div className="w-8 h-[1px] bg-brand" />
-                        <span className="text-[9px] font-bold text-[#5173FB] uppercase tracking-[0.3em]">Official Partners</span>
+                        <span className="text-[9px] font-bold text-brand uppercase tracking-[0.3em]">Official Partners</span>
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight leading-none">
-                        Shop by <span className="text-[#5173FB]">Brand</span>
+                        Shop by <span className="text-brand">Brand</span>
                     </h1>
                     <p className="mt-4 text-[12px] text-neutral-500 font-medium leading-relaxed max-w-md opacity-80">
                         Explore curated collections from our world-class manufacturing partners. Every brand we host meets our signature quality standards.
@@ -217,13 +217,13 @@ const Brands = () => {
                 </div>
 
                 <div className="relative w-full md:w-64 group">
-                    <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-neutral-400 group-focus-within:text-[#5173FB] transition-colors">
+                    <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-neutral-400 group-focus-within:text-brand transition-colors">
                         <Search size={14} />
                     </div>
                     <input 
                         type="text"
                         placeholder="Search directory..."
-                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-200 rounded-xl focus:ring-2 focus:ring-[#5173FB]/5 focus:border-[#5173FB] outline-none transition-all font-medium text-[12px] text-neutral-900 shadow-sm"
+                        className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand/5 focus:border-brand outline-none transition-all font-medium text-[12px] text-neutral-900 shadow-sm"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -257,7 +257,7 @@ const Brands = () => {
                     <p className="text-[12px] font-bold text-neutral-400 tracking-tight">No results for "{searchTerm}"</p>
                     <button 
                         onClick={() => setSearchTerm('')}
-                        className="mt-4 text-[#5173FB] font-bold uppercase tracking-[0.2em] text-[9px] hover:underline"
+                        className="mt-4 text-brand font-bold uppercase tracking-[0.2em] text-[9px] hover:underline"
                     >
                         Reset Directory
                     </button>

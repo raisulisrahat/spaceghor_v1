@@ -512,27 +512,36 @@ class OrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
         
         # Create each order item
-        for item_data in items_data:
-            product_id = item_data.pop('product', None)
-            color_id = item_data.pop('color', None)
-            size_id = item_data.pop('size', None)
-            
-            if product_id:
-                try:
-                    product = Product.objects.get(id=product_id)
-                    OrderItem.objects.create(
-                        order=order, 
-                        product=product,
-                        color_id=color_id,
-                        size_id=size_id,
-                        **item_data
-                    )
-                except Product.DoesNotExist:
-                    pass
+        from django.db import transaction
+        with transaction.atomic():
+            for item_data in items_data:
+                product_id = item_data.pop('product', None)
+                color_id = item_data.pop('color', None)
+                size_id = item_data.pop('size', None)
+                
+                if product_id:
+                    try:
+                        product = Product.objects.get(id=product_id)
+                        # Filter to only keep fields expected by OrderItem
+                        valid_keys = ['quantity', 'price']
+                        filtered_data = {k: v for k, v in item_data.items() if k in valid_keys}
+                        OrderItem.objects.create(
+                            order=order, 
+                            product=product,
+                            color_id=color_id,
+                            size_id=size_id,
+                            **filtered_data
+                        )
+                    except Product.DoesNotExist:
+                        pass
         
         return order
 
     def update(self, instance, validated_data):
+        # Check if total_amount is being changed
+        old_total = instance.total_amount
+        new_total = validated_data.get('total_amount', old_total)
+
         # Extract items data if provided
         request = self.context.get('request')
         items_data = request.data.get('items', [])
@@ -544,25 +553,47 @@ class OrderSerializer(serializers.ModelSerializer):
 
         # Update items if provided in request data
         if 'items' in request.data:
-            # Delete existing items for this order and recreate them
-            instance.items.all().delete()
-            for item_data in items_data:
-                product_id = item_data.pop('product', None)
-                color_id = item_data.pop('color', None)
-                size_id = item_data.pop('size', None)
+            from django.db import transaction
+            with transaction.atomic():
+                # Delete existing items for this order and recreate them
+                instance.items.all().delete()
+                for item_data in items_data:
+                    product_id = item_data.pop('product', None)
+                    color_id = item_data.pop('color', None)
+                    size_id = item_data.pop('size', None)
+                    
+                    if product_id:
+                        try:
+                            product = Product.objects.get(id=product_id)
+                            # Filter to only keep fields expected by OrderItem
+                            valid_keys = ['quantity', 'price']
+                            filtered_data = {k: v for k, v in item_data.items() if k in valid_keys}
+                            OrderItem.objects.create(
+                                order=instance,
+                                product=product,
+                                color_id=color_id,
+                                size_id=size_id,
+                                **filtered_data
+                            )
+                        except Product.DoesNotExist:
+                            pass
+
+        # Log change in total_amount as an OrderNote if it was changed
+        from decimal import Decimal
+        if old_total is not None and new_total is not None:
+            if Decimal(str(old_total)) != Decimal(str(new_total)):
+                user = request.user if request and request.user and request.user.is_authenticated else None
+                from .models import OrderNote
+                staff_name = user.first_name if (user and user.first_name) else (user.username if user else "System")
                 
-                if product_id:
-                    try:
-                        product = Product.objects.get(id=product_id)
-                        OrderItem.objects.create(
-                            order=instance,
-                            product=product,
-                            color_id=color_id,
-                            size_id=size_id,
-                            **item_data
-                        )
-                    except Product.DoesNotExist:
-                        pass
+                old_val_str = f"{int(old_total)}" if float(old_total).is_integer() else f"{float(old_total):.2f}"
+                new_val_str = f"{int(new_total)}" if float(new_total).is_integer() else f"{float(new_total):.2f}"
+                
+                OrderNote.objects.create(
+                    order=instance,
+                    user=user,
+                    note=f"Total amount updated from ৳{old_val_str} to ৳{new_val_str} by {staff_name}."
+                )
 
         return instance
 

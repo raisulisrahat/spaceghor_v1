@@ -112,7 +112,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
             {[...Array(5)].map((_, i) => (
               <Star 
                 key={i} 
-                className={`w-4 h-4 ${i < Math.round(average_rating) ? 'fill-[#5173FB] text-[#5173FB]' : 'text-neutral-200'}`} 
+                className={`w-4 h-4 ${i < Math.round(average_rating) ? 'fill-brand text-brand' : 'text-neutral-200'}`} 
               />
             ))}
           </div>
@@ -149,7 +149,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
           user ? (
             <button 
               onClick={() => setShowForm(true)}
-              className="px-6 py-3 bg-brand hover:bg-black text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-[#5173FB]/10"
+              className="px-6 py-3 bg-brand hover:bg-black text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-brand/10"
             >
               Write a Review
             </button>
@@ -178,7 +178,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
                     onClick={() => setRating(star)}
                     className="focus:outline-none"
                   >
-                    <Star className={`w-8 h-8 ${rating >= star ? 'fill-[#5173FB] text-[#5173FB]' : 'text-neutral-300'}`} />
+                    <Star className={`w-8 h-8 ${rating >= star ? 'fill-brand text-brand' : 'text-neutral-300'}`} />
                   </button>
                 ))}
               </div>
@@ -192,7 +192,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
                 placeholder="What did you like or dislike?"
                 rows={4}
                 required
-                className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
               />
             </div>
 
@@ -212,7 +212,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
                   </div>
                 ))}
                 
-                <label className="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 rounded-xl cursor-pointer hover:border-[#5173FB] hover:bg-brand/5/50 transition-colors text-neutral-500 hover:text-[#5173FB]">
+                <label className="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-neutral-300 rounded-xl cursor-pointer hover:border-brand hover:bg-brand/5/50 transition-colors text-neutral-500 hover:text-brand">
                   <ImagePlus className="w-6 h-6 mb-1" />
                   <span className="text-[10px] font-bold uppercase tracking-wider">Upload</span>
                   <input 
@@ -301,7 +301,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ product }) => {
                     {[...Array(5)].map((_, i) => (
                       <Star 
                         key={i} 
-                        className={`w-3 h-3 ${i < review.rating ? 'fill-[#5173FB] text-[#5173FB]' : 'text-neutral-100'}`} 
+                        className={`w-3 h-3 ${i < review.rating ? 'fill-brand text-brand' : 'text-neutral-100'}`} 
                       />
                     ))}
                   </div>

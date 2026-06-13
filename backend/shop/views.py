@@ -267,7 +267,23 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
+        # Resolve user by username or phone number
+        data = request.data.copy() if hasattr(request.data, 'copy') else dict(request.data)
+        username = data.get('username')
+        if username:
+            from django.contrib.auth.models import User
+            from .models import Profile
+            
+            user = User.objects.filter(username=username).first()
+            if not user:
+                profile = Profile.objects.filter(phone_number=username).first()
+                if profile:
+                    user = profile.user
+            
+            if user:
+                data['username'] = user.username
+
+        serializer = self.serializer_class(data=data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
@@ -1732,7 +1748,7 @@ class MetaView(View):
             
             # Safe image URL retrieval to avoid ValueErrors on empty fields
             # Default fallback to site logo in media
-            image = request.build_absolute_uri('/media/site/Qbamart.png')
+            image = request.build_absolute_uri('/media/site/spaceghor-logo.png')
             if site_settings and site_settings.site_logo:
                 try:
                     image = request.build_absolute_uri(site_settings.site_logo.url)

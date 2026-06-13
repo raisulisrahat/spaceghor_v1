@@ -77,11 +77,11 @@ const Footer = () => {
           <div>
             <h4 className="text-neutral-900 font-bold mb-6 text-base">Collection</h4>
             <ul className="space-y-3 text-[13px] font-medium text-neutral-500">
-              <li><Link to="/products" className="hover:text-[#5173FB] transition-colors">All Products</Link></li>
-              <li><Link to="/offer" className="hover:text-[#5173FB] transition-colors">Special Offers</Link></li>
-              <li><Link to="/brands" className="hover:text-[#5173FB] transition-colors">Brands</Link></li>
-              <li><Link to="/categories" className="hover:text-[#5173FB] transition-colors">Categories</Link></li>
-              <li><Link to="/flash-sale" className="hover:text-[#5173FB] transition-colors">Flash Sale</Link></li>
+              <li><Link to="/products" className="hover:text-brand transition-colors">All Products</Link></li>
+              <li><Link to="/offer" className="hover:text-brand transition-colors">Special Offers</Link></li>
+              <li><Link to="/brands" className="hover:text-brand transition-colors">Brands</Link></li>
+              <li><Link to="/categories" className="hover:text-brand transition-colors">Categories</Link></li>
+              <li><Link to="/flash-sale" className="hover:text-brand transition-colors">Flash Sale</Link></li>
             </ul>
           </div>
 
@@ -89,11 +89,11 @@ const Footer = () => {
           <div>
             <h4 className="text-neutral-900 font-bold mb-6 text-base">Informational Links</h4>
             <ul className="space-y-3 text-[13px] font-medium text-neutral-500">
-              <li><Link to="/about-us" className="hover:text-[#5173FB] transition-colors">About Us</Link></li>
-              <li><Link to="/contact-us" className="hover:text-[#5173FB] transition-colors">Contact Us</Link></li>
-              <li><Link to="/shipping-policy" className="hover:text-[#5173FB] transition-colors">Shipping Policy</Link></li>
-              <li><Link to="/return-replacement-policy" className="hover:text-[#5173FB] transition-colors">Return & Replacement Policy</Link></li>
-              <li><Link to="/blogs" className="hover:text-[#5173FB] transition-colors">Blog</Link></li>
+              <li><Link to="/about-us" className="hover:text-brand transition-colors">About Us</Link></li>
+              <li><Link to="/contact-us" className="hover:text-brand transition-colors">Contact Us</Link></li>
+              <li><Link to="/shipping-policy" className="hover:text-brand transition-colors">Shipping Policy</Link></li>
+              <li><Link to="/return-replacement-policy" className="hover:text-brand transition-colors">Return & Replacement Policy</Link></li>
+              <li><Link to="/blogs" className="hover:text-brand transition-colors">Blog</Link></li>
             </ul>
           </div>
 
@@ -102,19 +102,19 @@ const Footer = () => {
             <h4 className="text-neutral-900 font-bold mb-6 text-base">Contact Us</h4>
             <ul className="space-y-4 text-[13px] font-medium text-neutral-500">
               <li className="flex items-start space-x-3 group">
-                <div className="w-5 h-5 flex items-center justify-center text-[#5173FB]"><Phone className="w-4 h-4" /></div>
+                <div className="w-5 h-5 flex items-center justify-center text-brand"><Phone className="w-4 h-4" /></div>
                 <div>
                   <span className="block font-bold text-neutral-900">Hotline: {settings?.support_phone || '01618-320869'}</span>
                 </div>
               </li>
               <li className="flex items-start space-x-3 group">
-                <div className="w-5 h-5 flex items-center justify-center text-[#5173FB]"><Mail className="w-4 h-4" /></div>
+                <div className="w-5 h-5 flex items-center justify-center text-brand"><Mail className="w-4 h-4" /></div>
                 <div>
                   <span className="block font-bold text-neutral-900">Email: {siteEmail}</span>
                 </div>
               </li>
               <li className="flex items-start space-x-3 group">
-                <div className="w-5 h-5 flex items-center justify-center text-[#5173FB]"><MapPin className="w-4 h-4" /></div>
+                <div className="w-5 h-5 flex items-center justify-center text-brand"><MapPin className="w-4 h-4" /></div>
                 <div>
                   <span className="block font-bold text-neutral-900 mb-1">Address:</span>
                   <p className="leading-relaxed">
@@ -128,10 +128,10 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-neutral-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs space-y-4 md:space-y-0 text-neutral-400 font-medium">
-          <p>© 2026 {siteTitle || 'Spaceghor'}. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#5173FB] transition-colors">Cyber and Tech Solution</a>.</p>
+          <p>© 2026 {siteTitle || 'Spaceghor'}. Developed by <a href="https://ctsolutionbd.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors">Cyber and Tech Solution</a>.</p>
           <div className="flex space-x-6 uppercase tracking-widest">
-            <Link to="/privacy-policy" className="hover:text-[#5173FB]">Privacy Policy</Link>
-            <Link to="/terms-conditions" className="hover:text-[#5173FB]">Terms & Conditions</Link>
+            <Link to="/privacy-policy" className="hover:text-brand">Privacy Policy</Link>
+            <Link to="/terms-conditions" className="hover:text-brand">Terms & Conditions</Link>
           </div>
         </div>
 

@@ -129,7 +129,7 @@ const Searchbar = () => {
           >
             {isLoading ? (
               <div className="p-12 flex flex-col items-center justify-center text-neutral-400">
-                <Loader2 className="h-8 w-8 animate-spin mb-3 text-[#5173FB]" />
+                <Loader2 className="h-8 w-8 animate-spin mb-3 text-brand" />
                 <p className="text-sm">Searching our boutique...</p>
               </div>
             ) : results.length > 0 ? (
@@ -139,7 +139,7 @@ const Searchbar = () => {
                   <Link 
                     to={`/products?search=${query}`} 
                     onClick={() => setIsOpen(false)}
-                    className="text-xs font-semibold text-[#5173FB] hover:underline"
+                    className="text-xs font-semibold text-brand hover:underline"
                   >
                     View All
                   </Link>
@@ -160,7 +160,7 @@ const Searchbar = () => {
                         />
                       </div>
                       <div className="ml-4 flex-grow">
-                        <h4 className="text-sm font-semibold text-neutral-900 line-clamp-1 group-hover:text-[#5173FB] transition-colors">
+                        <h4 className="text-sm font-semibold text-neutral-900 line-clamp-1 group-hover:text-brand transition-colors">
                           {product.name}
                         </h4>
                         <div className="flex items-center mt-1">
@@ -177,7 +177,7 @@ const Searchbar = () => {
                         </div>
                       </div>
                       <div className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <ArrowRight className="h-4 w-4 text-[#5173FB]" />
+                        <ArrowRight className="h-4 w-4 text-brand" />
                       </div>
                     </Link>
                   ))}
@@ -208,7 +208,7 @@ const Searchbar = () => {
                       onClick={() => handleHistoryClick(item)}
                     >
                       <div className="flex items-center">
-                        <Clock className="h-4 w-4 text-neutral-300 mr-3 group-hover/item:text-[#5173FB]" />
+                        <Clock className="h-4 w-4 text-neutral-300 mr-3 group-hover/item:text-brand" />
                         <span className="text-sm text-neutral-600 group-hover/item:text-neutral-900">{item}</span>
                       </div>
                       <button

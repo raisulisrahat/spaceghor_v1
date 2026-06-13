@@ -134,7 +134,7 @@ const ForgotPassword = () => {
                           value={phone}
                           onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
                           placeholder="e.g. 01712345678"
-                          className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                          className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
                           required
                         />
                       </div>
@@ -168,7 +168,7 @@ const ForgotPassword = () => {
                           value={otp}
                           onChange={(e) => setOtp(e.target.value)}
                           placeholder="4-digit code"
-                          className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all tracking-[0.5em] font-bold"
+                          className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all tracking-[0.5em] font-bold"
                           required
                         />
                       </div>
@@ -206,7 +206,7 @@ const ForgotPassword = () => {
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           placeholder="Minimum 6 characters"
-                          className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                          className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
                           required
                         />
                         <button
@@ -229,7 +229,7 @@ const ForgotPassword = () => {
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           placeholder="Re-type password"
-                          className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                          className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
                           required
                         />
                       </div>
@@ -248,7 +248,7 @@ const ForgotPassword = () => {
           </AnimatePresence>
 
           <div className="mt-8 pt-6 border-t border-neutral-100 text-center">
-            <Link to="/login" className="text-sm font-bold text-[#5173FB] hover:underline">
+            <Link to="/login" className="text-sm font-bold text-brand hover:underline">
               Return to Sign In
             </Link>
           </div>

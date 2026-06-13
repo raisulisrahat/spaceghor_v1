@@ -30,7 +30,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useLanguage } from '../context/LanguageContext';
 import Searchbar from './Searchbar';
 import { BASE_URL, getCategories } from '../services/api';
-
+import { formatPhoneNumber, isValidPhoneNumber } from '../utils/phone';
 import { useSettings } from '../context/SettingsContext';
 
 const Navbar = () => {
@@ -132,6 +132,10 @@ const Navbar = () => {
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone) return;
+    if (!isValidPhoneNumber(phone)) {
+      setLoginError('Please enter a valid 11-digit mobile number starting with 01.');
+      return;
+    }
     setLoginStep('password');
     setLoginError('');
   };
@@ -254,7 +258,7 @@ const Navbar = () => {
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
                   className="flex items-center space-x-2 p-1 pl-2 hover:bg-neutral-100 rounded-full transition-all group"
                 >
-                  <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#5173FB] transition-all flex items-center justify-center bg-neutral-100 shadow-sm">
+                  <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-transparent group-hover:border-brand transition-all flex items-center justify-center bg-neutral-100 shadow-sm">
                     {user?.profile?.profile_picture ? (
                       <img 
                         src={user.profile.profile_picture.startsWith('http') ? user.profile.profile_picture : `${BASE_URL}${user.profile.profile_picture}`} 
@@ -335,7 +339,7 @@ const Navbar = () => {
                     <div className="mt-2 pt-2 border-t border-neutral-50 px-2">
                       <button 
                         onClick={handleLogout}
-                        className="w-full flex items-center space-x-3 px-3 py-2.5 text-sm font-bold text-[#5173FB] hover:bg-brand/5 rounded-xl transition-colors"
+                        className="w-full flex items-center space-x-3 px-3 py-2.5 text-sm font-bold text-brand hover:bg-brand/5 rounded-xl transition-colors"
                       >
                         <LogOut className="w-4 h-4" />
                         <span>Sign Out</span>
@@ -371,7 +375,7 @@ const Navbar = () => {
                         <Link 
                           to="/signup" 
                           onClick={() => setShowGuestMenu(false)}
-                          className="text-sm font-bold text-[#5173FB] hover:underline"
+                          className="text-sm font-bold text-brand hover:underline"
                         >
                           Create an Account
                         </Link>
@@ -400,8 +404,8 @@ const Navbar = () => {
                               required
                               type="text" 
                               value={phone}
-                              onChange={(e) => setPhone(e.target.value)}
-                              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] outline-none transition-all"
+                              onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+                              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all"
                               placeholder="e.g. 01700000000"
                             />
                           </div>
@@ -416,7 +420,7 @@ const Navbar = () => {
                               value={password}
                               onChange={(e) => setPassword(e.target.value)}
                               autoFocus
-                              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl text-sm focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] outline-none transition-all"
+                              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl text-sm focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all"
                               placeholder="••••••••"
                             />
                           </div>
@@ -425,7 +429,7 @@ const Navbar = () => {
                         {loginStep === 'phone' && (
                           <Link 
                             to="/forgot-password" 
-                            className="block text-sm text-neutral-500 hover:text-[#5173FB] transition-colors"
+                            className="block text-sm text-neutral-500 hover:text-brand transition-colors"
                           >
                             Lost your password?
                           </Link>
@@ -434,7 +438,7 @@ const Navbar = () => {
                         <label className="flex items-center space-x-3 cursor-pointer group">
                           <input 
                             type="checkbox" 
-                            className="w-4 h-4 rounded border-neutral-300 text-[#5173FB] focus:ring-[#5173FB]"
+                            className="w-4 h-4 rounded border-neutral-300 text-brand focus:ring-brand"
                           />
                           <span className="text-sm font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">Remember me</span>
                         </label>
@@ -442,7 +446,7 @@ const Navbar = () => {
                         <button 
                           type="submit"
                           disabled={isMiniLoading}
-                          className="w-full flex items-center justify-center space-x-2 bg-brand text-white py-4 rounded-xl font-bold text-sm hover:bg-[#3a5bd9] transition-all shadow-lg shadow-red-700/10 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                          className="w-full flex items-center justify-center space-x-2 bg-brand text-white py-4 rounded-xl font-bold text-sm transition-all shadow-lg shadow-red-700/10 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                           {isMiniLoading ? (
                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -541,7 +545,7 @@ const Navbar = () => {
               <div className="flex flex-col flex-grow">
                 {isCategoriesLoading ? (
                   <div className="flex flex-col items-center justify-center py-20 space-y-4">
-                    <Loader2 className="w-6 h-6 text-[#5173FB] animate-spin" />
+                    <Loader2 className="w-6 h-6 text-brand animate-spin" />
                     <p className="text-[10px] font-bold text-neutral-400">Loading collections...</p>
                   </div>
                 ) : parentCategories.length > 0 ? (
@@ -560,7 +564,7 @@ const Navbar = () => {
                               className="flex-grow flex items-center space-x-3 p-3.5 pl-5"
                             >
                               <div className={`w-8 h-8 rounded-xl flex items-center justify-center overflow-hidden border transition-all ${
-                                isExpanded ? 'bg-white border-[#5173FB]/20 shadow-sm' : 'bg-neutral-50 border-neutral-100'
+                                isExpanded ? 'bg-white border-brand/20 shadow-sm' : 'bg-neutral-50 border-neutral-100'
                               }`}>
                                 {category.image ? (
                                   <img 
@@ -569,11 +573,11 @@ const Navbar = () => {
                                     alt={category.name}
                                   />
                                 ) : (
-                                  <ShoppingBag className={`w-4 h-4 ${isExpanded ? 'text-[#5173FB]' : 'text-neutral-400'}`} />
+                                  <ShoppingBag className={`w-4 h-4 ${isExpanded ? 'text-brand' : 'text-neutral-400'}`} />
                                 )}
                               </div>
                               <span className={`text-[13px] font-bold transition-colors ${
-                                isExpanded ? 'text-[#5173FB]' : 'text-neutral-700'
+                                isExpanded ? 'text-brand' : 'text-neutral-700'
                               }`}>
                                 {category.name}
                               </span>
@@ -583,7 +587,7 @@ const Navbar = () => {
                               <button 
                                 onClick={(e) => toggleCategory(category.id, e)}
                                 className={`p-3.5 pr-5 transition-all ${
-                                  isExpanded ? 'text-[#5173FB]' : 'text-neutral-300'
+                                  isExpanded ? 'text-brand' : 'text-neutral-300'
                                 }`}
                               >
                                 {isExpanded ? (
@@ -611,7 +615,7 @@ const Navbar = () => {
                                       key={sub.id}
                                       to={`/products?category=${sub.slug}`}
                                       onClick={() => setIsOpen(false)}
-                                      className="flex items-center space-x-3 pl-11 pr-4 py-2.5 text-[12px] font-medium text-neutral-500 hover:text-[#5173FB] transition-colors group"
+                                      className="flex items-center space-x-3 pl-11 pr-4 py-2.5 text-[12px] font-medium text-neutral-500 hover:text-brand transition-colors group"
                                     >
                                       <div className="w-1 h-1 rounded-full bg-neutral-200 group-hover:bg-brand transition-colors" />
                                       <span>{sub.name}</span>

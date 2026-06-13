@@ -17,7 +17,7 @@ const SEO = ({ title, description, image, url, type = 'website', keywords, schem
 
   useEffect(() => {
     // 1. Title Management
-    const baseTitle = siteTitle || 'Qbamart';
+    const baseTitle = siteTitle;
     const fullTitle = title ? `${title} | ${baseTitle}` : baseTitle;
     document.title = fullTitle;
 

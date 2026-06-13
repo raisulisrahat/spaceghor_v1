@@ -16,7 +16,7 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
     <nav className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs md:text-sm mb-6 animate-in fade-in slide-in-from-left-4 duration-500">
       <Link 
         to="/" 
-        className="flex items-center text-neutral-400 hover:text-[#5173FB] transition-colors shrink-0"
+        className="flex items-center text-neutral-400 hover:text-brand transition-colors shrink-0"
       >
         <Home className="w-3.5 h-3.5 md:w-4 h-4" />
       </Link>
@@ -27,13 +27,13 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
           {item.path ? (
             <Link 
               to={item.path} 
-              className="font-medium text-neutral-400 hover:text-[#5173FB] transition-colors"
+              className="font-medium text-neutral-400 hover:text-brand transition-colors"
             >
               {item.label}
             </Link>
           ) : (
             <span 
-              className="font-bold text-[#5173FB] truncate max-w-[140px] md:max-w-none inline-block align-middle"
+              className="font-bold text-brand truncate max-w-[140px] md:max-w-none inline-block align-middle"
               title={item.label}
             >
               {item.label}

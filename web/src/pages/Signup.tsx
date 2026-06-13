@@ -129,7 +129,7 @@ const Signup = () => {
                       value={formData.phone_number}
                       onChange={handleChange}
                       placeholder="e.g. 01712345678"
-                      className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                      className="block w-full pl-10 pr-3 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-brand transition-all"
                       required
                     />
                   </div>
@@ -148,7 +148,7 @@ const Signup = () => {
                         value={formData.password}
                         onChange={handleChange}
                         placeholder="••••••••"
-                        className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                        className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-brand transition-all"
                         required
                         minLength={6}
                       />
@@ -177,7 +177,7 @@ const Signup = () => {
                         value={formData.confirm_password}
                         onChange={handleChange}
                         placeholder="••••••••"
-                        className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all"
+                        className="block w-full pl-10 pr-12 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-brand transition-all"
                         required
                       />
                       <button

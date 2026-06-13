@@ -219,7 +219,7 @@ const ProductManager = ({ resetKey }) => {
                         <input
                             type="text"
                             placeholder="Search catalog..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
@@ -228,7 +228,7 @@ const ProductManager = ({ resetKey }) => {
                     {selectedIds.length > 0 && (
                         <div className="flex items-center gap-2 animate-in slide-in-from-right-4 duration-300">
                             <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mr-2">{selectedIds.length} Selected</span>
-                            <button onClick={handleBulkExport} className="px-3 py-1.5 bg-brand/10 text-[#5173FB] rounded-lg text-xs font-semibold hover:bg-zinc-200 transition-all">Export</button>
+                            <button onClick={handleBulkExport} className="px-3 py-1.5 bg-brand/10 text-brand rounded-lg text-xs font-semibold hover:bg-zinc-200 transition-all">Export</button>
                             <button onClick={handleBulkDelete} className="px-3 py-1.5 bg-rose-50 text-rose-600 rounded-lg text-xs font-semibold hover:bg-rose-100 transition-all">Delete</button>
                             <button onClick={() => setSelectedIds([])} className="p-2 text-zinc-400 hover:text-zinc-900"><X size={14} /></button>
                         </div>
@@ -244,7 +244,7 @@ const ProductManager = ({ resetKey }) => {
                                         type="checkbox"
                                         onChange={handleSelectAll}
                                         checked={products.length > 0 && selectedIds.length === products.length}
-                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                        className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                     />
                                 </th>
                                 <th className="px-6 py-4">Product</th>
@@ -278,7 +278,7 @@ const ProductManager = ({ resetKey }) => {
                                                 type="checkbox"
                                                 checked={selectedIds.includes(product.id)}
                                                 onChange={() => handleSelectOne(product.id)}
-                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-[#5173FB]/5 w-4 h-4 transition-all"
+                                                className="rounded border-zinc-300 text-zinc-900 focus:ring-brand/5 w-4 h-4 transition-all"
                                             />
                                         </td>
                                         <td className="px-6 py-4">
@@ -291,7 +291,7 @@ const ProductManager = ({ resetKey }) => {
                                                     )}
                                                 </div>
                                                 <div className="min-w-0 max-w-[300px]">
-                                                    <button onClick={() => handleEdit(product)} className="text-sm font-bold text-zinc-900 hover:text-[#5173FB] truncate leading-tight text-left transition-colors cursor-pointer w-full">{product.name}</button>
+                                                    <button onClick={() => handleEdit(product)} className="text-sm font-bold text-zinc-900 hover:text-brand truncate leading-tight text-left transition-colors cursor-pointer w-full">{product.name}</button>
                                                     <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">{product.brand_details?.name}</p>
                                                 </div>
                                             </div>

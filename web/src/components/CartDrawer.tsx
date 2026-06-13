@@ -31,7 +31,7 @@ const CartDrawer = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-neutral-100">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-brand/10 rounded-xl text-[#5173FB]">
+                <div className="p-2 bg-brand/10 rounded-xl text-brand">
                   <ShoppingCart className="w-5 h-5" />
                 </div>
                 <div>
@@ -58,7 +58,7 @@ const CartDrawer = () => {
                   <Link 
                     to="/products" 
                     onClick={() => setIsCartOpen(false)}
-                    className="text-[#5173FB] text-sm font-bold hover:underline"
+                    className="text-brand text-sm font-bold hover:underline"
                   >
                     Start Shopping
                   </Link>
@@ -74,7 +74,7 @@ const CartDrawer = () => {
                         <Link 
                           to={`/product/${item.slug}`} 
                           onClick={() => setIsCartOpen(false)}
-                          className="text-sm font-bold text-neutral-900 hover:text-[#5173FB] transition-colors line-clamp-1"
+                          className="text-sm font-bold text-neutral-900 hover:text-brand transition-colors line-clamp-1"
                         >
                           {item.name}
                         </Link>
@@ -107,7 +107,7 @@ const CartDrawer = () => {
                           Out of Stock
                         </span>
                       ) : (
-                        <p className="text-xs font-bold text-[#5173FB] uppercase tracking-wider pt-0.5">৳{item.price}</p>
+                        <p className="text-xs font-bold text-brand uppercase tracking-wider pt-0.5">৳{item.price}</p>
                       )}
                       
                       <div className="flex items-center justify-between pt-2">
@@ -152,7 +152,7 @@ const CartDrawer = () => {
                   </div>
                   <div className="flex justify-between text-base">
                     <span className="text-neutral-900 font-bold">Total Amount</span>
-                    <span className="text-lg font-extrabold text-[#5173FB]">৳{cartTotal.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</span>
+                    <span className="text-lg font-extrabold text-brand">৳{cartTotal.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</span>
                   </div>
                 </div>
 

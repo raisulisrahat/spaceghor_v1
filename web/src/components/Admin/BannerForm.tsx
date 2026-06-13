@@ -294,7 +294,7 @@ const BannerForm = ({ banner, onSave, onCancel }) => {
                                         <div className="absolute top-full left-0 w-full mt-2 bg-white border border-zinc-200/80 rounded-2xl shadow-2xl overflow-hidden z-[9999] animate-in fade-in slide-in-from-top-2 duration-200">
                                             {loadingSuggestions ? (
                                                 <div className="px-4 py-6 text-center text-xs text-zinc-400 font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                                                    <RefreshCw size={14} className="animate-spin text-[#5173FB]" />
+                                                    <RefreshCw size={14} className="animate-spin text-brand" />
                                                     <span>Indexing redirect nodes...</span>
                                                 </div>
                                             ) : filteredSuggestions.length === 0 ? (
@@ -313,7 +313,7 @@ const BannerForm = ({ banner, onSave, onCancel }) => {
                                                             onMouseEnter={() => setSelectedIndex(index)}
                                                             className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-all duration-150 ${
                                                                 selectedIndex === index 
-                                                                    ? 'bg-brand/5 text-[#5173FB]' 
+                                                                    ? 'bg-brand/5 text-brand' 
                                                                     : 'hover:bg-zinc-50 text-zinc-700'
                                                             }`}
                                                         >
@@ -405,7 +405,7 @@ const BannerForm = ({ banner, onSave, onCancel }) => {
                                 <button
                                     type="button"
                                     onClick={() => setMediaModalOpen(true)}
-                                    className="text-[9px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
+                                    className="text-[9px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
                                 >
                                     <ImageIcon size={11} /> Gallery
                                 </button>
@@ -485,7 +485,7 @@ const BannerForm = ({ banner, onSave, onCancel }) => {
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
                             <div>
-                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Choose <span className="text-[#5173FB]">Banner Image</span></h3>
+                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Choose <span className="text-brand">Banner Image</span></h3>
                                 <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-0.5">Select or upload your promotion visual</p>
                             </div>
                             <button 
@@ -523,8 +523,8 @@ const BannerForm = ({ banner, onSave, onCancel }) => {
                         {/* Modal Body */}
                         <div className="flex-grow overflow-y-auto p-6 min-h-[400px]">
                             {activeModalTab === 'upload' ? (
-                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-[#5173FB] rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
-                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-[#5173FB]">
+                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-brand rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
+                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-brand">
                                         {uploadingImage ? <RefreshCw size={36} className="animate-spin" /> : <Upload size={36} />}
                                     </div>
                                     <h4 className="text-sm font-bold text-zinc-900">

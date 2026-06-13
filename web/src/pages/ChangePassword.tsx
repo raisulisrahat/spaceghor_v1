@@ -64,7 +64,7 @@ const ChangePassword = () => {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <Link to="/account" className="inline-flex items-center text-neutral-500 hover:text-[#5173FB] font-bold mb-8 transition-colors">
+            <Link to="/account" className="inline-flex items-center text-neutral-500 hover:text-brand font-bold mb-8 transition-colors">
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Account
             </Link>
@@ -75,7 +75,7 @@ const ChangePassword = () => {
               className="bg-white rounded-[2rem] p-8 shadow-sm border border-neutral-100 max-w-2xl"
             >
               <div className="mb-10">
-                <div className="w-16 h-16 bg-brand/10 text-[#5173FB] rounded-2xl flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-brand/10 text-brand rounded-2xl flex items-center justify-center mb-6">
                   <Lock className="w-8 h-8" />
                 </div>
                 <h1 className="text-2xl font-black text-neutral-900 tracking-tight">Change Password</h1>
@@ -104,7 +104,7 @@ const ChangePassword = () => {
                       type={showCurrentPassword ? "text" : "password"}
                       value={formData.currentPassword}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-[#5173FB] focus:ring-2 focus:ring-[#5173FB]/20 text-neutral-900 placeholder-neutral-400"
+                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 text-neutral-900 placeholder-neutral-400"
                       placeholder="Enter current password"
                       required
                     />
@@ -127,7 +127,7 @@ const ChangePassword = () => {
                       type={showNewPassword ? "text" : "password"}
                       value={formData.newPassword}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-[#5173FB] focus:ring-2 focus:ring-[#5173FB]/20 text-neutral-900 placeholder-neutral-400"
+                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 text-neutral-900 placeholder-neutral-400"
                       placeholder="Enter new password"
                       required
                       minLength={6}
@@ -151,7 +151,7 @@ const ChangePassword = () => {
                       type={showConfirmPassword ? "text" : "password"}
                       value={formData.confirmPassword}
                       onChange={handleChange}
-                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-[#5173FB] focus:ring-2 focus:ring-[#5173FB]/20 text-neutral-900 placeholder-neutral-400"
+                      className="w-full pl-12 pr-12 py-3.5 rounded-xl text-sm font-medium transition-all outline-none border border-neutral-200 bg-neutral-50 focus:bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 text-neutral-900 placeholder-neutral-400"
                       placeholder="Confirm new password"
                       required
                       minLength={6}
@@ -170,7 +170,7 @@ const ChangePassword = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full flex items-center justify-center py-4 bg-brand text-white font-bold rounded-xl hover:bg-[#3a5bd9] transition-all focus:ring-4 focus:ring-[#5173FB]/30 disabled:opacity-70"
+                    className="w-full flex items-center justify-center py-4 bg-brand text-white font-bold rounded-xl hover:bg-[#3a5bd9] transition-all focus:ring-4 focus:ring-brand/30 disabled:opacity-70"
                   >
                     {isLoading ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : <Save className="w-5 h-5 mr-2" />}
                     {isLoading ? 'Updating...' : 'Update Password'}

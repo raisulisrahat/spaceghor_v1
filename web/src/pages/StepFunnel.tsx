@@ -374,10 +374,10 @@ const StepFunnel = () => {
             {/* Main Header */}
             <header className="py-6 border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-md z-40">
                 <div className="container mx-auto px-4 flex justify-between items-center max-w-6xl">
-                    <div className="text-2xl font-black tracking-tighter text-[#5173FB]">{siteSettings?.site_title || 'Qbamart'}</div>
+                    <div className="text-2xl font-black tracking-tighter text-brand">{siteSettings?.site_title}</div>
                     <div className="flex gap-4 md:gap-8 items-center text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest">
-                        <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#5173FB]" /> 100% Secure</span>
-                        <span className="flex items-center gap-1.5"><Truck size={14} className="text-[#5173FB]" /> Cash on Delivery</span>
+                        <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-brand" /> 100% Secure</span>
+                        <span className="flex items-center gap-1.5"><Truck size={14} className="text-brand" /> Cash on Delivery</span>
                     </div>
                 </div>
             </header>
@@ -414,16 +414,16 @@ const StepFunnel = () => {
 
                         {/* Trust Factors Grid */}
                         <div className="grid grid-cols-3 gap-4">
-                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-[#5173FB]/30 transition-colors">
-                                <Award className="mx-auto text-[#5173FB] mb-2" size={24} />
+                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-brand/30 transition-colors">
+                                <Award className="mx-auto text-brand mb-2" size={24} />
                                 <p className="text-[10px] font-black uppercase text-slate-800">Premium Quality</p>
                             </div>
-                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-[#5173FB]/30 transition-colors">
-                                <Package className="mx-auto text-[#5173FB] mb-2" size={24} />
+                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-brand/30 transition-colors">
+                                <Package className="mx-auto text-brand mb-2" size={24} />
                                 <p className="text-[10px] font-black uppercase text-slate-800">Safe Packing</p>
                             </div>
-                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-[#5173FB]/30 transition-colors">
-                                <RefreshCcw className="mx-auto text-[#5173FB] mb-2" size={24} />
+                            <div className="bg-slate-50 p-4 rounded-3xl text-center border border-slate-100 hover:border-brand/30 transition-colors">
+                                <RefreshCcw className="mx-auto text-brand mb-2" size={24} />
                                 <p className="text-[10px] font-black uppercase text-slate-800">Easy Return</p>
                             </div>
                         </div>
@@ -447,19 +447,19 @@ const StepFunnel = () => {
                                 <h1 className="text-3xl md:text-4xl font-black mb-4 tracking-tight leading-tight">{product.name}</h1>
                                 
                                 <div className="flex items-baseline gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 w-fit">
-                                    <span className="text-4xl font-black text-[#5173FB]">৳{currentPrice}</span>
+                                    <span className="text-4xl font-black text-brand">৳{currentPrice}</span>
                                     {product.sale_price && <span className="text-xl text-white/30 line-through font-bold">৳{Math.floor(product.regular_price)}</span>}
                                 </div>
 
                                 <div className="space-y-4 mb-10">
                                     <div className="flex items-center gap-3 text-sm font-bold text-white/80">
-                                        <CheckCircle2 size={18} className="text-[#5173FB]" /> স্টক সীমিত, দ্রুত অর্ডার করুন!
+                                        <CheckCircle2 size={18} className="text-brand" /> স্টক সীমিত, দ্রুত অর্ডার করুন!
                                     </div>
                                     <div className="flex items-center gap-3 text-sm font-bold text-white/80">
-                                        <CheckCircle2 size={18} className="text-[#5173FB]" /> সারা বাংলাদেশে ক্যাশ অন ডেলিভারি
+                                        <CheckCircle2 size={18} className="text-brand" /> সারা বাংলাদেশে ক্যাশ অন ডেলিভারি
                                     </div>
                                     <div className="flex items-center gap-3 text-sm font-bold text-white/80">
-                                        <CheckCircle2 size={18} className="text-[#5173FB]" /> পন্য দেখে টাকা পরিশোধের সুযোগ
+                                        <CheckCircle2 size={18} className="text-brand" /> পন্য দেখে টাকা পরিশোধের সুযোগ
                                     </div>
                                 </div>
 
@@ -474,7 +474,7 @@ const StepFunnel = () => {
                                                 type="text"
                                                 name="customer_name"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-[#5173FB] outline-none transition-all font-bold placeholder-white/30"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
                                                 placeholder="আপনার নাম লিখুন"
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
@@ -483,7 +483,7 @@ const StepFunnel = () => {
                                                 type="tel"
                                                 name="phone_number"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-[#5173FB] outline-none transition-all font-bold placeholder-white/30"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
                                                 placeholder="আপনার মোবাইল নম্বর"
                                                 value={formData.phone_number}
                                                 onChange={handleChange}
@@ -494,7 +494,7 @@ const StepFunnel = () => {
                                             <select
                                                 name="district"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-[#5173FB] outline-none transition-all font-bold text-white"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold text-white"
                                                 value={formData.district}
                                                 onChange={handleChange}
                                             >
@@ -506,7 +506,7 @@ const StepFunnel = () => {
                                             <select
                                                 name="upazila"
                                                 required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-[#5173FB] outline-none transition-all font-bold text-white disabled:opacity-50"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold text-white disabled:opacity-50"
                                                 value={formData.upazila}
                                                 onChange={handleChange}
                                                 disabled={!formData.district}
@@ -522,7 +522,7 @@ const StepFunnel = () => {
                                             name="address"
                                             required
                                             rows={2}
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-[#5173FB] outline-none transition-all font-bold placeholder-white/30 resize-none"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30 resize-none"
                                             placeholder="আপনার পূর্ণ ঠিকানা লিখুন"
                                             value={formData.address}
                                             onChange={handleChange}
@@ -540,7 +540,7 @@ const StepFunnel = () => {
                                             </div>
                                             <div className="pt-3 border-t border-white/10 flex justify-between items-center text-lg">
                                                 <span>সর্বমোট</span>
-                                                <span className="text-2xl font-black text-[#5173FB]">৳{finalTotal}</span>
+                                                <span className="text-2xl font-black text-brand">৳{finalTotal}</span>
                                             </div>
                                         </div>
 
@@ -556,7 +556,7 @@ const StepFunnel = () => {
                                         </button>
                                         
                                         <p className="text-center text-[10px] uppercase tracking-widest text-white/30 font-black">
-                                            100% Secure Checkout | Verified by {siteSettings?.site_title || 'Qbamart'}
+                                            100% Secure Checkout | Verified by {siteSettings?.site_title}
                                         </p>
                                     </form>
                                 </div>
@@ -592,8 +592,8 @@ const StepFunnel = () => {
             {/* Footer */}
             <footer className="py-12 bg-slate-50 border-t border-slate-100 text-center">
                 <div className="container mx-auto px-4">
-                    <div className="text-xl font-black text-slate-300 mb-4 tracking-tighter uppercase">{siteSettings?.site_title || 'Qbamart'}</div>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} {siteSettings?.site_title || 'Qbamart'} | All Rights Reserved</p>
+                    <div className="text-xl font-black text-slate-300 mb-4 tracking-tighter uppercase">{siteSettings?.site_title}</div>
+                    <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} {siteSettings?.site_title} | All Rights Reserved</p>
                 </div>
             </footer>
             

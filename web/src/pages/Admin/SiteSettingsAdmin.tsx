@@ -69,7 +69,7 @@ const SiteSettingsAdmin = () => {
   const Section = ({ title, icon: Icon, children }: any) => (
     <div className="bg-white rounded-3xl border border-neutral-100 shadow-sm overflow-hidden mb-8">
       <div className="px-8 py-6 border-b border-neutral-50 flex items-center bg-neutral-50/30">
-        <Icon className="w-5 h-5 text-[#5173FB] mr-3" />
+        <Icon className="w-5 h-5 text-brand mr-3" />
         <h3 className="font-bold text-neutral-900 uppercase tracking-widest text-xs">{title}</h3>
       </div>
       <div className="p-8">
@@ -91,7 +91,7 @@ const SiteSettingsAdmin = () => {
           value={formData[name] ?? ''}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full pl-12 pr-4 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/20 focus:border-[#5173FB] transition-all text-neutral-800 font-medium"
+          className="w-full pl-12 pr-4 py-3.5 bg-neutral-50 border border-neutral-100 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all text-neutral-800 font-medium"
         />
       </div>
     </div>
@@ -100,7 +100,7 @@ const SiteSettingsAdmin = () => {
   if (isLoading) {
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="w-10 h-10 text-[#5173FB] animate-spin" />
+        <Loader2 className="w-10 h-10 text-brand animate-spin" />
         <p className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Loading configuration...</p>
       </div>
     );
@@ -116,7 +116,7 @@ const SiteSettingsAdmin = () => {
         <button 
           onClick={handleSave}
           disabled={updateMutation.isPending}
-          className="flex items-center justify-center space-x-2 px-8 py-4 bg-brand text-white rounded-2xl font-bold shadow-xl shadow-[#5173FB]/20 hover:bg-[#3a5bd9] transition-all disabled:opacity-70 min-w-[200px]"
+          className="flex items-center justify-center space-x-2 px-8 py-4 bg-brand text-white rounded-2xl font-bold shadow-xl shadow-brand/20 hover:bg-[#3a5bd9] transition-all disabled:opacity-70 min-w-[200px]"
         >
           {updateMutation.isPending ? (
             <Loader2 className="w-5 h-5 animate-spin" />

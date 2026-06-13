@@ -308,7 +308,7 @@ const UserManager = () => {
                         <input
                             type="text"
                             placeholder="Search by name, email or ID..."
-                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all"
+                            className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -316,7 +316,7 @@ const UserManager = () => {
                     
                     <div className="flex items-center gap-3">
                         <select 
-                            className="bg-white border border-zinc-200 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-600 outline-none focus:ring-2 focus:ring-[#5173FB]/5"
+                            className="bg-white border border-zinc-200 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-600 outline-none focus:ring-2 focus:ring-brand/5"
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
                         >
@@ -555,7 +555,7 @@ const UserManager = () => {
                                                                 value={verificationCode}
                                                                 onChange={(e) => setVerificationCode(e.target.value)}
                                                                 placeholder="e.g. 123456"
-                                                                className="flex-grow px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-center tracking-widest font-mono focus:border-[#5173FB] focus:outline-none"
+                                                                className="flex-grow px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-center tracking-widest font-mono focus:border-brand focus:outline-none"
                                                                 maxLength={6}
                                                             />
                                                             <button
@@ -674,7 +674,7 @@ const UserManager = () => {
                                 <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2 ml-1">New Password</label>
                                 <input
                                     type="password"
-                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:ring-2 focus:ring-[#5173FB]/5 transition-all font-semibold"
+                                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl outline-none focus:ring-2 focus:ring-brand/5 transition-all font-semibold"
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     placeholder="••••••••"

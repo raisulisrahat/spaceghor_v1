@@ -67,7 +67,7 @@ const OrderDetails = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-        <Loader2 className="w-10 h-10 animate-spin text-[#5173FB]" />
+        <Loader2 className="w-10 h-10 animate-spin text-brand" />
       </div>
     );
   }
@@ -137,7 +137,7 @@ const OrderDetails = () => {
                               : `https://steadfast.com.bd/tl/${order.courier_tracking_code}`} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="inline-flex items-center text-xs font-bold text-[#5173FB] hover:underline"
+                            className="inline-flex items-center text-xs font-bold text-brand hover:underline"
                           >
                             Track Order ({order.courier_tracking_code})
                           </a>
@@ -186,7 +186,7 @@ const OrderDetails = () => {
                             {(item.color_name || item.size_name) && (
                                 <>
                                     <span className="w-1 h-1 rounded-full bg-neutral-300"></span>
-                                    <span className="text-[10px] font-bold text-[#5173FB] uppercase tracking-widest border border-red-100 bg-brand/5 px-1.5 py-0.5 rounded">
+                                    <span className="text-[10px] font-bold text-brand uppercase tracking-widest border border-red-100 bg-brand/5 px-1.5 py-0.5 rounded">
                                         {[item.color_name, item.size_name].filter(Boolean).join(' / ')}
                                     </span>
                                 </>
@@ -205,7 +205,7 @@ const OrderDetails = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 space-y-4">
                     <div className="flex items-center space-x-3 text-neutral-900">
-                      <MapPin className="w-5 h-5 text-[#5173FB]" />
+                      <MapPin className="w-5 h-5 text-brand" />
                       <h3 className="font-bold">Shipping Address</h3>
                     </div>
                     <div className="text-sm text-neutral-600 leading-relaxed">
@@ -217,7 +217,7 @@ const OrderDetails = () => {
 
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-neutral-100 space-y-4">
                     <div className="flex items-center space-x-3 text-neutral-900">
-                      <CreditCard className="w-5 h-5 text-[#5173FB]" />
+                      <CreditCard className="w-5 h-5 text-brand" />
                       <h3 className="font-bold">Payment Method</h3>
                     </div>
                     <div className="text-sm text-neutral-600">
@@ -247,7 +247,7 @@ const OrderDetails = () => {
                     </div>
                     <div className="pt-4 border-t border-neutral-100 flex justify-between items-center">
                       <span className="text-base font-bold text-neutral-900">Total</span>
-                      <span className="text-2xl font-black text-[#5173FB]">TK. {order.total_amount}</span>
+                      <span className="text-2xl font-black text-brand">TK. {order.total_amount}</span>
                     </div>
                   </div>
                 </div>

@@ -31,7 +31,7 @@ const Categories = () => {
         return (
             <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
                 <SEO title="Categories" />
-                <Loader2 className="w-10 h-10 text-[#5173FB] animate-spin" />
+                <Loader2 className="w-10 h-10 text-brand animate-spin" />
                 <p className="text-sm font-bold text-neutral-400 uppercase tracking-widest">Organizing Collections...</p>
             </div>
         );
@@ -47,10 +47,10 @@ const Categories = () => {
             <div className="max-w-2xl mb-12 sm:mb-20">
                 <div className="flex items-center gap-2 mb-4">
                     <div className="w-8 h-[1px] bg-brand" />
-                    <span className="text-[9px] font-bold text-[#5173FB] uppercase tracking-[0.3em]">Shop Architecture</span>
+                    <span className="text-[9px] font-bold text-brand uppercase tracking-[0.3em]">Shop Architecture</span>
                 </div>
                 <h1 className="text-3xl sm:text-4xl font-black text-neutral-900 tracking-tight leading-none">
-                    Browse <span className="text-[#5173FB]">Collections</span>
+                    Browse <span className="text-brand">Collections</span>
                 </h1>
                 <p className="mt-4 text-[12px] text-neutral-500 font-medium leading-relaxed max-w-md opacity-80">
                     Our platform is organized into intuitive, high-quality collections to help you find exactly what you need with precision and style.
@@ -68,7 +68,7 @@ const Categories = () => {
                     >
                         <Link 
                             to={`/products?category=${category.slug}`}
-                            className="group block relative overflow-hidden rounded-2xl bg-white border border-neutral-100 p-2 hover:border-[#5173FB]/20 transition-all duration-300 hover:shadow-xl"
+                            className="group block relative overflow-hidden rounded-2xl bg-white border border-neutral-100 p-2 hover:border-brand/20 transition-all duration-300 hover:shadow-xl"
                         >
                             <div className="aspect-square relative overflow-hidden rounded-xl bg-neutral-50">
                                 {category.image ? (
@@ -91,7 +91,7 @@ const Categories = () => {
 
                             <div className="px-3 py-4 flex items-center justify-between">
                                 <div>
-                                    <h3 className="text-sm font-bold text-neutral-900 group-hover:text-[#5173FB] transition-colors tracking-tight">{category.name}</h3>
+                                    <h3 className="text-sm font-bold text-neutral-900 group-hover:text-brand transition-colors tracking-tight">{category.name}</h3>
                                     <p className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest mt-1 flex items-center gap-1.5">
                                         <div className="w-1 h-1 rounded-full bg-neutral-200 group-hover:bg-brand transition-colors" />
                                         {category.product_count || 0} Items

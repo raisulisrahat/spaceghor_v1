@@ -249,7 +249,7 @@ const Shop = () => {
                         {activeBrands.length > 0 && (
                             <div className="pt-8 border-t border-neutral-100">
                                 <h3 className="text-base font-bold text-neutral-900 mb-6 flex items-center">
-                                    <Filter className="w-4 h-4 mr-2 text-[#5173FB]" />
+                                    <Filter className="w-4 h-4 mr-2 text-brand" />
                                     Brands
                                 </h3>
                                 <div className="grid grid-cols-1 gap-1">
@@ -260,7 +260,7 @@ const Shop = () => {
                                                 searchParams.set('brand', brand.slug);
                                                 setSearchParams(searchParams);
                                             }}
-                                            className={`w-full text-left px-4 py-2 rounded-xl text-xs transition-all whitespace-nowrap ${selectedBrand === brand.slug ? 'bg-brand/10 text-[#5173FB] font-bold' : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900'}`}
+                                            className={`w-full text-left px-4 py-2 rounded-xl text-xs transition-all whitespace-nowrap ${selectedBrand === brand.slug ? 'bg-brand/10 text-brand font-bold' : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900'}`}
                                         >
                                             {brand.name}
                                         </button>
@@ -301,7 +301,7 @@ const Shop = () => {
                                                 const val = parseInt(e.target.value);
                                                 setMinPrice(isNaN(val) ? 0 : val);
                                             }}
-                                            className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-[#5173FB] focus:bg-white transition-all text-neutral-800"
+                                            className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-brand focus:bg-white transition-all text-neutral-800"
                                         />
                                     </div>
                                     <span className="text-neutral-400 text-xs font-bold">—</span>
@@ -315,7 +315,7 @@ const Shop = () => {
                                                 const val = parseInt(e.target.value);
                                                 setMaxPrice(isNaN(val) ? 0 : val);
                                             }}
-                                            className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-[#5173FB] focus:bg-white transition-all text-neutral-800"
+                                            className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-brand focus:bg-white transition-all text-neutral-800"
                                         />
                                     </div>
                                 </div>
@@ -375,7 +375,7 @@ const Shop = () => {
                                                         setSortBy(option.id);
                                                         setIsSortOpen(false);
                                                     }}
-                                                    className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold transition-all ${sortBy === option.id ? 'bg-brand/10 text-[#5173FB]' : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900'}`}
+                                                    className={`w-full text-left px-4 py-3 rounded-xl text-xs font-bold transition-all ${sortBy === option.id ? 'bg-brand/10 text-brand' : 'text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900'}`}
                                                 >
                                                     {option.label}
                                                 </button>
@@ -420,7 +420,7 @@ const Shop = () => {
                                     setMinPrice(0);
                                     setMaxPrice(25000);
                                 }}
-                                className="text-[#5173FB] font-bold hover:underline"
+                                className="text-brand font-bold hover:underline"
                             >
                                 Clear all filters
                             </button>
@@ -454,7 +454,7 @@ const Shop = () => {
                                                         <div className="space-y-1">
                                                             <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">{product.brand_name}</span>
                                                             <Link to={`/product/${product.slug}`}>
-                                                                <h3 className="text-xl font-bold text-neutral-900 hover:text-[#5173FB] transition-colors">{product.name}</h3>
+                                                                <h3 className="text-xl font-bold text-neutral-900 hover:text-brand transition-colors">{product.name}</h3>
                                                             </Link>
                                                             <div className="flex items-center space-x-2 pt-1">
                                                                 <div className="flex text-amber-400">
@@ -478,7 +478,7 @@ const Shop = () => {
                                                         </div>
 
                                                         {/* Wishlist Button */}
-                                                        <button className="p-2.5 rounded-full bg-white border border-neutral-100 text-neutral-300 hover:text-[#5173FB] transition-all shadow-sm">
+                                                        <button className="p-2.5 rounded-full bg-white border border-neutral-100 text-neutral-300 hover:text-brand transition-all shadow-sm">
                                                             <Heart className="w-4 h-4" />
                                                         </button>
                                                     </div>
@@ -612,7 +612,7 @@ const Shop = () => {
                                                     setSearchParams(searchParams);
                                                     setIsFilterOpen(false);
                                                 }}
-                                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${selectedCategory === cat.slug ? 'bg-brand/10 text-[#5173FB]' : 'text-neutral-500'}`}
+                                                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition-all ${selectedCategory === cat.slug ? 'bg-brand/10 text-brand' : 'text-neutral-500'}`}
                                             >
                                                 {cat.name}
                                             </button>
@@ -633,7 +633,7 @@ const Shop = () => {
                                                         setSearchParams(searchParams);
                                                         setIsFilterOpen(false);
                                                     }}
-                                                    className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${selectedBrand === brand.slug ? 'border-[#5173FB] bg-brand/10 text-[#5173FB]' : 'border-neutral-100 text-neutral-500'}`}
+                                                    className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${selectedBrand === brand.slug ? 'border-brand bg-brand/10 text-brand' : 'border-neutral-100 text-neutral-500'}`}
                                                 >
                                                     {brand.name}
                                                 </button>
@@ -657,7 +657,7 @@ const Shop = () => {
                                         />
                                         <div className="flex justify-between text-xs font-bold text-neutral-900">
                                             <span>৳0</span>
-                                            <span className="text-[#5173FB]">৳{maxPrice}</span>
+                                            <span className="text-brand">৳{maxPrice}</span>
                                         </div>
 
                                         {/* Custom Min/Max Inputs */}
@@ -672,7 +672,7 @@ const Shop = () => {
                                                         const val = parseInt(e.target.value);
                                                         setMinPrice(isNaN(val) ? 0 : val);
                                                     }}
-                                                    className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-[#5173FB] focus:bg-white transition-all text-neutral-800"
+                                                    className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-brand focus:bg-white transition-all text-neutral-800"
                                                 />
                                             </div>
                                             <span className="text-neutral-400 text-xs font-bold">—</span>
@@ -686,7 +686,7 @@ const Shop = () => {
                                                         const val = parseInt(e.target.value);
                                                         setMaxPrice(isNaN(val) ? 0 : val);
                                                     }}
-                                                    className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-[#5173FB] focus:bg-white transition-all text-neutral-800"
+                                                    className="w-full pl-7 pr-2 py-2.5 text-xs font-semibold bg-neutral-50 border border-neutral-100 rounded-xl focus:outline-none focus:border-brand focus:bg-white transition-all text-neutral-800"
                                                 />
                                             </div>
                                         </div>

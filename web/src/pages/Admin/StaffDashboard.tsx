@@ -258,7 +258,7 @@ const StaffDashboard = ({ role }) => {
                             <input
                                 type="text"
                                 placeholder="Search system..."
-                                className="pl-9 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm w-64 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/5 transition-all outline-none"
+                                className="pl-9 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm w-64 focus:bg-white focus:ring-2 focus:ring-brand/5 transition-all outline-none"
                                 value={searchQuery}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 onFocus={() => searchQuery.length >= 2 && setShowSearchResults(true)}
@@ -270,7 +270,7 @@ const StaffDashboard = ({ role }) => {
                                     <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-zinc-200 rounded-xl shadow-2xl z-50 overflow-hidden min-w-[320px] animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="px-4 py-3 border-b border-zinc-100 bg-zinc-50/50 flex justify-between items-center">
                                             <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Search Results</span>
-                                            {isLoadingSearch && <div className="w-3 h-3 border-2 border-[#5173FB] border-t-transparent rounded-full animate-spin" />}
+                                            {isLoadingSearch && <div className="w-3 h-3 border-2 border-brand border-t-transparent rounded-full animate-spin" />}
                                         </div>
                                         <div className="max-h-[400px] overflow-y-auto luxury-scrollbar">
                                             {searchResults.length > 0 ? (
@@ -309,7 +309,7 @@ const StaffDashboard = ({ role }) => {
                         <div className="relative">
                             <button
                                 onClick={() => setShowNotifications(!showNotifications)}
-                                className={`p-2 transition-all relative rounded-lg ${showNotifications ? 'bg-brand/10 text-[#5173FB]' : 'text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50'}`}
+                                className={`p-2 transition-all relative rounded-lg ${showNotifications ? 'bg-brand/10 text-brand' : 'text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50'}`}
                             >
                                 <Bell size={18} />
                                 {unreadCount > 0 && (
@@ -370,47 +370,47 @@ const StaffDashboard = ({ role }) => {
 
                 <div className="flex-1 p-4 md:p-8 lg:p-12 max-w-[1600px] mx-auto w-full">
                     <Routes>
-                        <Route path="/" element={<DashboardStats
-                            stats={stats}
-                            role={role}
-                            user={user}
-                            navigate={navigate}
-                            handleNavigate={handleNavigate}
-                            dateRange={dateRange}
-                            setDateRange={setDateRange}
-                            customStart={customStart}
-                            setCustomStart={setCustomStart}
-                            customEnd={customEnd}
-                            setCustomEnd={setCustomEnd}
-                            activeTab={activeTab}
-                        />} />
                         {role === 'admin' ? (
                             <>
+                                <Route path="/" element={<DashboardStats
+                                    stats={stats}
+                                    role={role}
+                                    user={user}
+                                    navigate={navigate}
+                                    handleNavigate={handleNavigate}
+                                    dateRange={dateRange}
+                                    setDateRange={setDateRange}
+                                    customStart={customStart}
+                                    setCustomStart={setCustomStart}
+                                    customEnd={customEnd}
+                                    setCustomEnd={setCustomEnd}
+                                    activeTab={activeTab}
+                                />} />
                                 <Route path="users" element={<UserManager />} />
                                 <Route path="media_manager" element={<MediaManager />} />
+                                <Route path="products/*" element={<ProductManager resetKey={navKey} />} />
+                                <Route path="orders" element={<OrderManager />} />
+                                <Route path="banners" element={<BannerManager />} />
+                                <Route path="flash_sales" element={<FlashSaleManager />} />
+                                <Route path="funnels" element={<FunnelManager />} />
+                                <Route path="meta_campaigns" element={<MetaManager />} />
+                                <Route path="blog_posts" element={<BlogPostManager />} />
+                                <Route path="blog_categories" element={<BlogCategoryManager />} />
+                                <Route path="brands" element={<BrandManager />} />
+                                <Route path="categories" element={<CategoryManager />} />
+                                <Route path="reviews" element={<ReviewManager />} />
+                                <Route path="notices" element={<NoticeManager />} />
+                                <Route path="settings" element={<ConfigManager />} />
+                                <Route path="security" element={<SecurityManager />} />
+                                <Route path="*" element={<Navigate to={`/staff/${role}`} replace />} />
                             </>
                         ) : (
                             <>
-                                <Route path="users" element={<Navigate to={`/staff/${role}`} replace />} />
-                                <Route path="media_manager" element={<Navigate to={`/staff/${role}`} replace />} />
+                                <Route path="/" element={<Navigate to={`/staff/${role}/orders`} replace />} />
+                                <Route path="orders" element={<OrderManager />} />
+                                <Route path="*" element={<Navigate to={`/staff/${role}/orders`} replace />} />
                             </>
                         )}
-                        <Route path="products/*" element={<ProductManager resetKey={navKey} />} />
-                        <Route path="orders" element={<OrderManager />} />
-
-                        <Route path="banners" element={<BannerManager />} />
-                        <Route path="flash_sales" element={<FlashSaleManager />} />
-                        <Route path="funnels" element={<FunnelManager />} />
-                        <Route path="meta_campaigns" element={<MetaManager />} />
-                        <Route path="blog_posts" element={<BlogPostManager />} />
-                        <Route path="blog_categories" element={<BlogCategoryManager />} />
-                        <Route path="brands" element={<BrandManager />} />
-                        <Route path="categories" element={<CategoryManager />} />
-                        <Route path="reviews" element={<ReviewManager />} />
-                        <Route path="notices" element={<NoticeManager />} />
-                        <Route path="settings" element={<ConfigManager />} />
-                        <Route path="security" element={<SecurityManager />} />
-                        <Route path="*" element={<Navigate to={`/staff/${role}`} replace />} />
                     </Routes>
                 </div>
             </main>
@@ -697,37 +697,27 @@ const StatusBadge = ({ status }) => {
 
 const SidebarContent = ({ activeTab, handleNavigate, role }) => (
     <div className="space-y-8">
-        <div>
-            <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">General</div>
-            <div className="space-y-0.5">
-                <SidebarItem id="dashboard" label="Dashboard" icon={<LayoutDashboard size={18} />} activeTab={activeTab} onClick={() => handleNavigate('dashboard')} />
-                {role === 'admin' && (
-                    <>
+        {role === 'admin' ? (
+            <>
+                <div>
+                    <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">General</div>
+                    <div className="space-y-0.5">
+                        <SidebarItem id="dashboard" label="Dashboard" icon={<LayoutDashboard size={18} />} activeTab={activeTab} onClick={() => handleNavigate('dashboard')} />
                         <SidebarItem id="users" label="Users" icon={<Users size={18} />} activeTab={activeTab} onClick={() => handleNavigate('users')} />
                         <SidebarItem id="media_manager" label="Media Manager" icon={<Image size={18} />} activeTab={activeTab} onClick={() => handleNavigate('media_manager')} />
-                    </>
-                )}
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <div>
-            <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">E-Commerce</div>
-            <div className="space-y-0.5">
-                {role === 'admin' && <SidebarItem id="products" label="Products" icon={<Package size={18} />} activeTab={activeTab} onClick={() => handleNavigate('products')} />}
-                <SidebarItem id="orders" label="Orders" icon={<ShoppingBag size={18} />} activeTab={activeTab} onClick={() => handleNavigate('orders')} />
-
-                {role === 'admin' && (
-                    <>
-                        {/* <SidebarItem id="brands" label="Brands" icon={<Zap size={18} />} activeTab={activeTab} onClick={() => handleNavigate('brands')} /> */}
+                <div>
+                    <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">E-Commerce</div>
+                    <div className="space-y-0.5">
+                        <SidebarItem id="products" label="Products" icon={<Package size={18} />} activeTab={activeTab} onClick={() => handleNavigate('products')} />
+                        <SidebarItem id="orders" label="Orders" icon={<ShoppingBag size={18} />} activeTab={activeTab} onClick={() => handleNavigate('orders')} />
                         <SidebarItem id="categories" label="Categories" icon={<Layers size={18} />} activeTab={activeTab} onClick={() => handleNavigate('categories')} />
                         <SidebarItem id="reviews" label="Reviews" icon={<MessageSquare size={18} />} activeTab={activeTab} onClick={() => handleNavigate('reviews')} />
-                    </>
-                )}
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        {role === 'admin' && (
-            <>
                 <div>
                     <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">Marketing</div>
                     <div className="space-y-0.5">
@@ -755,6 +745,13 @@ const SidebarContent = ({ activeTab, handleNavigate, role }) => (
                     </div>
                 </div>
             </>
+        ) : (
+            <div>
+                <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">E-Commerce</div>
+                <div className="space-y-0.5">
+                    <SidebarItem id="orders" label="Orders" icon={<ShoppingBag size={18} />} activeTab={activeTab} onClick={() => handleNavigate('orders')} />
+                </div>
+            </div>
         )}
     </div>
 );

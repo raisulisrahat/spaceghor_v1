@@ -361,7 +361,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/30">
                 <div>
                     <h3 className="text-sm font-bold text-zinc-900 tracking-tight">
-                        {post ? 'Edit' : 'Create'} <span className="text-[#5173FB]">Blog Post</span>
+                        {post ? 'Edit' : 'Create'} <span className="text-brand">Blog Post</span>
                     </h3>
                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">Post Configuration</p>
                 </div>
@@ -383,7 +383,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                     <div className="lg:col-span-2 space-y-5">
                         <div className="space-y-1.5">
                             <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">
-                                Post Title <span className="text-[#5173FB] font-black">*</span>
+                                Post Title <span className="text-brand font-black">*</span>
                             </label>
                             <input
                                 type="text"
@@ -391,14 +391,14 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                 value={formData.title}
                                 onChange={handleChange}
                                 required
-                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                                 placeholder="Enter post title..."
                             />
                         </div>
 
                         <div className="space-y-1.5">
                             <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">
-                                Post Content <span className="text-[#5173FB] font-black">*</span>
+                                Post Content <span className="text-brand font-black">*</span>
                             </label>
                             <div className="prose-sm relative editor-container-root">
                                 <ReactQuill
@@ -426,7 +426,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                                     key={pct}
                                                     type="button"
                                                     onClick={() => resizeImage(pct)}
-                                                    className="px-2 py-1 text-[9px] font-black tracking-wider uppercase bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-[#5173FB] rounded-md transition-all active:scale-95 text-white cursor-pointer"
+                                                    className="px-2 py-1 text-[9px] font-black tracking-wider uppercase bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-brand rounded-md transition-all active:scale-95 text-white cursor-pointer"
                                                 >
                                                     {pct}
                                                 </button>
@@ -439,7 +439,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                                 type="button"
                                                 onClick={() => alignImage('left')}
                                                 title="Align Left"
-                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-[#5173FB] rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
+                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-brand rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
                                             >
                                                 <AlignLeft size={12} />
                                             </button>
@@ -447,7 +447,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                                 type="button"
                                                 onClick={() => alignImage('center')}
                                                 title="Align Center"
-                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-[#5173FB] rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
+                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-brand rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
                                             >
                                                 <AlignCenter size={12} />
                                             </button>
@@ -455,7 +455,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                                 type="button"
                                                 onClick={() => alignImage('right')}
                                                 title="Align Right"
-                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-[#5173FB] rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
+                                                className="p-1.5 bg-zinc-900 border border-zinc-800 hover:bg-brand hover:border-brand rounded-md transition-all active:scale-95 text-zinc-300 hover:text-white cursor-pointer"
                                             >
                                                 <AlignRight size={12} />
                                             </button>
@@ -470,7 +470,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                                 max="100" 
                                                 value={getCurrentImageWidthPercent()} 
                                                 onChange={handleWidthPercentChange}
-                                                className="w-16 h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-[#5173FB]"
+                                                className="w-16 h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-brand"
                                             />
                                             <span className="text-[9px] font-black font-mono w-6 text-zinc-300">{getCurrentImageWidthPercent()}%</span>
                                         </div>
@@ -525,7 +525,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                     name="category"
                                     value={formData.category}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-[11px] font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-[11px] font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                                 >
                                     <option value="">Select category...</option>
                                     {categories.map(cat => (
@@ -543,7 +543,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                     name="slug"
                                     value={formData.slug}
                                     onChange={handleChange}
-                                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-[10px] font-bold text-zinc-900 uppercase tracking-widest focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none shadow-inner"
+                                    className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-[10px] font-bold text-zinc-900 uppercase tracking-widest focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none shadow-inner"
                                     placeholder="auto-generated"
                                 />
                             </div>
@@ -561,7 +561,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                         setGalleryTarget('featured');
                                         setMediaModalOpen(true);
                                     }}
-                                    className="text-[9px] font-bold uppercase tracking-wider text-[#5173FB] hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
+                                    className="text-[9px] font-bold uppercase tracking-wider text-brand hover:text-[#3a5bd9] transition-colors cursor-pointer flex items-center gap-1"
                                 >
                                     <ImageIcon size={11} /> Gallery
                                 </button>
@@ -569,7 +569,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
 
                             <div 
                                 onClick={() => fileInputRef.current?.click()}
-                                className="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg bg-zinc-50 border-2 border-dashed border-zinc-200 hover:border-[#5173FB] transition-all flex items-center justify-center p-1"
+                                className="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg bg-zinc-50 border-2 border-dashed border-zinc-200 hover:border-brand transition-all flex items-center justify-center p-1"
                             >
                                 {imagePreview ? (
                                     <>
@@ -582,10 +582,10 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                                     </>
                                 ) : (
                                     <div className="flex flex-col items-center gap-2 group-hover:scale-110 transition-transform">
-                                        <div className="p-2 bg-zinc-100 rounded-lg text-zinc-400 group-hover:bg-brand/10 group-hover:text-[#5173FB] transition-all">
+                                        <div className="p-2 bg-zinc-100 rounded-lg text-zinc-400 group-hover:bg-brand/10 group-hover:text-brand transition-all">
                                             <ImageIcon size={18} />
                                         </div>
-                                        <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest group-hover:text-[#5173FB] transition-colors">Upload Image</span>
+                                        <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest group-hover:text-brand transition-colors">Upload Image</span>
                                     </div>
                                 )}
                             </div>
@@ -628,7 +628,7 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                         {/* Modal Header */}
                         <div className="flex justify-between items-center px-6 py-4 border-b border-zinc-100 bg-zinc-50/50">
                             <div>
-                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Insert <span className="text-[#5173FB]">Image</span></h3>
+                                <h3 className="text-base font-black text-zinc-950 tracking-tight">Insert <span className="text-brand">Image</span></h3>
                                 <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-0.5">Select or upload your blog asset</p>
                             </div>
                             <button 
@@ -669,8 +669,8 @@ const BlogPostForm = ({ post, onSave, onCancel }) => {
                         {/* Modal Body */}
                         <div className="flex-grow overflow-y-auto p-6 min-h-[400px]">
                             {activeModalTab === 'upload' ? (
-                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-[#5173FB] rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
-                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-[#5173FB]">
+                                <div className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 hover:border-brand rounded-2xl p-12 transition-all min-h-[300px] text-center bg-zinc-50/20 group">
+                                    <div className="p-4 bg-zinc-100 rounded-full group-hover:bg-brand/10 transition-colors duration-300 mb-4 text-zinc-400 group-hover:text-brand">
                                         {uploadingImage ? <RefreshCw size={36} className="animate-spin" /> : <Upload size={36} />}
                                     </div>
                                     <h4 className="text-sm font-bold text-zinc-900">

@@ -102,7 +102,7 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({ activeTab, onTabChange 
           </div>
           <button 
             onClick={() => fileInputRef.current?.click()}
-            className="absolute -bottom-1 -right-1 lg:-bottom-2 lg:-right-2 p-1.5 lg:p-2.5 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-neutral-100 text-[#5173FB] hover:scale-110 transition-all z-10"
+            className="absolute -bottom-1 -right-1 lg:-bottom-2 lg:-right-2 p-1.5 lg:p-2.5 bg-white rounded-xl lg:rounded-2xl shadow-xl border border-neutral-100 text-brand hover:scale-110 transition-all z-10"
           >
             <Camera className="w-3 h-3 lg:w-4 lg:h-4" />
           </button>
@@ -111,7 +111,7 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({ activeTab, onTabChange 
         
         <div className="lg:mt-6 text-left lg:text-center flex-grow">
           <h2 className="text-lg lg:text-xl font-black text-neutral-900 tracking-tight">{user.user.first_name}</h2>
-          <div className="inline-flex items-center mt-1 lg:mt-2 px-2 lg:px-3 py-0.5 lg:py-1 bg-brand/5 text-[#5173FB] rounded-full text-[8px] lg:text-[10px] font-black uppercase tracking-widest">
+          <div className="inline-flex items-center mt-1 lg:mt-2 px-2 lg:px-3 py-0.5 lg:py-1 bg-brand/5 text-brand rounded-full text-[8px] lg:text-[10px] font-black uppercase tracking-widest">
             <ShieldCheck className="w-2.5 h-2.5 lg:w-3 lg:h-3 mr-1" />
             {user.user.is_staff ? 'Admin Account' : 'Verified Member'}
           </div>
@@ -119,7 +119,7 @@ const AccountSidebar: React.FC<AccountSidebarProps> = ({ activeTab, onTabChange 
 
         <button 
           onClick={() => navigate('/account/profile')}
-          className="lg:hidden p-2.5 text-neutral-400 hover:text-[#5173FB] bg-neutral-50 hover:bg-brand/5 rounded-xl transition-colors border border-neutral-100"
+          className="lg:hidden p-2.5 text-neutral-400 hover:text-brand bg-neutral-50 hover:bg-brand/5 rounded-xl transition-colors border border-neutral-100"
         >
           <Edit3 className="w-5 h-5" />
         </button>

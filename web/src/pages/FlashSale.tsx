@@ -111,14 +111,14 @@ const FlashSalePage = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex-1 space-y-8 text-center lg:text-left"
             >
-              <div className="inline-flex items-center space-x-2 bg-brand/5 px-3 py-1.5 rounded-full text-[#5173FB] font-bold text-[9px] uppercase tracking-[0.2em] border border-[#5173FB]/10">
+              <div className="inline-flex items-center space-x-2 bg-brand/5 px-3 py-1.5 rounded-full text-brand font-bold text-[9px] uppercase tracking-[0.2em] border border-brand/10">
                 <Zap className="w-3 h-3 fill-current" />
                 <span>Limited Time</span>
               </div>
               
               <h3 className="text-3xl md:text-4xl font-black text-neutral-900 leading-none tracking-tighter">
                 {activeSale.title}
-                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#5173FB] to-[#E07030]">
+                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-brand to-[#E07030]">
                   Up to {activeSale.discount_percentage || '50'}% OFF
                 </span>
               </h3>
@@ -130,13 +130,13 @@ const FlashSalePage = () => {
               <div className="flex flex-wrap items-center gap-8 justify-center lg:justify-start pt-4">
                 <div className="flex items-center space-x-2 text-neutral-800">
                   <div className="w-8 h-8 bg-neutral-50 rounded-xl flex items-center justify-center border border-neutral-100 shadow-sm">
-                    <ShieldCheck className="w-4 h-4 text-[#5173FB]" />
+                    <ShieldCheck className="w-4 h-4 text-brand" />
                   </div>
                   <span className="font-bold text-[10px] uppercase tracking-widest text-neutral-400">Authentic</span>
                 </div>
                 <div className="flex items-center space-x-2 text-neutral-800">
                   <div className="w-8 h-8 bg-neutral-50 rounded-xl flex items-center justify-center border border-neutral-100 shadow-sm">
-                    <TrendingUp className="w-4 h-4 text-[#5173FB]" />
+                    <TrendingUp className="w-4 h-4 text-brand" />
                   </div>
                   <span className="font-bold text-[10px] uppercase tracking-widest text-neutral-400">Fast Delivery</span>
                 </div>
@@ -152,7 +152,7 @@ const FlashSalePage = () => {
             >
               <div className="bg-white border border-neutral-100 p-6 md:p-10 rounded-[40px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.06)] relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity hidden md:block">
-                  <Timer className="w-32 h-32 text-[#5173FB]" />
+                  <Timer className="w-32 h-32 text-brand" />
                 </div>
                 
                 <div className="relative z-10 text-center space-y-8">
@@ -223,7 +223,7 @@ const FlashSalePage = () => {
                     style={{ opacity: 0, transform: 'translateY(20px)' }}
                     className="group"
                   >
-                    <div className="relative bg-white rounded-3xl p-2 border border-neutral-100 hover:border-[#5173FB]/20 transition-all duration-300 hover:shadow-xl group-hover:-translate-y-1.5">
+                    <div className="relative bg-white rounded-3xl p-2 border border-neutral-100 hover:border-brand/20 transition-all duration-300 hover:shadow-xl group-hover:-translate-y-1.5">
                       <div className="relative mb-4">
                         <ProductCard product={product} />
                         {/* Sold Badge */}
@@ -237,7 +237,7 @@ const FlashSalePage = () => {
                         <div className="space-y-2">
                            <div className="flex justify-between text-[9px] font-bold uppercase tracking-wider">
                              <span className="text-neutral-400 font-black">{stock > 0 ? `${stock} Left` : 'Sold Out'}</span>
-                             <span className="text-[#5173FB]">{soldPercentage}% Sold</span>
+                             <span className="text-brand">{soldPercentage}% Sold</span>
                            </div>
                            <div className="h-1 w-full bg-neutral-50 rounded-full overflow-hidden">
                               <motion.div 

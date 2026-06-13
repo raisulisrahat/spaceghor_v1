@@ -206,7 +206,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
             {/* Header Area */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
                 <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-zinc-900">Media <span className="text-[#5173FB]">Manager</span></h2>
+                    <h2 className="text-2xl font-bold tracking-tight text-zinc-900">Media <span className="text-brand">Manager</span></h2>
                     <p className="text-xs text-zinc-500 font-medium mt-1">Upload, search, preview, and organize all site assets in one premium media center.</p>
                 </div>
 
@@ -260,13 +260,13 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-xl border border-zinc-200/80 shadow-sm">
                 {/* Search */}
                 <div className="relative w-full md:w-80 group">
-                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-[#5173FB] transition-colors" size={14} />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-brand transition-colors" size={14} />
                     <input 
                         type="text" 
                         placeholder="Search media files..." 
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-medium focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                        className="w-full pl-10 pr-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-medium focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                     />
                 </div>
 
@@ -277,7 +277,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                             key={type}
                             onClick={() => setActiveType(type)}
                             className={`px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded-md transition-all flex-shrink-0 cursor-pointer ${activeType === type 
-                                ? 'bg-white text-[#5173FB] shadow-sm font-extrabold border border-zinc-200' 
+                                ? 'bg-white text-brand shadow-sm font-extrabold border border-zinc-200' 
                                 : 'text-zinc-500 hover:text-zinc-900'}`}
                         >
                             {type}
@@ -289,13 +289,13 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                 <div className="flex items-center gap-1 bg-zinc-50 border border-zinc-200 rounded-lg p-1">
                     <button 
                         onClick={() => setViewMode('grid')}
-                        className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white text-[#5173FB] shadow-sm' : 'text-zinc-400 hover:text-zinc-700'}`}
+                        className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white text-brand shadow-sm' : 'text-zinc-400 hover:text-zinc-700'}`}
                     >
                         <Grid size={14} />
                     </button>
                     <button 
                         onClick={() => setViewMode('list')}
-                        className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white text-[#5173FB] shadow-sm' : 'text-zinc-400 hover:text-zinc-700'}`}
+                        className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white text-brand shadow-sm' : 'text-zinc-400 hover:text-zinc-700'}`}
                     >
                         <List size={14} />
                     </button>
@@ -310,7 +310,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                             type="checkbox" 
                             checked={selectedPaths.length === filteredMedia.length}
                             onChange={toggleSelectAll}
-                            className="w-4 h-4 rounded text-[#5173FB] border-zinc-750 bg-zinc-800 focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                            className="w-4 h-4 rounded text-brand border-zinc-750 bg-zinc-800 focus:ring-0 focus:ring-offset-0 cursor-pointer"
                         />
                         <span className="text-xs font-bold uppercase tracking-wider">{selectedPaths.length} items selected</span>
                     </div>
@@ -342,7 +342,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
             {/* Media Content Grid/List */}
             {loading ? (
                 <div className="flex flex-col justify-center items-center py-24 bg-white rounded-2xl border border-zinc-100 shadow-sm">
-                    <RefreshCw size={24} className="text-[#5173FB] animate-spin mb-4" />
+                    <RefreshCw size={24} className="text-brand animate-spin mb-4" />
                     <p className="text-sm font-semibold text-zinc-500">Scanning Media Directory...</p>
                 </div>
             ) : filteredMedia.length === 0 ? (
@@ -369,7 +369,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                         setPreviewFile(file);
                                     }
                                 }}
-                                className={`group relative bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col ${selectedPaths.includes(file.path) ? 'border-[#5173FB] ring-2 ring-[#5173FB]/10' : 'border-zinc-200 hover:border-[#5173FB]'}`}
+                                className={`group relative bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col ${selectedPaths.includes(file.path) ? 'border-brand ring-2 ring-brand/10' : 'border-zinc-200 hover:border-brand'}`}
                             >
                                 {/* Checkbox Overlay */}
                                 <div 
@@ -380,7 +380,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                         type="checkbox"
                                         checked={selectedPaths.includes(file.path)}
                                         onChange={() => toggleSelect(file.path)}
-                                        className="w-4 h-4 rounded text-[#5173FB] border-zinc-300 focus:ring-0 focus:ring-offset-0 cursor-pointer shadow-md bg-white"
+                                        className="w-4 h-4 rounded text-brand border-zinc-300 focus:ring-0 focus:ring-offset-0 cursor-pointer shadow-md bg-white"
                                     />
                                 </div>
 
@@ -421,7 +421,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                                         title="Copy URL"
                                                         className={`p-1.5 rounded-lg border transition-all active:scale-90 cursor-pointer ${isCopied 
                                                             ? 'bg-emerald-500 border-emerald-500 text-white' 
-                                                            : 'bg-zinc-900/80 border-zinc-800 text-zinc-200 hover:bg-brand hover:border-[#5173FB] hover:text-white'}`}
+                                                            : 'bg-zinc-900/80 border-zinc-800 text-zinc-200 hover:bg-brand hover:border-brand hover:text-white'}`}
                                                     >
                                                         {isCopied ? <Check size={12} /> : <Copy size={12} />}
                                                     </button>
@@ -488,7 +488,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                         type="checkbox" 
                                         checked={filteredMedia.length > 0 && selectedPaths.length === filteredMedia.length}
                                         onChange={toggleSelectAll}
-                                        className="w-4 h-4 rounded text-[#5173FB] border-zinc-300 bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                                        className="w-4 h-4 rounded text-brand border-zinc-300 bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer"
                                     />
                                 </th>
                                 <th className="px-6 py-3.5">Asset</th>
@@ -521,7 +521,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                                 type="checkbox" 
                                                 checked={selectedPaths.includes(file.path)}
                                                 onChange={() => toggleSelect(file.path)}
-                                                className="w-4 h-4 rounded text-[#5173FB] border-zinc-300 bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded text-brand border-zinc-300 bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer"
                                             />
                                         </td>
                                         <td className="px-6 py-3 flex items-center gap-3">
@@ -589,7 +589,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                                         onClick={(e) => copyToClipboard(file.url, file.path, e)}
                                                         className={`p-1.5 rounded-lg border transition-all active:scale-90 cursor-pointer ${isCopied 
                                                             ? 'bg-emerald-500 border-emerald-500 text-white' 
-                                                            : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-brand hover:border-[#5173FB] hover:text-white'}`}
+                                                            : 'bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-brand hover:border-brand hover:text-white'}`}
                                                         title="Copy URL"
                                                     >
                                                         {isCopied ? <Check size={12} /> : <Copy size={12} />}
@@ -650,7 +650,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                             <div>
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
-                                        <span className="px-2 py-0.5 bg-brand/10 text-[#5173FB] text-[9px] font-black uppercase tracking-wider rounded">
+                                        <span className="px-2 py-0.5 bg-brand/10 text-brand text-[9px] font-black uppercase tracking-wider rounded">
                                             {previewFile.type}
                                         </span>
                                         <h3 className="text-sm font-black text-zinc-950 tracking-tight mt-2 break-all">{previewFile.name}</h3>
@@ -685,7 +685,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                             <div className="mt-1.5 space-y-1 max-h-32 overflow-y-auto pr-1">
                                                 {previewFile.connections.map((c, i) => (
                                                     <div key={i} className="bg-white border border-zinc-200 p-2 rounded-lg text-[10px] leading-tight">
-                                                        <span className="font-extrabold text-[#5173FB] text-[8px] uppercase tracking-wider block">{c.type}</span>
+                                                        <span className="font-extrabold text-brand text-[8px] uppercase tracking-wider block">{c.type}</span>
                                                         <span className="font-semibold text-zinc-800">{c.name}</span>
                                                     </div>
                                                 ))}
@@ -702,7 +702,7 @@ const MediaManager = ({ onSelect, selectMode = false }: MediaManagerProps = {}) 
                                     onClick={(e) => copyToClipboard(previewFile.url, previewFile.path, e)}
                                     className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest border transition-all active:scale-[0.98] cursor-pointer ${copiedPath === previewFile.path 
                                         ? 'bg-emerald-500 border-emerald-500 text-white' 
-                                        : 'bg-brand border-[#5173FB] text-white hover:bg-black hover:border-black'}`}
+                                        : 'bg-brand border-brand text-white hover:bg-black hover:border-black'}`}
                                 >
                                     {copiedPath === previewFile.path ? <Check size={14} /> : <Copy size={14} />}
                                     <span>{copiedPath === previewFile.path ? 'Copied!' : 'Copy Asset URL'}</span>

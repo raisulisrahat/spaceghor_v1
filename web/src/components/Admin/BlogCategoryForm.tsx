@@ -60,7 +60,7 @@ const BlogCategoryForm = ({ category, onSave, onCancel }) => {
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/30">
                 <div>
                     <h3 className="text-sm font-bold text-zinc-900 tracking-tight">
-                        {category ? 'Update' : 'Create'} <span className="text-[#5173FB]">Category</span>
+                        {category ? 'Update' : 'Create'} <span className="text-brand">Category</span>
                     </h3>
                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">Category Configuration</p>
                 </div>
@@ -80,7 +80,7 @@ const BlogCategoryForm = ({ category, onSave, onCancel }) => {
                 <div className="space-y-4">
                     <div className="space-y-1.5">
                         <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">
-                            Category Name <span className="text-[#5173FB] font-black">*</span>
+                            Category Name <span className="text-brand font-black">*</span>
                         </label>
                         <input
                             type="text"
@@ -88,7 +88,7 @@ const BlogCategoryForm = ({ category, onSave, onCancel }) => {
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                            className="w-full px-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                             placeholder="e.g. Health & Fitness"
                         />
                     </div>
@@ -122,7 +122,7 @@ const BlogCategoryForm = ({ category, onSave, onCancel }) => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="flex items-center gap-2 px-6 py-2 bg-[#5173FB] text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-zinc-950/10"
+                        className="flex items-center gap-2 px-6 py-2 bg-brand text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black active:scale-95 transition-all disabled:opacity-50 shadow-md shadow-zinc-950/10"
                     >
                         <Save size={14} />
                         {loading ? 'Processing...' : 'Save Category'}

@@ -217,7 +217,6 @@ const AdminLayout = () => {
                         >
                             <div className="px-3 py-3 border-b border-gray-50 mb-1">
                                 <p className="text-xs font-bold text-gray-900 uppercase">{user?.user?.username}</p>
-                                <p className="text-[10px] text-gray-400 mt-0.5 truncate">{user?.user?.email || 'admin@Qbamart.com'}</p>
                             </div>
                             <button 
                                 onClick={() => { navigate('/staff/admin/settings'); setIsProfileOpen(false); }}

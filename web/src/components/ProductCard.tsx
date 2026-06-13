@@ -104,7 +104,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               <span key={c.id} className="flex items-center">
                 <Link 
                   to={`/products?category=${c.slug}`}
-                  className="text-[10px] text-neutral-400 hover:text-[#5173FB] transition-colors"
+                  className="text-[10px] text-neutral-400 hover:text-brand transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {c.name}

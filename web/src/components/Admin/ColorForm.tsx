@@ -79,7 +79,7 @@ const ColorForm = ({ color, categories = [], onSave, onCancel }) => {
             <div className="p-4 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/30">
                 <div>
                     <h3 className="text-sm font-bold text-zinc-900 tracking-tight">
-                        {color ? 'Update' : 'Create New'} <span className="text-[#5173FB]">Color Aesthetic</span>
+                        {color ? 'Update' : 'Create New'} <span className="text-brand">Color Aesthetic</span>
                     </h3>
                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-0.5">Visual Attribute Configuration</p>
                 </div>
@@ -98,12 +98,12 @@ const ColorForm = ({ color, categories = [], onSave, onCancel }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                         <div className="space-y-1.5">
-                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Color Name <span className="text-[#5173FB] font-black">*</span></label>
+                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Color Name <span className="text-brand font-black">*</span></label>
                             <div className="relative group">
-                                <Palette className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-[#5173FB] transition-colors" size={14} />
+                                <Palette className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-brand transition-colors" size={14} />
                                 <input
                                     type="text"
-                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none placeholder:text-zinc-300 shadow-inner"
+                                    className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none placeholder:text-zinc-300 shadow-inner"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="e.g., Midnight Blue, Crimson"
@@ -113,7 +113,7 @@ const ColorForm = ({ color, categories = [], onSave, onCancel }) => {
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Hex Code <span className="text-[#5173FB] font-black">*</span></label>
+                            <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Hex Code <span className="text-brand font-black">*</span></label>
                             <div className="flex gap-2">
                                 <div className="relative h-10 w-10 flex-shrink-0 rounded-xl overflow-hidden border border-zinc-200 shadow-sm">
                                     <input
@@ -124,10 +124,10 @@ const ColorForm = ({ color, categories = [], onSave, onCancel }) => {
                                     />
                                 </div>
                                 <div className="relative flex-grow group">
-                                    <Hash className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-[#5173FB] transition-colors" size={14} />
+                                    <Hash className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-brand transition-colors" size={14} />
                                     <input
                                         type="text"
-                                        className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-mono font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-[#5173FB]/10 focus:border-[#5173FB] transition-all outline-none"
+                                        className="w-full pl-9 pr-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-xs font-mono font-bold text-zinc-900 focus:bg-white focus:ring-2 focus:ring-brand/10 focus:border-brand transition-all outline-none"
                                         value={hexCode}
                                         onChange={(e) => setHexCode(e.target.value)}
                                         placeholder="#000000"
@@ -161,7 +161,7 @@ const ColorForm = ({ color, categories = [], onSave, onCancel }) => {
                                             type="checkbox"
                                             checked={selectedCategories.includes(cat.id)}
                                             onChange={() => handleToggleCategory(cat.id)}
-                                            className="w-4 h-4 rounded border-zinc-300 text-[#5173FB] focus:ring-[#5173FB]/20"
+                                            className="w-4 h-4 rounded border-zinc-300 text-brand focus:ring-brand/20"
                                         />
                                         <div className="flex flex-col">
                                             <span className="text-xs font-semibold text-zinc-700 group-hover:text-zinc-900">{cat.name}</span>
