@@ -1484,7 +1484,7 @@ const getStatusStyle = (status) => {
         case 'shipped': return 'bg-indigo-50 text-indigo-700 border-indigo-100';
         case 'delivered': return 'bg-emerald-50 text-emerald-700 border-emerald-100';
         case 'partial_delivered': return 'bg-amber-50 text-amber-700 border-amber-100';
-        case 'cancelled': return 'bg-rose-50 text-rose-700 border-rose-100';
+        case 'cancelled': return 'bg-rose-500 text-rose-100 border-rose-900';
         case 'unknown': return 'bg-zinc-50 text-zinc-400 border-zinc-100';
         default: return 'bg-zinc-50 text-zinc-500 border-zinc-100';
     }
