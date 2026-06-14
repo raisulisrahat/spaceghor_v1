@@ -17,6 +17,8 @@ out/
 .cache/
 .parcel-cache/
 
+web/src/services/api.ts
+
 # Databases & Media
 *.sqlite3
 db.sqlite3

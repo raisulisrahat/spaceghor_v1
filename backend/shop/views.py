@@ -1965,6 +1965,9 @@ class MediaManagerView(APIView):
             # Skip profile_pictures directory to avoid traversing it
             if 'profile_pictures' in dirs:
                 dirs.remove('profile_pictures')
+            # Additional safety: skip files inside profile_pictures if walked
+            if 'profile_pictures' in root.replace('\\', '/').split('/'):
+                continue
             for file in files:
                 if file.startswith('.'):
                     continue
@@ -1973,7 +1976,7 @@ class MediaManagerView(APIView):
                 norm_path = rel_path.replace('\\', '/').strip('/')
                 
                 # Never show profile_pictures in Media Manager
-                if norm_path.startswith('profile_pictures/'):
+                if 'profile_pictures' in norm_path.split('/'):
                     continue
                 
                 try:
