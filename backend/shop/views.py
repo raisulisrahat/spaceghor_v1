@@ -1962,11 +1962,19 @@ class MediaManagerView(APIView):
             # Skip hidden folders / cache folders
             if any(part.startswith('.') for part in root.split(os.sep)):
                 continue
+            # Skip profile_pictures directory to avoid traversing it
+            if 'profile_pictures' in dirs:
+                dirs.remove('profile_pictures')
             for file in files:
                 if file.startswith('.'):
                     continue
                 file_path = os.path.join(root, file)
                 rel_path = os.path.relpath(file_path, media_root)
+                norm_path = rel_path.replace('\\', '/').strip('/')
+                
+                # Never show profile_pictures in Media Manager
+                if norm_path.startswith('profile_pictures/'):
+                    continue
                 
                 try:
                     stat_info = os.stat(file_path)
@@ -1984,7 +1992,6 @@ class MediaManagerView(APIView):
                 elif ext in ['.mp4', '.webm', '.ogg', '.mov']:
                     file_type = 'video'
 
-                norm_path = rel_path.replace('\\', '/').strip('/')
                 connections = connections_map.get(norm_path, [])
 
                 files_list.append({
@@ -2107,6 +2114,13 @@ class MediaManagerView(APIView):
             if not target_path.startswith(media_root):
                 errors.append({'path': p, 'error': 'Access denied'})
                 continue
+            
+            # Security check: prevent deleting profile pictures
+            norm_p = p.replace('\\', '/').strip('/')
+            if norm_p.startswith('profile_pictures/'):
+                errors.append({'path': p, 'error': 'Access denied to profile pictures'})
+                continue
+
             if not os.path.exists(target_path):
                 errors.append({'path': p, 'error': 'File not found'})
                 continue
