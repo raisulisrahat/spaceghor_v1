@@ -48,19 +48,13 @@ const Checkout = () => {
   const [paymentMethods, setPaymentMethods] = useState<{id: number, name: string, provider: string}[]>([]);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number | null>(null);
   const [isLoadingLocations, setIsLoadingLocations] = useState(false);
-  const [shippingZoneId, setShippingZoneId] = useState<number | null>(2); // Default to Inside Dhaka City
+  const [shippingZoneId, setShippingZoneId] = useState<number | null>(null); // Default to null
 
-  const [shippingCost, setShippingCost] = useState(50);
+  const [shippingCost, setShippingCost] = useState(0);
 
   // Set initial default shipping cost from fetched shipping zones
   useEffect(() => {
-    if (shippingZones.length > 0 && !formData.district) {
-        const defaultZone = shippingZones.find(z => z.name.toLowerCase().includes('dhaka city')) || shippingZones[0];
-        if (defaultZone) {
-            setShippingCost(parseFloat(defaultZone.shipping_cost));
-            setShippingZoneId(defaultZone.id);
-        }
-    }
+    // Keep it null by default so "শিপিং এলাকা সিলেক্ট করুন" is shown
   }, [shippingZones]);
 
   // Dhaka City upazilas (inside city corporation area)
@@ -613,9 +607,16 @@ const Checkout = () => {
                             }}
                         >
                             <option value="">শিপিং এলাকা সিলেক্ট করুন</option>
-                            {shippingZones.map(z => (
-                                <option key={z.id} value={z.id}>{z.name} - ৳{parseFloat(z.shipping_cost).toLocaleString()}</option>
-                            ))}
+                            {shippingZones.map(z => {
+                                const displayName = z.name.toLowerCase().includes('inside dhaka')
+                                    ? 'ঢাকা সিটির ভেতরে (Inside Dhaka)'
+                                    : z.name.toLowerCase().includes('outside dhaka')
+                                        ? 'ঢাকা সিটির বাইরে (Outside Dhaka)'
+                                        : z.name;
+                                return (
+                                    <option key={z.id} value={z.id}>{displayName} - ৳{parseFloat(z.shipping_cost).toLocaleString()}</option>
+                                );
+                            })}
                         </select>
                         <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none rotate-90" />
                       </div>

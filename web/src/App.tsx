@@ -112,6 +112,7 @@ function App() {
                     {/* Admin Routes */}
                     <Route path="/staff/admin/*" element={<StaffDashboard role="admin" />} />
                     <Route path="/staff/moderator/*" element={<StaffDashboard role="moderator" />} />
+                    <Route path="/staff/ads_manager/*" element={<StaffDashboard role="ads_manager" />} />
 
                     {/* 404 Catch-all */}
                     <Route path="*" element={<NotFound />} />

@@ -100,10 +100,16 @@ const ProfileSidebar = () => {
                   </div>
 
                   {/* Admin Dashboard Link */}
-                  {user?.user?.is_staff && (
+                  {(user?.user?.is_staff || ['admin', 'moderator', 'ads_manager'].includes(user?.profile?.role || user?.user?.role)) && (
                     <div className="bg-white px-2 py-2 border-b border-gray-100">
                       <button
-                        onClick={() => handleNavigation('/staff/admin')}
+                        onClick={() => handleNavigation(
+                          (user?.profile?.role === 'ads_manager' || user?.user?.role === 'ads_manager')
+                            ? '/staff/ads_manager/'
+                            : (user?.profile?.role === 'moderator' || user?.user?.role === 'moderator')
+                            ? '/staff/moderator/'
+                            : '/staff/admin/'
+                        )}
                         className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
                       >
                         <LayoutDashboard className="w-5 h-5 text-gray-400" />

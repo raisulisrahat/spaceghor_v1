@@ -224,6 +224,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
         show_specifications: true,
 
+        video_url: '',
+
     });
 
 
@@ -379,6 +381,8 @@ const ProductForm = ({ product, onSave, onCancel }) => {
                 specifications: product.specifications || {},
 
                 show_specifications: product.show_specifications !== false,
+
+                video_url: product.video_url || '',
 
             });
 
@@ -2879,7 +2883,29 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                         )}
 
-                        <p className="text-[10px] text-zinc-400 mt-2">Recommended: mp4, webm under 10MB</p>
+                        <div className="mt-4">
+
+                            <label className="block text-xs font-bold text-zinc-700 mb-2">YouTube Embed URL</label>
+
+                            <input
+
+                                type="text"
+
+                                name="video_url"
+
+                                placeholder="e.g. https://www.youtube.com/embed/..."
+
+                                className="w-full px-4 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-black/5 focus:border-zinc-400 transition-colors outline-none placeholder:text-zinc-400"
+
+                                value={formData.video_url}
+
+                                onChange={handleChange}
+
+                            />
+
+                        </div>
+
+                        <p className="text-[10px] text-zinc-400 mt-2">Recommended: mp4, webm</p>
 
                     </div>
 

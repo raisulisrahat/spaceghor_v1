@@ -298,9 +298,15 @@ const Navbar = () => {
                     </div>
 
                     <div className="px-2 space-y-0.5">
-                      {user?.user?.is_staff && (
+                      {(user?.user?.is_staff || ['admin', 'moderator', 'ads_manager'].includes(user?.profile?.role || user?.user?.role)) && (
                         <Link 
-                          to="/staff/admin" 
+                          to={
+                            (user?.profile?.role === 'ads_manager' || user?.user?.role === 'ads_manager')
+                              ? '/staff/ads_manager/'
+                              : (user?.profile?.role === 'moderator' || user?.user?.role === 'moderator')
+                              ? '/staff/moderator/'
+                              : '/staff/admin/'
+                          } 
                           onClick={() => setShowProfileMenu(false)}
                           className="flex items-center space-x-3 px-3 py-2.5 text-sm font-bold text-brand hover:bg-brand/5 rounded-xl transition-colors mb-1"
                         >

@@ -370,7 +370,7 @@ const UserManager = () => {
                                                 <span className="text-[10px] font-bold text-zinc-400">CUSTOMER</span>
                                             )}
 
-                                            {(user.is_staff || user.is_superuser || ['admin', 'moderator'].includes(user.role)) && (
+                                            {(user.is_staff || user.is_superuser || ['admin', 'moderator', 'ads_manager'].includes(user.role)) && (
                                                 <span className={`flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-md border ${
                                                     user.profile?.enable_2fa !== false 
                                                         ? 'text-emerald-600 bg-emerald-50 border-emerald-100' 
@@ -502,7 +502,7 @@ const UserManager = () => {
                                 </div>
                             </div>
 
-                            {(selectedUser.is_staff || selectedUser.is_superuser || ['admin', 'moderator'].includes(selectedUser.role)) && (
+                            {(selectedUser.is_staff || selectedUser.is_superuser || ['admin', 'moderator', 'ads_manager'].includes(selectedUser.role)) && (
                                 <div className="space-y-4">
                                     <div className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex items-center justify-between">
                                         <div className="text-left">

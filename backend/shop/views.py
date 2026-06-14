@@ -65,6 +65,13 @@ class IsFullAdmin(permissions.BasePermission):
                     (request.user.is_superuser or 
                      (hasattr(request.user, 'profile') and request.user.profile.role == 'admin')))
 
+class IsFullAdminOrAdsManager(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated and 
+                    (request.user.is_superuser or 
+                     (hasattr(request.user, 'profile') and 
+                      request.user.profile.role in ['admin', 'ads_manager'])))
+
 class IsModeratorOrAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
         return bool(request.user and request.user.is_authenticated and 
@@ -289,7 +296,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         
         # Check if user is staff/admin
-        is_staff_or_admin = user.is_staff or user.is_superuser or (hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator'])
+        is_staff_or_admin = user.is_staff or user.is_superuser or (hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator', 'ads_manager'])
         enable_2fa = getattr(user.profile, 'enable_2fa', True) if hasattr(user, 'profile') else True
         
         if is_staff_or_admin and enable_2fa:
@@ -558,7 +565,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator']:
+        if hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator', 'ads_manager']:
             if self.request.query_params.get('mine') == 'true':
                 return Order.objects.filter(user=user).exclude(status='draft')
             return Order.objects.exclude(status='draft')
@@ -1071,7 +1078,7 @@ class IncompleteOrderViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user and user.is_authenticated and hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator']:
+        if user and user.is_authenticated and hasattr(user, 'profile') and user.profile.role in ['admin', 'moderator', 'ads_manager']:
             return Order.objects.filter(status='draft')
         if user and user.is_authenticated:
             return Order.objects.filter(user=user, status='draft')
@@ -1164,7 +1171,9 @@ class SiteSettingsViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
-        return [IsFullAdmin()]
+        if self.action == 'sms_balance':
+            return [IsFullAdmin()]
+        return [IsFullAdminOrAdsManager()]
 
     @action(detail=False, methods=['get'])
     def sms_balance(self, request):
@@ -1216,7 +1225,7 @@ class FunnelViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
-        return [IsFullAdmin()]
+        return [IsFullAdminOrAdsManager()]
 
 class WishlistViewSet(viewsets.ModelViewSet):
     serializer_class = WishlistSerializer

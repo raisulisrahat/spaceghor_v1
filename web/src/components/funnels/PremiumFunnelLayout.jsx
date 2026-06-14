@@ -316,12 +316,19 @@ const PremiumFunnelLayout = ({
                                                 value={formData.shipping_zone}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">{t('select_area')}</option>
-                                                {shippingZones.map(zone => (
-                                                    <option key={zone.id} value={zone.id}>
-                                                        {zone.name} (+ ৳{parseFloat(zone.shipping_cost).toFixed(0)})
-                                                    </option>
-                                                ))}
+                                                <option value="">{t('select_shipping_zone')}</option>
+                                                {shippingZones.map(zone => {
+                                                    const displayName = zone.name.toLowerCase().includes('inside')
+                                                        ? 'ঢাকা সিটির ভেতরে (Inside Dhaka)'
+                                                        : zone.name.toLowerCase().includes('outside')
+                                                            ? 'ঢাকা সিটির বাইরে (Outside Dhaka)'
+                                                            : zone.name;
+                                                    return (
+                                                        <option key={zone.id} value={zone.id}>
+                                                            {displayName} (+ ৳{parseFloat(zone.shipping_cost).toFixed(0)})
+                                                        </option>
+                                                    );
+                                                })}
                                             </select>
                                             <Truck className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-300" size={18} />
                                         </div>

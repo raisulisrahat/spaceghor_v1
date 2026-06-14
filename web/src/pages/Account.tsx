@@ -398,7 +398,7 @@ const Account = () => {
                       <ChevronRight className="w-4 h-4 text-neutral-400 group-hover:text-brand" />
                     </Link>
 
-                    {(user?.user?.is_staff || user?.user?.is_superuser || ['admin', 'moderator'].includes(user?.profile?.role)) && (
+                    {(user?.user?.is_staff || user?.user?.is_superuser || ['admin', 'moderator', 'ads_manager'].includes(user?.profile?.role)) && (
                       <div className="space-y-4">
                         <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-2xl border border-neutral-100 transition-colors">
                           <div className="flex items-center space-x-3">

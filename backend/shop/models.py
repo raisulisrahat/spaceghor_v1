@@ -200,6 +200,7 @@ class Product(models.Model):
     show_additional_info = models.BooleanField(default=False, help_text="Enable/Disable Additional Information tab on product page")
     
     image = models.ImageField(upload_to='products/', blank=True, null=True)
+    video_url = models.CharField(max_length=500, blank=True, null=True, help_text="YouTube or external video embed URL")
     is_active = models.BooleanField(default=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
@@ -395,6 +396,7 @@ class Profile(models.Model):
         ('admin', 'Admin'),
         ('moderator', 'Moderator'),
         ('customer', 'Customer'),
+        ('ads_manager', 'Ads Manager'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')
@@ -662,8 +664,28 @@ class Notification(models.Model):
         return f"{self.title} - {self.user.username if self.user else 'System'}"
 
 # Signal Handlers for Notifications
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+import os
+
+@receiver(pre_save, sender=Profile)
+def delete_old_profile_picture(sender, instance, **kwargs):
+    """Auto-delete old profile picture from disk when a new one is uploaded."""
+    if not instance.pk:
+        return  # New profile, nothing to delete
+    try:
+        old_profile = Profile.objects.get(pk=instance.pk)
+    except Profile.DoesNotExist:
+        return
+    old_picture = old_profile.profile_picture
+    new_picture = instance.profile_picture
+    # If the picture has changed and an old one exists, delete the old file
+    if old_picture and old_picture != new_picture:
+        if os.path.isfile(old_picture.path):
+            try:
+                os.remove(old_picture.path)
+            except Exception:
+                pass
 
 @receiver(post_save, sender=Order)
 def order_notification(sender, instance, created, **kwargs):

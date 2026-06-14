@@ -160,12 +160,29 @@ const StaffDashboard = ({ role }) => {
                 navigate('/login', { state: { from: location.pathname } });
                 return;
             }
-            if (!user?.user?.is_staff) {
+            
+            const userRole = user.profile?.role || user.user?.role;
+            const isSuper = user.user?.is_superuser;
+            const isStaff = user.user?.is_staff;
+            
+            if (!isStaff && !['admin', 'moderator', 'ads_manager'].includes(userRole) && !isSuper) {
                 navigate('/');
                 return;
             }
-            if (role === 'admin' && user.user?.role !== 'admin') {
+            
+            if (userRole === 'ads_manager' && role !== 'ads_manager') {
+                navigate('/staff/ads_manager', { replace: true });
+                return;
+            }
+            
+            if (userRole === 'moderator' && role !== 'moderator') {
                 navigate('/staff/moderator', { replace: true });
+                return;
+            }
+            
+            if (role === 'admin' && userRole !== 'admin' && !isSuper) {
+                navigate(`/staff/${userRole || 'moderator'}`, { replace: true });
+                return;
             }
         }
     }, [user, authLoading, navigate, role, location.pathname]);
@@ -403,6 +420,12 @@ const StaffDashboard = ({ role }) => {
                                 <Route path="settings" element={<ConfigManager />} />
                                 <Route path="security" element={<SecurityManager />} />
                                 <Route path="*" element={<Navigate to={`/staff/${role}`} replace />} />
+                            </>
+                        ) : role === 'ads_manager' ? (
+                            <>
+                                <Route path="/" element={<Navigate to={`/staff/${role}/meta_campaigns`} replace />} />
+                                <Route path="meta_campaigns" element={<MetaManager />} />
+                                <Route path="*" element={<Navigate to={`/staff/${role}/meta_campaigns`} replace />} />
                             </>
                         ) : (
                             <>
@@ -745,6 +768,13 @@ const SidebarContent = ({ activeTab, handleNavigate, role }) => (
                     </div>
                 </div>
             </>
+        ) : role === 'ads_manager' ? (
+            <div>
+                <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">Marketing</div>
+                <div className="space-y-0.5">
+                    <SidebarItem id="meta_campaigns" label="Meta Campaigns" icon={<Facebook size={18} />} activeTab={activeTab} onClick={() => handleNavigate('meta_campaigns')} />
+                </div>
+            </div>
         ) : (
             <div>
                 <div className="px-3 pb-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-sans">E-Commerce</div>
