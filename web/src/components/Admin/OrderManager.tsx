@@ -472,10 +472,15 @@ const OrderManager = () => {
 
     const filteredOrders = orders.filter(order => {
         if (order.status === 'draft') return false;
+        const matchesProduct = Array.isArray(order.items) && order.items.some(item => {
+            const productName = item.product_details?.name || item.product_name || item.name || '';
+            return productName.toLowerCase().includes(search.toLowerCase());
+        });
         const matchesSearch =
             order.id.toString().includes(search) ||
             (order.customer_name && order.customer_name.toLowerCase().includes(search.toLowerCase())) ||
-            (order.phone_number && order.phone_number.includes(search));
+            (order.phone_number && order.phone_number.includes(search)) ||
+            matchesProduct;
         const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
         let matchesDate = true;
         const orderDate = new Date(order.created_at);
@@ -514,10 +519,16 @@ const OrderManager = () => {
     });
 
     const filteredIncomplete = incompleteOrders.filter(order => {
+        const items = order.items || order.cart_items;
+        const matchesProduct = Array.isArray(items) && items.some(item => {
+            const productName = item.product_details?.name || item.product_name || item.name || '';
+            return productName.toLowerCase().includes(search.toLowerCase());
+        });
         const matchesSearch =
             order.id.toString().includes(search) ||
             (order.customer_name && order.customer_name.toLowerCase().includes(search.toLowerCase())) ||
-            (order.phone_number && order.phone_number.includes(search));
+            (order.phone_number && order.phone_number.includes(search)) ||
+            matchesProduct;
         return matchesSearch;
     });
 
@@ -679,7 +690,7 @@ const OrderManager = () => {
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={14} />
                             <input
                                 type="text"
-                                placeholder="Search hash, customer, phone..."
+                                placeholder="Search hash, customer, phone, product..."
                                 className="w-full pl-9 pr-4 py-2 bg-white border border-zinc-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand/5 transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
