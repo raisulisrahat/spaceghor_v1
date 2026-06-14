@@ -728,16 +728,12 @@ const OfferPage = () => {
 
     const renderLayout = () => {
         switch (funnelData.layout_type) {
-            // case 'modern':
-            //     return <ModernFunnelLayout {...commonProps} />;
             case 'combo':
                 return <ComboFunnelLayout {...commonProps} />;
             case 'ezymart_v2':
                 return <EzymartFunnelLayout {...commonProps} />;
             case 'ezymart':
                 return <EzyFunnelLayout {...commonProps} />;
-            // case 'dark':
-            //     return <DarkFunnelLayout {...commonProps} />;
             case 'professional':
                 return <ProfessionalFunnelLayout {...commonProps} />;
             case 'garden':
