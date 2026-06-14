@@ -11,10 +11,9 @@ const formatAddressForAdmin = (address) => {
 };
 
 const OrderManager = () => {
-    const { token, user } = useAuth();
+    const { token } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const userRole = user?.user?.role || user?.profile?.role;
     
     const queryParams = new URLSearchParams(location.search);
     const initialView = queryParams.get('view') || 'real';
@@ -54,6 +53,7 @@ const OrderManager = () => {
     const [activeProductHistory, setActiveProductHistory] = useState(null);
     const [trackingStatus, setTrackingStatus] = useState(null);
     const [isFetchingTracking, setIsFetchingTracking] = useState(false);
+    const [copiedNumber, setCopiedNumber] = useState(false);
 
     const handleViewOrder = (order) => {
         setSelectedOrder(order);
@@ -387,6 +387,14 @@ const OrderManager = () => {
     };
 
     const handleCallOnly = (phoneNumber) => { window.location.href = `tel:${phoneNumber}`; };
+    const handleCopyNumber = (phoneNumber) => {
+        navigator.clipboard.writeText(phoneNumber).then(() => {
+            setCopiedNumber(true);
+            setTimeout(() => setCopiedNumber(false), 2000); // Reset after 2 seconds
+        }).catch(err => {
+            console.error("Could not copy number: ", err);
+        });
+    };
 
     const handleCopyOrderSummary = (order) => {
         let summaryText = `Order ID: #${order.id.toString().padStart(6, '0')}\n`;
@@ -798,8 +806,8 @@ const OrderManager = () => {
                                 </th>
                                 <th className="px-6 py-4">ID</th>
                                 <th className="px-6 py-4">Customer</th>
-                                <th className="px-6 py-4 text-center">Amount</th>
                                 <th className="px-6 py-4">{activeView === 'real' ? 'Status' : 'Location / IP'}</th>
+                                <th className="px-6 py-4 text-center">Amount</th>
                                 {activeView === 'real' && <th className="px-6 py-4">Courier ID</th>}
                                 <th className="px-6 py-4 text-center">Notes</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
@@ -834,9 +842,7 @@ const OrderManager = () => {
                                             <p className="text-[11px] font-medium text-zinc-400 font-mono">{order.phone_number}</p>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 text-center font-bold text-zinc-900 font-mono text-xs">
-                                        ৳{Number(order.total_amount).toLocaleString()}
-                                    </td>
+
                                     <td className="px-6 py-4">
                                         {activeView === 'real' ? (
                                             <div className="flex flex-col gap-1 items-start">
@@ -844,7 +850,7 @@ const OrderManager = () => {
                                                     <div className={`w-1 h-1 rounded-full ${
                                                         order.status === 'delivered' ? 'bg-emerald-500' : 
                                                         order.status === 'partial_delivered' ? 'bg-amber-500' : 
-                                                        order.status === 'cancelled' ? 'bg-red-900' : 
+                                                        order.status === 'cancelled' ? 'bg-rose-500' : 
                                                         'bg-zinc-500'
                                                     }`} />
                                                     {order.status}
@@ -855,8 +861,8 @@ const OrderManager = () => {
                                                     );
                                                     if (confirmNote) {
                                                         return (
-                                                            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-tighter" title={`Confirmed by ${confirmNote.username}`}>
-                                                                By: {confirmNote.username || 'System'}
+                                                            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-tighter" title={`Confirmed by ${confirmNote.user}`}>
+                                                                By: {confirmNote.username}
                                                             </span>
                                                         );
                                                     }
@@ -869,6 +875,9 @@ const OrderManager = () => {
                                                 <p className="text-[9px] font-medium text-zinc-400 uppercase tracking-widest">{order.ip_address}</p>
                                             </div>
                                         )}
+                                    </td>
+                                    <td className="px-6 py-4 text-center font-bold text-zinc-900 font-mono text-xs">
+                                        ৳{Number(order.total_amount).toLocaleString()}
                                     </td>
                                     {activeView === 'real' && (
                                         <td className="px-6 py-4">
@@ -894,7 +903,7 @@ const OrderManager = () => {
                                             </button>
                                             {activeView === 'real' ? (
                                                 <>
-                                                    {!order.courier_consignment_id && userRole !== 'moderator' && (
+                                                    {!order.courier_consignment_id && (
                                                         <>
                                                             <button onClick={() => handleSendToSteadfast(order)} disabled={isDispatching} className="p-2 text-zinc-400 bg-green-600/30 hover:text-brand hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all" title="Sync with Steadfast">
                                                                 <Truck size={14} />
@@ -978,7 +987,7 @@ const OrderManager = () => {
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setShowViewModal(false)}></div>
                     <div className="w-full md:max-w-2xl bg-white h-full relative z-10 shadow-2xl flex flex-col animate-in slide-in-from-right duration-500 border-l border-zinc-200">
                         {/* Header */}
-                        <div className="p-6 md:p-8 border-b border-zinc-100 flex justify-between items-start">
+                        <div className="p-6 md:p-8 border-b border-zinc-100 flex justify-between items-center">
                             <div className="flex items-start gap-4">
                                 <div>
                                     <h3 className="text-lg md:text-xl font-bold text-zinc-900 tracking-tight">Order Details</h3>
@@ -992,9 +1001,17 @@ const OrderManager = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={() => setShowViewModal(false)} className="p-2 text-zinc-400 hover:text-zinc-900 bg-zinc-50 rounded-lg transition-all">
-                                <X size={20} />
-                            </button>
+                            <div className="flex items-center gap-3">
+                                <div className="text-right">
+                                    <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Order Placed</p>
+                                    <p className="text-[11px] font-bold text-zinc-800 mt-0.5 font-mono">
+                                        {selectedOrder.created_at ? new Date(selectedOrder.created_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'N/A'}
+                                    </p>
+                                </div>
+                                <button onClick={() => setShowViewModal(false)} className="p-2 text-zinc-400 hover:text-zinc-900 bg-zinc-50 rounded-lg transition-all">
+                                    <X size={20} />
+                                </button>
+                            </div>
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 md:space-y-10 custom-scrollbar">
@@ -1037,6 +1054,12 @@ const OrderManager = () => {
                                         </>
                                     )}
                                     <button onClick={() => handleCallOnly(selectedOrder.phone_number)} className="p-2 border border-zinc-200 bg-white rounded-lg text-zinc-600 hover:bg-zinc-50 transition-all" title="Call Customer"><PhoneCall size={14} /></button>
+                                    <button 
+                                        onClick={() => handleCopyNumber(selectedOrder.phone_number)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
+                                    >
+                                        <Copy size={12} /> {copiedNumber ? 'Copied!' : 'Copy Number'}
+                                    </button>
                                 </div>
                             </div>
 
@@ -1122,7 +1145,7 @@ const OrderManager = () => {
                             </div>
 
                             {/* Logistics Sync */}
-                            {selectedOrder.status !== 'draft' && (selectedOrder.courier_consignment_id || userRole !== 'moderator') && (
+                            {selectedOrder.status !== 'draft' && (
                                 <div className="space-y-3">
                                     {!selectedOrder.courier_consignment_id ? (
                                         <div className="grid grid-cols-2 gap-3">
@@ -1204,22 +1227,12 @@ const OrderManager = () => {
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">
                                     <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order Summary</h4>
-                                    <div className="flex items-center gap-2">
-                                        {!isEditingDetails && (
-                                            <button 
-                                                onClick={handleEditDetailsClick}
-                                                className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
-                                            >
-                                                <Edit size={12} /> Edit Details
-                                            </button>
-                                        )}
-                                        <button 
-                                            onClick={() => handleCopyOrderSummary(selectedOrder)}
-                                            className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
-                                        >
-                                            <Copy size={12} /> Copy Summary
-                                        </button>
-                                    </div>
+                                    <button 
+                                        onClick={() => handleCopyOrderSummary(selectedOrder)}
+                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-600 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-colors"
+                                    >
+                                        <Copy size={12} /> Copy Summary
+                                    </button>
                                 </div>
                                 <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden">
                                     <table className="w-full text-left">
@@ -1336,43 +1349,6 @@ const OrderManager = () => {
                                                     )}
                                                 </td>
                                             </tr>
-                                            {isEditingDetails ? (
-                                                (() => {
-                                                    const subtotal = editForm.items?.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0) || 0;
-                                                    const shipping = Number(editForm.shipping_cost) || 0;
-                                                    const total = Number(editForm.total_amount) || 0;
-                                                    const difference = subtotal + shipping - total;
-                                                    if (difference !== 0) {
-                                                        return (
-                                                            <tr>
-                                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Discount / Adjustment</td>
-                                                                <td className="px-5 py-3 text-right text-rose-600 font-bold font-mono">
-                                                                    {difference > 0 ? '-' : '+'}৳{Math.abs(difference).toLocaleString()}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    }
-                                                    return null;
-                                                })()
-                                            ) : (
-                                                (() => {
-                                                    const subtotal = (selectedOrder.items || selectedOrder.cart_items)?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0;
-                                                    const shipping = Number(selectedOrder.shipping_cost) || 0;
-                                                    const total = Number(selectedOrder.total_amount) || 0;
-                                                    const difference = subtotal + shipping - total;
-                                                    if (difference !== 0) {
-                                                        return (
-                                                            <tr>
-                                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Discount / Adjustment</td>
-                                                                <td className="px-5 py-3 text-right text-rose-600 font-bold font-mono">
-                                                                    {difference > 0 ? '-' : '+'}৳{Math.abs(difference).toLocaleString()}
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    }
-                                                    return null;
-                                                })()
-                                            )}
                                             <tr className="bg-brand text-white font-black">
                                                 <td colSpan={2} className="px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
                                                 <td className="px-5 py-4 text-right text-base">
