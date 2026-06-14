@@ -98,7 +98,19 @@ const OfferPage = () => {
     // Initial Data Fetch
     useEffect(() => {
         getDistricts().then(res => setDistricts(res.data.results || res.data));
-        getShippingZones().then(res => setShippingZones(res.data.results || res.data));
+        getShippingZones().then(res => {
+            const zones = res.data.results || res.data;
+            setShippingZones(zones);
+            // Default to Outside Dhaka on load
+            const outsideZone = zones.find((z: any) =>
+                z.name.toLowerCase().includes('outside') ||
+                (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
+            ) || zones[zones.length - 1];
+            if (outsideZone) {
+                setShippingCost(parseFloat(outsideZone.shipping_cost));
+                setSelectedZone(outsideZone);
+            }
+        });
         getSiteSettings().then(res => {
             const data = res.data.results || res.data;
             setSiteSettings(Array.isArray(data) ? data[0] : data);
@@ -295,10 +307,11 @@ const OfferPage = () => {
                     return zone ? zone.id : 2;
                 }
             }
-            const insideZone = shippingZones.find(z => z.name.toLowerCase().includes('inside'));
-            return insideZone ? insideZone.id : 1;
+            // No district selected — default to outside Dhaka
+            const outsideZone = shippingZones.find(z => z.name.toLowerCase().includes('outside'));
+            return outsideZone ? outsideZone.id : (shippingZones[shippingZones.length - 1]?.id || 2);
         } else {
-            return formData.shipping_zone ? parseInt(formData.shipping_zone) : (shippingZones.find(z => z.name.toLowerCase().includes('inside'))?.id || 1);
+            return formData.shipping_zone ? parseInt(formData.shipping_zone) : (shippingZones.find(z => z.name.toLowerCase().includes('outside'))?.id || 2);
         }
     };
 

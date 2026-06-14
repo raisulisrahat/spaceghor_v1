@@ -52,9 +52,23 @@ const Checkout = () => {
 
   const [shippingCost, setShippingCost] = useState(0);
 
-  // Set initial default shipping cost from fetched shipping zones
+  // Set initial default shipping zone to Outside Dhaka when zones load
   useEffect(() => {
-    // Keep it null by default so "শিপিং এলাকা সিলেক্ট করুন" is shown
+    if (shippingZones.length > 0 && shippingZoneId === null) {
+      const outsideZone = shippingZones.find(z =>
+        z.name.toLowerCase().includes('outside') ||
+        (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
+      ) || shippingZones.find(z => !z.name.toLowerCase().includes('inside'));
+      if (outsideZone) {
+        setShippingCost(parseFloat(outsideZone.shipping_cost));
+        setShippingZoneId(outsideZone.id);
+      } else {
+        // Fallback: pick the last zone (usually outside)
+        const last = shippingZones[shippingZones.length - 1];
+        setShippingCost(parseFloat(last.shipping_cost));
+        setShippingZoneId(last.id);
+      }
+    }
   }, [shippingZones]);
 
   // Dhaka City upazilas (inside city corporation area)
@@ -100,14 +114,17 @@ const Checkout = () => {
                 setShippingZoneId(shippingZones[1]?.id || 2);
             }
         } else {
-            // No district selected — default to Dhaka City zone
-            const zone = shippingZones.find(z => z.name.toLowerCase().includes('dhaka city'));
+            // No district selected — default to Outside Dhaka zone
+            const zone = shippingZones.find(z =>
+              z.name.toLowerCase().includes('outside') ||
+              (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
+            );
             if (zone) {
                 setShippingCost(parseFloat(zone.shipping_cost));
                 setShippingZoneId(zone.id);
             } else {
-                setShippingCost(50);
-                setShippingZoneId(shippingZones[0]?.id || 1);
+                setShippingCost(100);
+                setShippingZoneId(shippingZones[shippingZones.length - 1]?.id || 2);
             }
         }
     }
@@ -629,7 +646,7 @@ const Checkout = () => {
                     <textarea 
                       required
                       rows={2}
-                      placeholder="গ্রাম/মহল্লা, ইউনিয়ন, সুনির্দিষ্ট ল্যান্ডমার্ক সহ বিস্তারিত ঠিকানা লিখুন" 
+                      placeholder="জেলা,উপজেলা,গ্রাম,মহল্লা,রাস্তা সহ বিস্তারিত ঠিকানা লিখুন" 
                       className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none resize-none placeholder:text-neutral-400"
                       value={formData.address}
                       onChange={e => setFormData({...formData, address: e.target.value})}

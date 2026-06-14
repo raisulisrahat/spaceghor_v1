@@ -899,6 +899,15 @@ class OrderViewSet(viewsets.ModelViewSet):
         total_qty = sum(item.quantity for item in order.items.all()) or 1
         desc_parts = [f"{item.product.name} (Qty: {item.quantity})" for item in order.items.all() if item.product]
         product_desc = ", ".join(desc_parts)[:255] or f"Package from {settings.site_title or 'Spaceghor'}"
+
+        # Calculate total weight in grams from product weights (kg * qty)
+        total_weight_kg = sum(
+            float(item.product.weight or 0) * item.quantity
+            for item in order.items.all()
+            if item.product
+        )
+        # Convert to grams; minimum 100g, fallback 500g if no weight set
+        item_weight_grams = max(int(total_weight_kg * 1000), 100) if total_weight_kg > 0 else 500
         
         recipient_address = order.address or f"{settings.site_title or 'Spaceghor'} Customer Address"
         if len(recipient_address) < 10:
@@ -916,7 +925,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             'recipient_address': recipient_address,
             'city_id': city_id,
             'zone_id': zone_id,
-            'item_weight': 1000, # Grams (default 1kg)
+            'item_weight': item_weight_grams, # Grams, derived from product.weight * quantity
             'item_quantity': total_qty,
             'collectable_amount': int(float(order.total_amount)),
             'product_description': product_desc
