@@ -11,7 +11,8 @@ const formatAddressForAdmin = (address) => {
 };
 
 const OrderManager = () => {
-    const { token } = useAuth();
+    const { token, user } = useAuth();
+    const isModerator = user?.profile?.role === 'moderator';
     const navigate = useNavigate();
     const location = useLocation();
     
@@ -285,6 +286,7 @@ const OrderManager = () => {
     };
 
     const handleSendToSteadfast = async (order = null) => {
+        if (isModerator) return;
         const targetOrder = order || selectedOrder;
         if (!targetOrder) return;
         setIsDispatching(true);
@@ -308,6 +310,7 @@ const OrderManager = () => {
     };
 
     const handleSendToCarrybee = async (order = null) => {
+        if (isModerator) return;
         const targetOrder = order || selectedOrder;
         if (!targetOrder) return;
         setIsDispatching(true);
@@ -903,7 +906,7 @@ const OrderManager = () => {
                                             </button>
                                             {activeView === 'real' ? (
                                                 <>
-                                                    {!order.courier_consignment_id && (
+                                                    {!order.courier_consignment_id && !isModerator && (
                                                         <>
                                                             <button onClick={() => handleSendToSteadfast(order)} disabled={isDispatching} className="p-2 text-zinc-400 bg-green-600/30 hover:text-brand hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all" title="Sync with Steadfast">
                                                                 <Truck size={14} />
@@ -1148,22 +1151,26 @@ const OrderManager = () => {
                             {selectedOrder.status !== 'draft' && (
                                 <div className="space-y-3">
                                     {!selectedOrder.courier_consignment_id ? (
-                                        <div className="grid grid-cols-2 gap-3">
-                                            <button 
-                                                onClick={() => handleSendToSteadfast()} 
-                                                disabled={isDispatching || !selectedOrder.items} 
-                                                className="py-3 bg-green-700/70 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all disabled:opacity-30"
-                                            >
-                                                <Truck size={14} /> Steadfast Sync
-                                            </button>
-                                            <button 
-                                                onClick={() => handleSendToCarrybee()} 
-                                                disabled={isDispatching || !selectedOrder.items} 
-                                                className="py-3 bg-yellow-400/80 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all disabled:opacity-30"
-                                            >
-                                                <Truck size={14} /> Carrybee Sync
-                                            </button>
-                                        </div>
+                                        !isModerator && (
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <button 
+                                                    onClick={() => handleSendToSteadfast()} 
+                                                    disabled={isDispatching || !selectedOrder.items} 
+                                                    className="py-3 bg-green-700/70 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all disabled:opacity-30"
+                                                    title="Sync with Steadfast"
+                                                >
+                                                    <Truck size={14} /> Steadfast Sync
+                                                </button>
+                                                <button 
+                                                    onClick={() => handleSendToCarrybee()} 
+                                                    disabled={isDispatching || !selectedOrder.items} 
+                                                    className="py-3 bg-yellow-400/80 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all disabled:opacity-30"
+                                                    title="Sync with Carrybee"
+                                                >
+                                                    <Truck size={14} /> Carrybee Sync
+                                                </button>
+                                            </div>
+                                        )
                                     ) : (
                                         <div className="grid grid-cols-2 gap-3">
                                             <div className="py-3 bg-zinc-100 border border-zinc-200 text-zinc-700 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2">

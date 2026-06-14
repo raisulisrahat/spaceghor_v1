@@ -688,7 +688,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         from .serializers import OrderNoteSerializer
         return Response(OrderNoteSerializer(note).data, status=status.HTTP_201_CREATED)
 
-    @action(detail=True, methods=['post'], permission_classes=[IsModeratorOrAdmin])
+    @action(detail=True, methods=['post'], permission_classes=[IsFullAdmin])
     def send_to_steadfast(self, request, pk=None):
         import requests
         order = self.get_object()
@@ -746,7 +746,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'error': f"Failed to connect to Steadfast: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=True, methods=['post'], permission_classes=[IsModeratorOrAdmin])
+    @action(detail=True, methods=['post'], permission_classes=[IsFullAdmin])
     def send_to_carrybee(self, request, pk=None):
         import requests
         order = self.get_object()
