@@ -76,6 +76,8 @@ const LAYOUT_OPTIONS = [
 
     { id: 'ezymart', name: 'EzyMart', description: 'Marketplace style layout', color: 'bg-orange-600' },
 
+    { id: 'ezymart_v2', name: 'EzyMart V2', description: 'Marketplace style layout V2', color: 'bg-orange-500' },
+
     { id: 'dark', name: 'Dark', description: 'High contrast & premium', color: 'bg-black' },
 
     { id: 'professional', name: 'Pro', description: 'Structured & informative', color: 'bg-blue-700' },

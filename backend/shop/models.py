@@ -595,6 +595,7 @@ class Funnel(models.Model):
         ('combo', 'Combo Layout'),
         ('bangla', 'Bangla Funnel Layout'),
         ('ezymart', 'EzyMart Layout'),
+        ('ezymart_v2', 'EzyMart V2 Layout'),
         ('dark', 'Dark High-Contrast Layout'),
         ('professional', 'Professional Two-Column Layout'),
         ('garden', 'Garden Green Layout'),

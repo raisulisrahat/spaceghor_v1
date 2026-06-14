@@ -59,6 +59,39 @@ const ProductDetail = () => {
     const [zoomStyle, setZoomStyle] = useState({ transformOrigin: 'center' });
     const [isHovered, setIsHovered] = useState(false);
 
+    // Touch events for manual swipe on mobile
+    const touchStartX = useRef<number | null>(null);
+    const touchEndX = useRef<number | null>(null);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+        if (touchStartX.current === null || touchEndX.current === null) return;
+        const diffX = touchStartX.current - touchEndX.current;
+        const minSwipeDistance = 50; // threshold in pixels
+
+        if (Math.abs(diffX) > minSwipeDistance) {
+            if (diffX > 0) {
+                // Swiped Left -> Next Image
+                setActiveImage(prev => (prev < gallery.length - 1 ? prev + 1 : 0));
+            } else {
+                // Swiped Right -> Previous Image
+                setActiveImage(prev => (prev > 0 ? prev - 1 : gallery.length - 1));
+            }
+        }
+        
+        // Reset
+        touchStartX.current = null;
+        touchEndX.current = null;
+    };
+
     // Lock body scroll when lightbox is open
     useEffect(() => {
         if (isLightboxOpen) {
@@ -320,6 +353,9 @@ const ProductDetail = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             className="aspect-square rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden bg-neutral-50 border border-neutral-100 relative group sm:mx-0 shadow-lg"
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
                         >
                             {gallery.length > 0 && gallery[activeImage] && (
                                 gallery[activeImage].type === 'video' ? (

@@ -325,7 +325,7 @@ const ClassicFunnelLayout = ({
                                     ref={submitBtnRef}
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] py-6 rounded-2xl text-white font-black text-2xl uppercase tracking-tighter hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand/20 disabled:opacity-50"
+                                    className="w-full bg-brand py-6 rounded-2xl text-white font-black text-2xl uppercase tracking-tighter hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand/20 disabled:opacity-50"
                                 >
                                     {submitting ? '...' : t('place_order')}
                                 </button>
@@ -554,7 +554,7 @@ const ClassicFunnelLayout = ({
                                     {funnel?.top_header_line_2}
                                 </p>
                         </div>        
-                    <div className="text-center mb-12 px-6 py-2 bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] rounded-[2rem] shadow-xl shadow-brand/10 text-white">
+                    <div className="text-center mb-12 px-6 py-2 bg-brand rounded-[2rem] shadow-xl shadow-brand/10 text-white">
                         <h4 className="text-lg md:text-2xl font-black text-white mb-2">{funnel?.top_header_line_3}</h4>
                         <div className="w-24 h-1.5 bg-yellow-300 mx-auto rounded-full shadow-[0_0_10px_rgba(253,224,71,0.8)]"></div>
                     </div>
@@ -576,7 +576,7 @@ const ClassicFunnelLayout = ({
                     <div className="container mx-auto px-4 max-w-6xl">
                         {/* Section Header */}
                         <div className="text-center mb-16 space-y-4">
-                            <div className="bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
+                            <div className="bg-brand text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
                                 <h5 className="text-xl md:text-2xl font-black tracking-tight uppercase">
                                     আমাদের কাস্টমার রিভিউ
                                 </h5>
@@ -647,7 +647,7 @@ const ClassicFunnelLayout = ({
                         <div className="mt-10 text-center">
                             <button 
                                 onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                                className="bg-brand text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
                             >
                                 <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
                             </button>
@@ -895,7 +895,7 @@ const ClassicFunnelLayout = ({
                                     ref={submitBtnRef}
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] hover:from-[#D97706] hover:via-[#C0561F] hover:to-[#B45309] text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81, 115, 251,0.3)] hover:shadow-[0_0_50px_rgba(81, 115, 251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="w-full bg-brand hover:bg-brand/70 hover:text-white font-black text-2xl py-6 rounded-2xl shadow-[0_0_30px_rgba(81, 115, 251,0.3)] hover:shadow-[0_0_50px_rgba(81, 115, 251,0.5)] transform transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                                 >
                                     <div className="absolute inset-0 w-[50%] h-full bg-white/30 skew-x-[-20deg] translate-x-[-200%] group-hover:animate-[shimmer_2s_infinite]"></div>
                                     {submitting ? '...' : (

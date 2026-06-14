@@ -115,6 +115,10 @@ const OrderManager = () => {
     }, [search, statusFilter, orderType, activeDateFilter, dateRange, activeView]);
 
     const handleDelete = async (id) => {
+        if (isModerator) {
+            alert("Moderators do not have permission to delete orders.");
+            return;
+        }
         try {
             const endpoint = activeView === 'real' ? `orders/${id}/` : `incomplete-orders/${id}/`;
             await api.delete(endpoint);
@@ -129,6 +133,10 @@ const OrderManager = () => {
     };
 
     const handleBulkDelete = async () => {
+        if (isModerator) {
+            alert("Moderators do not have permission to delete orders.");
+            return;
+        }
         if (selectedOrders.length === 0) return;
 
         try {
@@ -769,7 +777,7 @@ const OrderManager = () => {
                     )}
 
                     <div className="flex items-center gap-2">
-                        {selectedOrders.length > 0 && (
+                        {!isModerator && selectedOrders.length > 0 && (
                             <button 
                                 onClick={handleBulkDelete}
                                 className="px-4 py-2 bg-rose-500 text-white rounded-lg text-[11px] font-bold uppercase tracking-widest hover:bg-rose-600 transition-all flex items-center gap-2 animate-in zoom-in duration-200"
@@ -926,9 +934,11 @@ const OrderManager = () => {
                                                     {isConverting === order.id ? <RefreshCw size={14} className="animate-spin" /> : <CheckCircle size={14} />}
                                                 </button>
                                             )}
-                                            <button onClick={() => handleDelete(order.id)} className="p-2 text-zinc-400 hover:text-rose-600 hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all">
-                                                <Trash2 size={14} />
-                                            </button>
+                                            {!isModerator && (
+                                                <button onClick={() => handleDelete(order.id)} className="p-2 text-zinc-400 hover:text-rose-600 hover:bg-white border border-transparent hover:border-zinc-200 rounded-lg transition-all">
+                                                    <Trash2 size={14} />
+                                                </button>
+                                            )}
                                         </div>
                                     </td>
                                 </tr>
@@ -1088,65 +1098,30 @@ const OrderManager = () => {
                                 )}
                             </div>
 
-                            {/* Customer Activities & Session Details */}
-                            <div className="space-y-4">
-                                <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Metadata & Activities</h4>
-                                <div className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100 space-y-4">
-                                    {/* Confirmed by staff info
-                                    {(() => {
-                                        const confirmNote = selectedOrder.notes?.find(n => 
-                                            n.note && n.note.toLowerCase().includes('confirmed')
-                                        );
-                                        if (confirmNote) {
-                                            return (
-                                                <div className="flex items-center gap-3 pb-3 border-b border-zinc-200/50">
-                                                    <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
-                                                        <CheckCircle size={16} />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Confirmed By</p>
-                                                        <p className="text-xs font-bold text-zinc-900 mt-0.5">Staff User: <span className="font-mono">{confirmNote.username || 'System'}</span></p>
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    })()} */}
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="flex items-start gap-3">
-                                            <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
-                                                <Globe size={14} />
+                            {/* Timeline Notes */}
+                            <div className="space-y-4 pb-10">
+                                <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order Logs</h4>
+                                <div className="space-y-2">
+                                    {selectedOrder.notes?.map((note) => (
+                                        <div key={note.id} className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex flex-col">
+                                            <div className="flex justify-between items-center mb-1">
+                                                <span className="text-[9px] font-bold text-zinc-900 uppercase tracking-widest">{note.username || 'System'}</span>
+                                                <span className="text-[9px] font-bold text-zinc-400 uppercase">{new Date(note.created_at).toLocaleString()}</span>
                                             </div>
-                                            <div className="min-w-0">
-                                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">IP Address</p>
-                                                <p className="text-xs font-bold text-zinc-900 mt-0.5 font-mono truncate">{selectedOrder.ip_address || 'N/A'}</p>
-                                            </div>
+                                            <p className="text-xs font-semibold text-zinc-600 leading-relaxed">{note.note}</p>
                                         </div>
-
-                                        <div className="flex items-start gap-3">
-                                            <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
-                                                <MapPin size={14} />
-                                            </div>
-                                            <div className="min-w-0">
-                                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">IP Location</p>
-                                                <p className="text-xs font-bold text-zinc-900 mt-0.5 truncate">{selectedOrder.location || 'Unknown'}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-3 pt-3 border-t border-zinc-200/50">
-                                        <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
-                                            <Compass size={14} />
-                                        </div>
-                                        <div className="min-w-0 flex-1">
-                                            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">User Device Agent</p>
-                                            <p className="text-xs font-medium text-zinc-600 mt-0.5 break-words leading-relaxed">{selectedOrder.user_agent || 'N/A'}</p>
-                                        </div>
+                                    ))}
+                                    <div className="flex gap-2 pt-2">
+                                        <input 
+                                            value={noteText} 
+                                            onChange={e => setNoteText(e.target.value)} 
+                                            placeholder="Add operational note..." 
+                                            className="flex-1 px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold focus:ring-2 focus:ring-brand/5 outline-none" 
+                                        />
+                                        <button onClick={handleAddNote} disabled={!noteText.trim() || isSubmittingNote} className="px-5 py-2.5 bg-brand text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all disabled:opacity-30">Add</button>
                                     </div>
                                 </div>
                             </div>
-
                             {/* Logistics Sync */}
                             {selectedOrder.status !== 'draft' && (
                                 <div className="space-y-3">
@@ -1380,27 +1355,61 @@ const OrderManager = () => {
                                 </div>
                             </div>
 
-                            {/* Timeline Notes */}
-                            <div className="space-y-4 pb-10">
-                                <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order Logs</h4>
-                                <div className="space-y-2">
-                                    {selectedOrder.notes?.map((note) => (
-                                        <div key={note.id} className="p-4 bg-zinc-50 rounded-xl border border-zinc-100 flex flex-col">
-                                            <div className="flex justify-between items-center mb-1">
-                                                <span className="text-[9px] font-bold text-zinc-900 uppercase tracking-widest">{note.username || 'System'}</span>
-                                                <span className="text-[9px] font-bold text-zinc-400 uppercase">{new Date(note.created_at).toLocaleString()}</span>
+                                                        {/* Customer Activities & Session Details */}
+                            <div className="space-y-4">
+                                <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Metadata & Activities</h4>
+                                <div className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100 space-y-4">
+                                    {/* Confirmed by staff info
+                                    {(() => {
+                                        const confirmNote = selectedOrder.notes?.find(n => 
+                                            n.note && n.note.toLowerCase().includes('confirmed')
+                                        );
+                                        if (confirmNote) {
+                                            return (
+                                                <div className="flex items-center gap-3 pb-3 border-b border-zinc-200/50">
+                                                    <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+                                                        <CheckCircle size={16} />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Confirmed By</p>
+                                                        <p className="text-xs font-bold text-zinc-900 mt-0.5">Staff User: <span className="font-mono">{confirmNote.username || 'System'}</span></p>
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })()} */}
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="flex items-start gap-3">
+                                            <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
+                                                <Globe size={14} />
                                             </div>
-                                            <p className="text-xs font-semibold text-zinc-600 leading-relaxed">{note.note}</p>
+                                            <div className="min-w-0">
+                                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">IP Address</p>
+                                                <p className="text-xs font-bold text-zinc-900 mt-0.5 font-mono truncate">{selectedOrder.ip_address || 'N/A'}</p>
+                                            </div>
                                         </div>
-                                    ))}
-                                    <div className="flex gap-2 pt-2">
-                                        <input 
-                                            value={noteText} 
-                                            onChange={e => setNoteText(e.target.value)} 
-                                            placeholder="Add operational note..." 
-                                            className="flex-1 px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs font-semibold focus:ring-2 focus:ring-brand/5 outline-none" 
-                                        />
-                                        <button onClick={handleAddNote} disabled={!noteText.trim() || isSubmittingNote} className="px-5 py-2.5 bg-brand text-white rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all disabled:opacity-30">Add</button>
+
+                                        <div className="flex items-start gap-3">
+                                            <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
+                                                <MapPin size={14} />
+                                            </div>
+                                            <div className="min-w-0">
+                                                <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">IP Location</p>
+                                                <p className="text-xs font-bold text-zinc-900 mt-0.5 truncate">{selectedOrder.location || 'Unknown'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-3 pt-3 border-t border-zinc-200/50">
+                                        <div className="p-2 bg-zinc-100 text-zinc-500 rounded-lg mt-0.5">
+                                            <Compass size={14} />
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">User Device Agent</p>
+                                            <p className="text-xs font-medium text-zinc-600 mt-0.5 break-words leading-relaxed">{selectedOrder.user_agent || 'N/A'}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

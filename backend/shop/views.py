@@ -552,6 +552,8 @@ class OrderViewSet(viewsets.ModelViewSet):
             return [permissions.AllowAny()]
         if self.action in ['list', 'retrieve', 'request_cancel']:
             return [permissions.IsAuthenticated()]
+        if self.action == 'destroy':
+            return [IsFullAdmin()]
         return [IsModeratorOrAdmin()]
 
     def get_queryset(self):
@@ -1078,6 +1080,8 @@ class IncompleteOrderViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['create', 'partial_update', 'update']:
             return [permissions.AllowAny()]
+        if self.action == 'destroy':
+            return [IsFullAdmin()]
         return [IsModeratorOrAdmin()]
 
     def perform_create(self, serializer):

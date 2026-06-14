@@ -17,6 +17,7 @@ import ComboFunnelLayout from '../components/funnels/ComboFunnelLayout';
 // import ModernFunnelLayout from '../components/funnels/ModernFunnelLayout';
 // import BanglaFunnelLayout from '../components/funnels/BanglaFunnelLayout';
 import EzyFunnelLayout from '../components/funnels/EzyFunnelLayout';
+import EzymartFunnelLayout from '../components/funnels/EzymartFunnelLayout';
 // import DarkFunnelLayout from '../components/funnels/DarkFunnelLayout';
 import ProfessionalFunnelLayout from '../components/funnels/ProfessionalFunnelLayout';
 import GardenFunnelLayout from '../components/funnels/GardenFunnelLayout';
@@ -718,8 +719,8 @@ const OfferPage = () => {
             //     return <ModernFunnelLayout {...commonProps} />;
             case 'combo':
                 return <ComboFunnelLayout {...commonProps} />;
-            // case 'bangla':
-            //     return <BanglaFunnelLayout {...commonProps} />;
+            case 'ezymart_v2':
+                return <EzymartFunnelLayout {...commonProps} />;
             case 'ezymart':
                 return <EzyFunnelLayout {...commonProps} />;
             // case 'dark':

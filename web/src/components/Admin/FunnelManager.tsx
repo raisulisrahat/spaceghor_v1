@@ -433,6 +433,7 @@ const FunnelManager = () => {
                                         <option value="combo">Combo Layout</option>
                                         <option value="ezymart">EyeCare Layout</option>
                                         <option value="garden">kazir Hat Layout</option>
+                                        <option value="ezymart_v2">EzyMart Layout</option>
                                     </select>
                                 </div>
 
