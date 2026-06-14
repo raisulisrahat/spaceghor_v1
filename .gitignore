@@ -7,6 +7,8 @@ env/
 .env.*.local
 __pycache__/
 *.pyc
+backend/shop/migrations/0*
+backend/shop/migrations/*.pyc
 
 # Distribution / Build
 dist/
