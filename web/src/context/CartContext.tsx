@@ -15,7 +15,7 @@ interface CartItem {
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: any, quantity: number, color?: any, size?: any) => void;
+  addToCart: (product: any, quantity: number, color?: any, size?: any, isOrderNow?: boolean) => void;
   removeFromCart: (cartKey: string) => void;
   updateQuantity: (cartKey: string, quantity: number) => void;
   clearCart: () => void;
@@ -37,14 +37,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: any, quantity: number = 1, color?: any, size?: any) => {
+  const addToCart = (product: any, quantity: number = 1, color?: any, size?: any, isOrderNow: boolean = false) => {
     const rawPrice = product.sale_price || product.regular_price || "0";
     const cleanPrice = rawPrice.toString().replace(/[^0-9.]/g, '');
     const priceNum = parseFloat(cleanPrice) || 0;
 
     if ((window as any).dataLayer) {
       (window as any).dataLayer.push({
-        event: "add_to_cart",
+        event: isOrderNow ? "order_now" : "add_to_cart",
         ecommerce: {
           currency: "BDT",
           value: priceNum * quantity,

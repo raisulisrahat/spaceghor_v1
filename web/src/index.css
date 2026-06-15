@@ -6,10 +6,18 @@
 }
 
 @layer base {
-    html,
+
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         max-width: 100%;
         overflow-x: clip;
+        -webkit-overflow-scrolling: touch;
+        text-rendering: optimizeSpeed;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
     
   :root {

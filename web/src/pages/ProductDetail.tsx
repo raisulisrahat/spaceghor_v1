@@ -322,8 +322,8 @@ const ProductDetail = () => {
     }
     if (error || !product) return <div className="p-20 text-center">Product not found. <Link to="/products" className="text-brand font-bold">Return to shop</Link></div>;
 
-    const handleAddToCart = () => {
-        addToCart(product, quantity, selectedColor, selectedSize);
+    const handleAddToCart = (isOrderNow: boolean = false) => {
+        addToCart(product, quantity, selectedColor, selectedSize, isOrderNow);
     };
 
     return (
@@ -692,7 +692,7 @@ const ProductDetail = () => {
                                             <>
                                                 <button
                                                     onClick={() => {
-                                                        addToCart(product, quantity, selectedColor, selectedSize);
+                                                        addToCart(product, quantity, selectedColor, selectedSize, false);
                                                         setIsCartOpen(true);
                                                     }}
                                                     className="flex-grow bg-brand hover:bg-brand-hover text-white font-black h-12 rounded-2xl shadow-xl shadow-brand/10 transition-all flex items-center justify-center space-x-3 active:scale-95"
@@ -700,10 +700,10 @@ const ProductDetail = () => {
                                                     <ShoppingCart className="w-6 h-6" />
                                                     <span>Add to Cart</span>
                                                 </button>
-
+ 
                                                 <button
                                                     onClick={() => {
-                                                        addToCart(product, quantity, selectedColor, selectedSize);
+                                                        addToCart(product, quantity, selectedColor, selectedSize, true);
                                                         navigate('/checkout');
                                                     }}
                                                     className="flex-grow border-2 border-brand text-brand hover:bg-brand/5 font-black h-12 rounded-2xl transition-all flex items-center justify-center space-x-3 active:scale-95 animate-glow"
@@ -763,7 +763,7 @@ const ProductDetail = () => {
                                     <>
                                         <button
                                             onClick={() => {
-                                                handleAddToCart();
+                                                handleAddToCart(false);
                                                 setIsCartOpen(true);
                                             }}
                                             className="flex-1 bg-white border-2 border-brand text-brand font-black h-12 rounded-xl active:scale-95 transition-all flex items-center justify-center gap-2"
@@ -774,7 +774,7 @@ const ProductDetail = () => {
 
                                         <button
                                             onClick={() => {
-                                                handleAddToCart();
+                                                handleAddToCart(true);
                                                 navigate('/checkout');
                                             }}
                                             className="flex-1 bg-brand text-white font-black h-12 rounded-xl shadow-lg shadow-red-700/10 active:scale-95 transition-all flex items-center justify-center gap-2 animate-glow font-bold"
@@ -979,7 +979,7 @@ const ProductDetail = () => {
                             <>
                                 <button
                                     onClick={() => {
-                                        handleAddToCart();
+                                        handleAddToCart(true);
                                         navigate('/checkout');
                                     }}
                                     className="flex-1 bg-brand text-white font-black h-13 rounded-xl shadow-lg shadow-red-700/10 active:scale-95 transition-all flex items-center justify-center gap-2 animate-glow"
