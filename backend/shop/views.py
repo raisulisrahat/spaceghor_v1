@@ -1175,7 +1175,15 @@ class SiteSettingsViewSet(viewsets.ModelViewSet):
     serializer_class = SiteSettingsSerializer
 
     def get_object(self):
-        return SiteSettings.objects.first()
+        settings = SiteSettings.objects.first()
+        if not settings:
+            settings = SiteSettings.objects.create(site_title="Spaceghor")
+        return settings
+    
+    def list(self, request, *args, **kwargs):
+        settings = self.get_object()
+        serializer = self.get_serializer(settings)
+        return Response([serializer.data])
     
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

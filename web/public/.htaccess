@@ -11,12 +11,12 @@ RewriteBase /
 
 RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit|Facebot|Twitterbot|WhatsApp|TelegramBot|Discordbot|Slackbot|LinkedInBot|googlebot|bingbot|rogerbot|DuckDuckBot|ia_archiver) [NC]
 RewriteCond %{REQUEST_URI} ^/(product|blog|offer|step)/ [NC]
-RewriteRule ^(.*)$ https://api.qbamart.com/api/seo-proxy/?path=/$1 [L,R=302]
+RewriteRule ^(.*)$ https://api.spaceghor.com/api/seo-proxy/?path=/$1 [L,R=302]
 
 # ------------------------------------------------------------------
 # Redirect sitemap.xml to Django backend dynamic sitemap
 # ------------------------------------------------------------------
-RewriteRule ^sitemap\.xml$ https://api.qbamart.com/sitemap.xml [L,R=302]
+RewriteRule ^sitemap\.xml$ https://api.spaceghor.com/sitemap.xml [L,R=302]
 
 # ------------------------------------------------------------------
 # React SPA fallback — serve index.html for all other routes

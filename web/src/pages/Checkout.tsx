@@ -216,6 +216,23 @@ const Checkout = () => {
     const message = searchParams.get('message');
 
     if (status === 'success') {
+      // Google Tag Manager dataLayer Purchase Event
+      if ((window as any).dataLayer && cart.length > 0) {
+        (window as any).dataLayer.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: searchParams.get('order_id') || `checkout_${Date.now()}`,
+            value: cartTotal + shippingCost,
+            currency: 'BDT',
+            items: cart.map(item => ({
+              item_name: item.name,
+              item_id: item.id,
+              price: item.price,
+              quantity: item.quantity
+            }))
+          }
+        });
+      }
       setIsSuccess(true);
       clearCart();
       if (name) setFormData(prev => ({ ...prev, name }));
@@ -405,6 +422,24 @@ const Checkout = () => {
 
       if (res.data?.temp_password || res.data?.password || res.data?.guest_password) {
         setTempPassword(res.data.temp_password || res.data.password || res.data.guest_password);
+      }
+
+      // Google Tag Manager dataLayer Purchase Event
+      if ((window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: res.data?.id || `checkout_${Date.now()}`,
+            value: cartTotal + shippingCost,
+            currency: 'BDT',
+            items: cart.map(item => ({
+              item_name: item.name,
+              item_id: item.id,
+              price: item.price,
+              quantity: item.quantity
+            }))
+          }
+        });
       }
 
       setIsSuccess(true);

@@ -310,6 +310,24 @@ const StepFunnel = () => {
                     content_type: 'product'
                 });
             }
+
+            // Google Tag Manager dataLayer Purchase Event
+            if ((window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'purchase',
+                    ecommerce: {
+                        transaction_id: `stepfunnel_${Date.now()}`,
+                        value: finalTotal,
+                        currency: 'BDT',
+                        items: [{
+                            item_name: product.name,
+                            item_id: product.id,
+                            price: currentPrice,
+                            quantity: 1
+                        }]
+                    }
+                });
+            }
         } catch (err) {
             console.error("Order failed", err);
             alert("Failed to place order. Please check your information.");

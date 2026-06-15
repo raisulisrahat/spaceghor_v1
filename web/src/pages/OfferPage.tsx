@@ -248,6 +248,24 @@ const OfferPage = () => {
                     content_type: 'product'
                 });
             }
+
+            // Google Tag Manager dataLayer Purchase Event
+            if ((window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'purchase',
+                    ecommerce: {
+                        transaction_id: `funnel_${Date.now()}`,
+                        value: currentPrice,
+                        currency: 'BDT',
+                        items: [{
+                            item_name: funnelData.product_details.name,
+                            item_id: funnelData.product_details.id,
+                            price: currentPrice,
+                            quantity: 1
+                        }]
+                    }
+                });
+            }
         }
     }, [isSuccess, funnelData, currentPrice]);
 
