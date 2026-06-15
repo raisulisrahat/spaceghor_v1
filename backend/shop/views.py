@@ -2331,11 +2331,317 @@ class BkashCallbackView(View):
             return redirect(redirect_url)
 
 
+from django.utils.html import escape
+
+class SitemapXslView(View):
+    def get(self, request, *args, **kwargs):
+        xsl_content = """<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+                xmlns:html="http://www.w3.org/TR/REC-html40"
+                xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+                xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:template match="/">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <title>XML Sitemap - SpaceGhor</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+          body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
+            color: #334155;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #f8fafc;
+          }
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+          }
+          header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+          }
+          .logo-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: -0.025em;
+          }
+          .logo-text span {
+            color: #C35317;
+          }
+          h1 {
+            color: #0f172a;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.025em;
+          }
+          p.desc {
+            color: #64748b;
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 800px;
+          }
+          .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+          }
+          .stat-card {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+          }
+          .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+          }
+          .stat-card .label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.05em;
+          }
+          .stat-card .value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 8px;
+          }
+          .search-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+          }
+          .search-box {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            font-size: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.2s;
+            color: #1e293b;
+          }
+          .search-box:focus {
+            border-color: #C35317;
+            box-shadow: 0 0 0 4px rgba(195, 83, 23, 0.12);
+          }
+          .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            pointer-events: none;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+          }
+          th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 700;
+            padding: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+          td {
+            padding: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            word-break: break-all;
+            vertical-align: middle;
+          }
+          tr:hover td {
+            background-color: #f8fafc;
+          }
+          a {
+            color: #C35317;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+          }
+          a:hover {
+            color: #a0400f;
+            text-decoration: underline;
+          }
+          .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #475569;
+          }
+          .badge-priority {
+            background: #fff7ed;
+            color: #c2410c;
+          }
+          .badge-freq {
+            background: #f0fdf4;
+            color: #166534;
+          }
+          .image-preview-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+          }
+          .image-preview {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            transition: transform 0.2s;
+            cursor: zoom-in;
+          }
+          .image-preview:hover {
+            transform: scale(1.1);
+            z-index: 10;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <header>
+            <div class="logo-text">Space<span>Ghor</span> Sitemap</div>
+            <div class="badge badge-priority">Production Ready</div>
+          </header>
+          
+          <h1>XML Sitemap Index</h1>
+          <p class="desc">This is an advanced XML sitemap indexing all search-engine readable URLs on SpaceGhor. It supports auto-discovery of products, categories, brands, blog posts, and marketing landing pages (funnels) with built-in Google Image extensions.</p>
+          
+          <div class="stats" style="margin-top: 30px;">
+            <div class="stat-card">
+              <div class="label">Total Pages / URLs</div>
+              <div class="value"><xsl:value-of select="count(sitemap:urlset/sitemap:url)"/></div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Total Media / Images</div>
+              <div class="value"><xsl:value-of select="count(sitemap:urlset/sitemap:url/image:image)"/></div>
+            </div>
+          </div>
+          
+          <div class="search-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="searchInput" class="search-box" placeholder="Filter sitemap URLs..." onkeyup="filterUrls()"/>
+          </div>
+          
+          <table id="sitemapTable">
+            <thead>
+              <tr>
+                <th>Location / URL</th>
+                <th style="width: 100px;">Priority</th>
+                <th style="width: 120px;">Change Freq</th>
+                <th style="width: 150px;">Last Modified</th>
+                <th>Image Previews</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:for-each select="sitemap:urlset/sitemap:url">
+                <tr>
+                  <td>
+                    <a href="{sitemap:loc}" target="_blank">
+                      <xsl:value-of select="sitemap:loc"/>
+                    </a>
+                  </td>
+                  <td>
+                    <span class="badge badge-priority">
+                      <xsl:value-of select="sitemap:priority"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge badge-freq">
+                      <xsl:value-of select="sitemap:changefreq"/>
+                    </span>
+                  </td>
+                  <td>
+                    <xsl:value-of select="sitemap:lastmod"/>
+                  </td>
+                  <td>
+                    <xsl:if test="image:image">
+                      <div class="image-preview-container">
+                        <xsl:for-each select="image:image">
+                          <img class="image-preview" src="{image:loc}" title="{image:title}" alt="{image:title}"/>
+                        </xsl:for-each>
+                      </div>
+                    </xsl:if>
+                  </td>
+                </tr>
+              </xsl:for-each>
+            </tbody>
+          </table>
+        </div>
+        <script type="text/javascript">
+          function filterUrls() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+            var table = document.getElementById('sitemapTable');
+            var tr = table.getElementsByTagName('tr');
+            for (var i = 1; i &lt; tr.length; i++) {
+              var td = tr[i].getElementsByTagName('td')[0];
+              if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toLowerCase().indexOf(filter) &gt; -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
+        </script>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+"""
+        return HttpResponse(xsl_content, content_type="application/xml")
+
 class SitemapView(View):
     def get(self, request, *args, **kwargs):
         from django.conf import settings as django_settings
         frontend_url = getattr(django_settings, 'FRONTEND_URL', 'https://spaceghor.com').rstrip('/')
         
+        def get_absolute_image_url(image_field):
+            if not image_field:
+                return None
+            try:
+                return request.build_absolute_uri(image_field.url)
+            except Exception:
+                backend_base = getattr(django_settings, 'BACKEND_URL', 'https://api.spaceghor.com').rstrip('/')
+                url_path = image_field.url
+                if not url_path.startswith('/'):
+                    url_path = '/' + url_path
+                return f"{backend_base}{url_path}"
+
         # Build sitemap XML
         urls = []
         
@@ -2355,37 +2661,159 @@ class SitemapView(View):
             ('/brands', '0.5', 'monthly'),
             ('/categories', '0.5', 'monthly'),
         ]
+        
+        today_str = timezone.now().strftime('%Y-%m-%d')
+        
         for path_str, priority, changefreq in static_paths:
-            urls.append(f"  <url>\n    <loc>{frontend_url}{path_str}</loc>\n    <changefreq>{changefreq}</changefreq>\n    <priority>{priority}</priority>\n  </url>")
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + path_str)}</loc>\n"
+                f"    <lastmod>{today_str}</lastmod>\n"
+                f"    <changefreq>{changefreq}</changefreq>\n"
+                f"    <priority>{priority}</priority>\n"
+                f"  </url>"
+            )
         
         # 2. Dynamic Categories
         categories = Category.objects.all()
         for cat in categories:
-            urls.append(f"  <url>\n    <loc>{frontend_url}/products?category={cat.slug}</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>")
+            img_xml = ""
+            if cat.image:
+                try:
+                    img_url = get_absolute_image_url(cat.image)
+                    if img_url:
+                        img_xml = f"\n    <image:image>\n      <image:loc>{escape(img_url)}</image:loc>\n      <image:title>{escape(cat.name)}</image:title>\n    </image:image>"
+                except Exception:
+                    pass
+            
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + '/products?category=' + cat.slug)}</loc>\n"
+                f"    <lastmod>{today_str}</lastmod>\n"
+                f"    <changefreq>daily</changefreq>\n"
+                f"    <priority>0.8</priority>{img_xml}\n"
+                f"  </url>"
+            )
             
         # 3. Dynamic Brands
         brands = Brand.objects.all()
         for brand in brands:
-            urls.append(f"  <url>\n    <loc>{frontend_url}/products?brand={brand.slug}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.6</priority>\n  </url>")
+            img_xml = ""
+            if brand.logo:
+                try:
+                    img_url = get_absolute_image_url(brand.logo)
+                    if img_url:
+                        img_xml = f"\n    <image:image>\n      <image:loc>{escape(img_url)}</image:loc>\n      <image:title>{escape(brand.name)} Logo</image:title>\n    </image:image>"
+                except Exception:
+                    pass
+            
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + '/products?brand=' + brand.slug)}</loc>\n"
+                f"    <lastmod>{today_str}</lastmod>\n"
+                f"    <changefreq>weekly</changefreq>\n"
+                f"    <priority>0.6</priority>{img_xml}\n"
+                f"  </url>"
+            )
             
         # 4. Dynamic Products
-        products = Product.objects.filter(is_active=True)
+        products = Product.objects.filter(is_active=True).prefetch_related('images')
         for prod in products:
-            urls.append(f"  <url>\n    <loc>{frontend_url}/product/{prod.slug}</loc>\n    <lastmod>{prod.updated_at.strftime('%Y-%m-%d')}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>")
+            images_xml = []
+            
+            # Primary Product Image
+            if prod.image:
+                try:
+                    img_url = get_absolute_image_url(prod.image)
+                    if img_url:
+                        images_xml.append(
+                            f"\n    <image:image>\n"
+                            f"      <image:loc>{escape(img_url)}</image:loc>\n"
+                            f"      <image:title>{escape(prod.name)}</image:title>\n"
+                            f"    </image:image>"
+                        )
+                except Exception:
+                    pass
+            
+            # Gallery Images
+            for gal_img in prod.images.all():
+                if gal_img.image:
+                    try:
+                        gal_url = get_absolute_image_url(gal_img.image)
+                        if gal_url:
+                            images_xml.append(
+                                f"\n    <image:image>\n"
+                                f"      <image:loc>{escape(gal_url)}</image:loc>\n"
+                                f"      <image:title>{escape(prod.name)} Gallery Image</image:title>\n"
+                                f"    </image:image>"
+                            )
+                    except Exception:
+                        pass
+                        
+            images_str = "".join(images_xml)
+            lastmod_str = prod.updated_at.strftime('%Y-%m-%d')
+            
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + '/product/' + prod.slug)}</loc>\n"
+                f"    <lastmod>{lastmod_str}</lastmod>\n"
+                f"    <changefreq>daily</changefreq>\n"
+                f"    <priority>0.8</priority>{images_str}\n"
+                f"  </url>"
+            )
             
         # 5. Dynamic Blog Posts
         posts = BlogPost.objects.filter(is_published=True)
         for post in posts:
-            urls.append(f"  <url>\n    <loc>{frontend_url}/blog/{post.slug}</loc>\n    <lastmod>{post.created_at.strftime('%Y-%m-%d')}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>")
+            img_xml = ""
+            if post.image:
+                try:
+                    img_url = get_absolute_image_url(post.image)
+                    if img_url:
+                        img_xml = f"\n    <image:image>\n      <image:loc>{escape(img_url)}</image:loc>\n      <image:title>{escape(post.title)}</image:title>\n    </image:image>"
+                except Exception:
+                    pass
+            
+            lastmod_str = post.created_at.strftime('%Y-%m-%d')
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + '/blog/' + post.slug)}</loc>\n"
+                f"    <lastmod>{lastmod_str}</lastmod>\n"
+                f"    <changefreq>weekly</changefreq>\n"
+                f"    <priority>0.7</priority>{img_xml}\n"
+                f"  </url>"
+            )
             
         # 6. Dynamic Funnels
-        funnels = Funnel.objects.filter(is_active=True)
+        funnels = Funnel.objects.filter(is_active=True).select_related('product')
         for funnel in funnels:
+            img_xml = ""
+            if funnel.product and funnel.product.image:
+                try:
+                    img_url = get_absolute_image_url(funnel.product.image)
+                    if img_url:
+                        img_xml = f"\n    <image:image>\n      <image:loc>{escape(img_url)}</image:loc>\n      <image:title>{escape(funnel.title)}</image:title>\n    </image:image>"
+                except Exception:
+                    pass
+            
             path_prefix = '/step' if funnel.layout_type == 'bangla' else '/offer'
-            urls.append(f"  <url>\n    <loc>{frontend_url}{path_prefix}/{funnel.slug}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>")
+            urls.append(
+                f"  <url>\n"
+                f"    <loc>{escape(frontend_url + path_prefix + '/' + funnel.slug)}</loc>\n"
+                f"    <lastmod>{today_str}</lastmod>\n"
+                f"    <changefreq>weekly</changefreq>\n"
+                f"    <priority>0.7</priority>{img_xml}\n"
+                f"  </url>"
+            )
             
         # Combine
-        xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(urls) + '\n</urlset>'
+        xml_content = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+            '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+            + "\n".join(urls) + '\n</urlset>'
+        )
         return HttpResponse(xml_content, content_type="application/xml")
 
 
