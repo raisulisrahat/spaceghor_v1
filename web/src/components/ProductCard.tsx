@@ -54,8 +54,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       className={`group relative bg-white rounded-xl overflow-hidden border border-neutral-100 hover:shadow-xl transition-all duration-300 flex flex-col ${!isAvailable ? 'opacity-75' : ''}`}
     >

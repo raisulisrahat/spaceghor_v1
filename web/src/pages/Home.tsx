@@ -207,8 +207,8 @@ const Home = () => {
                       <div className="absolute inset-0 to-transparent" />
 
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="absolute bottom-4 left-4 md:bottom-10 md:left-10 max-w-[85%] md:max-w-lg space-y-2 md:space-y-6"
                       >
@@ -235,8 +235,8 @@ const Home = () => {
                       <div className="absolute inset-0 to-transparent" />
 
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                         className="absolute bottom-4 left-4 md:bottom-10 md:left-10 max-w-[85%] md:max-w-lg space-y-2 md:space-y-6"
                       >
