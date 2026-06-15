@@ -25,6 +25,7 @@ interface SiteSettings {
   show_chat_bubble?: boolean;
   facebook_pixel_id?: string;
   google_tag_id?: string;
+  google_tag_manager_id?: string;
   enable_district_upazila?: boolean;
 }
 

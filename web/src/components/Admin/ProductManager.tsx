@@ -30,7 +30,7 @@ const ProductManager = ({ resetKey }) => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            const response = await api.get(`products/?search=${search}&page=${page}`);
+            const response = await api.get(`products/?search=${search}&page=${page}&ordering=-updated_at`);
             const data = response.data.results || response.data;
             setProducts(Array.isArray(data) ? data : []);
         } catch (error) {

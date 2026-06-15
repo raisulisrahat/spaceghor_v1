@@ -90,6 +90,33 @@ const OfferPage = () => {
         enabled: !!slug
     });
 
+    const hasSentBeginCheckoutRef = useRef(false);
+
+    useEffect(() => {
+        if (funnelData?.product_details && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+            const product = funnelData.product_details;
+            let priceVal = Math.floor(product.sale_price || product.regular_price);
+            if (funnelData.discount_percentage) {
+                const discount = parseFloat(funnelData.discount_percentage);
+                priceVal = Math.floor(product.regular_price * (1 - discount / 100));
+            }
+            (window as any).dataLayer.push({
+                event: 'begin_checkout',
+                ecommerce: {
+                    value: priceVal,
+                    currency: 'BDT',
+                    items: [{
+                        item_name: product.name,
+                        item_id: product.id?.toString(),
+                        price: priceVal.toString(),
+                        quantity: 1
+                    }]
+                }
+            });
+            hasSentBeginCheckoutRef.current = true;
+        }
+    }, [funnelData]);
+
     const [districts, setDistricts] = useState<any[]>([]);
     const [upazilas, setUpazilas] = useState<any[]>([]);
     const [shippingZones, setShippingZones] = useState<any[]>([]);

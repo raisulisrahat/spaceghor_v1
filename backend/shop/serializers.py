@@ -110,7 +110,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
     image = HybridImageField(required=False, allow_null=True)
     class Meta:
         model = ProductImage
-        fields = ['id', 'product', 'color', 'color_details', 'image', 'created_at']
+        fields = ['id', 'product', 'color', 'color_details', 'image', 'order', 'created_at']
 
 class ProductVideoSerializer(serializers.ModelSerializer):
     video = HybridFileField(required=False, allow_null=True)
@@ -270,8 +270,8 @@ class ProductSerializer(serializers.ModelSerializer):
         if 'sizes' in request.data:
             product.sizes.set(get_list(request.data, 'sizes'))
         
-        for image in uploaded_images:
-            ProductImage.objects.create(product=product, image=image)
+        for idx, image in enumerate(uploaded_images):
+            ProductImage.objects.create(product=product, image=image, order=idx)
             
         for video in uploaded_videos:
             ProductVideo.objects.create(product=product, video=video)
@@ -338,8 +338,9 @@ class ProductSerializer(serializers.ModelSerializer):
         if 'sizes' in request.data:
             instance.sizes.set(get_list(request.data, 'sizes'))
         
-        for image in uploaded_images:
-            ProductImage.objects.create(product=instance, image=image)
+        existing_count = ProductImage.objects.filter(product=instance).count()
+        for idx, image in enumerate(uploaded_images):
+            ProductImage.objects.create(product=instance, image=image, order=existing_count + idx)
             
         for video in uploaded_videos:
             ProductVideo.objects.create(product=instance, video=video)

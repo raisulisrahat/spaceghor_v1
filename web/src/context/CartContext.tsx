@@ -38,6 +38,28 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [cart]);
 
   const addToCart = (product: any, quantity: number = 1, color?: any, size?: any) => {
+    const rawPrice = product.sale_price || product.regular_price || "0";
+    const cleanPrice = rawPrice.toString().replace(/[^0-9.]/g, '');
+    const priceNum = parseFloat(cleanPrice) || 0;
+
+    if ((window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          currency: "BDT",
+          value: priceNum * quantity,
+          items: [{
+            item_id: product.id?.toString(),
+            item_name: product.name,
+            price: cleanPrice,
+            quantity: quantity,
+            item_color: color?.name || undefined,
+            item_size: size?.name || undefined
+          }]
+        }
+      });
+    }
+
     setCart(prev => {
       const cartKey = `${product.slug}-${color?.id || 'none'}-${size?.id || 'none'}`;
       const existing = prev.find(item => item.cartKey === cartKey);

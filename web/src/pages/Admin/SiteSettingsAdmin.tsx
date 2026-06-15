@@ -182,9 +182,10 @@ const SiteSettingsAdmin = () => {
         </Section>
 
         <Section title="Marketing Pixels & Tracking" icon={Target}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
              <InputField label="Facebook Pixel ID" name="facebook_pixel_id" icon={Target} />
              <InputField label="Google Tag ID (gtag.js)" name="google_tag_id" icon={Target} placeholder="e.g. G-X06QEH8RN6" />
+             <InputField label="Google Tag Manager ID (GTM)" name="google_tag_manager_id" icon={Target} placeholder="e.g. GTM-KCNNWJST" />
           </div>
         </Section>
       </div>

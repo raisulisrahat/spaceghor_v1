@@ -86,6 +86,28 @@ const StepFunnel = () => {
         enabled: !!slug
     });
 
+    const hasSentBeginCheckoutRef = useRef(false);
+
+    useEffect(() => {
+        if (product && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+            const currentPrice = Math.floor(product.sale_price || product.regular_price);
+            (window as any).dataLayer.push({
+                event: 'begin_checkout',
+                ecommerce: {
+                    value: currentPrice,
+                    currency: 'BDT',
+                    items: [{
+                        item_name: product.name,
+                        item_id: product.id?.toString(),
+                        price: currentPrice.toString(),
+                        quantity: 1
+                    }]
+                }
+            });
+            hasSentBeginCheckoutRef.current = true;
+        }
+    }, [product]);
+
     const [districts, setDistricts] = useState<any[]>([]);
     const [upazilas, setUpazilas] = useState<any[]>([]);
     const [shippingZones, setShippingZones] = useState<any[]>([]);

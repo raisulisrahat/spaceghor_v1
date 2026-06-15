@@ -246,7 +246,11 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True, related_name='product_images')
     image = models.ImageField(upload_to='products/gallery/')
+    order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'created_at']
 
     def save(self, *args, **kwargs):
         if self.image and not self.image.name.endswith('.webp'):
@@ -550,6 +554,7 @@ class SiteSettings(models.Model):
     meta_keywords = models.CharField(max_length=255, blank=True, help_text="Comma separated SEO keywords")
     facebook_pixel_id = models.CharField(max_length=50, blank=True, null=True, help_text="Facebook Pixel ID")
     google_tag_id = models.CharField(max_length=50, blank=True, null=True, help_text="Google Tag ID (gtag.js) e.g. G-XXXXXX")
+    google_tag_manager_id = models.CharField(max_length=50, blank=True, null=True, help_text="Google Tag Manager ID (GTM) e.g. GTM-XXXXXXX")
     facebook_capi_token = models.TextField(blank=True, null=True, help_text="Facebook Conversion API Access Token")
     facebook_ad_account_id = models.CharField(max_length=100, blank=True, null=True, help_text="Facebook Ad Account ID")
     facebook_test_code = models.CharField(max_length=100, blank=True, null=True, help_text="Facebook Test Event Code")

@@ -124,9 +124,10 @@ const CategoryManager = () => {
 
     const handleBulkDelete = async () => {
         const type = activeTab === 'colors' ? 'color' : activeTab === 'sizes' ? 'size' : activeTab === 'brands' ? 'brand' : 'category';
+        const apiPath = (activeTab === 'parents' || activeTab === 'subcategories') ? 'categories' : activeTab;
         try {
             // Note: Assuming bulk_delete endpoint exists as per request pattern
-            const endpoint = type === 'category' ? 'categories/bulk_delete/' : `${activeTab}/bulk_delete/`;
+            const endpoint = type === 'category' ? 'categories/bulk_delete/' : `${apiPath}/bulk_delete/`;
             await api.post(endpoint, { ids: selectedIds });
             setSelectedIds([]);
             fetchData();
@@ -142,7 +143,7 @@ const CategoryManager = () => {
                         identifier = brands.find(b => b.id === id)?.slug;
                     }
                     
-                    const endp = (type === 'category' || type === 'brand') ? `${activeTab}/${identifier}/` : `${activeTab}/${id}/`;
+                    const endp = (type === 'category' || type === 'brand') ? `${apiPath}/${identifier}/` : `${apiPath}/${id}/`;
                     return api.delete(endp);
                 }));
                 setSelectedIds([]);
@@ -176,8 +177,9 @@ const CategoryManager = () => {
 
     const handleDelete = async (item) => {
         const type = activeTab === 'colors' ? 'color' : activeTab === 'sizes' ? 'size' : activeTab === 'brands' ? 'brand' : 'category';
+        const apiPath = (activeTab === 'parents' || activeTab === 'subcategories') ? 'categories' : activeTab;
         const identifier = (type === 'category' || type === 'brand') ? item.slug : item.id;
-        const endpoint = (type === 'category' || type === 'brand') ? `${activeTab}/${identifier}/` : `${activeTab}/${identifier}/`;
+        const endpoint = (type === 'category' || type === 'brand') ? `${apiPath}/${identifier}/` : `${apiPath}/${identifier}/`;
 
         try {
             await api.delete(endpoint);

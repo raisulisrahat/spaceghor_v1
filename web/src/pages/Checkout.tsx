@@ -16,6 +16,27 @@ const Checkout = () => {
   const { isAuthenticated, user } = useAuth();
   const { settings, siteTitle } = useSettings();
   
+  const hasSentBeginCheckoutRef = useRef(false);
+
+  useEffect(() => {
+    if (cart.length > 0 && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'begin_checkout',
+        ecommerce: {
+          value: cartTotal,
+          currency: 'BDT',
+          items: cart.map(item => ({
+            item_name: item.name,
+            item_id: item.id?.toString(),
+            price: item.price,
+            quantity: item.quantity
+          }))
+        }
+      });
+      hasSentBeginCheckoutRef.current = true;
+    }
+  }, [cart, cartTotal]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);

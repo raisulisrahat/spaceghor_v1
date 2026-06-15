@@ -383,6 +383,19 @@ const ConfigManager = () => {
                             />
                             <p className="text-[10px] text-zinc-400 font-medium mt-1">Google Tag ID for tracking and Google Analytics integration.</p>
                         </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Google Tag Manager ID (GTM)</label>
+                            <input
+                                type="text"
+                                name="google_tag_manager_id"
+                                value={config.google_tag_manager_id || ''}
+                                onChange={handleChange}
+                                className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-semibold text-zinc-900 text-sm"
+                                placeholder="GTM-KCNNWJST"
+                            />
+                            <p className="text-[10px] text-zinc-400 font-medium mt-1">Google Tag Manager ID. GTM will be dynamically loaded and will automatically initialize/update dataLayer.</p>
+                        </div>
                     </div>
                 </div>
                 

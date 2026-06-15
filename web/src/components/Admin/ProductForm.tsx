@@ -886,7 +886,26 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
     };
 
+    const handleDragStart = (e: React.DragEvent, index: number) => {
+        e.dataTransfer.setData('text/plain', index.toString());
+        e.dataTransfer.effectAllowed = 'move';
+    };
 
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+    };
+
+    const handleDrop = (e: React.DragEvent, targetIndex: number) => {
+        e.preventDefault();
+        const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+        if (isNaN(sourceIndex) || sourceIndex === targetIndex) return;
+
+        const updated = [...existingGalleryImages];
+        const [movedItem] = updated.splice(sourceIndex, 1);
+        updated.splice(targetIndex, 0, movedItem);
+        setExistingGalleryImages(updated);
+    };
 
     const handleExistingGalleryImageColorChange = async (imageId, index, newColor) => {
 
@@ -1506,12 +1525,22 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
 
 
+            // Save the order of existing gallery images
+            for (let i = 0; i < existingGalleryImages.length; i++) {
+                const img = existingGalleryImages[i];
+                if (img.id) {
+                    await api.patch(`product-images/${img.id}/`, { order: i }, config);
+                }
+            }
+
             // Save gallery images from library
-            for (const img of galleryImagesFromLibrary) {
+            for (let idx = 0; idx < galleryImagesFromLibrary.length; idx++) {
+                const img = galleryImagesFromLibrary[idx];
                 await api.post('product-images/', {
                     product: savedProduct.id,
                     image: img.url,
-                    color: img.color || null
+                    color: img.color || null,
+                    order: existingGalleryImages.length + idx
                 }, config);
             }
 
@@ -2602,7 +2631,14 @@ const ProductForm = ({ product, onSave, onCancel }) => {
 
                                 {existingGalleryImages.map((img, i) => (
 
-                                    <div key={`existing-${img.id || i}`} className="relative group bg-zinc-50 border border-zinc-200 rounded-xl p-2 flex flex-col gap-2">
+                                    <div
+                                        key={`existing-${img.id || i}`}
+                                        draggable
+                                        onDragStart={(e) => handleDragStart(e, i)}
+                                        onDragOver={handleDragOver}
+                                        onDrop={(e) => handleDrop(e, i)}
+                                        className="relative group bg-zinc-50 border border-zinc-200 rounded-xl p-2 flex flex-col gap-2 cursor-grab active:cursor-grabbing hover:border-brand/40 transition-colors"
+                                    >
 
                                         <div className="relative h-24 rounded-lg overflow-hidden flex-shrink-0 bg-white">
 

@@ -31,7 +31,7 @@ const ProductManager = () => {
 
   const { data: products, isLoading } = useQuery({
     queryKey: ['admin-products'],
-    queryFn: () => getProducts().then(res => res.data)
+    queryFn: () => getProducts({ ordering: '-updated_at' }).then(res => res.data)
   });
 
   const { data: categories } = useQuery({ queryKey: ['categories'], queryFn: () => getCategories().then(res => res.data) });

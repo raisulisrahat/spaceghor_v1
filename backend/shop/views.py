@@ -453,6 +453,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_fields = ['categories', 'brand', 'is_active']
     search_fields = ['name', 'description']
     ordering_fields = ['regular_price', 'created_at', 'updated_at']
+    ordering = ['-updated_at']
     
     def get_queryset(self):
         from django.utils import timezone
