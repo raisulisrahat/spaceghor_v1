@@ -1227,20 +1227,25 @@ const OrderManager = () => {
                                         <Copy size={12} /> Copy Summary
                                     </button>
                                 </div>
-                                <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-x-auto">
-                                    <table className="w-full text-left min-w-[400px] sm:min-w-0">
+                                <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-x-auto w-full max-w-full">
+                                    <table className="w-full text-left table-fixed">
+                                        <colgroup>
+                                            <col className="w-[50%] sm:w-[60%]" />
+                                            <col className="w-[20%] sm:w-[20%]" />
+                                            <col className="w-[30%] sm:w-[20%]" />
+                                        </colgroup>
                                         <thead className="bg-zinc-100/50 border-b border-zinc-100 text-[9px] font-bold text-zinc-400 uppercase tracking-widest">
                                             <tr>
-                                                <th className="px-3 sm:px-5 py-3">Product</th>
-                                                <th className="px-3 sm:px-5 py-3 text-center">Qty</th>
-                                                <th className="px-3 sm:px-5 py-3 text-right">Sum</th>
+                                                <th className="px-2 sm:px-5 py-3">Product</th>
+                                                <th className="px-2 sm:px-5 py-3 text-center">Qty</th>
+                                                <th className="px-2 sm:px-5 py-3 text-right">Sum</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-zinc-100">
                                             {isEditingDetails ? (
                                                 editForm.items?.map((item, idx) => (
                                                     <tr key={item.id || idx} className="text-xs font-semibold text-zinc-900">
-                                                        <td className="px-3 sm:px-5 py-4">
+                                                        <td className="px-2 sm:px-5 py-4">
                                                             <div className="flex items-center gap-2 sm:gap-3">
                                                                 <div className="w-10 h-10 rounded-lg bg-white border border-zinc-100 p-0.5 overflow-hidden flex-shrink-0">
                                                                     {item.image ? (
@@ -1261,7 +1266,7 @@ const OrderManager = () => {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="px-3 sm:px-5 py-4 text-center">
+                                                        <td className="px-2 sm:px-5 py-4 text-center">
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
@@ -1270,7 +1275,7 @@ const OrderManager = () => {
                                                                 onChange={(e) => handleItemChange(item.id, 'quantity', Number(e.target.value))} 
                                                             />
                                                         </td>
-                                                        <td className="px-3 sm:px-5 py-4 text-right font-mono">
+                                                        <td className="px-2 sm:px-5 py-4 text-right font-mono">
                                                             <div className="flex items-center justify-end gap-1">
                                                                 <span className="text-zinc-400">৳</span>
                                                                 <input 
@@ -1287,7 +1292,7 @@ const OrderManager = () => {
                                             ) : (
                                                 (selectedOrder.items || selectedOrder.cart_items)?.map((item, idx) => (
                                                     <tr key={item.id || idx} className="text-xs font-semibold text-zinc-900">
-                                                        <td className="px-3 sm:px-5 py-4">
+                                                        <td className="px-2 sm:px-5 py-4">
                                                             <div className="flex items-center gap-2 sm:gap-3">
                                                                 <div className="w-10 h-10 rounded-lg bg-white border border-zinc-100 p-0.5 overflow-hidden flex-shrink-0">
                                                                     {item.product_details?.thumbnail || item.image ? (
@@ -1308,24 +1313,24 @@ const OrderManager = () => {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="px-3 sm:px-5 py-4 text-center">{item.quantity}</td>
-                                                        <td className="px-3 sm:px-5 py-4 text-right font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
+                                                        <td className="px-2 sm:px-5 py-4 text-center">{item.quantity}</td>
+                                                        <td className="px-2 sm:px-5 py-4 text-right font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
                                                     </tr>
                                                 ))
                                             )}
                                         </tbody>
                                         <tfoot className="bg-zinc-100/30 border-t border-zinc-100 font-bold text-zinc-900 text-[11px] font-mono">
                                             <tr>
-                                                <td colSpan={2} className="px-3 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Subtotal</td>
-                                                <td className="px-3 sm:px-5 py-3 text-right">
+                                                <td colSpan={2} className="px-2 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Subtotal</td>
+                                                <td className="px-2 sm:px-5 py-3 text-right">
                                                     ৳{isEditingDetails 
                                                         ? (editForm.items?.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0) || 0).toLocaleString()
                                                         : ((selectedOrder.items || selectedOrder.cart_items)?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0).toLocaleString()}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colSpan={2} className="px-3 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Shipping</td>
-                                                <td className="px-3 sm:px-5 py-3 text-right">
+                                                <td colSpan={2} className="px-2 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Shipping</td>
+                                                <td className="px-2 sm:px-5 py-3 text-right">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-zinc-400">৳</span>
@@ -1343,8 +1348,8 @@ const OrderManager = () => {
                                                 </td>
                                             </tr>
                                             <tr className="bg-brand text-white font-black">
-                                                <td colSpan={2} className="px-3 sm:px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
-                                                <td className="px-3 sm:px-5 py-4 text-right text-base">
+                                                <td colSpan={2} className="px-2 sm:px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
+                                                <td className="px-2 sm:px-5 py-4 text-right text-base">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-white opacity-85">৳</span>
