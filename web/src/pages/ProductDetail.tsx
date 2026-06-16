@@ -205,12 +205,12 @@ const ProductDetail = () => {
                 event: 'view_item',
                 ecommerce: {
                     currency: 'BDT', // Replace with your store's currency
-                    value: product.price,
+                    value: product.sale_price,
                     items: [
                         {
                             item_id: product.id,
                             item_name: product.name,
-                            price: product.price,
+                            price: product.sale_price,
                             item_brand: product.brand?.name,
                             item_category: product.categories?.[0]?.name,
                             quantity: 1
@@ -350,12 +350,12 @@ const ProductDetail = () => {
             event: 'add_to_cart',
             ecommerce: {
                 currency: 'BDT',
-                value: product.price * quantity,
+                value: product.sale_price * quantity,
                 items: [
                     {
                         item_id: product.id,
                         item_name: product.name,
-                        price: product.price,
+                        price: product.sale_price,
                         quantity: quantity,
                         item_variant: selectedColor?.name || selectedSize?.name || undefined
                     }
