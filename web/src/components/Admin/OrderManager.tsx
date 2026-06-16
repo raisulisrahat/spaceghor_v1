@@ -1011,7 +1011,7 @@ const OrderManager = () => {
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" onClick={() => setShowViewModal(false)}></div>
                     <div className="w-full md:max-w-2xl bg-white h-full relative z-10 shadow-2xl flex flex-col animate-in slide-in-from-right duration-500 border-l border-zinc-200">
                         {/* Header */}
-                        <div className="p-6 md:p-8 border-b border-zinc-100 flex justify-between items-center">
+                        <div className="p-4 sm:p-6 md:p-8 border-b border-zinc-100 flex justify-between items-center">
                             <div className="flex items-start gap-4">
                                 <div>
                                     <h3 className="text-lg md:text-xl font-bold text-zinc-900 tracking-tight">Order Details</h3>
@@ -1038,9 +1038,9 @@ const OrderManager = () => {
                             </div>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-8 md:space-y-10 custom-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-8 md:space-y-10 custom-scrollbar">
                             {/* Status Section */}
-                            <div className="flex flex-col sm:flex-row justify-between gap-6 bg-zinc-50 p-6 rounded-2xl border border-zinc-100">
+                            <div className="flex flex-col sm:flex-row justify-between gap-6 bg-zinc-50 p-4 sm:p-6 rounded-2xl border border-zinc-100">
                                 <div>
                                     <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Current Status</p>
                                     <span className={`inline-flex px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${getStatusStyle(selectedOrder.status)}`}>{selectedOrder.status}</span>
@@ -1096,7 +1096,7 @@ const OrderManager = () => {
                                         <textarea className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-brand/5 transition-all outline-none min-h-[100px]" value={editForm.address} onChange={e => setEditForm({...editForm, address: e.target.value})} placeholder="Shipping Address" />
                                     </div>
                                 ) : (
-                                    <div className="p-6 bg-zinc-50 rounded-2xl border border-zinc-100 relative group">
+                                    <div className="p-4 sm:p-6 bg-zinc-50 rounded-2xl border border-zinc-100 relative group">
                                         <div className="flex justify-between items-start mb-4">
                                             <div>
                                                 <p className="text-lg font-bold text-zinc-900 leading-none">{selectedOrder.customer_name || 'Guest User'}</p>
@@ -1227,21 +1227,21 @@ const OrderManager = () => {
                                         <Copy size={12} /> Copy Summary
                                     </button>
                                 </div>
-                                <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-hidden">
-                                    <table className="w-full text-left">
+                                <div className="bg-zinc-50 rounded-2xl border border-zinc-100 overflow-x-auto">
+                                    <table className="w-full text-left min-w-[400px] sm:min-w-0">
                                         <thead className="bg-zinc-100/50 border-b border-zinc-100 text-[9px] font-bold text-zinc-400 uppercase tracking-widest">
                                             <tr>
-                                                <th className="px-5 py-3">Product</th>
-                                                <th className="px-5 py-3 text-center">Qty</th>
-                                                <th className="px-5 py-3 text-right">Sum</th>
+                                                <th className="px-3 sm:px-5 py-3">Product</th>
+                                                <th className="px-3 sm:px-5 py-3 text-center">Qty</th>
+                                                <th className="px-3 sm:px-5 py-3 text-right">Sum</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-zinc-100">
                                             {isEditingDetails ? (
                                                 editForm.items?.map((item, idx) => (
                                                     <tr key={item.id || idx} className="text-xs font-semibold text-zinc-900">
-                                                        <td className="px-5 py-4">
-                                                            <div className="flex items-center gap-3">
+                                                        <td className="px-3 sm:px-5 py-4">
+                                                            <div className="flex items-center gap-2 sm:gap-3">
                                                                 <div className="w-10 h-10 rounded-lg bg-white border border-zinc-100 p-0.5 overflow-hidden flex-shrink-0">
                                                                     {item.image ? (
                                                                         <img 
@@ -1254,29 +1254,29 @@ const OrderManager = () => {
                                                                     ) : <Package size={16} className="text-zinc-200 mx-auto mt-2" />}
                                                                 </div>
                                                                 <div className="min-w-0">
-                                                                    <p className="truncate max-w-[180px]">{item.name || 'Unknown'}</p>
+                                                                    <p className="truncate max-w-[120px] sm:max-w-[180px]">{item.name}</p>
                                                                     <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-tighter mt-0.5">
-                                                                        {item.color_name || 'N/A'} / {item.size_name || 'N/A'}
+                                                                        {item.color_name} / {item.size_name}
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="px-5 py-4 text-center">
+                                                        <td className="px-3 sm:px-5 py-4 text-center">
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
-                                                                className="w-16 px-2 py-1 bg-white border border-zinc-300 rounded text-center font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
+                                                                className="w-12 sm:w-16 px-1.5 sm:px-2 py-1 bg-white border border-zinc-300 rounded text-center font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                 value={item.quantity} 
                                                                 onChange={(e) => handleItemChange(item.id, 'quantity', Number(e.target.value))} 
                                                             />
                                                         </td>
-                                                        <td className="px-5 py-4 text-right font-mono">
+                                                        <td className="px-3 sm:px-5 py-4 text-right font-mono">
                                                             <div className="flex items-center justify-end gap-1">
                                                                 <span className="text-zinc-400">৳</span>
                                                                 <input 
                                                                     type="number" 
                                                                     min="0" 
-                                                                    className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
+                                                                    className="w-16 sm:w-20 px-1.5 sm:px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                     value={item.price} 
                                                                     onChange={(e) => handleItemChange(item.id, 'price', Number(e.target.value))} 
                                                                 />
@@ -1287,8 +1287,8 @@ const OrderManager = () => {
                                             ) : (
                                                 (selectedOrder.items || selectedOrder.cart_items)?.map((item, idx) => (
                                                     <tr key={item.id || idx} className="text-xs font-semibold text-zinc-900">
-                                                        <td className="px-5 py-4">
-                                                            <div className="flex items-center gap-3">
+                                                        <td className="px-3 sm:px-5 py-4">
+                                                            <div className="flex items-center gap-2 sm:gap-3">
                                                                 <div className="w-10 h-10 rounded-lg bg-white border border-zinc-100 p-0.5 overflow-hidden flex-shrink-0">
                                                                     {item.product_details?.thumbnail || item.image ? (
                                                                         <img 
@@ -1301,38 +1301,38 @@ const OrderManager = () => {
                                                                     ) : <Package size={16} className="text-zinc-200 mx-auto mt-2" />}
                                                                 </div>
                                                                 <div className="min-w-0">
-                                                                    <p className="truncate max-w-[180px]">{item.product_details?.name || item.name || 'Unknown'}</p>
+                                                                    <p className="truncate max-w-[120px] sm:max-w-[180px]">{item.product_details?.name || item.name || 'Unknown'}</p>
                                                                     <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-tighter mt-0.5">
                                                                         {item.color_details?.name || item.color || 'N/A'} / {item.size_details?.name || item.size || 'N/A'}
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="px-5 py-4 text-center">{item.quantity}</td>
-                                                        <td className="px-5 py-4 text-right font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
+                                                        <td className="px-3 sm:px-5 py-4 text-center">{item.quantity}</td>
+                                                        <td className="px-3 sm:px-5 py-4 text-right font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
                                                     </tr>
                                                 ))
                                             )}
                                         </tbody>
                                         <tfoot className="bg-zinc-100/30 border-t border-zinc-100 font-bold text-zinc-900 text-[11px] font-mono">
                                             <tr>
-                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Subtotal</td>
-                                                <td className="px-5 py-3 text-right">
+                                                <td colSpan={2} className="px-3 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Subtotal</td>
+                                                <td className="px-3 sm:px-5 py-3 text-right">
                                                     ৳{isEditingDetails 
                                                         ? (editForm.items?.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0) || 0).toLocaleString()
                                                         : ((selectedOrder.items || selectedOrder.cart_items)?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0).toLocaleString()}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colSpan={2} className="px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Shipping</td>
-                                                <td className="px-5 py-3 text-right">
+                                                <td colSpan={2} className="px-3 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Shipping</td>
+                                                <td className="px-3 sm:px-5 py-3 text-right">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-zinc-400">৳</span>
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
-                                                                className="w-20 px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
+                                                                className="w-16 sm:w-20 px-1.5 sm:px-2 py-1 bg-white border border-zinc-300 rounded text-right font-bold text-zinc-900 focus:ring-2 focus:ring-brand/5 outline-none" 
                                                                 value={editForm.shipping_cost} 
                                                                 onChange={(e) => handleShippingChange(Number(e.target.value))} 
                                                             />
@@ -1343,15 +1343,15 @@ const OrderManager = () => {
                                                 </td>
                                             </tr>
                                             <tr className="bg-brand text-white font-black">
-                                                <td colSpan={2} className="px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
-                                                <td className="px-5 py-4 text-right text-base">
+                                                <td colSpan={2} className="px-3 sm:px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
+                                                <td className="px-3 sm:px-5 py-4 text-right text-base">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-white opacity-85">৳</span>
                                                             <input 
                                                                 type="number" 
                                                                 min="0" 
-                                                                className="w-24 px-2 py-1 bg-brand text-white border border-white/30 rounded text-right font-black focus:ring-2 focus:ring-white/20 outline-none font-mono" 
+                                                                className="w-20 sm:w-24 px-1.5 sm:px-2 py-1 bg-brand text-white border border-white/30 rounded text-right font-black focus:ring-2 focus:ring-white/20 outline-none font-mono" 
                                                                 value={editForm.total_amount} 
                                                                 onChange={(e) => setEditForm({ ...editForm, total_amount: Number(e.target.value) })} 
                                                             />

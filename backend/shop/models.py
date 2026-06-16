@@ -583,7 +583,7 @@ class SiteSettings(models.Model):
     enable_order_confirmation_sms = models.BooleanField(default=False, help_text="Send SMS to customer when order is placed")
 
     # bKash Integration
-    bkash_base_url = models.URLField(max_length=500, help_text="bKash API URL")
+    bkash_base_url = models.URLField(max_length=500, blank=True, null=True, help_text="bKash API URL")
     bkash_app_key = models.CharField(max_length=255, blank=True, null=True, help_text="bKash App Key")
     bkash_app_secret = models.CharField(max_length=255, blank=True, null=True, help_text="bKash App Secret")
     bkash_username = models.CharField(max_length=255, blank=True, null=True, help_text="bKash Username")
