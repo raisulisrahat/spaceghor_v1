@@ -211,6 +211,8 @@ const ProductDetail = () => {
                             item_id: product.id,
                             item_name: product.name,
                             price: product.price,
+                            item_brand: product.brand?.name,
+                            item_category: product.categories?.[0]?.name,
                             quantity: 1
                         }
                     ]
