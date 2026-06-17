@@ -1,9 +1,182 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import api, { getMediaUrl } from '../../utils/api';
-import { Plus, Edit, Trash2, Search, Link as LinkIcon, ExternalLink, CheckCircle, XCircle, Target, Zap, Shield, Image as ImageIcon, Activity, RefreshCw, X, Upload } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, Link as LinkIcon, ExternalLink, CheckCircle, XCircle, Target, Zap, Shield, Image as ImageIcon, Activity, RefreshCw, X, Upload, ChevronDown, Package } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 
+// ─── Reusable Searchable Product Picker ───────────────────────────────────────
+const ProductSearchSelect = ({
+    label,
+    value,
+    onChange,
+    required = false,
+    placeholder = 'Search product...',
+    allowClear = false,
+}: {
+    label: string;
+    value: string | number;
+    onChange: (id: string, product: any) => void;
+    required?: boolean;
+    placeholder?: string;
+    allowClear?: boolean;
+}) => {
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState<any[]>([]);
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [selected, setSelected] = useState<any>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+    // Fetch product details when value changes externally (edit mode)
+    useEffect(() => {
+        if (!value) { setSelected(null); return; }
+        api.get(`products/${value}/`).then(r => setSelected(r.data)).catch(() => {});
+    }, [value]);
+
+    // Search products debounced
+    const search = useCallback((q: string) => {
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(async () => {
+            setLoading(true);
+            try {
+                const res = await api.get('products/', { params: { search: q, page_size: 12 } });
+                setResults(res.data.results || res.data || []);
+            } catch { setResults([]); }
+            finally { setLoading(false); }
+        }, 280);
+    }, []);
+
+    useEffect(() => { if (open) search(query); }, [query, open]);
+
+    // Close on outside click
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    const handleSelect = (product: any) => {
+        setSelected(product);
+        onChange(String(product.id), product);
+        setOpen(false);
+        setQuery('');
+    };
+
+    const handleClear = () => {
+        setSelected(null);
+        onChange('', null);
+    };
+
+    const thumb = (p: any) => {
+        const raw = p?.thumbnail || p?.image;
+        if (!raw) return null;
+        return raw.startsWith('http') ? raw : getMediaUrl(raw);
+    };
+
+    return (
+        <div className="space-y-2" ref={containerRef}>
+            <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">{label}</label>
+            <div className="relative">
+                {/* Trigger button */}
+                <button
+                    type="button"
+                    onClick={() => setOpen(v => !v)}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 bg-zinc-50 border rounded-xl text-sm font-semibold text-left transition-all focus:outline-none focus:ring-2 focus:ring-brand/10 ${open ? 'border-brand/30 ring-2 ring-brand/10' : 'border-zinc-200 hover:border-zinc-300'}`}
+                >
+                    {selected ? (
+                        <>
+                            <div className="w-7 h-7 rounded-lg border border-zinc-200 overflow-hidden flex-shrink-0 bg-white">
+                                {thumb(selected)
+                                    ? <img src={thumb(selected)!} alt="" className="w-full h-full object-cover" />
+                                    : <div className="w-full h-full flex items-center justify-center text-zinc-300"><Package size={12} /></div>
+                                }
+                            </div>
+                            <span className="flex-1 truncate text-zinc-900">{selected.name}</span>
+                            <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider flex-shrink-0">#{selected.id}</span>
+                        </>
+                    ) : (
+                        <span className="text-zinc-400 flex-1">{placeholder}</span>
+                    )}
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                        {allowClear && selected && (
+                            <span
+                                role="button"
+                                tabIndex={0}
+                                onClick={e => { e.stopPropagation(); handleClear(); }}
+                                onKeyDown={e => e.key === 'Enter' && (e.stopPropagation(), handleClear())}
+                                className="p-0.5 rounded-full text-zinc-400 hover:text-rose-500 hover:bg-rose-50 transition-colors"
+                            >
+                                <X size={12} />
+                            </span>
+                        )}
+                        <ChevronDown size={14} className={`text-zinc-400 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </div>
+                </button>
+
+                {/* Hidden native input for form required validation */}
+                <input type="hidden" name="_product_val" value={String(value || '')} required={required && !selected} />
+
+                {/* Dropdown */}
+                {open && (
+                    <div className="absolute z-50 top-full left-0 right-0 mt-1.5 bg-white border border-zinc-200 rounded-xl shadow-2xl shadow-zinc-900/10 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+                        {/* Search input */}
+                        <div className="p-2 border-b border-zinc-100">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={13} />
+                                <input
+                                    autoFocus
+                                    type="text"
+                                    value={query}
+                                    onChange={e => setQuery(e.target.value)}
+                                    placeholder="Type product name..."
+                                    className="w-full pl-8 pr-3 py-2 text-sm font-medium text-zinc-900 bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:ring-2 focus:ring-brand/10 focus:border-brand/30 transition-all"
+                                />
+                                {loading && <RefreshCw className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 animate-spin" size={12} />}
+                            </div>
+                        </div>
+
+                        {/* Results */}
+                        <div className="max-h-56 overflow-y-auto luxury-scrollbar">
+                            {results.length === 0 && !loading ? (
+                                <div className="px-4 py-6 text-center text-[11px] font-bold text-zinc-400 uppercase tracking-widest">
+                                    {query ? 'No products found' : 'Start typing to search...'}
+                                </div>
+                            ) : results.map(p => (
+                                <button
+                                    key={p.id}
+                                    type="button"
+                                    onClick={() => handleSelect(p)}
+                                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-zinc-50 transition-colors border-b border-zinc-50 last:border-0 group ${selected?.id === p.id ? 'bg-brand/5' : ''}`}
+                                >
+                                    <div className="w-8 h-8 rounded-lg border border-zinc-100 overflow-hidden flex-shrink-0 bg-white">
+                                        {thumb(p)
+                                            ? <img src={thumb(p)!} alt="" className="w-full h-full object-cover" />
+                                            : <div className="w-full h-full flex items-center justify-center text-zinc-200"><Package size={13} /></div>
+                                        }
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-[12px] font-semibold text-zinc-900 truncate">{p.name}</p>
+                                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-wider mt-0.5">
+                                            ID #{p.id} {p.stock !== undefined ? `· Stock: ${p.stock}` : ''}
+                                        </p>
+                                    </div>
+                                    {selected?.id === p.id && <CheckCircle size={13} className="text-brand flex-shrink-0" />}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// ─── Main FunnelManager ───────────────────────────────────────────────────────
 const FunnelManager = () => {
     const { token } = useAuth();
     const [funnels, setFunnels] = useState([]);
@@ -320,7 +493,7 @@ const FunnelManager = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-6 py-4 hidden sm:table-cell">
                                             <a
                                                 href={`/offer/${funnel.slug}`}
                                                 target="_blank"
@@ -406,21 +579,13 @@ const FunnelManager = () => {
                                         placeholder="summer-special"
                                     />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Linked Product</label>
-                                    <select
-                                        name="product"
-                                        required
-                                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
-                                        value={formData.product}
-                                        onChange={handleInputChange}
-                                    >
-                                        <option value="">Select a product...</option>
-                                        {products.map(p => (
-                                            <option key={p.id} value={p.id}>{p.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
+                                <ProductSearchSelect
+                                    label="Linked Product"
+                                    value={formData.product}
+                                    onChange={(id) => setFormData(prev => ({ ...prev, product: id }))}
+                                    required
+                                    placeholder="Search & select primary product..."
+                                />
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Base Layout</label>
                                     <select
@@ -440,19 +605,14 @@ const FunnelManager = () => {
                                 {formData.layout_type === 'combo' && (
                                     <>
                                         <div className="space-y-2 col-span-2">
-                                            <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Secondary Linked Product (For Combo Bundle)</label>
-                                            <select
-                                                name="product_two"
-                                                required
-                                                className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-brand/5 outline-none transition-all"
+                                            <ProductSearchSelect
+                                                label="Secondary Linked Product (For Combo Bundle)"
                                                 value={formData.product_two}
-                                                onChange={handleInputChange}
-                                            >
-                                                <option value="">Select second product...</option>
-                                                {products.map(p => (
-                                                    <option key={p.id} value={p.id}>{p.name}</option>
-                                                ))}
-                                            </select>
+                                                onChange={(id) => setFormData(prev => ({ ...prev, product_two: id }))}
+                                                required
+                                                placeholder="Search & select secondary product..."
+                                                allowClear
+                                            />
                                         </div>
 
                                         <div className="space-y-2 col-span-2 md:col-span-1">
@@ -613,7 +773,7 @@ const FunnelManager = () => {
                                 )}
                             </div>
 
-                            <div className="pt-4 border-t border-zinc-100">
+                            {/* <div className="pt-4 border-t border-zinc-100">
                                 <label className="flex items-center justify-between p-4 bg-zinc-50 rounded-2xl border border-zinc-200 cursor-pointer group hover:border-zinc-300 transition-all">
                                     <div className="flex items-center gap-3">
                                         <div className="relative inline-flex items-center">
@@ -652,7 +812,7 @@ const FunnelManager = () => {
                                         </div>
                                     </div>
                                 )}
-                            </div>
+                            </div> */}
 
 
 
