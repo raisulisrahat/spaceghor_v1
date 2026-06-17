@@ -170,7 +170,7 @@ const ProfileSidebar = () => {
                         Log In
                       </button>
                       <button
-                        onClick={() => handleNavigation('/register')}
+                        onClick={() => handleNavigation('/signup')}
                         className="w-full bg-white text-black border border-gray-200 rounded-xl py-3 font-semibold hover:bg-gray-50 transition-colors"
                       >
                         Create Account
