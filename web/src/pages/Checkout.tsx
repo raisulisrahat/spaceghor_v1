@@ -16,27 +16,6 @@ const Checkout = () => {
   const { isAuthenticated, user } = useAuth();
   const { settings, siteTitle } = useSettings();
   
-  const hasSentBeginCheckoutRef = useRef(false);
-
-  useEffect(() => {
-    if (cart.length > 0 && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'begin_checkout',
-        ecommerce: {
-          value: cartTotal,
-          currency: 'BDT',
-          items: cart.map(item => ({
-            item_name: item.name,
-            item_id: item.id?.toString(),
-            price: item.price,
-            quantity: item.quantity
-          }))
-        }
-      });
-      hasSentBeginCheckoutRef.current = true;
-    }
-  }, [cart, cartTotal]);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
@@ -92,28 +71,39 @@ const Checkout = () => {
     }
   }, [shippingZones]);
 
-  // Dhaka City upazilas (inside city corporation area)
+  // Dhaka City upazilas (only used when district is "Dhaka" without "City" suffix)
   const DHAKA_CITY_UPAZILAS = [
     'Dhaka Sadar', 'Demra', 'Dhanmondi', 'Gulshan', 'Jatrabari',
     'Khilgaon', 'Khilkhet', 'Kotwali', 'Lalbagh', 'Mirpur',
     'Mohammadpur', 'Motijheel', 'Pallabi', 'Ramna', 'Rayer Bazar',
     'Sabujbagh', 'Shah Ali', 'Sher-e-Bangla Nagar', 'Sutrapur',
     'Tejgaon', 'Turag', 'Uttara', 'Badda', 'Cantonment',
-    'Dakshinkhan', 'Uttarkhan', 'Vatara'
+    'Dakshinkhan', 'Uttarkhan', 'Vatara', 'Darus Salam',
+    'Adabor', 'Bangshal', 'Chawk Bazar', 'Gandaria', 'Hazaribag',
+    'Kafrul', 'Kalabagan', 'Kamrangirchar', 'Mugda', 'Nawabganj',
+    'Wari',
   ];
 
   // Update shipping cost and zone when district/upazila changes
   useEffect(() => {
     if (settings?.enable_district_upazila !== false && shippingZones.length > 0) {
-        const isDhakaDistrict = formData.district.toLowerCase().includes('dhaka');
+        const districtLower = formData.district.toLowerCase();
+        const isDhakaDistrict = districtLower.includes('dhaka');
+
+        // If district is explicitly "Dhaka City" (contains 'city'), every upazila under it
+        // belongs to the city corporation → always 50 TK, no upazila check needed.
+        // If district is plain "Dhaka" (no 'city'), check the upazila list.
         const isDhakaCity = isDhakaDistrict && (
-          !formData.upazila ||
-          DHAKA_CITY_UPAZILAS.some(u => formData.upazila.toLowerCase().includes(u.toLowerCase()))
+          districtLower.includes('city') ||
+          (!!formData.upazila &&
+            DHAKA_CITY_UPAZILAS.some(u => formData.upazila.toLowerCase().includes(u.toLowerCase())))
         );
 
         if (isDhakaCity) {
-            // Dhaka City - ৳50
-            const zone = shippingZones.find(z => z.name.toLowerCase().includes('dhaka city'));
+            // Inside Dhaka City Corporation - ৳50
+            // Must match 'inside dhaka city' specifically, NOT 'outside dhaka city'
+            const zone = shippingZones.find(z => z.name.toLowerCase().includes('inside dhaka city'))
+                      ?? shippingZones.find(z => z.name.toLowerCase().includes('inside'));
             if (zone) {
                 setShippingCost(parseFloat(zone.shipping_cost));
                 setShippingZoneId(zone.id);
@@ -122,11 +112,10 @@ const Checkout = () => {
                 setShippingZoneId(shippingZones[0]?.id || 1);
             }
         } else if (formData.district) {
-            // Outside Dhaka City (other districts or Dhaka district sub-areas) - ৳100
-            const zone = shippingZones.find(z =>
-              z.name.toLowerCase().includes('outside dhaka city') ||
-              (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside dhaka city'))
-            );
+            // Outside Dhaka City: other districts, OR Dhaka district non-city upazilas - ৳100
+            // Must match 'outside dhaka city' specifically, NOT 'inside dhaka city'
+            const zone = shippingZones.find(z => z.name.toLowerCase().includes('outside dhaka city'))
+                      ?? shippingZones.find(z => z.name.toLowerCase().includes('outside'));
             if (zone) {
                 setShippingCost(parseFloat(zone.shipping_cost));
                 setShippingZoneId(zone.id);
@@ -135,11 +124,9 @@ const Checkout = () => {
                 setShippingZoneId(shippingZones[1]?.id || 2);
             }
         } else {
-            // No district selected — default to Outside Dhaka zone
-            const zone = shippingZones.find(z =>
-              z.name.toLowerCase().includes('outside') ||
-              (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
-            );
+            // No district selected — default to Outside/100 TK zone
+            const zone = shippingZones.find(z => z.name.toLowerCase().includes('outside dhaka city'))
+                      ?? shippingZones.find(z => z.name.toLowerCase().includes('outside'));
             if (zone) {
                 setShippingCost(parseFloat(zone.shipping_cost));
                 setShippingZoneId(zone.id);
@@ -147,6 +134,7 @@ const Checkout = () => {
                 setShippingCost(100);
                 setShippingZoneId(shippingZones[shippingZones.length - 1]?.id || 2);
             }
+
         }
     }
   }, [formData.district, formData.upazila, settings?.enable_district_upazila, shippingZones]);
@@ -245,12 +233,25 @@ const Checkout = () => {
             transaction_id: searchParams.get('order_id') || `checkout_${Date.now()}`,
             value: cartTotal + shippingCost,
             currency: 'BDT',
-            items: cart.map(item => ({
-              item_name: item.name,
-              item_id: item.id,
-              price: item.price,
-              quantity: item.quantity
-            }))
+            items: cart.map(item => {
+              const itemData: any = {
+                item_name: item.name,
+                item_id: item.id,
+                price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
+                quantity: item.quantity
+              };
+              if (item.color) {
+                itemData.item_variant = item.color.name;
+              }
+              if (item.size) {
+                if (itemData.item_variant) {
+                  itemData.item_variant += ` / ${item.size.name}`;
+                } else {
+                  itemData.item_variant = item.size.name;
+                }
+              }
+              return itemData;
+            })
           }
         });
       }
@@ -453,12 +454,25 @@ const Checkout = () => {
             transaction_id: res.data?.id || `checkout_${Date.now()}`,
             value: cartTotal + shippingCost,
             currency: 'BDT',
-            items: cart.map(item => ({
-              item_name: item.name,
-              item_id: item.id,
-              price: item.price,
-              quantity: item.quantity
-            }))
+            items: cart.map(item => {
+              const itemData: any = {
+                item_name: item.name,
+                item_id: item.id,
+                price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
+                quantity: item.quantity
+              };
+              if (item.color) {
+                itemData.item_variant = item.color.name;
+              }
+              if (item.size) {
+                if (itemData.item_variant) {
+                  itemData.item_variant += ` / ${item.size.name}`;
+                } else {
+                  itemData.item_variant = item.size.name;
+                }
+              }
+              return itemData;
+            })
           }
         });
       }
@@ -601,7 +615,7 @@ const Checkout = () => {
                     <input 
                       required
                       type="text" 
-                      placeholder="যেমন: রহিম আহমেদ" 
+                      placeholder="আপনার নাম" 
                       className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
                       value={formData.name}
                       onChange={e => setFormData({...formData, name: e.target.value})}
@@ -614,7 +628,7 @@ const Checkout = () => {
                     <input 
                       required
                       type="tel" 
-                      placeholder="যেমন: 01XXXXXXXXX" 
+                      placeholder="01XXXXXXXXX" 
                       className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 11)})}
@@ -682,9 +696,9 @@ const Checkout = () => {
                             <option value="">শিপিং এলাকা সিলেক্ট করুন</option>
                             {shippingZones.map(z => {
                                 const displayName = z.name.toLowerCase().includes('inside dhaka')
-                                    ? 'ঢাকা সিটির ভেতরে (Inside Dhaka)'
+                                    ? 'ঢাকা সিটির ভেতরে'
                                     : z.name.toLowerCase().includes('outside dhaka')
-                                        ? 'ঢাকা সিটির বাইরে (Outside Dhaka)'
+                                        ? 'ঢাকা সিটির বাইরে'
                                         : z.name;
                                 return (
                                     <option key={z.id} value={z.id}>{displayName} - ৳{parseFloat(z.shipping_cost).toLocaleString()}</option>
@@ -846,23 +860,6 @@ const Checkout = () => {
                     </>
                   )}
                 </button>
-              </div>
-
-              <div className="flex items-center justify-center space-x-4 pt-2">
-                 <div className="flex flex-col items-center space-y-0.5">
-                    <ShieldCheck className="w-4 h-4 text-neutral-300" />
-                    <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">SSL</span>
-                 </div>
-                 <div className="w-[1px] h-4 bg-neutral-100" />
-                 <div className="flex flex-col items-center space-y-0.5">
-                    <CreditCard className="w-4 h-4 text-neutral-300" />
-                    <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">Secure</span>
-                 </div>
-                 <div className="w-[1px] h-4 bg-neutral-100" />
-                 <div className="flex flex-col items-center space-y-0.5">
-                    <CheckCircle className="w-4 h-4 text-neutral-300" />
-                    <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">Original</span>
-                 </div>
               </div>
             </div>
             
