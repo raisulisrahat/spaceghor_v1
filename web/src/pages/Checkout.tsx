@@ -271,7 +271,9 @@ const Checkout = () => {
                 item_name: item.name,
                 item_id: item.id,
                 price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
-                quantity: item.quantity
+                quantity: item.quantity,
+                color: item.color?.name || '',
+                size: item.size?.name || ''
               };
               if (item.color) {
                 itemData.item_variant = item.color.name;
@@ -501,7 +503,9 @@ const Checkout = () => {
                 item_name: item.name,
                 item_id: item.id,
                 price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
-                quantity: item.quantity
+                quantity: item.quantity,
+                color: item.color?.name || '',
+                size: item.size?.name || ''
               };
               if (item.color) {
                 itemData.item_variant = item.color.name;

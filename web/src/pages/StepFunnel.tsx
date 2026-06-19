@@ -351,12 +351,12 @@ const StepFunnel = () => {
                     event: 'purchase',
                     customer_name: res.data?.customer_name || formData.customer_name,
                     customer_phone: finalPhone,
-                    phone_number: finalPhone,
                     customer_address: finalAddress,
-                    address: finalAddress,
-                    total_amount: parseFloat(res.data?.total_amount) || finalTotal,
                     order_id: res.data?.id || `stepfunnel_${Date.now()}`,
-                    quantity: 1,
+                    district: formData.district,
+                    upazila: formData.upazila,
+                    shipping_cost: shippingCost,
+                    total_amount: parseFloat(res.data?.total_amount) || finalTotal,
                     ip_address: res.data?.ip_address || ipAddress,
                     ecommerce: {
                         transaction_id: res.data?.id || `stepfunnel_${Date.now()}`,
@@ -366,7 +366,9 @@ const StepFunnel = () => {
                             item_name: product.name,
                             item_id: product.id,
                             price: currentPrice,
-                            quantity: 1
+                            quantity: 1,
+                            color: '',
+                            size: '',
                         }]
                     }
                 });

@@ -323,12 +323,16 @@ const OfferPage = () => {
                             item_name: item.product_name || item.product_details?.name || funnelData.product_details.name,
                             item_id: item.product,
                             price: parseFloat(item.price),
-                            quantity: item.quantity
+                            quantity: item.quantity,
+                            color: item.color_name || '',
+                            size: item.size_name || ''
                         })) || [{
                             item_name: funnelData.product_details.name,
                             item_id: funnelData.product_details.id,
                             price: currentPrice,
-                            quantity: 1
+                            quantity: 1,
+                            color: '',
+                            size: ''
                         }]
                     }
                 });
