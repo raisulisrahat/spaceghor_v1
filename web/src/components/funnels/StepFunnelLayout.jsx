@@ -254,14 +254,6 @@ const StepFunnelLayout = ({
                                                     value={formData.phone_number}
                                                     onChange={handleChange}
                                                 />
-                                                <input
-                                                    type="email"
-                                                    name="email"
-                                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 sm:py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
-                                                    placeholder="ইমেইল (অপশনাল)"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                />
                                             </div>
                                         </div>
 

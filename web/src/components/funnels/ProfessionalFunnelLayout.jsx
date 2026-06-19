@@ -186,14 +186,6 @@ const ProfessionalFunnelLayout = ({
                                                 value={formData.phone_number}
                                                 onChange={handleChange}
                                             />
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold"
-                                                placeholder="ইমেইল (অপশনাল)"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                            />
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">
@@ -237,14 +229,6 @@ const ProfessionalFunnelLayout = ({
                                             placeholder={t('write_full_address')}
                                             rows={2}
                                             value={formData.address}
-                                            onChange={handleChange}
-                                        ></textarea>
-                                        <textarea
-                                            name="order_note"
-                                            className="w-full px-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-[#800000] outline-none transition-all font-sans font-bold resize-none"
-                                            placeholder="অর্ডার নোট (অপশনাল)"
-                                            rows={1}
-                                            value={formData.order_note}
                                             onChange={handleChange}
                                         ></textarea>
                                     </div>

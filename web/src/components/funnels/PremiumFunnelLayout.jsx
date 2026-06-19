@@ -318,10 +318,10 @@ const PremiumFunnelLayout = ({
                                             >
                                                 <option value="">{t('select_shipping_zone')}</option>
                                                 {shippingZones.map(zone => {
-                                                    const displayName = zone.name.toLowerCase().includes('inside')
-                                                        ? 'ঢাকা সিটির ভেতরে (Inside Dhaka)'
-                                                        : zone.name.toLowerCase().includes('outside')
-                                                            ? 'ঢাকা সিটির বাইরে (Outside Dhaka)'
+                                                    const displayName = zone.name.toLowerCase().includes('inside dhaka city')
+                                                        ? 'ঢাকা সিটির ভেতরে'
+                                                        : zone.name.toLowerCase().includes('outside dhaka city')
+                                                            ? 'ঢাকা সিটির বাইরে'
                                                             : zone.name;
                                                     return (
                                                         <option key={zone.id} value={zone.id}>

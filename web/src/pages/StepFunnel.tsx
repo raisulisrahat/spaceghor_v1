@@ -68,6 +68,15 @@ const StepFunnel = () => {
     const formRef = useRef<HTMLDivElement>(null);
     const submitBtnRef = useRef<HTMLButtonElement>(null);
 
+    const [ipAddress, setIpAddress] = useState('');
+
+    useEffect(() => {
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => setIpAddress(data.ip))
+            .catch(err => console.error("Error fetching IP:", err));
+    }, []);
+
     // Form State
     const [formData, setFormData] = useState({
         customer_name: '',
@@ -307,7 +316,7 @@ const StepFunnel = () => {
                 payment_method: 1
             };
 
-            await createOrder(orderData);
+            const res = await createOrder(orderData);
 
             // Mark as submitted to prevent any subsequent draft saves/updates
             isOrderSubmittedRef.current = true;
@@ -335,11 +344,23 @@ const StepFunnel = () => {
 
             // Google Tag Manager dataLayer Purchase Event
             if ((window as any).dataLayer) {
+                const finalAddress = res.data?.address || `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`;
+                const finalPhone = res.data?.phone_number || formData.phone_number;
+
                 (window as any).dataLayer.push({
                     event: 'purchase',
+                    customer_name: res.data?.customer_name || formData.customer_name,
+                    customer_phone: finalPhone,
+                    phone_number: finalPhone,
+                    customer_address: finalAddress,
+                    address: finalAddress,
+                    total_amount: parseFloat(res.data?.total_amount) || finalTotal,
+                    order_id: res.data?.id || `stepfunnel_${Date.now()}`,
+                    quantity: 1,
+                    ip_address: res.data?.ip_address || ipAddress,
                     ecommerce: {
-                        transaction_id: `stepfunnel_${Date.now()}`,
-                        value: finalTotal,
+                        transaction_id: res.data?.id || `stepfunnel_${Date.now()}`,
+                        value: parseFloat(res.data?.total_amount) || finalTotal,
                         currency: 'BDT',
                         items: [{
                             item_name: product.name,

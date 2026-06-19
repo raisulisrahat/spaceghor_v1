@@ -34,6 +34,15 @@ const Checkout = () => {
     }
   }, [draftOrderId]);
   
+  const [ipAddress, setIpAddress] = useState('');
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => setIpAddress(data.ip))
+      .catch(err => console.error("Error fetching IP:", err));
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -199,9 +208,19 @@ const Checkout = () => {
     fetchUpazilas();
   }, [formData.district, districts]);
 
-  // Pre-fill data if user is authenticated
+  // Pre-fill data if user is authenticated or has saved form data
   useEffect(() => {
-    if (isAuthenticated && user) {
+    const savedForm = sessionStorage.getItem('checkout_form_data');
+    if (savedForm) {
+      try {
+        const parsed = JSON.parse(savedForm);
+        setFormData(parsed);
+        // Clear it after parsing so it doesn't linger forever
+        sessionStorage.removeItem('checkout_form_data');
+      } catch (e) {
+        console.error("Failed to parse saved checkout form:", e);
+      }
+    } else if (isAuthenticated && user) {
       setFormData({
         name: user.user?.first_name || '',
         phone: user.user?.username || '', // Backend uses phone as username
@@ -227,11 +246,25 @@ const Checkout = () => {
     if (status === 'success') {
       // Google Tag Manager dataLayer Purchase Event
       if ((window as any).dataLayer && cart.length > 0) {
+        const orderId = searchParams.get('order_id') || `checkout_${Date.now()}`;
+        const finalName = name || formData.name;
+        const finalPhone = phone || formData.phone;
+        const finalAddress = formData.district ? `${formData.address}, ${formData.upazila}, ${formData.district}` : formData.address;
+        const totalAmountVal = cartTotal + shippingCost;
+        const totalQuantityVal = cart.reduce((total, item) => total + item.quantity, 0);
+
         (window as any).dataLayer.push({
           event: 'purchase',
+          customer_name: finalName,
+          customer_phone: finalPhone,
+          customer_address: finalAddress,
+          total_amount: totalAmountVal,
+          order_id: orderId,
+          quantity: totalQuantityVal,
+          ip_address: ipAddress,
           ecommerce: {
-            transaction_id: searchParams.get('order_id') || `checkout_${Date.now()}`,
-            value: cartTotal + shippingCost,
+            transaction_id: orderId,
+            value: totalAmountVal,
             currency: 'BDT',
             items: cart.map(item => {
               const itemData: any = {
@@ -438,6 +471,8 @@ const Checkout = () => {
       }
 
       if (res.data?.bkash_url) {
+        // Save form data to session storage before redirecting to bkash
+        sessionStorage.setItem('checkout_form_data', JSON.stringify(formData));
         window.location.href = res.data.bkash_url;
         return;
       }
@@ -450,9 +485,16 @@ const Checkout = () => {
       if ((window as any).dataLayer) {
         (window as any).dataLayer.push({
           event: 'purchase',
+          customer_name: res.data?.customer_name || formData.name,
+          customer_phone: res.data?.phone_number || formData.phone,
+          customer_address: res.data?.address || (formData.district ? `${formData.address}, ${formData.upazila}, ${formData.district}` : formData.address),
+          total_amount: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
+          order_id: res.data?.id || `checkout_${Date.now()}`,
+          quantity: cart.reduce((total, item) => total + item.quantity, 0),
+          ip_address: res.data?.ip_address || ipAddress,
           ecommerce: {
             transaction_id: res.data?.id || `checkout_${Date.now()}`,
-            value: cartTotal + shippingCost,
+            value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
             currency: 'BDT',
             items: cart.map(item => {
               const itemData: any = {
