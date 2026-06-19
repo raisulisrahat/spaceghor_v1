@@ -669,7 +669,7 @@ const Checkout = () => {
                     <input 
                       required
                       type="tel" 
-                      placeholder="01XXXXXXXXX" 
+                      placeholder="আপনার মোবাইল নাম্বার" 
                       className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
                       value={formData.phone}
                       onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 11)})}
@@ -757,7 +757,7 @@ const Checkout = () => {
                     <textarea 
                       required
                       rows={2}
-                      placeholder="জেলা,উপজেলা,গ্রাম,মহল্লা,রাস্তা সহ বিস্তারিত ঠিকানা লিখুন" 
+                      placeholder="আপনার ঠিকানা, জেলা এবং থানাসহ বিস্তারিত লিখুন" 
                       className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand outline-none resize-none placeholder:text-neutral-400"
                       value={formData.address}
                       onChange={e => setFormData({...formData, address: e.target.value})}

@@ -337,7 +337,7 @@ const PremiumFunnelLayout = ({
                                         name="address"
                                         required
                                         className="w-full px-4 sm:px-6 py-3.5 sm:py-5 bg-neutral-50 border border-neutral-100 rounded-2xl focus:bg-white focus:border-brand outline-none transition-all font-bold resize-none"
-                                        placeholder={t('write_full_address')}
+                                        placeholder="আপনার ঠিকানা, জেলা এবং থানাসহ বিস্তারিত লিখুন"
                                         rows={2}
                                         value={formData.address}
                                         onChange={handleChange}

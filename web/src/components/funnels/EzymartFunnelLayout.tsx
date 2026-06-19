@@ -858,7 +858,7 @@ const EzymartFunnelLayout = ({
                                                 name="phone_number"
                                                 required
                                                 className="w-full pl-5 pr-12 py-4 bg-slate-900/50 border border-white/20 rounded-2xl focus:border-[#ff003c] focus:bg-slate-900/80 focus:ring-4 focus:ring-[#ff003c]/10 text-white placeholder-slate-500 outline-none font-bold transition-all duration-300"
-                                                placeholder="১১ ডিজিটের মোবাইল নম্বর দিন"
+                                                placeholder="আপনার মোবাইল নাম্বার"
                                                 value={formData.phone_number}
                                                 onChange={handlePhoneChange}
                                             />
@@ -928,7 +928,7 @@ const EzymartFunnelLayout = ({
                                             required
                                             rows={2}
                                             className="w-full pl-5 pr-12 py-4 bg-slate-900/50 border border-white/20 rounded-2xl focus:border-[#ff003c] focus:bg-slate-900/80 focus:ring-4 focus:ring-[#ff003c]/10 text-white placeholder-slate-500 outline-none font-bold transition-all duration-300 resize-none"
-                                            placeholder={t('write_full_address')}
+                                            placeholder="আপনার ঠিকানা, জেলা এবং থানাসহ বিস্তারিত লিখুন"
                                             value={formData.address}
                                             onChange={handleChange}
                                         />
@@ -980,7 +980,7 @@ const EzymartFunnelLayout = ({
 
                                 <div className="space-y-3 text-sm sm:text-base">
                                     <div className="flex justify-between items-center text-slate-300 font-bold">
-                                        <span>প্রোডাক্ট নাম</span>
+                                        <span>পণ্য</span>
                                         <div className='flex gap-3 items-center text-right justify-end max-w-[200px] sm:max-w-xs'>
                                             <span className="font-extrabold text-white truncate text-xs sm:text-sm block">
                                                 {product.name}
@@ -1008,7 +1008,9 @@ const EzymartFunnelLayout = ({
                                             }
                                         </span>
                                     </div>
-                                    
+                                    <p className="text-sm font-medium text-slate-300 text-right mt-1">
+                                        ক্যাশ অন ডেলিভারি, কোনো প্রকার অগ্রিম পেমেন্টের প্রয়োজন নেই
+                                    </p>
                                     <div className="h-px bg-white/10 w-full my-3"></div>
                                     
                                     <div className="flex justify-between items-center">

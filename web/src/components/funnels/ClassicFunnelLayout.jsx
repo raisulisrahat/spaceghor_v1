@@ -213,7 +213,7 @@ const ClassicFunnelLayout = ({
                                             name="phone_number"
                                             required
                                             className="w-full px-5 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 text-white placeholder-slate-500 outline-none font-medium transition-all"
-                                            placeholder="017XXXXXXXX"
+                                            placeholder="আপনার মোবাইল নাম্বার"
                                             value={formData.phone_number}
                                             onChange={handlePhoneChange}
                                         />
@@ -755,7 +755,7 @@ const ClassicFunnelLayout = ({
                                                 name="phone_number"
                                                 required
                                                 className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300"
-                                                placeholder="017XXXXXXXX"
+                                                placeholder="আপনার মোবাইল নাম্বার"
                                                 value={formData.phone_number}
                                                 onChange={handlePhoneChange}
                                             />
@@ -823,7 +823,7 @@ const ClassicFunnelLayout = ({
                                             required
                                             rows="2"
                                             className="w-full pl-5 pr-12 py-4 bg-white/5 border border-white/20 rounded-2xl focus:border-brand focus:bg-white/10 focus:ring-4 focus:ring-brand/20 text-white placeholder-slate-400 outline-none font-medium transition-all duration-300 resize-none"
-                                            placeholder={t('write_full_address')}
+                                            placeholder="আপনার ঠিকানা, জেলা এবং থানাসহ বিস্তারিত লিখুন"
                                             value={formData.address}
                                             onChange={handleChange}
                                         ></textarea>
@@ -895,6 +895,9 @@ const ClassicFunnelLayout = ({
                                             <span className="text-xl font-black text-white">{t('total_amount')}</span>
                                             <span className="text-3xl font-black text-white drop-shadow-lg">৳{finalTotal}</span>
                                         </div>
+                                        <p className="text-sm font-medium text-white/70 text-center mt-3 leading-relaxed">
+                                            ক্যাশ অন ডেলিভারি, কোনো প্রকার অগ্রিম পেমেন্টের প্রয়োজন নেই
+                                        </p>
                                     </div>
                                 </div>
 
