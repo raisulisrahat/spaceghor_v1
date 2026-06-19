@@ -25,6 +25,7 @@ const Checkout = () => {
     return saved ? parseInt(saved, 10) : null;
   });
   const isOrderSubmittedRef = useRef(false);
+  const hasSentBeginCheckoutRef = useRef(false);
 
   useEffect(() => {
     if (draftOrderId) {
@@ -42,6 +43,40 @@ const Checkout = () => {
       .then(data => setIpAddress(data.ip))
       .catch(err => console.error("Error fetching IP:", err));
   }, []);
+
+  useEffect(() => {
+    if (cart.length > 0 && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'begin_checkout',
+        ecommerce: {
+          value: cartTotal,
+          currency: 'BDT',
+          items: cart.map(item => {
+            const itemData: any = {
+              item_name: item.name,
+              item_id: item.id,
+              price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
+              quantity: item.quantity,
+              color: item.color?.name || '',
+              size: item.size?.name || ''
+            };
+            if (item.color) {
+              itemData.item_variant = item.color.name;
+            }
+            if (item.size) {
+              if (itemData.item_variant) {
+                itemData.item_variant += ` / ${item.size.name}`;
+              } else {
+                itemData.item_variant = item.size.name;
+              }
+            }
+            return itemData;
+          })
+        }
+      });
+      hasSentBeginCheckoutRef.current = true;
+    }
+  }, [cart, cartTotal]);
 
   const [formData, setFormData] = useState({
     name: '',
