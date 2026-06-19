@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart, MessageCircle, Facebook } from 'lucide-react';
+import { ShieldCheck, ChevronDown, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart, MessageCircle, Facebook } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
@@ -247,8 +247,8 @@ const EzyFunnelLayout = ({
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes pulse-glow {
-                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(174, 0, 255, 0.4); }
-                    50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(38, 0, 255, 0.7); }
+                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px #9f441685; }
+                    50% { transform: scale(1.03); box-shadow: 0 0 30px #c0561f; }
                 }
                 .pulse-btn {
                     animation: pulse-glow 2.5s infinite ease-in-out;
@@ -583,7 +583,7 @@ const EzyFunnelLayout = ({
                                         <div className="container mx-auto px-4 max-w-6xl">
                                             {/* Section Header */}
                                             <div className="text-center mb-16 space-y-4">
-                                                <div className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
+                                                <div className="bg-brand text-white px-8 py-4 rounded-3xl inline-block shadow-2xl transform -rotate-1">
                                                     <h5 className="text-xl md:text-2xl font-black tracking-tight uppercase">
                                                         আমাদের কাস্টমার রিভিউ
                                                     </h5>
@@ -652,7 +652,7 @@ const EzyFunnelLayout = ({
                                             <div className="mt-10 text-center">
                                                 <button 
                                                     onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
-                                                    className="bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                                                    className="bg-brand text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
                                                 >
                                                     <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
                                                 </button>
@@ -900,7 +900,7 @@ const EzyFunnelLayout = ({
                                                     );
                                                 })}
                                             </select>
-                                            <Truck className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#ff003c] pointer-events-none" size={20} />
+                                            <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#ff003c] pointer-events-none" size={20} />
                                         </div>
                                         {shippingError && (
                                             <p className="text-[#ff003c] text-sm font-bold mt-2 animate-bounce flex items-center gap-1.5 ml-2">
@@ -936,7 +936,7 @@ const EzyFunnelLayout = ({
                                         <span className="font-black text-white">৳ {language === 'bn' ? toBanglaNumber(subtotal) : subtotal}</span>
                                     </div>
                                     <div className="flex justify-between items-center text-slate-300 font-bold">
-                                        <span>ডেলিভারি চার্জ (Shipping)</span>
+                                        <span>ডেলিভারি চার্জ</span>
                                         <span className="font-black text-white">
                                             {siteSettings?.enable_district_upazila !== false
                                                 ? (formData.district

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, Check, Sparkles, TrendingUp, ShoppingCart } from 'lucide-react';
+import { ShieldCheck, ChevronDown, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, Check, Sparkles, TrendingUp, ShoppingCart } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const PremiumFunnelLayout = ({
@@ -120,7 +120,7 @@ const PremiumFunnelLayout = ({
                 <div className="bg-neutral-50 rounded-3xl sm:rounded-[4rem] p-6 sm:p-12 md:p-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
                     <div className="space-y-4">
                         <div className="w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center mx-auto text-brand">
-                            <Truck size={32} />
+                            <ChevronDown size={32} />
                         </div>
                         <h3 className="text-xl font-black tracking-tight">Express Shipping</h3>
                         <p className="text-neutral-500 font-medium text-sm">Delivery within 24-72 hours across Bangladesh.</p>
@@ -330,7 +330,7 @@ const PremiumFunnelLayout = ({
                                                     );
                                                 })}
                                             </select>
-                                            <Truck className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-300" size={18} />
+                                            <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-neutral-300" size={18} />
                                         </div>
                                     )}
                                     <textarea

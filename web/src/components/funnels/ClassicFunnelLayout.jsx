@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart } from 'lucide-react';
+import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart, ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -355,7 +355,7 @@ const ClassicFunnelLayout = ({
                     {/* Left Typography Side */}
                     <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-700/80 backdrop-blur-md text-white font-bold text-sm mb-8 border border-white/30 shadow-xl  hero-badge">
-                            <span className="uppercase tracking-widest text-md">{funnel?.top_header_line_1}</span>
+                            <span className="uppercase tracking-widest text-md">{funnel?.top_header_line_2}</span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-black/80 leading-[1.1] mb-6 drop-shadow-md hero-title">
@@ -551,11 +551,11 @@ const ClassicFunnelLayout = ({
                 <div className="container mx-auto px-4 max-w-4xl">
                     <div className="text-center mb-6">
                     <p className="text-xl md:text-2xl font-black tracking-tight uppercase">
-                                    {funnel?.top_header_line_2}
+                                    {funnel?.top_header_line_3}
                                 </p>
                         </div>        
                     <div className="text-center mb-12 px-6 py-2 bg-brand rounded-[2rem] shadow-xl shadow-brand/10 text-white">
-                        <h4 className="text-lg md:text-2xl font-black text-white mb-2">{funnel?.top_header_line_3}</h4>
+                        <h4 className="text-lg md:text-2xl font-black text-white mb-2">{funnel?.top_header_line_4}</h4>
                         <div className="w-24 h-1.5 bg-yellow-300 mx-auto rounded-full shadow-[0_0_10px_rgba(253,224,71,0.8)]"></div>
                     </div>
                     <div className=" grid gap-1">
@@ -856,7 +856,7 @@ const ClassicFunnelLayout = ({
                                                 );
                                             })}
                                         </select>
-                                        <Truck className="absolute right-5 top-1/2 -translate-y-1/2 text-white/70 pointer-events-none" size={20} />
+                                        <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-white/70 pointer-events-none" size={20} />
                                     </div>
                                     {shippingError && (
                                         <p className="text-red-400 text-sm font-bold mt-2 animate-pulse flex items-center gap-1.5 ml-2">

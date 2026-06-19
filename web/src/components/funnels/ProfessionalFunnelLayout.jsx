@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, Check, ChevronRight } from 'lucide-react';
+import { ShieldCheck, ChevronDown, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, Check, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -314,7 +314,7 @@ const ProfessionalFunnelLayout = ({
                                     </button>
                                 </form>
                                 <div className="flex justify-center items-center gap-6 opacity-30 grayscale pt-4">
-                                     <Truck size={32} /> <ShieldCheck size={32} /> <Award size={32} />
+                                     <ChevronDown size={32} /> <ShieldCheck size={32} /> <Award size={32} />
                                 </div>
                             </div>
                         </div>

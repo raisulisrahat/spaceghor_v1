@@ -139,13 +139,14 @@ const OfferPage = () => {
             const zones = res.data.results || res.data;
             setShippingZones(zones);
             // Default to Outside Dhaka on load
-            const outsideZone = zones.find((z: any) =>
-                z.name.toLowerCase().includes('outside') ||
-                (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
-            ) || zones[zones.length - 1];
-            if (outsideZone) {
-                setShippingCost(parseFloat(outsideZone.shipping_cost));
-                setSelectedZone(outsideZone);
+            const insideZone = zones.find((z: any) =>
+                z.name.toLowerCase().includes('outside dhaka city') ||
+                z.name.toLowerCase().includes('outside')
+            ) || zones[0];
+            if (insideZone) {
+                setShippingCost(parseFloat(insideZone.shipping_cost));
+                setSelectedZone(insideZone);
+                setFormData(prev => ({ ...prev, shipping_zone: insideZone.id.toString() }));
             }
         });
         getSiteSettings().then(res => {
@@ -388,11 +389,11 @@ const OfferPage = () => {
                     return zone ? zone.id : 2;
                 }
             }
-            // No district selected — default to outside Dhaka
-            const outsideZone = shippingZones.find(z => z.name.toLowerCase().includes('outside'));
-            return outsideZone ? outsideZone.id : (shippingZones[shippingZones.length - 1]?.id || 2);
+            // No district selected — default to inside Dhaka
+            const insideZone = shippingZones.find(z => z.name.toLowerCase().includes('inside'));
+            return insideZone ? insideZone.id : (shippingZones[0]?.id || 1);
         } else {
-            return formData.shipping_zone ? parseInt(formData.shipping_zone) : (shippingZones.find(z => z.name.toLowerCase().includes('outside'))?.id || 2);
+            return formData.shipping_zone ? parseInt(formData.shipping_zone) : (shippingZones.find(z => z.name.toLowerCase().includes('inside'))?.id || 1);
         }
     };
 

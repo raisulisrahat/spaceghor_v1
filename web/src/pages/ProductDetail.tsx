@@ -213,7 +213,6 @@ const ProductDetail = () => {
                             price: product.sale_price,
                             item_brand: product.brand?.name,
                             item_category: product.categories?.[0]?.name,
-                            quantity: 1
                         }
                     ]
                 }

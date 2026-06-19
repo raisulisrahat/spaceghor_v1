@@ -64,18 +64,13 @@ const Checkout = () => {
   // Set initial default shipping zone to Outside Dhaka when zones load
   useEffect(() => {
     if (shippingZones.length > 0 && shippingZoneId === null) {
-      const outsideZone = shippingZones.find(z =>
-        z.name.toLowerCase().includes('outside') ||
-        (z.name.toLowerCase().includes('dhaka') && !z.name.toLowerCase().includes('inside') && !z.name.toLowerCase().includes('city'))
-      ) || shippingZones.find(z => !z.name.toLowerCase().includes('inside'));
-      if (outsideZone) {
-        setShippingCost(parseFloat(outsideZone.shipping_cost));
-        setShippingZoneId(outsideZone.id);
-      } else {
-        // Fallback: pick the last zone (usually outside)
-        const last = shippingZones[shippingZones.length - 1];
-        setShippingCost(parseFloat(last.shipping_cost));
-        setShippingZoneId(last.id);
+      const insideZone = shippingZones.find(z =>
+        z.name.toLowerCase().includes('outside dhaka city') ||
+        z.name.toLowerCase().includes('outside')
+      ) || shippingZones[0];
+      if (insideZone) {
+        setShippingCost(parseFloat(insideZone.shipping_cost));
+        setShippingZoneId(insideZone.id);
       }
     }
   }, [shippingZones]);
@@ -140,8 +135,8 @@ const Checkout = () => {
                 setShippingCost(parseFloat(zone.shipping_cost));
                 setShippingZoneId(zone.id);
             } else {
-                setShippingCost(100);
-                setShippingZoneId(shippingZones[shippingZones.length - 1]?.id || 2);
+                setShippingCost(50);
+                setShippingZoneId(shippingZones[0]?.id || 1);
             }
 
         }
@@ -741,9 +736,9 @@ const Checkout = () => {
                         >
                             <option value="">শিপিং এলাকা সিলেক্ট করুন</option>
                             {shippingZones.map(z => {
-                                const displayName = z.name.toLowerCase().includes('inside dhaka')
+                                const displayName = z.name.toLowerCase().includes('inside dhaka city')
                                     ? 'ঢাকা সিটির ভেতরে'
-                                    : z.name.toLowerCase().includes('outside dhaka')
+                                    : z.name.toLowerCase().includes('outside dhaka city')
                                         ? 'ঢাকা সিটির বাইরে'
                                         : z.name;
                                 return (
@@ -871,7 +866,7 @@ const Checkout = () => {
                 </div>
                   <div className="flex justify-between items-center text-xs font-medium text-neutral-500">
                   <span>ডেলিভারি চার্জ ({
-                      shippingZones.find(z => z.id === shippingZoneId)?.name || 'ঢাকা শহরের ভেতরে'
+                      shippingZones.find(z => z.id === shippingZoneId)?.name
                   })</span>
                   <span className="text-brand font-bold">৳{shippingCost}</span>
                 </div>

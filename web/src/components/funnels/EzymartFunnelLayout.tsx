@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ShieldCheck, Truck, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart, MessageCircle, Facebook } from 'lucide-react';
+import { ShieldCheck, ChevronDown, Star, CheckCircle, ArrowRight, Clock, Phone, MapPin, Zap, Award, ShoppingCart, MessageCircle, Facebook } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
@@ -247,8 +247,8 @@ const EzymartFunnelLayout = ({
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes pulse-glow {
-                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
-                    50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(34, 197, 94, 0.7); }
+                    0%, 100% { transform: scale(1); box-shadow: 0 0 15px #9f441685; }
+                    50% { transform: scale(1.03); box-shadow: 0 0 30px #c0561f; }
                 }
                 .pulse-btn {
                     animation: pulse-glow 2.5s infinite ease-in-out;
@@ -960,7 +960,7 @@ const EzymartFunnelLayout = ({
                                                     );
                                                 })}
                                             </select>
-                                            <Truck className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#ff003c] pointer-events-none" size={20} />
+                                            <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#ff003c] pointer-events-none" size={20} />
                                         </div>
                                         {shippingError && (
                                             <p className="text-[#ff003c] text-sm font-bold mt-2 animate-bounce flex items-center gap-1.5 ml-2">

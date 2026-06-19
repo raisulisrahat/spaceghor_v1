@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
     ShieldCheck, 
-    Truck, 
+    ChevronDown, 
     Star, 
     CheckCircle2, 
     ArrowRight, 
@@ -136,7 +136,7 @@ const StepFunnelLayout = ({
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center space-y-3 group hover:border-brand/50 transition-colors">
                                 <div className="w-12 h-12 bg-brand/10 text-brand rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
-                                    <Truck size={24} />
+                                    <ChevronDown size={24} />
                                 </div>
                                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">ডেলিভারি</p>
                                 <p className="text-xs font-bold uppercase tracking-widest text-slate-400">সারা বাংলাদেশে</p>
