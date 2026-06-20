@@ -104,6 +104,7 @@ const ComboFunnelLayout = ({
 
     // Observer for Mobile CTA
     const submitBtnRef = useRef(null);
+    const formRef = useRef(null);
     const [showMobileCTA, setShowMobileCTA] = useState(true);
 
     useEffect(() => {
@@ -114,8 +115,8 @@ const ComboFunnelLayout = ({
             { threshold: 0.1 }
         );
 
-        if (submitBtnRef.current) {
-            observer.observe(submitBtnRef.current);
+        if (formRef.current) {
+            observer.observe(formRef.current);
         }
 
         return () => {
@@ -784,7 +785,7 @@ const ComboFunnelLayout = ({
             )}
 
             {/* Premium framed Golden Golden Checkout Area */}
-            <div id="order-form" className="py-16 relative overflow-hidden bg-[#FAF6ED]">
+            <div id="order-form" ref={formRef} className="py-16 relative overflow-hidden bg-[#FAF6ED]">
                 <div className="container mx-auto px-4 max-w-4xl relative z-10 checkout-form-container">
                     <div className="text-center text-[#3D1625] mb-8">
                         <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-2">

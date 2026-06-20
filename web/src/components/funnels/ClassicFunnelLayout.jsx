@@ -91,19 +91,20 @@ const ClassicFunnelLayout = ({
 
     // Observer for Mobile CTA
     const submitBtnRef = useRef(null);
+    const formRef = useRef(null);
     const [showMobileCTA, setShowMobileCTA] = useState(true);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                // Hide CTA when submit button is visible
+                // Hide CTA when form is visible
                 setShowMobileCTA(!entry.isIntersecting);
             },
             { threshold: 0.1 }
         );
 
-        if (submitBtnRef.current) {
-            observer.observe(submitBtnRef.current);
+        if (formRef.current) {
+            observer.observe(formRef.current);
         }
 
         return () => {
@@ -657,7 +658,7 @@ const ClassicFunnelLayout = ({
             )}
 
             {/* Glassmorphism Order Form Section */}
-            <div id="order-form" className="py-12 relative overflow-hidden bg-[#0a0a0a]/90">
+            <div id="order-form" ref={formRef} className="py-12 relative overflow-hidden bg-[#0a0a0a]/90">
                 <div className="container mx-auto px-4 max-w-4xl relative z-10 checkout-form-container">
                     <div className="text-center text-white mb-8 sm:mb-12">
                         <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6 drop-shadow-md">{t('fill_form_to_order')}</h2>

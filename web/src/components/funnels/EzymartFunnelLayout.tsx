@@ -37,6 +37,7 @@ const EzymartFunnelLayout = ({
     const [videoRatio, setVideoRatio] = useState(null);
     const [isPortrait, setIsPortrait] = useState(false);
     const submitBtnRef = useRef(null);
+    const formRef = useRef(null);
 
     // Active Variant for Summary and display
     const activeVariant = selectedVariants?.find(v => v.quantity > 0) || selectedVariants?.[0];
@@ -126,13 +127,13 @@ const EzymartFunnelLayout = ({
             { threshold: 0.1 }
         );
 
-        if (submitBtnRef.current) {
-            observer.observe(submitBtnRef.current);
+        if (formRef.current) {
+            observer.observe(formRef.current);
         }
 
         return () => {
-            if (submitBtnRef.current) {
-                observer.unobserve(submitBtnRef.current);
+            if (formRef.current) {
+                observer.unobserve(formRef.current);
             }
         };
     }, []);
@@ -766,7 +767,7 @@ const EzymartFunnelLayout = ({
                     </div>
 
                     {/* F. High Conversion Order Form */}
-                    <div id="order-form-anchor" className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 sm:p-10 shadow-2xl space-y-8">
+                    <div id="order-form-anchor" ref={formRef} className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 sm:p-10 shadow-2xl space-y-8">
                         <form onSubmit={handleFormSubmit} className="space-y-8">
                             
                             {/* Variant Selection List */}

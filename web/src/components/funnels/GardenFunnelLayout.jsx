@@ -91,6 +91,7 @@ const GardenFunnelLayout = ({
 
     // Observer for Mobile CTA
     const submitBtnRef = useRef(null);
+    const formRef = useRef(null);
     const [showMobileCTA, setShowMobileCTA] = useState(true);
 
     useEffect(() => {
@@ -101,8 +102,8 @@ const GardenFunnelLayout = ({
             { threshold: 0.1 }
         );
 
-        if (submitBtnRef.current) {
-            observer.observe(submitBtnRef.current);
+        if (formRef.current) {
+            observer.observe(formRef.current);
         }
 
         return () => {
@@ -828,7 +829,7 @@ const GardenFunnelLayout = ({
             )}
 
             {/* Premium Glassmorphic Dark Golden Checkout Container */}
-            <div id="order-form" className="py-12 relative overflow-hidden bg-gradient-to-b from-[#3d1625] to-[#3d1625]">
+            <div id="order-form" ref={formRef} className="py-12 relative overflow-hidden bg-gradient-to-b from-[#3d1625] to-[#3d1625]">
                 <div className="container mx-auto px-4 max-w-4xl relative z-10 checkout-form-container">
                     <div className="text-center text-white mb-8 sm:mb-12">
                         <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6 drop-shadow-md">

@@ -826,19 +826,19 @@ const OrderManager = () => {
                                         onChange={handleSelectAll}
                                     />
                                 </th>
-                                <th className="px-6 py-4">ID</th>
-                                <th className="px-6 py-4">Customer</th>
-                                <th className="px-6 py-4">{activeView === 'real' ? 'Status' : 'Location / IP'}</th>
-                                <th className="px-6 py-4 text-center">Amount</th>
-                                {activeView === 'real' && <th className="px-6 py-4">Courier ID</th>}
-                                <th className="px-6 py-4 text-center">Notes</th>
+                                <th className="px-4 py-4">ID</th>
+                                <th className="px-4 py-4">Customer</th>
+                                <th className="px-4 py-4">{activeView === 'real' ? 'Status' : 'Location / IP'}</th>
+                                <th className="px-4 py-4 text-center">Amount</th>
+                                {activeView === 'real' && <th className="px-4 py-4">Courier ID</th>}
+                                <th className="px-4 py-4 text-center">Notes</th>
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-zinc-100">
                             {paginatedOrders.map(order => (
                                 <tr key={order.id} className="group hover:bg-zinc-50 transition-colors">
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         <input
                                             type="checkbox"
                                             className="rounded border-zinc-300 text-zinc-900"
@@ -846,14 +846,14 @@ const OrderManager = () => {
                                             onChange={() => handleSelectOne(order.id)}
                                         />
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         <button onClick={() => handleViewOrder(order)} className="text-xs font-bold text-zinc-900 font-mono hover:underline">
                                             #{order.id.toString().padStart(6, '0')}
                                         </button>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         <div className="space-y-0.5">
-                                            <div className="flex items-center gap-2">
+                                            <div className="items-center gap-2">
                                                 <p className="text-sm font-bold text-zinc-900">{order.customer_name || 'Guest'}</p>
                                                 {order.is_duplicate && (
                                                     <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-rose-50 text-rose-600 border border-rose-100 rounded text-[8px] font-black uppercase tracking-tighter">
@@ -865,7 +865,7 @@ const OrderManager = () => {
                                         </div>
                                     </td>
 
-                                    <td className="px-6 py-4">
+                                    <td className="px-4 py-4">
                                         {activeView === 'real' ? (
                                             <div className="flex flex-col gap-1 items-start">
                                                 <div className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[10px] font-bold uppercase tracking-wider ${getStatusStyle(order.status)}`}>
@@ -898,11 +898,11 @@ const OrderManager = () => {
                                             </div>
                                         )}
                                     </td>
-                                    <td className="px-6 py-4 text-center font-bold text-zinc-900 font-mono text-xs">
+                                    <td className="px-4 py-4 text-center font-bold text-zinc-900 font-mono text-xs">
                                         ৳{Number(order.total_amount).toLocaleString()}
                                     </td>
                                     {activeView === 'real' && (
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 py-4">
                                             {order.courier_tracking_code ? (
                                                 <div className="space-y-0.5">
                                                     <p className="text-[10px] font-bold text-zinc-900 font-mono">{order.courier_tracking_code}</p>
@@ -1238,7 +1238,7 @@ const OrderManager = () => {
                                             <tr>
                                                 <th className="px-2 sm:px-5 py-3">Product</th>
                                                 <th className="px-2 sm:px-5 py-3 text-center">Qty</th>
-                                                <th className="px-2 sm:px-5 py-3 text-right">Sum</th>
+                                                <th className="px-2 sm:px-5 py-3 text-center">Sum</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-zinc-100">
@@ -1275,7 +1275,7 @@ const OrderManager = () => {
                                                                 onChange={(e) => handleItemChange(item.id, 'quantity', Number(e.target.value))} 
                                                             />
                                                         </td>
-                                                        <td className="px-2 sm:px-5 py-4 text-right font-mono">
+                                                        <td className="px-2 sm:px-5 py-4 text-center font-mono">
                                                             <div className="flex items-center justify-end gap-1">
                                                                 <span className="text-zinc-400">৳</span>
                                                                 <input 
@@ -1314,7 +1314,7 @@ const OrderManager = () => {
                                                             </div>
                                                         </td>
                                                         <td className="px-2 sm:px-5 py-4 text-center">{item.quantity}</td>
-                                                        <td className="px-2 sm:px-5 py-4 text-right font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
+                                                        <td className="px-2 sm:px-5 py-4 text-center font-mono">৳{(item.price * item.quantity).toLocaleString()}</td>
                                                     </tr>
                                                 ))
                                             )}
@@ -1322,7 +1322,7 @@ const OrderManager = () => {
                                         <tfoot className="bg-zinc-100/30 border-t border-zinc-100 font-bold text-zinc-900 text-[11px] font-mono">
                                             <tr>
                                                 <td colSpan={2} className="px-2 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Subtotal</td>
-                                                <td className="px-2 sm:px-5 py-3 text-right">
+                                                <td className="px-2 sm:px-5 py-3 text-center">
                                                     ৳{isEditingDetails 
                                                         ? (editForm.items?.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity)), 0) || 0).toLocaleString()
                                                         : ((selectedOrder.items || selectedOrder.cart_items)?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0).toLocaleString()}
@@ -1330,7 +1330,7 @@ const OrderManager = () => {
                                             </tr>
                                             <tr>
                                                 <td colSpan={2} className="px-2 sm:px-5 py-3 text-zinc-400 uppercase tracking-widest text-[9px]">Shipping</td>
-                                                <td className="px-2 sm:px-5 py-3 text-right">
+                                                <td className="px-2 sm:px-5 py-3 text-center">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-zinc-400">৳</span>
@@ -1349,7 +1349,7 @@ const OrderManager = () => {
                                             </tr>
                                             <tr className="bg-brand text-white font-black">
                                                 <td colSpan={2} className="px-2 sm:px-5 py-4 uppercase tracking-widest text-[10px]">Total Amount</td>
-                                                <td className="px-2 sm:px-5 py-4 text-right text-base">
+                                                <td className="px-2 sm:px-5 py-4 text-center text-base">
                                                     {isEditingDetails ? (
                                                         <div className="flex items-center justify-end gap-1">
                                                             <span className="text-white opacity-85">৳</span>
