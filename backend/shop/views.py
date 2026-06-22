@@ -416,6 +416,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
+        if self.action == 'create':
+            return [permissions.IsAuthenticated()]
         return [IsFullAdmin()]
     
     def perform_create(self, serializer):
@@ -2815,5 +2817,78 @@ class SitemapView(View):
             + "\n".join(urls) + '\n</urlset>'
         )
         return HttpResponse(xml_content, content_type="application/xml")
+
+
+class CourierWebhookView(generics.GenericAPIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        # 1. Authenticate webhook request
+        token = request.headers.get('X-CB-Webhook-Integration-Header') or request.META.get('HTTP_X_CB_WEBHOOK_INTEGRATION_HEADER')
+        
+        from .models import SiteSettings, Order, OrderNote
+        settings = SiteSettings.objects.first()
+        configured_token = settings.webhook_auth_token if settings else None
+        
+        # If a token is configured, check that it matches
+        if configured_token and token != configured_token:
+            return Response({"error": "Invalid auth token"}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        data = request.data
+        event = data.get('event')
+        
+        # Carrybee Webhook Verification Event
+        if event == 'webhook.integration':
+            response = Response({"status": "accepted"}, status=status.HTTP_202_ACCEPTED)
+            if token:
+                response['X-CB-Webhook-Integration-Header'] = token
+            return response
+            
+        # Handle status update events
+        tracking_code = data.get('tracking_code') or data.get('tracking_id') or data.get('consignment_id')
+        invoice_id = data.get('invoice') or data.get('invoice_id') or data.get('order_id') or data.get('merchant_order_id')
+        
+        order = None
+        if tracking_code:
+            order = Order.objects.filter(courier_tracking_code=tracking_code).first() or Order.objects.filter(courier_consignment_id=tracking_code).first()
+        if not order and invoice_id:
+            try:
+                order = Order.objects.filter(id=int(invoice_id)).first()
+            except (ValueError, TypeError):
+                pass
+                
+        if order:
+            status_text = (data.get('status') or event or '').lower()
+            old_status = order.status
+            new_status = None
+            
+            if any(x in status_text for x in ['delivered', 'success', 'paid']):
+                new_status = 'delivered'
+            elif any(x in status_text for x in ['cancel', 'fail', 'return', 'reject']):
+                new_status = 'cancelled'
+            elif any(x in status_text for x in ['transit', 'way', 'hub', 'ship', 'mile', 'transit']):
+                new_status = 'shipped'
+            elif any(x in status_text for x in ['pick', 'process', 'receive', 'request']):
+                new_status = 'processing'
+                
+            if new_status and new_status != old_status:
+                order.status = new_status
+                order.save()
+                
+            # Log the webhook payload as an order note
+            note_content = f"Courier Webhook Update ({event}): Status: {status_text}."
+            if new_status and new_status != old_status:
+                note_content += f" Order status updated from {old_status} to {new_status}."
+            
+            OrderNote.objects.create(
+                order=order,
+                user=None, # System note
+                note=note_content
+            )
+            
+            return Response({"status": "processed"}, status=status.HTTP_200_OK)
+            
+        return Response({"status": "ignored"}, status=status.HTTP_200_OK)
+
 
 

@@ -9,7 +9,7 @@ from .views import (
     BlogCategoryViewSet, BlogPostViewSet, FunnelViewSet,
     ColorViewSet, SizeViewSet, TagViewSet, ProductImageViewSet, ProductVideoViewSet,
     UserViewSet, ReviewViewSet, OTPViewSet, MetaView, CustomObtainAuthToken,
-    MediaManagerView, SecurityAuditView, BkashCallbackView
+    MediaManagerView, SecurityAuditView, BkashCallbackView, CourierWebhookView
 )
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -44,6 +44,7 @@ router.register(r'otp', OTPViewSet, basename='otp')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('webhooks/courier/', CourierWebhookView.as_view(), name='courier-webhook'),
     path('bkash/callback/', BkashCallbackView.as_view(), name='bkash-callback'),
     path('courier/<int:pk>/check_status/', OrderViewSet.as_view({'get': 'check_status'}), name='courier-check-status'),
     path('register/', RegisterView.as_view(), name='register'),
