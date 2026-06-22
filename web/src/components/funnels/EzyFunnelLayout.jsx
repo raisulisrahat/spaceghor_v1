@@ -449,9 +449,10 @@ const EzyFunnelLayout = ({
                             />
                         ) : (
                             <Swiper
-                                modules={[Pagination, Autoplay, EffectFade]}
+                                modules={[Pagination, Autoplay, EffectFade, Navigation]}
                                 effect="fade"
                                 pagination={{ clickable: true }}
+                                navigation={true}
                                 autoplay={{ delay: 3500, disableOnInteraction: false }}
                                 loop={true}
                                 className="w-full h-full"
@@ -539,7 +540,7 @@ const EzyFunnelLayout = ({
                         {/* Image Slider 2 */}
                         <div className="relative">
                             <Swiper
-                                modules={[Pagination, Autoplay]}
+                                modules={[Pagination, Autoplay, Navigation]}
                                 spaceBetween={24}
                                 slidesPerView={1}
                                 breakpoints={{
@@ -547,8 +548,9 @@ const EzyFunnelLayout = ({
                                     1024: { slidesPerView: 3 },
                                 }}
                                 pagination={{ clickable: true }}
+                                navigation={true}
                                 autoplay={{ delay: 3000, disableOnInteraction: false }}
-                                className="pb-4"
+                                className="pb-12"
                             >
                                 {product.images.map((section, idx) => (
                                     <SwiperSlide key={section.id || idx} className="h-auto">
@@ -592,7 +594,7 @@ const EzyFunnelLayout = ({
                                             </div>
                                             <div className="relative review-swiper-container">
                                                 <Swiper
-                                                    modules={[Pagination, Autoplay]}
+                                                    modules={[Pagination, Autoplay, Navigation]}
                                                     spaceBetween={30}
                                                     slidesPerView={1}
                                                     breakpoints={{
@@ -600,6 +602,7 @@ const EzyFunnelLayout = ({
                                                         1024: { slidesPerView: 3 },
                                                     }}
                                                     pagination={{ clickable: true }}
+                                                    navigation={true}
                                                     autoplay={{ delay: 3000, disableOnInteraction: false }}
                                                     className="pb-16"
                                                 >
@@ -680,7 +683,7 @@ const EzyFunnelLayout = ({
 
                         {/* Offer Price Highlight (Hand Drawn Circle style) */}
                         <h3 className="text-2xl sm:text-4xl font-extrabold flex items-center justify-center gap-2 flex-wrap leading-relaxed py-2">
-                            <span>বর্তমান অফার প্রাইজ মাত্র</span>
+                            <span>অফার প্রাইজ মাত্র</span>
                             <span className="relative inline-block px-6 py-2 mx-2">
                                 <svg className="absolute inset-0 w-full h-full text-[#ff003c] pointer-events-none scale-125 z-0" viewBox="0 0 100 40" preserveAspectRatio="none">
                                     <path

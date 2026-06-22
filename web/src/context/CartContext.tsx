@@ -64,22 +64,31 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const cartKey = `${product.slug}-${color?.id || 'none'}-${size?.id || 'none'}`;
       const existing = prev.find(item => item.cartKey === cartKey);
       const stockLimit = product.stock !== undefined ? product.stock : 999999;
-      
+
+      let itemImage = product.image;
+      if (color && product.images && product.images.length > 0) {
+        const variantImageObj = product.images.find((img: any) => 
+          img.color === color.id || img.color_details?.id === color.id
+        );
+        if (variantImageObj && variantImageObj.image) {
+          itemImage = variantImageObj.image;
+        }
+      }
+
       if (existing) {
         return prev.map(item => 
-          item.cartKey === cartKey ? { ...item, quantity: Math.min(item.quantity + quantity, stockLimit) } : item
+          item.cartKey === cartKey ? { ...item, quantity: Math.min(item.quantity + quantity, stockLimit), image: itemImage } : item
         );
       }
       
       const rawPrice = product.sale_price || product.regular_price || "0";
-      const cleanPrice = rawPrice.toString().replace(/[^0-9.]/g, '');
 
       return [...prev, {
         id: product.id,
         name: product.name,
         slug: product.slug,
         price: cleanPrice,
-        image: product.image,
+        image: itemImage,
         quantity: Math.min(quantity, stockLimit),
         color,
         size,

@@ -598,6 +598,7 @@ const GardenFunnelLayout = ({
                                 640: { slidesPerView: 2, spaceBetween: 20 },
                                 1024: { slidesPerView: 3, spaceBetween: 24 }
                             }}
+                            navigation={true}
                             pagination={{ clickable: true }}
                             autoplay={{ delay: 3500, disableOnInteraction: false }}
                             className="product-hero-swiper pb-10"
@@ -783,13 +784,14 @@ const GardenFunnelLayout = ({
                         </div>
                         <div className="relative review-swiper-container">
                              <Swiper
-                                 modules={[Pagination, Autoplay]}
+                                 modules={[Pagination, Autoplay, Navigation]}
                                  spaceBetween={24}
                                  slidesPerView={1}
                                  breakpoints={{
                                      640: { slidesPerView: 2 },
                                      1024: { slidesPerView: 3 },
                                  }}
+                                 navigation={true}
                                  pagination={{ clickable: true }}
                                  autoplay={{ delay: 3000, disableOnInteraction: false }}
                                  className="pb-12"

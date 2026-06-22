@@ -38,13 +38,13 @@ const Cart = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <SEO title="My Shopping Bag" description={`You have ${cart.length} items in your shopping bag. Proceed to checkout to complete your purchase.`} />
+      <SEO title="My Shopping Cart" description={`You have ${cart.length} items in your shopping cart. Proceed to checkout to complete your purchase.`} />
       <div className="flex items-center space-x-3 mb-8">
-        <div className="p-2 bg-neutral-900 rounded-lg">
+        <div className="p-2 bg-brand rounded-lg">
           <ShoppingBag className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Shopping Bag</h1>
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Shopping Cart</h1>
           <p className="text-neutral-500 text-[11px] font-medium uppercase tracking-wider">{cart.length} items collected</p>
         </div>
       </div>
@@ -62,6 +62,7 @@ const Cart = () => {
                 transition={{ delay: idx * 0.05 }}
                 className={`flex items-center space-x-4 p-4 bg-white rounded-xl border border-neutral-100 shadow-sm hover:shadow-md transition-all ${!(item.stock && item.stock > 0) ? 'opacity-75' : ''}`}
               >
+                
                 <div className="w-20 h-20 rounded-lg overflow-hidden bg-neutral-50 border border-neutral-100 flex-shrink-0">
                   <img src={item.image} className="w-full h-full object-cover" alt={item.name} />
                 </div>
@@ -151,15 +152,11 @@ const Cart = () => {
                    <span className="text-neutral-500 font-medium">Subtotal</span>
                    <span className="text-neutral-900 font-bold">৳{cartTotal.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-[13px]">
-                   <span className="text-neutral-500 font-medium">Delivery</span>
-                   <span className="text-brand font-bold">৳60</span>
-                </div>
               </div>
 
               <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
-                  <span className="font-bold text-neutral-900 text-base">Total amount</span>
-                  <span className="text-xl font-bold text-brand">৳{(cartTotal + 60).toLocaleString()}</span>
+                  <span className="font-bold text-neutral-900 text-base">Product amount</span>
+                  <span className="text-xl font-bold text-brand">৳{(cartTotal).toLocaleString()}</span>
               </div>
 
               {cart.some(i => i.stock !== undefined && i.stock <= 0) && (
@@ -186,18 +183,6 @@ const Cart = () => {
                 <Link to="/products" className="block text-center text-neutral-400 hover:text-neutral-900 font-bold text-xs py-2 transition-colors uppercase tracking-wider">
                   Continue Shopping
                 </Link>
-              </div>
-
-              <div className="pt-6 border-t border-neutral-50 flex items-center justify-center space-x-4 text-neutral-300">
-                <div className="flex items-center space-x-1.5">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span className="text-[10px] font-bold uppercase">Secure</span>
-                </div>
-                <div className="w-[1px] h-3 bg-neutral-100" />
-                <div className="flex items-center space-x-1.5">
-                  <span className="text-[10px]">🚚</span>
-                  <span className="text-[10px] font-bold uppercase">Fast</span>
-                </div>
               </div>
            </div>
         </div>

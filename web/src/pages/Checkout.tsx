@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
-import { CheckCircle, ArrowLeft, CreditCard, ShieldCheck, Mail, Phone, User, MapPin, Lock, ChevronRight, AlertCircle } from 'lucide-react';
+import { CheckCircle, ArrowLeft, CreditCard, ShieldCheck, Mail, Phone, User, MapPin, Lock, ChevronRight, AlertCircle, Minus, Plus, Trash2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { createOrder, getDistricts, getUpazilas, getPaymentMethods, getShippingZones, createDraftOrder, updateDraftOrder, deleteDraftOrder } from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,7 +12,7 @@ import SEO from '../components/SEO';
 const Checkout = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { cart, cartTotal, clearCart } = useCart();
+  const { cart, cartTotal, clearCart, updateQuantity, removeFromCart } = useCart();
   const { isAuthenticated, user } = useAuth();
   const { settings, siteTitle } = useSettings();
   
@@ -870,11 +870,41 @@ const Checkout = () => {
                     <div className="w-16 h-16 rounded-xl overflow-hidden bg-neutral-50 border border-neutral-100 flex-shrink-0 p-1">
                       <img src={item.image} className="w-full h-full object-cover rounded-lg" alt={item.name} />
                     </div>
-                    <div className="flex-grow min-w-0 space-y-1">
-                      <h4 className="text-[13px] font-bold text-neutral-900 leading-tight line-clamp-1">{item.name}</h4>
+                    <div className="flex-grow min-w-0 flex flex-col justify-center space-y-1.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <h4 className="text-[13px] font-bold text-neutral-900 leading-tight line-clamp-2">{item.name}</h4>
+                        
+                        <div className="flex items-center space-x-2 flex-shrink-0">
+                          <div className="flex items-center bg-neutral-50 rounded-md border border-neutral-200 overflow-hidden">
+                            <button 
+                              type="button"
+                              disabled={item.stock !== undefined && item.stock <= 0}
+                              onClick={() => updateQuantity(item.cartKey, item.quantity - 1)}
+                              className="px-2 py-1 hover:bg-neutral-200 transition-colors text-neutral-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="w-6 text-center text-[10px] font-bold text-neutral-900">{item.quantity}</span>
+                            <button 
+                              type="button"
+                              disabled={item.quantity >= (item.stock !== undefined ? item.stock : 999999)}
+                              onClick={() => updateQuantity(item.cartKey, item.quantity + 1)}
+                              className="px-2 py-1 hover:bg-neutral-200 transition-colors text-neutral-600 disabled:opacity-30 disabled:cursor-not-allowed"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
+                          </div>
+                          <button 
+                            type="button"
+                            onClick={() => removeFromCart(item.cartKey)}
+                            className="p-1.5 text-neutral-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
                       
-                      {/* Color & Size Info */}
-                      {(item.color || item.size) && (
+                      <div className="flex items-end justify-between">
                         <div className="flex flex-wrap gap-2 py-0.5">
                           {item.color && (
                             <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-tight">কালার: {item.color.name}</span>
@@ -883,11 +913,8 @@ const Checkout = () => {
                             <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-tight">সাইজ: {item.size.code}</span>
                           )}
                         </div>
-                      )}
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] text-neutral-400 font-bold">পরিমাণ: {item.quantity}</span>
-                        <span className="text-xs font-bold text-neutral-700">৳{(parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) * item.quantity).toLocaleString()}</span>
+                        
+                        <span className="text-xs font-bold text-neutral-900">৳{(parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) * item.quantity).toLocaleString()}</span>
                       </div>
                     </div>
                   </div>

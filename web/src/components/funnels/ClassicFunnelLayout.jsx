@@ -410,9 +410,6 @@ const ClassicFunnelLayout = ({
                                                 .swiper-button-next, .swiper-button-prev { color: white !important; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transform: scale(0.7); }
                                                 .swiper-pagination-bullet { background: white !important; opacity: 0.5 !important; }
                                                 .swiper-pagination-bullet-active { background: var(--color-brand) !important; opacity: 1 !important; }
-                                                @media (max-width: 768px) {
-                                                    .swiper-button-next, .swiper-button-prev { display: none !important; }
-                                                }
                                             `}} />
                                         </div>
                                     );
@@ -474,7 +471,7 @@ const ClassicFunnelLayout = ({
                 {/* Green Strip */}
                 <div className="bg-gradient-to-r from-[#065F46] via-[#059669] to-[#065F46] py-6 text-center text-white font-black text-3xl md:text-4xl tracking-wide shadow-inner">
                     <span className="flex items-center justify-center gap-1 md:gap-3 flex-wrap">
-                        {language === 'bn' ? 'বর্তমান ডিসকাউন্ট প্রাইস মাত্র' : 'Current Discount Price Only'}
+                        {language === 'bn' ? 'অফার ডিসকাউন্ট প্রাইস মাত্র' : 'Offer Discount Price Only'}
                         <span className="relative inline-block px-6 py-2 mx-2">
                             <svg className="absolute inset-0 w-full h-full text-white pointer-events-none" viewBox="0 0 100 40" preserveAspectRatio="none">
                                 <path
@@ -593,7 +590,7 @@ const ClassicFunnelLayout = ({
                                     640: { slidesPerView: 2 },
                                     1024: { slidesPerView: 3 },
                                 }}
-                                navigation
+                                navigation={true}
                                 pagination={{ clickable: true }}
                                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 className="pb-16"

@@ -151,7 +151,7 @@ const CartDrawer = () => {
                     <span className="text-neutral-900 font-bold">৳{cartTotal.toFixed(0)}</span>
                   </div>
                   <div className="flex justify-between text-base">
-                    <span className="text-neutral-900 font-bold">Total Amount</span>
+                    <span className="text-neutral-900 font-bold">Product Amount</span>
                     <span className="text-lg font-extrabold text-brand">৳{cartTotal.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</span>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ const CartDrawer = () => {
                     onClick={() => setIsCartOpen(false)}
                     className="flex items-center justify-center py-3.5 border-2 border-neutral-200 text-neutral-600 rounded-xl font-bold text-sm hover:bg-neutral-100 hover:border-neutral-300 transition-all active:scale-95"
                   >
-                    View Bag
+                    View Cart
                   </Link>
                   <Link 
                     to="/checkout"

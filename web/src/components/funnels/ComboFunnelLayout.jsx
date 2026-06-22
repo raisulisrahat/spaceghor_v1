@@ -586,6 +586,7 @@ const ComboFunnelLayout = ({
                                 640: { slidesPerView: 2, spaceBetween: 20 },
                                 1024: { slidesPerView: 3, spaceBetween: 24 }
                             }}
+                            navigation={true}
                             pagination={{ clickable: true }}
                             autoplay={{ delay: 3500, disableOnInteraction: false }}
                             className="signofmodesty-hero-swiper pb-10"
@@ -746,6 +747,7 @@ const ComboFunnelLayout = ({
                                     640: { slidesPerView: 2 },
                                     1024: { slidesPerView: 3 },
                                 }}
+                                navigation={true}
                                 pagination={{ clickable: true }}
                                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 className="pb-12"
