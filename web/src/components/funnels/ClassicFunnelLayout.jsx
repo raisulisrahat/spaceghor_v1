@@ -454,7 +454,7 @@ const ClassicFunnelLayout = ({
                 {/* Orange Strip */}
                 <div className="bg-gradient-to-r from-[#D97706] via-[#C0561F] to-[#B45309] py-5 text-center text-white font-black text-2xl md:text-3xl tracking-wide border-b border-black/10 shadow-lg">
                     <span className="flex items-center justify-center gap-1 md:gap-3 flex-wrap">
-                        {language === 'bn' ? 'রেগুলার প্রাইস আগে ছিলো:' : 'Regular Price Was Before:'}
+                        {language === 'bn' ? 'রেগুলার প্রাইস:' : 'Regular Price:'}
                         <span className="relative inline-flex items-center justify-center px-4 py-1">
                             <svg className="absolute inset-0 w-full h-full text-yellow-300 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <line x1="5" y1="15" x2="95" y2="85" stroke="currentColor" strokeWidth="8" strokeLinecap="round" className="animate-draw-line-1" />
@@ -471,7 +471,7 @@ const ClassicFunnelLayout = ({
                 {/* Green Strip */}
                 <div className="bg-gradient-to-r from-[#065F46] via-[#059669] to-[#065F46] py-6 text-center text-white font-black text-3xl md:text-4xl tracking-wide shadow-inner">
                     <span className="flex items-center justify-center gap-1 md:gap-3 flex-wrap">
-                        {language === 'bn' ? 'অফার ডিসকাউন্ট প্রাইস মাত্র' : 'Offer Discount Price Only'}
+                        {language === 'bn' ? 'অফার প্রাইস' : 'Offer Price Only'}
                         <span className="relative inline-block px-6 py-2 mx-2">
                             <svg className="absolute inset-0 w-full h-full text-white pointer-events-none" viewBox="0 0 100 40" preserveAspectRatio="none">
                                 <path

@@ -678,12 +678,12 @@ const EzyFunnelLayout = ({
                     <div className="bg-gradient-to-br from-[#3b0a60]/60 to-[#1e0033]/40 rounded-[2.5rem] p-6 sm:p-12 border border-white/10 shadow-2xl text-center space-y-6">
                         {/* Regular Price Tag */}
                         <div className="inline-block bg-[#ffff00] text-black px-5 py-2 rounded-xl font-black text-sm sm:text-base uppercase tracking-wider shadow-md">
-                            রেগুলার প্রাইস আগে ছিলো <span className="line-through decoration-[#ff003c] decoration-4 font-black">৳ {regPriceStr}</span> টাকা
+                            রেগুলার প্রাইস<span className="line-through decoration-[#ff003c] decoration-4 font-black">৳ {regPriceStr}</span> টাকা
                         </div>
 
                         {/* Offer Price Highlight (Hand Drawn Circle style) */}
                         <h3 className="text-2xl sm:text-4xl font-extrabold flex items-center justify-center gap-2 flex-wrap leading-relaxed py-2">
-                            <span>অফার প্রাইজ মাত্র</span>
+                            <span>অফার প্রাইজ</span>
                             <span className="relative inline-block px-6 py-2 mx-2">
                                 <svg className="absolute inset-0 w-full h-full text-[#ff003c] pointer-events-none scale-125 z-0" viewBox="0 0 100 40" preserveAspectRatio="none">
                                     <path

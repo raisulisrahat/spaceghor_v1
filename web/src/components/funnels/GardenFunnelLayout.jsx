@@ -681,7 +681,7 @@ const GardenFunnelLayout = ({
                     <div className="relative z-10 space-y-6 text-center w-full">
                         {/* Regular Price Strip */}
                         <div className="text-neutral-500/90 font-bold text-base md:text-lg flex items-center justify-center gap-2 flex-wrap font-serif italic">
-                            {language === 'bn' ? 'রেগুলার প্রাইস:' : 'Regular Price Was:'}
+                            {language === 'bn' ? 'রেগুলার প্রাইস:' : 'Regular Price:'}
                             <span className="relative inline-flex items-center justify-center px-3 not-italic">
                                 <span className="absolute left-0 right-0 h-[2px] bg-red-500/80 rounded rotate-[-4deg]" />
                                 <span className="font-extrabold text-slate-500 text-lg md:text-xl">
@@ -694,7 +694,7 @@ const GardenFunnelLayout = ({
                         {/* Special Asymmetric Highlight Plaque for Offer Price */}
                         <div className="relative inline-block px-10 py-5 mx-auto bg-gradient-to-r from-brand via-[#8B5CF6] to-[#BC14CD] text-white shadow-xl rounded-[2rem_0.5rem_2rem_0.5rem] border border-brand/30 transform rotate-[-1deg] max-w-sm">
                             <div className="font-black text-lg md:text-xl tracking-wide flex items-center justify-center gap-2 flex-wrap text-white/95">
-                                {language === 'bn' ? 'অফার প্রাইস মাত্র' : 'Discount Price Only'}
+                                {language === 'bn' ? 'অফার প্রাইস' : 'Discount Price'}
                                 <span className="relative z-10 font-black text-yellow-400 text-2xl md:text-3xl drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.6)] px-1">
                                     ৳{language === 'bn' ? toBanglaNumber(Math.floor(product.sale_price || product.regular_price)) : Math.floor(product.sale_price || product.regular_price)}
                                 </span>

@@ -650,7 +650,7 @@ const ComboFunnelLayout = ({
             <div className="w-full shadow-lg relative z-20">
                 <div className="bg-green-100 py-4 text-center text-[#3D1625] font-black text-lg md:text-xl tracking-wide border-b border-[#e2d8cd]">
                     <span className="flex items-center justify-center gap-2 flex-wrap">
-                        {language === 'bn' ? 'রেগুলার প্রাইস:' : 'Regular Price Was:'}
+                        {language === 'bn' ? 'রেগুলার প্রাইস:' : 'Regular Price:'}
                         <span className="relative inline-flex items-center justify-center px-3">
                             <span className="absolute left-0 right-0 h-1 bg-red-600 rounded rotate-[-4deg]" />
                             <span className="relative z-10 font-black">
@@ -665,7 +665,7 @@ const ComboFunnelLayout = ({
 
                 <div className="bg-green-900 py-5 text-center text-white font-black text-xl md:text-2xl tracking-wide shadow-inner">
                     <span className="flex items-center justify-center gap-2 flex-wrap">
-                        {language === 'bn' ? 'অফার প্রাইস মাত্র' : 'Discount Price Only'}
+                        {language === 'bn' ? 'অফার প্রাইস' : 'Discount Price'}
                         <span className="relative inline-block px-4 py-1.5 mx-2 bg-[#ECC100] text-[#3D1625] rounded-xl shadow-lg transform rotate-[-1deg]">
                             <span className="relative z-10 font-extrabold">
                                 ৳{language === 'bn' 
