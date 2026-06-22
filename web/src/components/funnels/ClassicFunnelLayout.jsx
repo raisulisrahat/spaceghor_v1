@@ -471,7 +471,7 @@ const ClassicFunnelLayout = ({
                 {/* Green Strip */}
                 <div className="bg-gradient-to-r from-[#065F46] via-[#059669] to-[#065F46] py-6 text-center text-white font-black text-3xl md:text-4xl tracking-wide shadow-inner">
                     <span className="flex items-center justify-center gap-1 md:gap-3 flex-wrap">
-                        {language === 'bn' ? 'অফার প্রাইস' : 'Offer Price Only'}
+                        {language === 'bn' ? 'অফার প্রাইস' : 'Offer Price'}
                         <span className="relative inline-block px-6 py-2 mx-2">
                             <svg className="absolute inset-0 w-full h-full text-white pointer-events-none" viewBox="0 0 100 40" preserveAspectRatio="none">
                                 <path
