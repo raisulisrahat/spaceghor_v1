@@ -456,7 +456,7 @@ const ClassicFunnelLayout = ({
                     <span className="flex items-center justify-center gap-1 md:gap-3 flex-wrap">
                         {language === 'bn' ? 'রেগুলার প্রাইস আগে ছিলো:' : 'Regular Price Was Before:'}
                         <span className="relative inline-flex items-center justify-center px-4 py-1">
-                            <svg className="absolute inset-0 w-full h-full text-red-600 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <svg className="absolute inset-0 w-full h-full text-yellow-300 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
                                 <line x1="5" y1="15" x2="95" y2="85" stroke="currentColor" strokeWidth="8" strokeLinecap="round" className="animate-draw-line-1" />
                                 <line x1="95" y1="15" x2="5" y2="85" stroke="currentColor" strokeWidth="8" strokeLinecap="round" className="animate-draw-line-2" />
                             </svg>
