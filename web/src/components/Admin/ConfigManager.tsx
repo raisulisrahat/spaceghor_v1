@@ -564,7 +564,10 @@ const ConfigManager = () => {
                                         <button
                                             type="button"
                                             onClick={() => {
-                                                const token = 'cb_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                                                const token = crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                                                    var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                                                    return v.toString(16);
+                                                });
                                                 setConfig(prev => ({ ...prev, webhook_auth_token: token }));
                                             }}
                                             className="p-3 bg-zinc-100 text-zinc-600 rounded-xl hover:bg-zinc-200 transition-all active:scale-95 font-bold text-[10px] uppercase tracking-wider whitespace-nowrap"
