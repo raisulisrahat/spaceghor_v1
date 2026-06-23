@@ -2819,8 +2819,11 @@ class SitemapView(View):
         return HttpResponse(xml_content, content_type="application/xml")
 
 
-class CourierWebhookView(generics.GenericAPIView):
+class CourierWebhookView(APIView):
     permission_classes = [permissions.AllowAny]
+    
+    def get(self, request, *args, **kwargs):
+        return Response({"message": "Courier Webhook Endpoint. Please POST updates here."}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         # 1. Authenticate webhook request

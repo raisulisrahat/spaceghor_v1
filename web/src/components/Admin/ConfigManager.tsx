@@ -535,13 +535,13 @@ const ConfigManager = () => {
                                         <input
                                             type="text"
                                             readOnly
-                                            value={`${window.location.origin}/api/webhooks/courier/`}
+                                            value={`${BASE_URL.replace(/\/$/, '')}/api/webhooks/courier/`}
                                             className="flex-1 bg-zinc-100 border border-zinc-200 p-3 rounded-xl font-mono text-[10px] text-zinc-500 outline-none"
                                         />
                                         <button 
                                             type="button"
                                             onClick={() => {
-                                                navigator.clipboard.writeText(`${window.location.origin}/api/webhooks/courier/`);
+                                                navigator.clipboard.writeText(`${BASE_URL.replace(/\/$/, '')}/api/webhooks/courier/`);
                                                 alert('URL copied');
                                             }}
                                             className="p-3 bg-brand text-white rounded-xl hover:bg-black transition-all active:scale-95"
@@ -552,14 +552,26 @@ const ConfigManager = () => {
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest ml-1">Secure Auth Token</label>
-                                    <input
-                                        type="text"
-                                        name="webhook_auth_token"
-                                        value={config.webhook_auth_token || ''}
-                                        onChange={handleChange}
-                                        className="w-full bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-mono text-zinc-900 text-xs"
-                                        placeholder="Secret bearer token..."
-                                    />
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="text"
+                                            name="webhook_auth_token"
+                                            value={config.webhook_auth_token || ''}
+                                            onChange={handleChange}
+                                            className="flex-1 bg-zinc-50 border border-zinc-200 p-3 rounded-xl focus:ring-2 focus:ring-brand/5 outline-none transition-all font-mono text-zinc-900 text-xs"
+                                            placeholder="Secret bearer token..."
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const token = 'cb_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                                                setConfig(prev => ({ ...prev, webhook_auth_token: token }));
+                                            }}
+                                            className="p-3 bg-zinc-100 text-zinc-600 rounded-xl hover:bg-zinc-200 transition-all active:scale-95 font-bold text-[10px] uppercase tracking-wider whitespace-nowrap"
+                                        >
+                                            Generate
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
