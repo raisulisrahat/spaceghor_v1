@@ -282,13 +282,19 @@ const OfferPage = () => {
 
     const subtotal = calculateSubtotal();
 
+    
+    const hasTrackedSuccessRef = useRef(false);
+  
     // Track Purchase Event when isSuccess becomes true
     useEffect(() => {
-        if (isSuccess && createdOrder) {
+        if (isSuccess && !hasTrackedSuccessRef.current) {
+            hasTrackedSuccessRef.current = true;
             window.scrollTo(0, 0);
+            
+            // Facebook Purchase Event
             if ((window as any).fbq) {
                 (window as any).fbq('track', 'Purchase', {
-                    value: parseFloat(createdOrder.total_amount) || currentPrice,
+                    value: currentPrice,
                     currency: 'BDT',
                     content_name: funnelData.product_details.name,
                     content_type: 'product'
@@ -309,7 +315,6 @@ const OfferPage = () => {
                     event: 'purchase',
                     customer_name: createdOrder.customer_name || formData.customer_name,
                     customer_phone: finalPhone,
-                    phone_number: finalPhone,
                     customer_address: finalAddress,
                     address: finalAddress,
                     total_amount: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),
