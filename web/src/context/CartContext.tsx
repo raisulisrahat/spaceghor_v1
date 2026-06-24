@@ -7,6 +7,7 @@ interface CartItem {
   price: string;
   image: string;
   quantity: number;
+  sku?: string;
   color?: { id: number, name: string };
   size?: { id: number, name: string, code: string };
   cartKey: string;
@@ -87,6 +88,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: product.id,
         name: product.name,
         slug: product.slug,
+        sku: product.sku,
         price: cleanPrice,
         image: itemImage,
         quantity: Math.min(quantity, stockLimit),

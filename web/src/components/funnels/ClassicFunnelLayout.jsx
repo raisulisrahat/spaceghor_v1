@@ -491,7 +491,7 @@ const ClassicFunnelLayout = ({
                     </span>
                 </div>
             </div>
-            
+
             <div className="mt-10 text-center">
                             <button 
                                 onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
@@ -916,9 +916,7 @@ const ClassicFunnelLayout = ({
                                 >
                                     <div className="absolute inset-0 w-[50%] h-full bg-white/30 skew-x-[-20deg] translate-x-[-200%] group-hover:animate-[shimmer_2s_infinite]"></div>
                                     {submitting ? '...' : (
-                                        <>
-                                            {t('place_order')} <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={28} />
-                                        </>
+                                        <span>{submitting ? 'অর্ডার প্রসেস হচ্ছে...' : 'অর্ডার কনফার্ম করুন'} <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={28} /></span>
                                     )}
                                 </button>
                             </form>

@@ -311,7 +311,7 @@ const OfferPage = () => {
                     order_id: createdOrder.id,
                     quantity: totalQty,
                     ip_address: createdOrder.ip_address || ipAddress,
-                    content_ids: createdOrder.items ? createdOrder.items.map((item: any) => item.product.toString()) : [funnelData.product_details.id.toString()],
+                    content_ids: createdOrder.items ? createdOrder.items.map((item: any) => item.product_details?.sku || item.product.toString()) : [funnelData.product_details.sku || funnelData.product_details.id.toString()],
                     content_name: funnelData.product_details.name,
                     content_type: 'product',
                     ecommerce: {

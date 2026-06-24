@@ -1114,7 +1114,7 @@ const ComboFunnelLayout = ({
                                 className="w-full bg-green-900 hover:bg-green-700/80 text-white font-black text-2xl py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-3 disabled:opacity-75 disabled:cursor-not-allowed"
                             >
                                 <Lock size={24} className="shrink-0 animate-pulse text-white/90" />
-                                {submitting ? '...' : t('place_order')}
+                                 <span>{submitting ? 'অর্ডার প্রসেস হচ্ছে...' : 'অর্ডার কনফার্ম করুন'}</span>
                             </button>
                         </form>
                     </div>
