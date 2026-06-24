@@ -294,6 +294,9 @@ const Checkout = () => {
           order_id: orderId,
           quantity: totalQuantityVal,
           ip_address: ipAddress,
+          content_ids: cart.map(item => item.id.toString()),
+          content_name: cart.map(item => item.name).join(', '),
+          content_type: 'product',
           ecommerce: {
             transaction_id: orderId,
             value: totalAmountVal,
@@ -530,6 +533,9 @@ const Checkout = () => {
           order_id: res.data?.id || `checkout_${Date.now()}`,
           quantity: cart.reduce((total, item) => total + item.quantity, 0),
           ip_address: res.data?.ip_address || ipAddress,
+          content_ids: cart.map(item => item.id.toString()),
+          content_name: cart.map(item => item.name).join(', '),
+          content_type: 'product',
           ecommerce: {
             transaction_id: res.data?.id || `checkout_${Date.now()}`,
             value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),

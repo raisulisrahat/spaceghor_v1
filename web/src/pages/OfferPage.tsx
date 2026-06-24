@@ -311,6 +311,9 @@ const OfferPage = () => {
                     order_id: createdOrder.id,
                     quantity: totalQty,
                     ip_address: createdOrder.ip_address || ipAddress,
+                    content_ids: createdOrder.items ? createdOrder.items.map((item: any) => item.product.toString()) : [funnelData.product_details.id.toString()],
+                    content_name: funnelData.product_details.name,
+                    content_type: 'product',
                     ecommerce: {
                         transaction_id: createdOrder.id,
                         value: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),

@@ -37,6 +37,7 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         };
 
         fbScript();
+        (window as any).fbq('set', 'autoConfig', false, pixelId);
         (window as any).fbq('init', pixelId);
         (window as any).fbq('track', 'PageView');
     }, [pixelId]);

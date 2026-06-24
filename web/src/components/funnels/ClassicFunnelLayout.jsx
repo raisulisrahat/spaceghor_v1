@@ -491,6 +491,15 @@ const ClassicFunnelLayout = ({
                     </span>
                 </div>
             </div>
+            
+            <div className="mt-10 text-center">
+                            <button 
+                                onClick={() => document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="bg-brand text-white px-8 py-5 rounded-full text-md md:text-xl font-black shadow-2xl shadow-brand/30 transform transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-4 mx-auto uppercase tracking-tighter"
+                            >
+                                <ShoppingCart size={20} /> অর্ডার করতে ক্লিক করুন
+                            </button>
+            </div>
 
             {/* Custom Keyframes embedded via inline style for tailwind classes if needed, but we can just use tailwind default or we'll define a quick style block */}
             <style dangerouslySetInnerHTML={{

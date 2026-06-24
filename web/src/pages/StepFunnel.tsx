@@ -348,6 +348,9 @@ const StepFunnel = () => {
                     shipping_cost: shippingCost,
                     total_amount: parseFloat(res.data?.total_amount) || finalTotal,
                     ip_address: res.data?.ip_address || ipAddress,
+                    content_ids: [product.id.toString()],
+                    content_name: product.name,
+                    content_type: 'product',
                     ecommerce: {
                         transaction_id: res.data?.id || `stepfunnel_${Date.now()}`,
                         value: parseFloat(res.data?.total_amount) || finalTotal,
