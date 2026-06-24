@@ -11,8 +11,8 @@ const ContactUs = () => {
   const siteEmail = `support@${formattedSiteTitle}.com`;
   const contactPhone = settings?.support_phone || "01516-542909";
   const whatsappNumber = settings?.whatsapp_number || "01516-542909";
-  const facebookLink = settings?.facebook_url || "https://www.facebook.com/Spaceghor";
-  const messengerLink = settings?.messenger_url || "https://m.me/Spaceghor";
+  const facebookLink = settings?.facebook_url || "https://www.facebook.com/timespace24";
+  const messengerLink = settings?.messenger_url || "https://m.me/timespace24";
 
   return (
     <div className="bg-white min-h-screen">
