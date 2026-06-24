@@ -181,6 +181,7 @@ def compress_image(image_field, max_width=1200):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True, null=True)
+    sku = models.CharField(max_length=50, unique=True, blank=True, help_text="Auto-generated Stock Keeping Unit")
     description = models.TextField()
     short_description = models.TextField(blank=True, help_text="Enter key features, one per line")
     regular_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -209,6 +210,13 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+
+        if not self.sku:
+            while True:
+                new_sku = 'SKU-' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+                if not Product.objects.filter(sku=new_sku).exists():
+                    self.sku = new_sku
+                    break
 
         if self.image and not self.image.name.endswith('.webp'):
             compress_image(self.image)
