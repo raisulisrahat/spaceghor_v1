@@ -25,6 +25,7 @@ const Checkout = () => {
     return saved ? parseInt(saved, 10) : null;
   });
   const isOrderSubmittedRef = useRef(false);
+  const hasTrackedSuccessRef = useRef(false);
   const hasSentBeginCheckoutRef = useRef(false);
 
   useEffect(() => {
@@ -275,7 +276,8 @@ const Checkout = () => {
 
     if (status === 'success') {
       // Google Tag Manager dataLayer Purchase Event
-      if ((window as any).dataLayer && cart.length > 0) {
+      if ((window as any).dataLayer && cart.length > 0 && !hasTrackedSuccessRef.current) {
+        hasTrackedSuccessRef.current = true;
         const orderId = searchParams.get('order_id') || `checkout_${Date.now()}`;
         const finalName = name || formData.name;
         const finalPhone = phone || formData.phone;
@@ -514,7 +516,11 @@ const Checkout = () => {
       }
 
       // Google Tag Manager dataLayer Purchase Event
-      if ((window as any).dataLayer) {
+      if ((window as any).dataLayer && !hasTrackedSuccessRef.current) {
+        hasTrackedSuccessRef.current = true;
+        
+        const totalAmountVal = parseFloat(res.data?.total_amount) || (cartTotal + shippingCost);
+        
         (window as any).dataLayer.push({
           event: 'purchase',
           customer_name: res.data?.customer_name || formData.name,

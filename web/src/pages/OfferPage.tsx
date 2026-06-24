@@ -291,16 +291,6 @@ const OfferPage = () => {
             hasTrackedSuccessRef.current = true;
             window.scrollTo(0, 0);
             
-            // Facebook Purchase Event
-            if ((window as any).fbq) {
-                (window as any).fbq('track', 'Purchase', {
-                    value: currentPrice,
-                    currency: 'BDT',
-                    content_name: funnelData.product_details.name,
-                    content_type: 'product'
-                });
-            }
-
             // Google Tag Manager dataLayer Purchase Event
             if ((window as any).dataLayer) {
                 const totalQty = createdOrder.items?.reduce((sum: number, item: any) => sum + item.quantity, 0) || 

@@ -332,16 +332,6 @@ const StepFunnel = () => {
 
             setIsSuccess(true);
             
-            // Facebook Purchase Event
-            if ((window as any).fbq) {
-                (window as any).fbq('track', 'Purchase', {
-                    value: finalTotal,
-                    currency: 'BDT',
-                    content_name: product.name,
-                    content_type: 'product'
-                });
-            }
-
             // Google Tag Manager dataLayer Purchase Event
             if ((window as any).dataLayer) {
                 const finalAddress = res.data?.address || `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`;
