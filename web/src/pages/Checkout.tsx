@@ -27,6 +27,17 @@ const Checkout = () => {
   const isOrderSubmittedRef = useRef(false);
   const hasTrackedSuccessRef = useRef(false);
   const hasSentBeginCheckoutRef = useRef(false);
+  const checkoutStartTimeRef = useRef(Date.now());
+  const hasReachedFourMinutesRef = useRef(false);
+  const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      hasReachedFourMinutesRef.current = true;
+      setFourMinuteTrigger(true);
+    }, 4 * 60 * 1000); // 4 minutes
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (draftOrderId) {
@@ -324,6 +335,16 @@ const Checkout = () => {
             })
           }
         });
+
+        // Explicit Facebook Pixel Event Tracking
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Purchase', {
+            value: totalAmountVal,
+            currency: 'BDT',
+            content_ids: cart.map(item => item.sku || item.id.toString()),
+            content_type: 'product'
+          });
+        }
       }
       setIsSuccess(true);
       clearCart();
@@ -339,8 +360,10 @@ const Checkout = () => {
 
   // Debounced draft auto-save
   useEffect(() => {
+    if (settings?.enable_draft_orders === false) return;
     const hasContact = formData.phone.length >= 3 || formData.name.length >= 3;
     if (!hasContact || cart.length === 0) return;
+    if (!hasReachedFourMinutesRef.current) return;
 
     const timer = setTimeout(async () => {
       if (isOrderSubmittedRef.current) return;
@@ -376,14 +399,16 @@ const Checkout = () => {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [formData, cart, shippingZoneId, selectedPaymentMethod, shippingCost, cartTotal, draftOrderId]);
+  }, [formData, cart, shippingZoneId, selectedPaymentMethod, shippingCost, cartTotal, draftOrderId, fourMinuteTrigger, settings?.enable_draft_orders]);
 
   // Immediate save on unmount / beforeunload
   const saveDraftImmediatelyRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     saveDraftImmediatelyRef.current = () => {
+      if (settings?.enable_draft_orders === false) return;
       if (isOrderSubmittedRef.current) return;
+      if (!hasReachedFourMinutesRef.current) return;
       const hasContact = formData.phone.length >= 3 || formData.name.length >= 3;
       if (!hasContact || cart.length === 0) return;
 
@@ -438,7 +463,7 @@ const Checkout = () => {
         .catch(err => console.error("Error creating draft beforeunload:", err));
       }
     };
-  }, [formData, cart, shippingZoneId, selectedPaymentMethod, shippingCost, cartTotal, draftOrderId]);
+  }, [formData, cart, shippingZoneId, selectedPaymentMethod, shippingCost, cartTotal, draftOrderId, settings?.enable_draft_orders]);
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -563,6 +588,16 @@ const Checkout = () => {
             })
           }
         });
+
+        // Explicit Facebook Pixel Event Tracking
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Purchase', {
+            value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
+            currency: 'BDT',
+            content_ids: cart.map(item => item.sku || item.id.toString()),
+            content_type: 'product'
+          });
+        }
       }
 
       setIsSuccess(true);

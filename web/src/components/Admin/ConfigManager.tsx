@@ -423,6 +423,23 @@ const ConfigManager = () => {
                                 <div className="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"></div>
                             </label>
                         </div>
+
+                        <div className="flex items-center justify-between p-4 bg-zinc-50 rounded-2xl border border-zinc-200">
+                            <div>
+                                <span className="text-[10px] font-bold text-zinc-900 uppercase tracking-widest block">Enable Draft Orders</span>
+                                <span className="text-[9px] font-medium text-zinc-400 block mt-0.5">Allow the system to automatically save abandoned checkouts as incomplete orders</span>
+                            </div>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    name="enable_draft_orders"
+                                    checked={config.enable_draft_orders || false}
+                                    onChange={handleChange}
+                                    className="sr-only peer"
+                                />
+                                <div className="w-10 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
 

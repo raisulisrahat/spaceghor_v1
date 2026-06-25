@@ -529,7 +529,43 @@ const OrderManager = () => {
             (order.customer_name && order.customer_name.toLowerCase().includes(search.toLowerCase())) ||
             (order.phone_number && order.phone_number.includes(search)) ||
             matchesProduct;
-        return matchesSearch;
+            
+        let matchesDate = true;
+        const orderDate = new Date(order.created_at);
+        const today = new Date();
+        if (activeDateFilter === '24h') {
+            const oneDayAgo = new Date(today);
+            oneDayAgo.setHours(today.getHours() - 24);
+            matchesDate = orderDate >= oneDayAgo;
+        } else if (activeDateFilter === '7d') {
+            const sevenDaysAgo = new Date(today);
+            sevenDaysAgo.setDate(today.getDate() - 7);
+            matchesDate = orderDate >= sevenDaysAgo;
+        } else if (activeDateFilter === '30d') {
+            const thirtyDaysAgo = new Date(today);
+            thirtyDaysAgo.setDate(today.getDate() - 30);
+            matchesDate = orderDate >= thirtyDaysAgo;
+        } else if (activeDateFilter === 'Max') {
+            matchesDate = true;
+        } else if (activeDateFilter === 'Custom') {
+            if (dateRange.start) {
+                const startDate = new Date(dateRange.start);
+                startDate.setHours(0, 0, 0, 0);
+                matchesDate = matchesDate && orderDate >= startDate;
+            }
+            if (dateRange.end) {
+                const endDate = new Date(dateRange.end);
+                endDate.setHours(23, 59, 59, 999);
+                matchesDate = matchesDate && orderDate <= endDate;
+            }
+        }
+
+        const matchesOrderType =
+            orderType === 'all' ? true :
+                orderType === 'standard' ? !order.funnel :
+                    orderType === 'funnel' ? !!order.funnel : true;
+
+        return matchesSearch && matchesDate && matchesOrderType;
     });
 
     // Pagination Logic
@@ -696,7 +732,6 @@ const OrderManager = () => {
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
-                        {activeView === 'real' && (
                             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
                                 <div className="flex items-center bg-zinc-100 border border-zinc-200 rounded-lg p-1 shadow-sm w-full sm:w-auto overflow-x-auto no-scrollbar">
                                     {['24h', '7d', '30d', 'Max'].map((range) => (
@@ -745,7 +780,6 @@ const OrderManager = () => {
                                     </select>
                                 </div>
                             </div>
-                        )}
                     </div>
 
                     {showCustomDate && (

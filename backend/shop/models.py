@@ -181,7 +181,7 @@ def compress_image(image_field, max_width=1200):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    sku = models.CharField(max_length=50, unique=True, blank=True, help_text="Auto-generated Stock Keeping Unit")
+    sku = models.CharField(max_length=50, unique=True, blank=True, null=True, help_text="Auto-generated Stock Keeping Unit")
     description = models.TextField()
     short_description = models.TextField(blank=True, help_text="Enter key features, one per line")
     regular_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -583,6 +583,7 @@ class SiteSettings(models.Model):
     show_chat_bubble = models.BooleanField(default=True, help_text="Show floating chat bubble on the site")
     session_timeout_minutes = models.PositiveIntegerField(default=60, help_text="User session timeout in minutes")
     enable_district_upazila = models.BooleanField(default=True, help_text="Enable District and Upazila fields in checkout")
+    enable_draft_orders = models.BooleanField(default=True, help_text="Enable/Disable Draft (Incomplete) Order system")
 
     # SMS Configuration (BulkSMSBD)
     sms_api_key = models.CharField(max_length=255, blank=True, null=True, help_text="API Key for BulkSMSBD")

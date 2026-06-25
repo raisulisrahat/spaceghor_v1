@@ -101,6 +101,17 @@ const OfferPage = () => {
     });
 
     const hasSentBeginCheckoutRef = useRef(false);
+    const checkoutStartTimeRef = useRef(Date.now());
+    const hasReachedFourMinutesRef = useRef(false);
+    const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            hasReachedFourMinutesRef.current = true;
+            setFourMinuteTrigger(true);
+        }, 2 * 60 * 1000); // 2 minutes
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         if (funnelData?.product_details && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
@@ -335,6 +346,16 @@ const OfferPage = () => {
                         }]
                     }
                 });
+
+                // Explicit Facebook Pixel Event Tracking
+                if (typeof (window as any).fbq === 'function') {
+                    (window as any).fbq('track', 'Purchase', {
+                        value: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),
+                        currency: 'BDT',
+                        content_ids: createdOrder.items ? createdOrder.items.map((item: any) => item.product_details?.sku || item.product.toString()) : [funnelData.product_details.sku || funnelData.product_details.id.toString()],
+                        content_type: 'product'
+                    });
+                }
             }
         }
     }, [isSuccess, createdOrder, funnelData, currentPrice, selectedVariants, subtotal, shippingCost, formData, upazilas, districts, siteSettings, ipAddress]);
@@ -407,8 +428,10 @@ const OfferPage = () => {
 
     // Debounced draft auto-save
     useEffect(() => {
+        if (siteSettings?.enable_draft_orders === false) return;
         const hasContact = formData.phone_number.length >= 3 || formData.customer_name.length >= 3;
         if (!hasContact || !funnelData) return;
+        if (!hasReachedFourMinutesRef.current) return;
 
         const timer = setTimeout(async () => {
             if (isOrderSubmittedRef.current) return;
@@ -483,14 +506,16 @@ const OfferPage = () => {
         }, 2000);
 
         return () => clearTimeout(timer);
-    }, [formData, selectedVariants, shippingCost, subtotal, funnelData, draftOrderId, shippingZones, districts, siteSettings]);
+    }, [formData, selectedVariants, shippingCost, subtotal, funnelData, draftOrderId, shippingZones, districts, siteSettings, fourMinuteTrigger]);
 
     // Immediate save on unmount / beforeunload
     const saveDraftImmediatelyRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
         saveDraftImmediatelyRef.current = () => {
+            if (siteSettings?.enable_draft_orders === false) return;
             if (isOrderSubmittedRef.current) return;
+            if (!hasReachedFourMinutesRef.current) return;
             const hasContact = formData.phone_number.length >= 3 || formData.customer_name.length >= 3;
             if (!hasContact || !funnelData) return;
 

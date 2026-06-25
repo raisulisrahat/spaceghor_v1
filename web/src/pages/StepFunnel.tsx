@@ -96,6 +96,17 @@ const StepFunnel = () => {
     });
 
     const hasSentBeginCheckoutRef = useRef(false);
+    const checkoutStartTimeRef = useRef(Date.now());
+    const hasReachedFourMinutesRef = useRef(false);
+    const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            hasReachedFourMinutesRef.current = true;
+            setFourMinuteTrigger(true);
+        }, 2 * 60 * 1000); // 2 minutes
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         if (product && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
@@ -170,8 +181,10 @@ const StepFunnel = () => {
 
     // Debounced draft auto-save
     useEffect(() => {
+        if (siteSettings?.enable_draft_orders === false) return;
         const hasContact = formData.phone_number.length >= 3 || formData.customer_name.length >= 3;
         if (!hasContact || !product) return;
+        if (!hasReachedFourMinutesRef.current) return;
 
         const timer = setTimeout(async () => {
             if (isOrderSubmittedRef.current) return;
@@ -205,14 +218,16 @@ const StepFunnel = () => {
         }, 2000);
 
         return () => clearTimeout(timer);
-    }, [formData, product, selectedZone, shippingCost, finalTotal, draftOrderId]);
+    }, [formData, product, selectedZone, shippingCost, finalTotal, draftOrderId, fourMinuteTrigger, siteSettings?.enable_draft_orders]);
 
     // Immediate save on unmount / beforeunload
     const saveDraftImmediatelyRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
         saveDraftImmediatelyRef.current = () => {
+            if (siteSettings?.enable_draft_orders === false) return;
             if (isOrderSubmittedRef.current) return;
+            if (!hasReachedFourMinutesRef.current) return;
             const hasContact = formData.phone_number.length >= 3 || formData.customer_name.length >= 3;
             if (!hasContact || !product) return;
 
@@ -265,7 +280,7 @@ const StepFunnel = () => {
                 .catch(err => console.error("Error creating draft beforeunload:", err));
             }
         };
-    }, [formData, product, selectedZone, shippingCost, finalTotal, draftOrderId, slug, upazilas, districts, currentPrice]);
+    }, [formData, product, selectedZone, shippingCost, finalTotal, draftOrderId, slug, upazilas, districts, currentPrice, siteSettings?.enable_draft_orders]);
 
     useEffect(() => {
         const handleBeforeUnload = () => {
@@ -365,6 +380,16 @@ const StepFunnel = () => {
                         }]
                     }
                 });
+
+                // Explicit Facebook Pixel Event Tracking
+                if (typeof (window as any).fbq === 'function') {
+                    (window as any).fbq('track', 'Purchase', {
+                        value: parseFloat(res.data?.total_amount) || finalTotal,
+                        currency: 'BDT',
+                        content_ids: [product.sku || product.id.toString()],
+                        content_type: 'product'
+                    });
+                }
             }
         } catch (err) {
             console.error("Order failed", err);

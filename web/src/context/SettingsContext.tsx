@@ -27,6 +27,7 @@ interface SiteSettings {
   google_tag_id?: string;
   google_tag_manager_id?: string;
   enable_district_upazila?: boolean;
+  enable_draft_orders?: boolean;
 }
 
 interface SettingsContextType {
