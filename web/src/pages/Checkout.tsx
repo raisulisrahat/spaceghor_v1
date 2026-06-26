@@ -103,16 +103,7 @@ const Checkout = () => {
               (window as any).gtag('event', 'begin_checkout', ecommerceData);
           }
 
-          if (typeof (window as any).fbq === 'function') {
-            (window as any).fbq('track', 'InitiateCheckout', {
-              value: cartTotal,
-              currency: 'BDT',
-              content_ids: cart.map(item => item.sku || item.id.toString()),
-              content_name: cart.map(item => item.name).join(', '),
-              content_type: 'product',
-              num_items: cart.reduce((total, item) => total + item.quantity, 0)
-            }, { eventID: eventId });
-          }
+
 
           (window as any).__tracked_gtm_checkout = true;
         }
@@ -367,15 +358,7 @@ const Checkout = () => {
           }
         });
 
-        // Explicit Facebook Pixel Event Tracking
-        if (typeof (window as any).fbq === 'function') {
-          (window as any).fbq('track', 'Purchase', {
-            value: totalAmountVal,
-            currency: 'BDT',
-            content_ids: cart.map(item => item.sku || item.id.toString()),
-            content_type: 'product'
-          });
-        }
+
       }
       setIsSuccess(true);
       clearCart();
@@ -620,15 +603,7 @@ const Checkout = () => {
           }
         });
 
-        // Explicit Facebook Pixel Event Tracking
-        if (typeof (window as any).fbq === 'function') {
-          (window as any).fbq('track', 'Purchase', {
-            value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
-            currency: 'BDT',
-            content_ids: cart.map(item => item.sku || item.id.toString()),
-            content_type: 'product'
-          });
-        }
+
       }
 
       setIsSuccess(true);

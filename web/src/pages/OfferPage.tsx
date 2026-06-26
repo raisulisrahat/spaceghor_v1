@@ -150,16 +150,7 @@ const OfferPage = () => {
                         (window as any).gtag('event', 'begin_checkout', ecommerceData);
                     }
 
-                    if (typeof (window as any).fbq === 'function') {
-                        (window as any).fbq('track', 'InitiateCheckout', {
-                            value: priceVal,
-                            currency: 'BDT',
-                            content_ids: [product.sku || product.id?.toString()],
-                            content_name: product.name,
-                            content_type: 'product',
-                            num_items: 1
-                        }, { eventID: eventId });
-                    }
+
 
                     (window as any).__tracked_gtm_offer = true;
                 }
@@ -377,15 +368,7 @@ const OfferPage = () => {
                     }
                 });
 
-                // Explicit Facebook Pixel Event Tracking
-                if (typeof (window as any).fbq === 'function') {
-                    (window as any).fbq('track', 'Purchase', {
-                        value: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),
-                        currency: 'BDT',
-                        content_ids: createdOrder.items ? createdOrder.items.map((item: any) => item.product_details?.sku || item.product.toString()) : [funnelData.product_details.sku || funnelData.product_details.id.toString()],
-                        content_type: 'product'
-                    });
-                }
+
             }
         }
     }, [isSuccess, createdOrder, funnelData, currentPrice, selectedVariants, subtotal, shippingCost, formData, upazilas, districts, siteSettings, ipAddress]);

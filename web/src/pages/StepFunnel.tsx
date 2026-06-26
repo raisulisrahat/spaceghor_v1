@@ -140,16 +140,7 @@ const StepFunnel = () => {
                         (window as any).gtag('event', 'begin_checkout', ecommerceData);
                     }
 
-                    if (typeof (window as any).fbq === 'function') {
-                        (window as any).fbq('track', 'InitiateCheckout', {
-                            value: currentPrice,
-                            currency: 'BDT',
-                            content_ids: [product.sku || product.id?.toString()],
-                            content_name: product.name,
-                            content_type: 'product',
-                            num_items: 1
-                        }, { eventID: eventId });
-                    }
+
 
                     (window as any).__tracked_gtm_step = true;
                 }
@@ -411,15 +402,7 @@ const StepFunnel = () => {
                     }
                 });
 
-                // Explicit Facebook Pixel Event Tracking
-                if (typeof (window as any).fbq === 'function') {
-                    (window as any).fbq('track', 'Purchase', {
-                        value: parseFloat(res.data?.total_amount) || finalTotal,
-                        currency: 'BDT',
-                        content_ids: [product.sku || product.id.toString()],
-                        content_type: 'product'
-                    });
-                }
+
             }
         } catch (err) {
             console.error("Order failed", err);
