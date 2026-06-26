@@ -151,6 +151,16 @@ const OfferPage = () => {
                     }
 
 
+                    if (typeof (window as any).fbq === 'function') {
+                        (window as any).fbq('track', 'InitiateCheckout', {
+                            value: priceVal,
+                            currency: 'BDT',
+                            content_ids: [product.sku || product.id?.toString()],
+                            content_name: product.name,
+                            content_type: 'product',
+                            num_items: 1
+                        }, { eventID: eventId });
+                    }
 
                     (window as any).__tracked_gtm_offer = true;
                 }
