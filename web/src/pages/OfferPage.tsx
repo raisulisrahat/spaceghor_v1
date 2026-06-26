@@ -125,19 +125,33 @@ const OfferPage = () => {
             
             if (!hasPushedGTMRef.current && (window as any).dataLayer) {
                 if (!(window as any).__tracked_gtm_offer) {
+                    const eventId = `checkout_${Date.now()}`;
                     (window as any).dataLayer.push({
                         event: 'begin_checkout',
+                        event_id: eventId,
                         ecommerce: {
                             value: priceVal,
                             currency: 'BDT',
                             items: [{
                                 item_name: product.name,
-                                item_id: product.id?.toString(),
+                                item_id: product.sku || product.id?.toString(),
                                 price: priceVal.toString(),
                                 quantity: 1
                             }]
                         }
                     });
+
+                    if (typeof (window as any).fbq === 'function') {
+                        (window as any).fbq('track', 'InitiateCheckout', {
+                            value: priceVal,
+                            currency: 'BDT',
+                            content_ids: [product.sku || product.id?.toString()],
+                            content_name: product.name,
+                            content_type: 'product',
+                            num_items: 1
+                        }, { eventID: eventId });
+                    }
+
                     (window as any).__tracked_gtm_offer = true;
                 }
                 hasPushedGTMRef.current = true;
