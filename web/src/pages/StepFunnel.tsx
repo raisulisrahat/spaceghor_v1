@@ -141,16 +141,21 @@ const StepFunnel = () => {
                     }
 
 
-                    if (typeof (window as any).fbq === 'function') {
-                        (window as any).fbq('track', 'InitiateCheckout', {
-                            value: currentPrice,
-                            currency: 'BDT',
-                            content_ids: [product.sku || product.id?.toString()],
-                            content_name: product.name,
-                            content_type: 'product',
-                            num_items: 1
-                        }, { eventID: eventId });
-                    }
+                    const firePixel = () => {
+                        if (typeof (window as any).fbq === 'function') {
+                            (window as any).fbq('track', 'InitiateCheckout', {
+                                value: currentPrice,
+                                currency: 'BDT',
+                                content_ids: [product.sku || product.id?.toString()],
+                                content_name: product.name,
+                                content_type: 'product',
+                                num_items: 1
+                            }, { eventID: eventId });
+                        } else {
+                            setTimeout(firePixel, 500);
+                        }
+                    };
+                    firePixel();
 
                     (window as any).__tracked_gtm_step = true;
                 }
@@ -403,7 +408,7 @@ const StepFunnel = () => {
                         currency: 'BDT',
                         items: [{
                             item_name: product.name,
-                            item_id: product.id,
+                            item_id: product.sku || product.id.toString(),
                             price: currentPrice,
                             quantity: 1,
                             color: '',

@@ -151,16 +151,21 @@ const OfferPage = () => {
                     }
 
 
-                    if (typeof (window as any).fbq === 'function') {
-                        (window as any).fbq('track', 'InitiateCheckout', {
-                            value: priceVal,
-                            currency: 'BDT',
-                            content_ids: [product.sku || product.id?.toString()],
-                            content_name: product.name,
-                            content_type: 'product',
-                            num_items: 1
-                        }, { eventID: eventId });
-                    }
+                    const firePixel = () => {
+                        if (typeof (window as any).fbq === 'function') {
+                            (window as any).fbq('track', 'InitiateCheckout', {
+                                value: priceVal,
+                                currency: 'BDT',
+                                content_ids: [product.sku || product.id?.toString()],
+                                content_name: product.name,
+                                content_type: 'product',
+                                num_items: 1
+                            }, { eventID: eventId });
+                        } else {
+                            setTimeout(firePixel, 500);
+                        }
+                    };
+                    firePixel();
 
                     (window as any).__tracked_gtm_offer = true;
                 }
@@ -362,14 +367,14 @@ const OfferPage = () => {
                         currency: 'BDT',
                         items: createdOrder.items?.map((item: any) => ({
                             item_name: item.product_name || item.product_details?.name || funnelData.product_details.name,
-                            item_id: item.product,
+                            item_id: item.product_details?.sku || item.product.toString(),
                             price: parseFloat(item.price),
                             quantity: item.quantity,
                             color: item.color_name || '',
                             size: item.size_name || ''
                         })) || [{
                             item_name: funnelData.product_details.name,
-                            item_id: funnelData.product_details.id,
+                            item_id: funnelData.product_details.sku || funnelData.product_details.id.toString(),
                             price: currentPrice,
                             quantity: 1,
                             color: '',

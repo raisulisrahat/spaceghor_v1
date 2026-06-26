@@ -104,16 +104,21 @@ const Checkout = () => {
           }
 
 
-          if (typeof (window as any).fbq === 'function') {
-            (window as any).fbq('track', 'InitiateCheckout', {
-              value: cartTotal,
-              currency: 'BDT',
-              content_ids: cart.map(item => item.sku || item.id.toString()),
-              content_name: cart.map(item => item.name).join(', '),
-              content_type: 'product',
-              num_items: cart.reduce((total, item) => total + item.quantity, 0)
-            }, { eventID: eventId });
-          }
+          const firePixel = () => {
+            if (typeof (window as any).fbq === 'function') {
+              (window as any).fbq('track', 'InitiateCheckout', {
+                value: cartTotal,
+                currency: 'BDT',
+                content_ids: cart.map(item => item.sku || item.id.toString()),
+                content_name: cart.map(item => item.name).join(', '),
+                content_type: 'product',
+                num_items: cart.reduce((total, item) => total + item.quantity, 0)
+              }, { eventID: eventId });
+            } else {
+              setTimeout(firePixel, 500);
+            }
+          };
+          firePixel();
 
           (window as any).__tracked_gtm_checkout = true;
         }
@@ -347,7 +352,7 @@ const Checkout = () => {
             items: cart.map(item => {
               const itemData: any = {
                 item_name: item.name,
-                item_id: item.id,
+                item_id: item.sku || item.id.toString(),
                 price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
                 quantity: item.quantity,
                 color: item.color?.name || '',
@@ -592,7 +597,7 @@ const Checkout = () => {
             items: cart.map(item => {
               const itemData: any = {
                 item_name: item.name,
-                item_id: item.id,
+                item_id: item.sku || item.id.toString(),
                 price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
                 quantity: item.quantity,
                 color: item.color?.name || '',
