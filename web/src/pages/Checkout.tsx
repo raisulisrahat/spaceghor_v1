@@ -93,21 +93,6 @@ const Checkout = () => {
         }
         hasPushedGTMRef.current = true;
       }
-
-      if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
-        if (!(window as any).__tracked_fb_checkout) {
-          (window as any).fbq('track', 'InitiateCheckout', {
-            value: cartTotal,
-            currency: 'BDT',
-            content_ids: cart.map(item => item.sku || item.id.toString()),
-            content_name: cart.map(item => item.name).join(', '),
-            content_type: 'product',
-            num_items: cart.reduce((total, item) => total + item.quantity, 0)
-          });
-          (window as any).__tracked_fb_checkout = true;
-        }
-        hasPushedFBRef.current = true;
-      }
     }
   }, [cart, cartTotal]);
 

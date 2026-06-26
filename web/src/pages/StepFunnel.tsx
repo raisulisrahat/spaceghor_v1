@@ -132,21 +132,6 @@ const StepFunnel = () => {
                 }
                 hasPushedGTMRef.current = true;
             }
-
-            if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
-                if (!(window as any).__tracked_fb_step) {
-                    (window as any).fbq('track', 'InitiateCheckout', {
-                        value: currentPrice,
-                        currency: 'BDT',
-                        content_ids: [product.sku || product.id?.toString()],
-                        content_name: product.name,
-                        content_type: 'product',
-                        num_items: 1
-                    });
-                    (window as any).__tracked_fb_step = true;
-                }
-                hasPushedFBRef.current = true;
-            }
         }
     }, [product]);
 
