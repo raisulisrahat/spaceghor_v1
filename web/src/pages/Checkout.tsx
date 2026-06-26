@@ -661,7 +661,7 @@ const Checkout = () => {
                 </p>
                 <div className="h-[1px] bg-neutral-200/60" />
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-neutral-500 font-bold">Username (Phone):</span>
+                  <span className="text-neutral-500 font-bold">Phone Number:</span>
                   <span className="font-bold text-neutral-800 bg-white px-3 py-1 rounded-lg border border-neutral-200">{formData.phone}</span>
                 </div>
               </div>
