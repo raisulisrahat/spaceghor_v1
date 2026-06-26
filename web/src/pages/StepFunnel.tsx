@@ -113,23 +113,32 @@ const StepFunnel = () => {
         if (product) {
             const currentPrice = Math.floor(product.sale_price || product.regular_price);
             
-            if (!hasPushedGTMRef.current && (window as any).dataLayer) {
+            if (!hasPushedGTMRef.current) {
                 if (!(window as any).__tracked_gtm_step) {
                     const eventId = `checkout_${Date.now()}`;
-                    (window as any).dataLayer.push({
-                        event: 'begin_checkout',
-                        event_id: eventId,
-                        ecommerce: {
-                            value: currentPrice,
-                            currency: 'BDT',
-                            items: [{
-                                item_name: product.name,
-                                item_id: product.sku || product.id?.toString(),
-                                price: currentPrice.toString(),
-                                quantity: 1
-                            }]
-                        }
-                    });
+                    
+                    const ecommerceData = {
+                        value: currentPrice,
+                        currency: 'BDT',
+                        items: [{
+                            item_name: product.name,
+                            item_id: product.sku || product.id?.toString(),
+                            price: currentPrice.toString(),
+                            quantity: 1
+                        }]
+                    };
+
+                    if ((window as any).dataLayer) {
+                        (window as any).dataLayer.push({
+                            event: 'custom_begin_checkout',
+                            event_id: eventId,
+                            ecommerce: ecommerceData
+                        });
+                    }
+
+                    if (typeof (window as any).gtag === 'function') {
+                        (window as any).gtag('event', 'begin_checkout', ecommerceData);
+                    }
 
                     if (typeof (window as any).fbq === 'function') {
                         (window as any).fbq('track', 'InitiateCheckout', {

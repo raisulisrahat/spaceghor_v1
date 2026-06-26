@@ -59,13 +59,11 @@ const Checkout = () => {
 
   useEffect(() => {
     if (cart.length > 0) {
-      if (!hasPushedGTMRef.current && (window as any).dataLayer) {
+      if (!hasPushedGTMRef.current) {
         if (!(window as any).__tracked_gtm_checkout) {
           const eventId = `checkout_${Date.now()}`;
-          (window as any).dataLayer.push({
-            event: 'begin_checkout',
-            event_id: eventId,
-            ecommerce: {
+          
+          const ecommerceData = {
               value: cartTotal,
               currency: 'BDT',
               items: cart.map(item => {
@@ -89,8 +87,21 @@ const Checkout = () => {
                 }
                 return itemData;
               })
-            }
-          });
+            };
+
+          // Push to dataLayer with a custom event name to intentionally bypass any rogue GTM Facebook tags
+          if ((window as any).dataLayer) {
+              (window as any).dataLayer.push({
+                event: 'custom_begin_checkout',
+                event_id: eventId,
+                ecommerce: ecommerceData
+              });
+          }
+
+          // Explicitly fire GA4 so analytics don't break
+          if (typeof (window as any).gtag === 'function') {
+              (window as any).gtag('event', 'begin_checkout', ecommerceData);
+          }
 
           if (typeof (window as any).fbq === 'function') {
             (window as any).fbq('track', 'InitiateCheckout', {
