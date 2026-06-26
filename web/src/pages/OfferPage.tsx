@@ -100,7 +100,8 @@ const OfferPage = () => {
         enabled: !!slug
     });
 
-    const hasSentBeginCheckoutRef = useRef(false);
+    const hasPushedGTMRef = useRef(false);
+    const hasPushedFBRef = useRef(false);
     const checkoutStartTimeRef = useRef(Date.now());
     const hasReachedFourMinutesRef = useRef(false);
     const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
@@ -114,29 +115,32 @@ const OfferPage = () => {
     }, []);
 
     useEffect(() => {
-        if (funnelData?.product_details && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+        if (funnelData?.product_details) {
             const product = funnelData.product_details;
             let priceVal = Math.floor(product.sale_price || product.regular_price);
             if (funnelData.discount_percentage) {
                 const discount = parseFloat(funnelData.discount_percentage);
                 priceVal = Math.floor(product.regular_price * (1 - discount / 100));
             }
-            (window as any).dataLayer.push({
-                event: 'begin_checkout',
-                ecommerce: {
-                    value: priceVal,
-                    currency: 'BDT',
-                    items: [{
-                        item_name: product.name,
-                        item_id: product.id?.toString(),
-                        price: priceVal.toString(),
-                        quantity: 1
-                    }]
-                }
-            });
+            
+            if (!hasPushedGTMRef.current && (window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'begin_checkout',
+                    ecommerce: {
+                        value: priceVal,
+                        currency: 'BDT',
+                        items: [{
+                            item_name: product.name,
+                            item_id: product.id?.toString(),
+                            price: priceVal.toString(),
+                            quantity: 1
+                        }]
+                    }
+                });
+                hasPushedGTMRef.current = true;
+            }
 
-            // Explicit Facebook Pixel Event Tracking for InitiateCheckout
-            if (typeof (window as any).fbq === 'function') {
+            if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
                 (window as any).fbq('track', 'InitiateCheckout', {
                     value: priceVal,
                     currency: 'BDT',
@@ -145,9 +149,8 @@ const OfferPage = () => {
                     content_type: 'product',
                     num_items: 1
                 });
+                hasPushedFBRef.current = true;
             }
-
-            hasSentBeginCheckoutRef.current = true;
         }
     }, [funnelData]);
 

@@ -26,7 +26,8 @@ const Checkout = () => {
   });
   const isOrderSubmittedRef = useRef(false);
   const hasTrackedSuccessRef = useRef(false);
-  const hasSentBeginCheckoutRef = useRef(false);
+  const hasPushedGTMRef = useRef(false);
+  const hasPushedFBRef = useRef(false);
   const checkoutStartTimeRef = useRef(Date.now());
   const hasReachedFourMinutesRef = useRef(false);
   const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
@@ -57,38 +58,40 @@ const Checkout = () => {
   }, []);
 
   useEffect(() => {
-    if (cart.length > 0 && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'begin_checkout',
-        ecommerce: {
-          value: cartTotal,
-          currency: 'BDT',
-          items: cart.map(item => {
-            const itemData: any = {
-              item_name: item.name,
-              item_id: item.id,
-              price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
-              quantity: item.quantity,
-              color: item.color?.name || '',
-              size: item.size?.name || ''
-            };
-            if (item.color) {
-              itemData.item_variant = item.color.name;
-            }
-            if (item.size) {
-              if (itemData.item_variant) {
-                itemData.item_variant += ` / ${item.size.name}`;
-              } else {
-                itemData.item_variant = item.size.name;
+    if (cart.length > 0) {
+      if (!hasPushedGTMRef.current && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'begin_checkout',
+          ecommerce: {
+            value: cartTotal,
+            currency: 'BDT',
+            items: cart.map(item => {
+              const itemData: any = {
+                item_name: item.name,
+                item_id: item.id,
+                price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
+                quantity: item.quantity,
+                color: item.color?.name || '',
+                size: item.size?.name || ''
+              };
+              if (item.color) {
+                itemData.item_variant = item.color.name;
               }
-            }
-            return itemData;
-          })
-        }
-      });
+              if (item.size) {
+                if (itemData.item_variant) {
+                  itemData.item_variant += ` / ${item.size.name}`;
+                } else {
+                  itemData.item_variant = item.size.name;
+                }
+              }
+              return itemData;
+            })
+          }
+        });
+        hasPushedGTMRef.current = true;
+      }
 
-      // Explicit Facebook Pixel Event Tracking for InitiateCheckout
-      if (typeof (window as any).fbq === 'function') {
+      if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
         (window as any).fbq('track', 'InitiateCheckout', {
           value: cartTotal,
           currency: 'BDT',
@@ -96,9 +99,8 @@ const Checkout = () => {
           content_type: 'product',
           num_items: cart.reduce((total, item) => total + item.quantity, 0)
         });
+        hasPushedFBRef.current = true;
       }
-
-      hasSentBeginCheckoutRef.current = true;
     }
   }, [cart, cartTotal]);
 

@@ -95,7 +95,8 @@ const StepFunnel = () => {
         enabled: !!slug
     });
 
-    const hasSentBeginCheckoutRef = useRef(false);
+    const hasPushedGTMRef = useRef(false);
+    const hasPushedFBRef = useRef(false);
     const checkoutStartTimeRef = useRef(Date.now());
     const hasReachedFourMinutesRef = useRef(false);
     const [fourMinuteTrigger, setFourMinuteTrigger] = useState(false);
@@ -109,24 +110,27 @@ const StepFunnel = () => {
     }, []);
 
     useEffect(() => {
-        if (product && !hasSentBeginCheckoutRef.current && (window as any).dataLayer) {
+        if (product) {
             const currentPrice = Math.floor(product.sale_price || product.regular_price);
-            (window as any).dataLayer.push({
-                event: 'begin_checkout',
-                ecommerce: {
-                    value: currentPrice,
-                    currency: 'BDT',
-                    items: [{
-                        item_name: product.name,
-                        item_id: product.id?.toString(),
-                        price: currentPrice.toString(),
-                        quantity: 1
-                    }]
-                }
-            });
+            
+            if (!hasPushedGTMRef.current && (window as any).dataLayer) {
+                (window as any).dataLayer.push({
+                    event: 'begin_checkout',
+                    ecommerce: {
+                        value: currentPrice,
+                        currency: 'BDT',
+                        items: [{
+                            item_name: product.name,
+                            item_id: product.id?.toString(),
+                            price: currentPrice.toString(),
+                            quantity: 1
+                        }]
+                    }
+                });
+                hasPushedGTMRef.current = true;
+            }
 
-            // Explicit Facebook Pixel Event Tracking for InitiateCheckout
-            if (typeof (window as any).fbq === 'function') {
+            if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
                 (window as any).fbq('track', 'InitiateCheckout', {
                     value: currentPrice,
                     currency: 'BDT',
@@ -135,9 +139,8 @@ const StepFunnel = () => {
                     content_type: 'product',
                     num_items: 1
                 });
+                hasPushedFBRef.current = true;
             }
-
-            hasSentBeginCheckoutRef.current = true;
         }
     }, [product]);
 
