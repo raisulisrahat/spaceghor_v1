@@ -40,6 +40,42 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         (window as any).fbq('set', 'autoConfig', false, pixelId);
         (window as any).fbq('init', pixelId);
         (window as any).fbq('track', 'PageView');
+
+        // MONKEY PATCH fbq to enforce strict single-fire for e-commerce events
+        // This blocks GTM or Auto-Tracker from firing duplicate/wrong events
+        const originalFbq = (window as any).fbq;
+        (window as any).fbq = function(...args: any[]) {
+            const command = args[0];
+            const eventName = args[1];
+            
+            if (command === 'track' && eventName === 'InitiateCheckout') {
+                if ((window as any).__blocked_duplicate_fb_initiate_checkout) {
+                    console.log('Blocked duplicate InitiateCheckout from external source');
+                    return;
+                }
+                (window as any).__blocked_duplicate_fb_initiate_checkout = true;
+            }
+            
+            if (command === 'track' && eventName === 'Purchase') {
+                if ((window as any).__blocked_duplicate_fb_purchase) {
+                    console.log('Blocked duplicate Purchase from external source');
+                    return;
+                }
+                (window as any).__blocked_duplicate_fb_purchase = true;
+            }
+            
+            if (originalFbq.callMethod) {
+                originalFbq.callMethod.apply(originalFbq, args);
+            } else {
+                originalFbq.queue.push(args);
+            }
+        };
+        // Preserve properties on the patched function
+        (window as any).fbq.queue = originalFbq.queue;
+        (window as any).fbq.loaded = originalFbq.loaded;
+        (window as any).fbq.version = originalFbq.version;
+        (window as any).fbq.push = originalFbq.push;
+
     }, [pixelId]);
 
     return (
