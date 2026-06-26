@@ -60,45 +60,52 @@ const Checkout = () => {
   useEffect(() => {
     if (cart.length > 0) {
       if (!hasPushedGTMRef.current && (window as any).dataLayer) {
-        (window as any).dataLayer.push({
-          event: 'begin_checkout',
-          ecommerce: {
-            value: cartTotal,
-            currency: 'BDT',
-            items: cart.map(item => {
-              const itemData: any = {
-                item_name: item.name,
-                item_id: item.id,
-                price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
-                quantity: item.quantity,
-                color: item.color?.name || '',
-                size: item.size?.name || ''
-              };
-              if (item.color) {
-                itemData.item_variant = item.color.name;
-              }
-              if (item.size) {
-                if (itemData.item_variant) {
-                  itemData.item_variant += ` / ${item.size.name}`;
-                } else {
-                  itemData.item_variant = item.size.name;
+        if (!(window as any).__tracked_gtm_checkout) {
+          (window as any).dataLayer.push({
+            event: 'begin_checkout',
+            ecommerce: {
+              value: cartTotal,
+              currency: 'BDT',
+              items: cart.map(item => {
+                const itemData: any = {
+                  item_name: item.name,
+                  item_id: item.id,
+                  price: parseFloat(item.price.toString().replace(/[^0-9.]/g, '')) || 0,
+                  quantity: item.quantity,
+                  color: item.color?.name || '',
+                  size: item.size?.name || ''
+                };
+                if (item.color) {
+                  itemData.item_variant = item.color.name;
                 }
-              }
-              return itemData;
-            })
-          }
-        });
+                if (item.size) {
+                  if (itemData.item_variant) {
+                    itemData.item_variant += ` / ${item.size.name}`;
+                  } else {
+                    itemData.item_variant = item.size.name;
+                  }
+                }
+                return itemData;
+              })
+            }
+          });
+          (window as any).__tracked_gtm_checkout = true;
+        }
         hasPushedGTMRef.current = true;
       }
 
       if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
-        (window as any).fbq('track', 'InitiateCheckout', {
-          value: cartTotal,
-          currency: 'BDT',
-          content_ids: cart.map(item => item.sku || item.id.toString()),
-          content_type: 'product',
-          num_items: cart.reduce((total, item) => total + item.quantity, 0)
-        });
+        if (!(window as any).__tracked_fb_checkout) {
+          (window as any).fbq('track', 'InitiateCheckout', {
+            value: cartTotal,
+            currency: 'BDT',
+            content_ids: cart.map(item => item.sku || item.id.toString()),
+            content_name: cart.map(item => item.name).join(', '),
+            content_type: 'product',
+            num_items: cart.reduce((total, item) => total + item.quantity, 0)
+          });
+          (window as any).__tracked_fb_checkout = true;
+        }
         hasPushedFBRef.current = true;
       }
     }

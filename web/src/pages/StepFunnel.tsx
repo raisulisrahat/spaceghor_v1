@@ -114,31 +114,37 @@ const StepFunnel = () => {
             const currentPrice = Math.floor(product.sale_price || product.regular_price);
             
             if (!hasPushedGTMRef.current && (window as any).dataLayer) {
-                (window as any).dataLayer.push({
-                    event: 'begin_checkout',
-                    ecommerce: {
-                        value: currentPrice,
-                        currency: 'BDT',
-                        items: [{
-                            item_name: product.name,
-                            item_id: product.id?.toString(),
-                            price: currentPrice.toString(),
-                            quantity: 1
-                        }]
-                    }
-                });
+                if (!(window as any).__tracked_gtm_step) {
+                    (window as any).dataLayer.push({
+                        event: 'begin_checkout',
+                        ecommerce: {
+                            value: currentPrice,
+                            currency: 'BDT',
+                            items: [{
+                                item_name: product.name,
+                                item_id: product.id?.toString(),
+                                price: currentPrice.toString(),
+                                quantity: 1
+                            }]
+                        }
+                    });
+                    (window as any).__tracked_gtm_step = true;
+                }
                 hasPushedGTMRef.current = true;
             }
 
             if (!hasPushedFBRef.current && typeof (window as any).fbq === 'function') {
-                (window as any).fbq('track', 'InitiateCheckout', {
-                    value: currentPrice,
-                    currency: 'BDT',
-                    content_ids: [product.sku || product.id?.toString()],
-                    content_name: product.name,
-                    content_type: 'product',
-                    num_items: 1
-                });
+                if (!(window as any).__tracked_fb_step) {
+                    (window as any).fbq('track', 'InitiateCheckout', {
+                        value: currentPrice,
+                        currency: 'BDT',
+                        content_ids: [product.sku || product.id?.toString()],
+                        content_name: product.name,
+                        content_type: 'product',
+                        num_items: 1
+                    });
+                    (window as any).__tracked_fb_step = true;
+                }
                 hasPushedFBRef.current = true;
             }
         }
