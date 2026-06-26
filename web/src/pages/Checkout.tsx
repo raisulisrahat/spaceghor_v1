@@ -86,6 +86,18 @@ const Checkout = () => {
           })
         }
       });
+
+      // Explicit Facebook Pixel Event Tracking for InitiateCheckout
+      if (typeof (window as any).fbq === 'function') {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          value: cartTotal,
+          currency: 'BDT',
+          content_ids: cart.map(item => item.sku || item.id.toString()),
+          content_type: 'product',
+          num_items: cart.reduce((total, item) => total + item.quantity, 0)
+        });
+      }
+
       hasSentBeginCheckoutRef.current = true;
     }
   }, [cart, cartTotal]);
