@@ -140,7 +140,7 @@ const OfferPage = () => {
 
                     if ((window as any).dataLayer) {
                         (window as any).dataLayer.push({
-                            event: 'custom_begin_checkout',
+                            event: 'begin_checkout',
                             event_id: eventId,
                             ecommerce: ecommerceData
                         });

@@ -92,7 +92,7 @@ const Checkout = () => {
           // Push to dataLayer with a custom event name to intentionally bypass any rogue GTM Facebook tags
           if ((window as any).dataLayer) {
               (window as any).dataLayer.push({
-                event: 'custom_begin_checkout',
+                event: 'begin_checkout',
                 event_id: eventId,
                 ecommerce: ecommerceData
               });
