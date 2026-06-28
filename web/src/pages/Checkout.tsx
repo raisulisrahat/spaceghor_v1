@@ -339,6 +339,7 @@ const Checkout = () => {
           customer_phone: finalPhone,
           customer_address: finalAddress,
           total_amount: totalAmountVal,
+          event_id: orderId.toString().startsWith('checkout_') ? orderId : `order_${orderId}`,
           order_id: orderId,
           quantity: totalQuantityVal,
           ip_address: ipAddress,
@@ -346,7 +347,7 @@ const Checkout = () => {
           content_name: cart.map(item => item.name).join(', '),
           content_type: 'product',
           ecommerce: {
-            transaction_id: orderId,
+            transaction_id: orderId.toString().startsWith('checkout_') ? orderId : `order_${orderId}`,
             value: totalAmountVal,
             currency: 'BDT',
             items: cart.map(item => {
@@ -584,6 +585,7 @@ const Checkout = () => {
           customer_phone: res.data?.phone_number || formData.phone,
           customer_address: res.data?.address || (formData.district ? `${formData.address}, ${formData.upazila}, ${formData.district}` : formData.address),
           total_amount: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
+          event_id: res.data?.id ? `order_${res.data.id}` : `checkout_${Date.now()}`,
           order_id: res.data?.id || `checkout_${Date.now()}`,
           quantity: cart.reduce((total, item) => total + item.quantity, 0),
           ip_address: res.data?.ip_address || ipAddress,
@@ -591,7 +593,7 @@ const Checkout = () => {
           content_name: cart.map(item => item.name).join(', '),
           content_type: 'product',
           ecommerce: {
-            transaction_id: res.data?.id || `checkout_${Date.now()}`,
+            transaction_id: res.data?.id ? `order_${res.data.id}` : `checkout_${Date.now()}`,
             value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
             currency: 'BDT',
             items: cart.map(item => {

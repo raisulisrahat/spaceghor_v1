@@ -393,6 +393,7 @@ const StepFunnel = () => {
                     customer_name: res.data?.customer_name || formData.customer_name,
                     customer_phone: finalPhone,
                     customer_address: finalAddress,
+                    event_id: res.data?.id ? `order_${res.data.id}` : `stepfunnel_${Date.now()}`,
                     order_id: res.data?.id || `stepfunnel_${Date.now()}`,
                     district: formData.district,
                     upazila: formData.upazila,
@@ -403,7 +404,7 @@ const StepFunnel = () => {
                     content_name: product.name,
                     content_type: 'product',
                     ecommerce: {
-                        transaction_id: res.data?.id || `stepfunnel_${Date.now()}`,
+                        transaction_id: res.data?.id ? `order_${res.data.id}` : `stepfunnel_${Date.now()}`,
                         value: parseFloat(res.data?.total_amount) || finalTotal,
                         currency: 'BDT',
                         items: [{

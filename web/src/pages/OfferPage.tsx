@@ -355,6 +355,7 @@ const OfferPage = () => {
                     customer_address: finalAddress,
                     address: finalAddress,
                     total_amount: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),
+                    event_id: createdOrder.id ? `order_${createdOrder.id}` : `checkout_${Date.now()}`,
                     order_id: createdOrder.id,
                     quantity: totalQty,
                     ip_address: createdOrder.ip_address || ipAddress,
@@ -362,7 +363,7 @@ const OfferPage = () => {
                     content_name: funnelData.product_details.name,
                     content_type: 'product',
                     ecommerce: {
-                        transaction_id: createdOrder.id,
+                        transaction_id: createdOrder.id ? `order_${createdOrder.id}` : `checkout_${Date.now()}`,
                         value: parseFloat(createdOrder.total_amount) || (subtotal + shippingCost),
                         currency: 'BDT',
                         items: createdOrder.items?.map((item: any) => ({

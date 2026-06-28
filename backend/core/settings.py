@@ -144,6 +144,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Path to the built Vite frontend (index.html lives here)
+FRONTEND_DIST_DIR = BASE_DIR.parent / 'web' / 'dist'
+
+# Public-facing frontend domain (used in og:url / canonical tags)
+SITE_URL = os.getenv('SITE_URL', 'https://spaceghor.com')
+
+# Public-facing media/API domain (used for absolute media URLs)
+MEDIA_DOMAIN = os.getenv('MEDIA_DOMAIN', 'https://api.spaceghor.com')
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

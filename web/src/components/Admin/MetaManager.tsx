@@ -77,7 +77,7 @@ const MetaManager = () => {
     const [refreshKey, setRefreshKey] = useState(0);
 
     // Segmented Source Selection
-    const [dataSource, setDataSource] = useState<'funnels' | 'meta_ads'>('funnels');
+    const [dataSource, setDataSource] = useState<'funnels' | 'meta_ads'>('meta_ads');
 
     // Live Meta Graph campaigns & insights state
     const [metaCampaigns, setMetaCampaigns] = useState<any[]>([]);
@@ -932,12 +932,6 @@ const MetaManager = () => {
 
                                 {/* Segmented control for data source */}
                                 <div className="flex items-center gap-1 bg-zinc-200 p-1 rounded-lg border border-zinc-300">
-                                    <button
-                                        onClick={() => setDataSource('funnels')}
-                                        className={`px-3 py-1 text-[10px] font-bold uppercase rounded font-mono transition-all ${dataSource === 'funnels' ? 'bg-zinc-950 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-800'}`}
-                                    >
-                                        Local Funnels
-                                    </button>
                                     <button
                                         onClick={() => {
                                             if (!capiToken || !adAccountId) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import api, { getMediaUrl } from '../../utils/api';
 import { Edit, Trash2, Plus, Search, Eye, MoreHorizontal, Image as ImageIcon, Download, Upload, X, Zap, Target, Activity, Shield, Package, AlertTriangle, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -7,6 +7,7 @@ import ProductForm from './ProductForm';
 
 const ProductManager = ({ resetKey }) => {
     const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { token } = useAuth();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,15 +17,39 @@ const ProductManager = ({ resetKey }) => {
     const [page, setPage] = useState(1);
     const [selectedIds, setSelectedIds] = useState([]);
 
+    // Handle URL parameters for direct linking
+    useEffect(() => {
+        const productParam = searchParams.get('products');
+        
+        if (!productParam) {
+            setView('list');
+            setSelectedProduct(null);
+        } else if (productParam === 'new') {
+            setView('create');
+            setSelectedProduct(null);
+        } else {
+            // Fetch the specific product to ensure we have full details
+            api.get(`products/${productParam}/`)
+                .then(res => {
+                    setSelectedProduct(res.data);
+                    setView('edit');
+                })
+                .catch(err => {
+                    console.error("Failed to fetch product for editing:", err);
+                    setSearchParams({});
+                });
+        }
+    }, [searchParams]);
+
     // Reset view to list when navigating back to the base products URL or via sidebar click
     useEffect(() => {
         // Match /staff/admin/products or /staff/moderator/products (with or without trailing slash)
         const isProductsBase = /^\/staff\/(admin|moderator)\/products\/?$/.test(location.pathname);
-        if (isProductsBase) {
+        if (isProductsBase && !searchParams.get('products')) {
             setView('list');
             setSelectedProduct(null);
         }
-    }, [resetKey, location.pathname]);
+    }, [resetKey, location.pathname, searchParams]);
 
     // Fetch Products
     const fetchProducts = async () => {
@@ -60,17 +85,15 @@ const ProductManager = ({ resetKey }) => {
     };
 
     const handleEdit = (product) => {
-        setSelectedProduct(product);
-        setView('edit');
+        setSearchParams({ products: product.slug });
     };
 
     const handleCreate = () => {
-        setSelectedProduct(null);
-        setView('create');
+        setSearchParams({ products: 'new' });
     };
 
     const handleSave = () => {
-        setView('list');
+        setSearchParams({});
         fetchProducts();
     };
 
@@ -159,7 +182,7 @@ const ProductManager = ({ resetKey }) => {
     };
 
     if (view === 'create' || view === 'edit') {
-        return <ProductForm product={selectedProduct} onSave={handleSave} onCancel={() => setView('list')} />;
+        return <ProductForm product={selectedProduct} onSave={handleSave} onCancel={() => setSearchParams({})} />;
     }
 
     return (
