@@ -61,7 +61,7 @@ const Checkout = () => {
     if (cart.length > 0) {
       if (!hasPushedGTMRef.current) {
         if (!(window as any).__tracked_gtm_checkout) {
-          const eventId = `checkout_${Date.now()}`;
+          const eventId = Date.now().toString();
           
           const ecommerceData = {
               value: cartTotal,
@@ -326,7 +326,7 @@ const Checkout = () => {
       // Google Tag Manager dataLayer Purchase Event
       if ((window as any).dataLayer && cart.length > 0 && !hasTrackedSuccessRef.current) {
         hasTrackedSuccessRef.current = true;
-        const orderId = searchParams.get('order_id') || `checkout_${Date.now()}`;
+        const orderId = searchParams.get('order_id') || Date.now().toString();
         const finalName = name || formData.name;
         const finalPhone = phone || formData.phone;
         const finalAddress = formData.district ? `${formData.address}, ${formData.upazila}, ${formData.district}` : formData.address;
@@ -585,15 +585,15 @@ const Checkout = () => {
           customer_phone: res.data?.phone_number || formData.phone,
           customer_address: res.data?.address || (formData.district ? `${formData.address}, ${formData.upazila}, ${formData.district}` : formData.address),
           total_amount: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
-          event_id: res.data?.id ? `order_${res.data.id}` : `checkout_${Date.now()}`,
-          order_id: res.data?.id || `checkout_${Date.now()}`,
+          event_id: res.data?.id ? `order_${res.data.id}` : Date.now().toString(),
+          order_id: res.data?.id || Date.now().toString(),
           quantity: cart.reduce((total, item) => total + item.quantity, 0),
           ip_address: res.data?.ip_address || ipAddress,
           content_ids: cart.map(item => item.sku || item.id.toString()),
           content_name: cart.map(item => item.name).join(', '),
           content_type: 'product',
           ecommerce: {
-            transaction_id: res.data?.id ? `order_${res.data.id}` : `checkout_${Date.now()}`,
+            transaction_id: res.data?.id ? `order_${res.data.id}` : Date.now().toString(),
             value: parseFloat(res.data?.total_amount) || (cartTotal + shippingCost),
             currency: 'BDT',
             items: cart.map(item => {

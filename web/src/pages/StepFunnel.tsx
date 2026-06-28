@@ -115,7 +115,7 @@ const StepFunnel = () => {
             
             if (!hasPushedGTMRef.current) {
                 if (!(window as any).__tracked_gtm_step) {
-                    const eventId = `checkout_${Date.now()}`;
+                    const eventId = Date.now().toString();
                     
                     const ecommerceData = {
                         value: currentPrice,
@@ -393,8 +393,8 @@ const StepFunnel = () => {
                     customer_name: res.data?.customer_name || formData.customer_name,
                     customer_phone: finalPhone,
                     customer_address: finalAddress,
-                    event_id: res.data?.id ? `order_${res.data.id}` : `stepfunnel_${Date.now()}`,
-                    order_id: res.data?.id || `stepfunnel_${Date.now()}`,
+                    event_id: res.data?.id ? `order_${res.data.id}` : Date.now().toString(),
+                    order_id: res.data?.id || Date.now().toString(),
                     district: formData.district,
                     upazila: formData.upazila,
                     shipping_cost: shippingCost,
@@ -404,7 +404,7 @@ const StepFunnel = () => {
                     content_name: product.name,
                     content_type: 'product',
                     ecommerce: {
-                        transaction_id: res.data?.id ? `order_${res.data.id}` : `stepfunnel_${Date.now()}`,
+                        transaction_id: res.data?.id ? `order_${res.data.id}` : Date.now().toString(),
                         value: parseFloat(res.data?.total_amount) || finalTotal,
                         currency: 'BDT',
                         items: [{
