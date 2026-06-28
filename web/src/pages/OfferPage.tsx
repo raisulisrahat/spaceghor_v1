@@ -160,7 +160,7 @@ const OfferPage = () => {
                                 content_name: product.name,
                                 content_type: 'product',
                                 num_items: 1
-                            }, { eventID: eventId });
+                            });
                         } else {
                             setTimeout(firePixel, 500);
                         }
