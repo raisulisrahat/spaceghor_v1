@@ -150,7 +150,7 @@ const StepFunnel = () => {
                                 content_name: product.name,
                                 content_type: 'product',
                                 num_items: 1
-                            });
+                            }, { eventID: eventId });
                         } else {
                             setTimeout(firePixel, 500);
                         }
@@ -666,7 +666,7 @@ const StepFunnel = () => {
                                         </button>
                                         
                                         <p className="text-center text-[10px] uppercase tracking-widest text-white/30 font-black">
-                                            100% Secure Checkout | Verified by {siteSettings?.site_title || 'Spaceghor'}
+                                            100% Secure Checkout | Verified by {siteSettings?.site_title || 'Qbamart'}
                                         </p>
                                     </form>
                                 </div>

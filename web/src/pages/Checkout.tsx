@@ -113,7 +113,7 @@ const Checkout = () => {
                 content_name: cart.map(item => item.name).join(', '),
                 content_type: 'product',
                 num_items: cart.reduce((total, item) => total + item.quantity, 0)
-              });
+              }, { eventID: eventId });
             } else {
               setTimeout(firePixel, 500);
             }
