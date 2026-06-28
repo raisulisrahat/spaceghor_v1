@@ -136,11 +136,6 @@ const StepFunnel = () => {
                         });
                     }
 
-                    if (typeof (window as any).gtag === 'function') {
-                        (window as any).gtag('event', 'begin_checkout', ecommerceData);
-                    }
-
-
                     const firePixel = () => {
                         if (typeof (window as any).fbq === 'function') {
                             (window as any).fbq('track', 'InitiateCheckout', {

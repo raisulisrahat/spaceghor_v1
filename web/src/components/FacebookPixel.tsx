@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // Assuming you use react-router
 import { useSettings } from '../context/SettingsContext';
 
 interface PixelProps {
@@ -8,7 +9,20 @@ interface PixelProps {
 const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
     const { settings } = useSettings();
     const pixelId = customPixelId || settings?.facebook_pixel_id;
+    const location = useLocation(); // Hook into route changes
 
+    // 1. Reset blocking flags on route change
+    useEffect(() => {
+        (window as any).__blocked_duplicate_fb_initiate_checkout = false;
+        (window as any).__blocked_duplicate_fb_purchase = false;
+        
+        // Optional: Fire PageView on every route change, since SPAs don't hard reload
+        if (typeof (window as any).fbq === 'function') {
+             (window as any).fbq('track', 'PageView');
+        }
+    }, [location.pathname]); 
+
+    // 2. Initialize and Patch Pixel
     useEffect(() => {
         if (!pixelId) return;
 
@@ -39,10 +53,8 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         fbScript();
         (window as any).fbq('set', 'autoConfig', false, pixelId);
         (window as any).fbq('init', pixelId);
-        (window as any).fbq('track', 'PageView');
 
-        // MONKEY PATCH fbq to enforce strict single-fire for e-commerce events
-        // Use Object.defineProperty to prevent fbevents.js from completely overwriting our patch
+        // MONKEY PATCH fbq to enforce strict single-fire per page view
         let currentFbq = (window as any).fbq;
         
         const createPatchedFbq = (original: any) => {
@@ -52,7 +64,7 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
                 
                 if ((command === 'track' || command === 'trackSingle') && eventName === 'InitiateCheckout') {
                     if ((window as any).__blocked_duplicate_fb_initiate_checkout) {
-                        console.log('Blocked duplicate InitiateCheckout from external source');
+                        console.log('Blocked duplicate InitiateCheckout');
                         return;
                     }
                     (window as any).__blocked_duplicate_fb_initiate_checkout = true;
@@ -60,7 +72,7 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
                 
                 if ((command === 'track' || command === 'trackSingle') && eventName === 'Purchase') {
                     if ((window as any).__blocked_duplicate_fb_purchase) {
-                        console.log('Blocked duplicate Purchase from external source');
+                        console.log('Blocked duplicate Purchase');
                         return;
                     }
                     (window as any).__blocked_duplicate_fb_purchase = true;
@@ -75,7 +87,6 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
                 }
             };
             
-            // Preserve properties
             Object.assign(patched, original);
             return patched;
         };
@@ -85,8 +96,6 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         Object.defineProperty(window, 'fbq', {
             get: () => activeFbq,
             set: (newVal) => {
-                // When fbevents.js loads, it sets window.fbq to a new function.
-                // We wrap the new function to keep our patch intact!
                 activeFbq = createPatchedFbq(newVal);
             },
             configurable: true
