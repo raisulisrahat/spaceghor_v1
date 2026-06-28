@@ -42,39 +42,55 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         (window as any).fbq('track', 'PageView');
 
         // MONKEY PATCH fbq to enforce strict single-fire for e-commerce events
-        // This blocks GTM or Auto-Tracker from firing duplicate/wrong events
-        const originalFbq = (window as any).fbq;
-        (window as any).fbq = function(...args: any[]) {
-            const command = args[0];
-            const eventName = args[0] === 'trackSingle' ? args[2] : args[1];
-            
-            if ((command === 'track' || command === 'trackSingle') && eventName === 'InitiateCheckout') {
-                if ((window as any).__blocked_duplicate_fb_initiate_checkout) {
-                    console.log('Blocked duplicate InitiateCheckout from external source');
-                    return;
+        // Use Object.defineProperty to prevent fbevents.js from completely overwriting our patch
+        let currentFbq = (window as any).fbq;
+        
+        const createPatchedFbq = (original: any) => {
+            const patched = function(...args: any[]) {
+                const command = args[0];
+                const eventName = args[0] === 'trackSingle' ? args[2] : args[1];
+                
+                if ((command === 'track' || command === 'trackSingle') && eventName === 'InitiateCheckout') {
+                    if ((window as any).__blocked_duplicate_fb_initiate_checkout) {
+                        console.log('Blocked duplicate InitiateCheckout from external source');
+                        return;
+                    }
+                    (window as any).__blocked_duplicate_fb_initiate_checkout = true;
                 }
-                (window as any).__blocked_duplicate_fb_initiate_checkout = true;
-            }
-            
-            if ((command === 'track' || command === 'trackSingle') && eventName === 'Purchase') {
-                if ((window as any).__blocked_duplicate_fb_purchase) {
-                    console.log('Blocked duplicate Purchase from external source');
-                    return;
+                
+                if ((command === 'track' || command === 'trackSingle') && eventName === 'Purchase') {
+                    if ((window as any).__blocked_duplicate_fb_purchase) {
+                        console.log('Blocked duplicate Purchase from external source');
+                        return;
+                    }
+                    (window as any).__blocked_duplicate_fb_purchase = true;
                 }
-                (window as any).__blocked_duplicate_fb_purchase = true;
-            }
+                
+                if (original.callMethod) {
+                    original.callMethod.apply(original, args);
+                } else if (original.queue) {
+                    original.queue.push(args);
+                } else {
+                    original.apply(null, args);
+                }
+            };
             
-            if (originalFbq.callMethod) {
-                originalFbq.callMethod.apply(originalFbq, args);
-            } else {
-                originalFbq.queue.push(args);
-            }
+            // Preserve properties
+            Object.assign(patched, original);
+            return patched;
         };
-        // Preserve properties on the patched function
-        (window as any).fbq.queue = originalFbq.queue;
-        (window as any).fbq.loaded = originalFbq.loaded;
-        (window as any).fbq.version = originalFbq.version;
-        (window as any).fbq.push = originalFbq.push;
+
+        let activeFbq = createPatchedFbq(currentFbq);
+
+        Object.defineProperty(window, 'fbq', {
+            get: () => activeFbq,
+            set: (newVal) => {
+                // When fbevents.js loads, it sets window.fbq to a new function.
+                // We wrap the new function to keep our patch intact!
+                activeFbq = createPatchedFbq(newVal);
+            },
+            configurable: true
+        });
 
     }, [pixelId]);
 
