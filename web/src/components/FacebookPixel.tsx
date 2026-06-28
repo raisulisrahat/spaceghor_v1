@@ -46,9 +46,9 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
         const originalFbq = (window as any).fbq;
         (window as any).fbq = function(...args: any[]) {
             const command = args[0];
-            const eventName = args[1];
+            const eventName = args[0] === 'trackSingle' ? args[2] : args[1];
             
-            if (command === 'track' && eventName === 'InitiateCheckout') {
+            if ((command === 'track' || command === 'trackSingle') && eventName === 'InitiateCheckout') {
                 if ((window as any).__blocked_duplicate_fb_initiate_checkout) {
                     console.log('Blocked duplicate InitiateCheckout from external source');
                     return;
@@ -56,7 +56,7 @@ const FacebookPixel = ({ pixelId: customPixelId }: PixelProps) => {
                 (window as any).__blocked_duplicate_fb_initiate_checkout = true;
             }
             
-            if (command === 'track' && eventName === 'Purchase') {
+            if ((command === 'track' || command === 'trackSingle') && eventName === 'Purchase') {
                 if ((window as any).__blocked_duplicate_fb_purchase) {
                     console.log('Blocked duplicate Purchase from external source');
                     return;
