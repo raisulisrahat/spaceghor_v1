@@ -149,7 +149,7 @@ const OfferPage = () => {
 
                     const firePixel = () => {
                         if (typeof (window as any).fbq === 'function') {
-                            (window as any).fbq('track', 'InitiateCheckout', { eventID: eventId });
+                            (window as any)
                         } else {
                             setTimeout(firePixel, 500);
                         }
