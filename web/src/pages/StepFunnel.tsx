@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { 
-    getProductBySlug, 
-    getDistricts, 
-    getUpazilas, 
+import {
+    getProductBySlug,
+    getDistricts,
+    getUpazilas,
     getSiteSettings,
     createOrder,
     getShippingZones,
@@ -12,15 +12,15 @@ import {
     updateDraftOrder,
     deleteDraftOrder
 } from '../services/api';
-import { 
-    ShieldCheck, 
-    Truck, 
-    Star, 
-    CheckCircle, 
-    ArrowRight, 
-    Phone, 
-    MapPin, 
-    Zap, 
+import {
+    ShieldCheck,
+    Truck,
+    Star,
+    CheckCircle,
+    ArrowRight,
+    Phone,
+    MapPin,
+    Zap,
     Award,
     Clock,
     ShoppingCart,
@@ -48,7 +48,7 @@ const StepFunnel = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
     const { t, language } = useLanguage();
-    
+
     const [submitting, setSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [draftOrderId, setDraftOrderId] = useState<number | null>(() => {
@@ -112,11 +112,11 @@ const StepFunnel = () => {
     useEffect(() => {
         if (product) {
             const currentPrice = Math.floor(product.sale_price || product.regular_price);
-            
+
             if (!hasPushedGTMRef.current) {
                 if (!(window as any).__tracked_gtm_step) {
                     const eventId = Date.now().toString();
-                    
+
                     const ecommerceData = {
                         value: currentPrice,
                         currency: 'BDT',
@@ -173,15 +173,15 @@ const StepFunnel = () => {
     useEffect(() => {
         if (formData.district) {
             getUpazilas(formData.district).then(res => setUpazilas(res.data.results || res.data));
-            
+
             // Auto shipping cost for Dhaka/Outside
             const district = districts.find(d => d.id == formData.district);
             if (district) {
                 const isDhaka = district.name.toLowerCase().includes('dhaka');
                 setShippingCost(isDhaka ? 60 : 120);
-                
+
                 // Try to find matching zone in backend shipping zones
-                const zone = shippingZones.find(z => 
+                const zone = shippingZones.find(z =>
                     isDhaka ? z.name.toLowerCase().includes('inside') : z.name.toLowerCase().includes('outside')
                 );
                 if (zone) setSelectedZone(zone);
@@ -295,13 +295,13 @@ const StepFunnel = () => {
                     body: JSON.stringify(orderData),
                     keepalive: true
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data?.id) {
-                        sessionStorage.setItem(`draft_order_id_stepfunnel_${slug}`, data.id.toString());
-                    }
-                })
-                .catch(err => console.error("Error creating draft beforeunload:", err));
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data?.id) {
+                            sessionStorage.setItem(`draft_order_id_stepfunnel_${slug}`, data.id.toString());
+                        }
+                    })
+                    .catch(err => console.error("Error creating draft beforeunload:", err));
             }
         };
     }, [formData, product, selectedZone, shippingCost, finalTotal, draftOrderId, slug, upazilas, districts, currentPrice, siteSettings?.enable_draft_orders]);
@@ -330,8 +330,8 @@ const StepFunnel = () => {
         const phone = formData.phone_number || '';
         const cleanPhone = phone.replace(/\D/g, '');
         if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
-            alert(language === 'bn' 
-                ? 'দয়া করে একটি সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।' 
+            alert(language === 'bn'
+                ? 'দয়া করে একটি সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।'
                 : 'Please enter a valid 11-digit mobile number starting with 01 (e.g. 017XXXXXXXX).'
             );
             return;
@@ -370,7 +370,7 @@ const StepFunnel = () => {
             }
 
             setIsSuccess(true);
-            
+
             // Google Tag Manager dataLayer Purchase Event
             if ((window as any).dataLayer) {
                 const finalAddress = res.data?.address || `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`;
@@ -437,17 +437,17 @@ const StepFunnel = () => {
 
     if (isSuccess) return (
         <div className="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-slate-50">
-            <motion.div 
-                initial={{ scale: 0 }} 
-                animate={{ scale: 1 }} 
+            <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
                 className="w-24 h-24 bg-green-500 text-white rounded-full flex items-center justify-center mb-8 shadow-xl"
             >
                 <Check size={48} strokeWidth={4} />
             </motion.div>
             <h1 className="text-4xl font-black text-slate-900 mb-4 tracking-tight">অর্ডার সফল হয়েছে!</h1>
             <p className="text-slate-600 text-xl mb-10 max-w-lg">আপনার অর্ডারটি আমরা পেয়েছি। আমাদের প্রতিনিধি শীঘ্রই কল করে আপনার অর্ডারটি কনফার্ম করবেন। আমাদের সাথে থাকার জন্য ধন্যবাদ।</p>
-            <button 
-                onClick={() => navigate('/')} 
+            <button
+                onClick={() => navigate('/')}
                 className="bg-brand text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl shadow-brand/20 hover:scale-105 transition-transform"
             >
                 আরো কেনাকাটা করুন
@@ -463,7 +463,7 @@ const StepFunnel = () => {
     return (
         <div className="bg-white min-h-screen font-sans selection:bg-brand selection:text-white">
             <SEO title={`${product.name} - Special Offer`} description={product.short_description} image={product.image} />
-            
+
             {/* Promo Top Bar */}
             <div className="bg-brand text-white py-2.5 text-center font-bold text-xs md:text-sm uppercase tracking-widest px-4">
                 🔥 আজই অর্ডার করলে পাচ্ছেন বিশেষ ছাড় এবং দ্রুত ডেলিভারি!
@@ -482,7 +482,7 @@ const StepFunnel = () => {
 
             <main className="max-w-6xl mx-auto px-4 md:px-6 pt-8 pb-32">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-                    
+
                     {/* Left: Visuals */}
                     <div className="space-y-8">
                         <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-slate-50 bg-slate-50 relative group">
@@ -501,7 +501,7 @@ const StepFunnel = () => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
-                            
+
                             {/* Offer Badge */}
                             {product.sale_price && (
                                 <div className="absolute top-6 left-6 bg-red-600 text-white px-5 py-2 rounded-2xl font-black text-lg z-10 shadow-xl rotate-[-5deg] animate-pulse">
@@ -540,10 +540,10 @@ const StepFunnel = () => {
                         <div className="bg-slate-900 rounded-[3rem] p-8 md:p-12 text-white shadow-3xl shadow-slate-900/40 relative overflow-hidden">
                             {/* Decorative Blur */}
                             <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand opacity-20 rounded-full blur-[80px]" />
-                            
+
                             <div className="relative z-10">
                                 <h1 className="text-3xl md:text-4xl font-black mb-4 tracking-tight leading-tight">{product.name}</h1>
-                                
+
                                 <div className="flex items-baseline gap-4 mb-8 bg-white/5 p-4 rounded-2xl border border-white/10 w-fit">
                                     <span className="text-4xl font-black text-brand">৳{currentPrice}</span>
                                     {product.sale_price && <span className="text-xl text-white/30 line-through font-bold">৳{Math.floor(product.regular_price)}</span>}
@@ -652,7 +652,7 @@ const StepFunnel = () => {
                                                 <>অর্ডার কনফার্ম করুন <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform" /></>
                                             )}
                                         </button>
-                                        
+
                                         <p className="text-center text-[10px] uppercase tracking-widest text-white/30 font-black">
                                             100% Secure Checkout | Verified by {siteSettings?.site_title || 'Qbamart'}
                                         </p>
@@ -667,14 +667,14 @@ const StepFunnel = () => {
             {/* Floating Mobile CTA */}
             <AnimatePresence>
                 {showMobileCTA && (
-                    <motion.div 
-                        initial={{ y: 100 }} 
-                        animate={{ y: 0 }} 
+                    <motion.div
+                        initial={{ y: 100 }}
+                        animate={{ y: 0 }}
                         exit={{ y: 100 }}
                         className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-xl border-t border-slate-100 lg:hidden z-50"
                     >
-                        <a 
-                            href="#order-form" 
+                        <a
+                            href="#order-form"
                             className="w-full bg-brand text-white font-black py-4 rounded-2xl flex items-center justify-center gap-2 shadow-2xl shadow-brand/30"
                             onClick={(e) => {
                                 e.preventDefault();
@@ -694,8 +694,9 @@ const StepFunnel = () => {
                     <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">&copy; {new Date().getFullYear()} {siteSettings?.site_title || 'Qbamart'} | All Rights Reserved</p>
                 </div>
             </footer>
-            
-            <style dangerouslySetInnerHTML={{ __html: `
+
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 .swiper-pagination-bullet-active { background: #C0561F !important; }
                 .swiper-button-next, .swiper-button-prev { color: #C0561F !important; }
             `}} />

@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { 
-    getFunnelBySlug, 
-    getDistricts, 
-    getUpazilas, 
+import {
+    getFunnelBySlug,
+    getDistricts,
+    getUpazilas,
     getSiteSettings,
     createOrder,
     getShippingZones,
@@ -123,11 +123,11 @@ const OfferPage = () => {
                 const discount = parseFloat(funnelData.discount_percentage);
                 priceVal = Math.floor(product.regular_price * (1 - discount / 100));
             }
-            
+
             if (!hasPushedGTMRef.current) {
                 if (!(window as any).__tracked_gtm_offer) {
                     const eventId = Date.now().toString();
-                    
+
                     const ecommerceData = {
                         value: priceVal,
                         currency: 'BDT',
@@ -197,7 +197,7 @@ const OfferPage = () => {
             const buildVariants = (product: any, defaultQuantity = 0) => {
                 const price = product.sale_price || product.regular_price;
                 const variants: any[] = [];
-                
+
                 if (product.colors && product.colors.length > 0 && product.sizes && product.sizes.length > 0) {
                     product.colors.forEach((c: any) => {
                         product.sizes.forEach((s: any) => {
@@ -248,7 +248,7 @@ const OfferPage = () => {
             };
 
             const primaryVars = buildVariants(funnelData.product_details, 0);
-            
+
             // Auto-select the first primary variant
             if (primaryVars.length > 0) {
                 primaryVars[0].quantity = 1;
@@ -318,21 +318,21 @@ const OfferPage = () => {
 
     const subtotal = calculateSubtotal();
 
-    
+
     const hasTrackedSuccessRef = useRef(false);
-  
+
     // Track Purchase Event when isSuccess becomes true
     useEffect(() => {
         if (isSuccess && !hasTrackedSuccessRef.current) {
             hasTrackedSuccessRef.current = true;
             window.scrollTo(0, 0);
-            
+
             // Google Tag Manager dataLayer Purchase Event
             if ((window as any).dataLayer) {
-                const totalQty = createdOrder.items?.reduce((sum: number, item: any) => sum + item.quantity, 0) || 
-                                 selectedVariants.filter(v => v.quantity > 0).reduce((sum, v) => sum + v.quantity, 0) || 
-                                 1;
-                const finalAddress = createdOrder.address || (siteSettings?.enable_district_upazila !== false 
+                const totalQty = createdOrder.items?.reduce((sum: number, item: any) => sum + item.quantity, 0) ||
+                    selectedVariants.filter(v => v.quantity > 0).reduce((sum, v) => sum + v.quantity, 0) ||
+                    1;
+                const finalAddress = createdOrder.address || (siteSettings?.enable_district_upazila !== false
                     ? `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`
                     : formData.address);
                 const finalPhone = createdOrder.phone_number || formData.phone_number;
@@ -457,7 +457,7 @@ const OfferPage = () => {
                 customer_name: formData.customer_name || 'Incomplete Customer',
                 phone_number: formData.phone_number,
                 email: formData.email,
-                address: siteSettings?.enable_district_upazila !== false 
+                address: siteSettings?.enable_district_upazila !== false
                     ? `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`
                     : formData.address || 'Incomplete Address',
                 order_note: formData.order_note,
@@ -541,7 +541,7 @@ const OfferPage = () => {
                 customer_name: formData.customer_name || 'Incomplete Customer',
                 phone_number: formData.phone_number,
                 email: formData.email,
-                address: siteSettings?.enable_district_upazila !== false 
+                address: siteSettings?.enable_district_upazila !== false
                     ? `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`
                     : formData.address || 'Incomplete Address',
                 order_note: formData.order_note,
@@ -618,13 +618,13 @@ const OfferPage = () => {
                     body: JSON.stringify(orderData),
                     keepalive: true
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data?.id) {
-                        sessionStorage.setItem(`draft_order_id_offerpage_${slug}`, data.id.toString());
-                    }
-                })
-                .catch(err => console.error("Error creating draft beforeunload:", err));
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data?.id) {
+                            sessionStorage.setItem(`draft_order_id_offerpage_${slug}`, data.id.toString());
+                        }
+                    })
+                    .catch(err => console.error("Error creating draft beforeunload:", err));
             }
         };
     }, [formData, selectedVariants, shippingCost, subtotal, funnelData, draftOrderId, slug, upazilas, districts, currentPrice, siteSettings, shippingZones]);
@@ -652,8 +652,8 @@ const OfferPage = () => {
         const phone = formData.phone_number || '';
         const cleanPhone = phone.replace(/\D/g, '');
         if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
-            alert(language === 'bn' 
-                ? 'দয়া করে একটি সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।' 
+            alert(language === 'bn'
+                ? 'দয়া করে একটি সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।'
                 : 'Please enter a valid 11-digit mobile number starting with 01 (e.g. 017XXXXXXXX).'
             );
             return;
@@ -666,7 +666,7 @@ const OfferPage = () => {
                 customer_name: formData.customer_name,
                 phone_number: formData.phone_number,
                 email: formData.email,
-                address: siteSettings?.enable_district_upazila !== false 
+                address: siteSettings?.enable_district_upazila !== false
                     ? `${formData.address}${formData.upazila ? `, ${upazilas.find(u => u.id == formData.upazila)?.name || formData.upazila}` : ''}${formData.district ? `, ${districts.find(d => d.id == formData.district)?.name || formData.district}` : ''}`
                     : formData.address,
                 order_note: formData.order_note,
@@ -720,10 +720,10 @@ const OfferPage = () => {
             }
 
             const res = await createOrder(orderData);
-            
+
             // Mark as submitted to prevent any subsequent draft saves/updates
             isOrderSubmittedRef.current = true;
-            
+
             if (res.data?.temp_password || res.data?.password || res.data?.guest_password) {
                 setTempPassword(res.data.temp_password || res.data.password || res.data.guest_password);
             }
@@ -766,7 +766,7 @@ const OfferPage = () => {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4 text-center relative overflow-hidden">
                 <FacebookPixel pixelId={funnelData.pixel_id} />
-                
+
                 {/* Background Blobs */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-10"></div>
@@ -777,7 +777,7 @@ const OfferPage = () => {
                     <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-inner animate-bounce">
                         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    
+
                     <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">{language === 'bn' ? 'অর্ডার সফল হয়েছে!' : 'Order Successful!'}</h1>
                     <p className="text-slate-500 text-sm md:text-base mb-6 max-w-md mx-auto">
                         {language === 'bn' ? 'আপনার অর্ডারের জন্য ধন্যবাদ। আমাদের প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করবেন।' : 'Thank you for your order. Our representative will contact you soon.'}
@@ -817,8 +817,8 @@ const OfferPage = () => {
                         </div>
                     )}
 
-                                        <button 
-                        onClick={() => navigate('/')} 
+                    <button
+                        onClick={() => navigate('/')}
                         className="w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-2xl font-black uppercase tracking-wider text-sm shadow-xl shadow-slate-900/20 active:scale-95 transition-all"
                     >
                         {language === 'bn' ? 'হোম পেজে যান' : 'Go to Home Page'}
@@ -873,8 +873,8 @@ const OfferPage = () => {
 
     return (
         <>
-            <SEO 
-                title={funnelData.title} 
+            <SEO
+                title={funnelData.title}
                 description={`Special Offer: ${funnelData.product_details.name}. Get it now at a discounted price!`}
                 image={funnelData.product_details.image}
             />
