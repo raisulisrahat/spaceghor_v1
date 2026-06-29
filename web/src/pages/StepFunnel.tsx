@@ -138,7 +138,7 @@ const StepFunnel = () => {
 
                     const firePixel = () => {
                         if (typeof (window as any).fbq === 'function') {
-                            (window as any)
+                            (window as any).fbq('track', 'InitiateCheckout', { eventID: eventId });
                         } else {
                             setTimeout(firePixel, 500);
                         }
