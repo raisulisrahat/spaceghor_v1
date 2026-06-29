@@ -100,7 +100,7 @@ const OfferPage = () => {
         enabled: !!slug
     });
 
-    const hasPushedGTMRef = useRef(false);
+
     const hasPushedFBRef = useRef(false);
     const checkoutStartTimeRef = useRef(Date.now());
     const hasReachedFourMinutesRef = useRef(false);
@@ -114,6 +114,7 @@ const OfferPage = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    const hasPushedGTMRef = useRef(false);
     useEffect(() => {
         if (funnelData?.product_details) {
             const product = funnelData.product_details;
@@ -148,14 +149,7 @@ const OfferPage = () => {
 
                     const firePixel = () => {
                         if (typeof (window as any).fbq === 'function') {
-                            (window as any).fbq('track', 'InitiateCheckout', {
-                                value: priceVal,
-                                currency: 'BDT',
-                                content_ids: [product.sku || product.id?.toString()],
-                                content_name: product.name,
-                                content_type: 'product',
-                                num_items: 1
-                            });
+                            (window as any)
                         } else {
                             setTimeout(firePixel, 500);
                         }

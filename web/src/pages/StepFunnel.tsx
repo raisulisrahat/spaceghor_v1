@@ -138,14 +138,7 @@ const StepFunnel = () => {
 
                     const firePixel = () => {
                         if (typeof (window as any).fbq === 'function') {
-                            (window as any).fbq('track', 'InitiateCheckout', {
-                                value: currentPrice,
-                                currency: 'BDT',
-                                content_ids: [product.sku || product.id?.toString()],
-                                content_name: product.name,
-                                content_type: 'product',
-                                num_items: 1
-                            }, { eventID: eventId });
+                            (window as any)
                         } else {
                             setTimeout(firePixel, 500);
                         }
