@@ -18,6 +18,7 @@ const Checkout = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [tempPassword, setTempPassword] = useState<string | null>(null);
   const [draftOrderId, setDraftOrderId] = useState<number | null>(() => {
@@ -499,9 +500,10 @@ const Checkout = () => {
     const phone = formData.phone || '';
     const cleanPhone = phone.replace(/\D/g, '');
     if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
-      alert('Please enter a valid 11-digit contact number starting with 01 (e.g. 017XXXXXXXX).');
+      setPhoneError(true);
       return;
     }
+    setPhoneError(false);
 
     setIsSubmitting(true);
     
@@ -752,10 +754,19 @@ const Checkout = () => {
                       required
                       type="tel" 
                       placeholder="আপনার মোবাইল নাম্বার" 
-                      className="w-full px-4 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400"
+                      className={`w-full px-4 py-2.5 bg-neutral-50 border ${phoneError ? 'border-red-500 bg-red-50' : 'border-neutral-200'} rounded-lg text-sm transition-all focus:bg-white focus:border-brand focus:ring-2 focus:ring-red-100/50 outline-none placeholder:text-neutral-400`}
                       value={formData.phone}
-                      onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 11)})}
+                      onChange={e => {
+                        setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 11)});
+                        if (phoneError) setPhoneError(false);
+                      }}
                     />
+                    {phoneError && (
+                      <p className="text-red-500 text-xs mt-1 font-semibold flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন।
+                      </p>
+                    )}
                   </div>
 
                   {settings?.enable_district_upazila !== false ? (

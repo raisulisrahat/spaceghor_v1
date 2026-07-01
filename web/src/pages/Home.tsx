@@ -381,7 +381,7 @@ const Home = () => {
                 to={`/products?category=${category.slug}`}
                 className="flex-shrink-0 w-28 sm:w-36 md:w-44 snap-start group flex flex-col items-center space-y-4"
               >
-                <div className="w-20 h-20 sm:w-28 sm:h-28 group-hover:scale-105 transition-transform duration-500 flex items-center justify-center bg-neutral-50 rounded-full overflow-hidden p-4">
+                <div className="w-20 h-20 sm:w-28 sm:h-28 group-hover:scale-105 transition-transform duration-500 flex items-center justify-center rounded-full overflow-hidden p-4">
                   {category.image ? (
                     <img
                       src={resolveImageUrl(category.image)}

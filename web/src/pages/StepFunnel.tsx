@@ -28,7 +28,8 @@ import {
     ChevronRight,
     Check,
     RefreshCcw,
-    CheckCircle2
+    CheckCircle2,
+    AlertCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -51,6 +52,7 @@ const StepFunnel = () => {
     
     const [submitting, setSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [phoneError, setPhoneError] = useState(false);
     const [draftOrderId, setDraftOrderId] = useState<number | null>(() => {
         const saved = sessionStorage.getItem(`draft_order_id_stepfunnel_${slug}`);
         return saved ? parseInt(saved, 10) : null;
@@ -320,12 +322,10 @@ const StepFunnel = () => {
         const phone = formData.phone_number || '';
         const cleanPhone = phone.replace(/\D/g, '');
         if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
-            alert(language === 'bn' 
-                ? 'দয়া করে একটি সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)।' 
-                : 'Please enter a valid 11-digit mobile number starting with 01 (e.g. 017XXXXXXXX).'
-            );
+            setPhoneError(true);
             return;
         }
+        setPhoneError(false);
 
         setSubmitting(true);
 
@@ -567,15 +567,28 @@ const StepFunnel = () => {
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
                                             />
-                                            <input
-                                                type="tel"
-                                                name="phone_number"
-                                                required
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30"
-                                                placeholder={t('phone_number')}
-                                                value={formData.phone_number}
-                                                onChange={handleChange}
-                                            />
+                                            <div>
+                                                <input
+                                                    type="tel"
+                                                    name="phone_number"
+                                                    required
+                                                    className={`w-full bg-white/5 border ${phoneError ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all font-bold placeholder-white/30`}
+                                                    placeholder={t('phone_number')}
+                                                    value={formData.phone_number}
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        if (phoneError) setPhoneError(false);
+                                                    }}
+                                                />
+                                                {phoneError && (
+                                                    <p className="text-red-500 text-sm mt-2 font-bold flex items-center gap-1">
+                                                        <AlertCircle size={16} />
+                                                        {language === 'bn' 
+                                                            ? 'সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017XXXXXXXX)' 
+                                                            : 'Enter a valid 11-digit mobile number (e.g. 017XXXXXXXX)'}
+                                                    </p>
+                                                )}
+                                            </div>
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">
