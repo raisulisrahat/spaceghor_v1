@@ -91,7 +91,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
 
       {/* Content */}
-      <div className="px-2 pb-2 flex flex-col flex-grow space-y-0.5">
+      <div className="px-3 pb-3 md:px-4 md:pb-4 flex flex-col flex-grow space-y-1 md:space-y-1.5">
         <Link to={`/product/${product.slug}`}>
           <h3 className="text-xs font-bold text-neutral-800 line-clamp-1 group-hover:text-brand transition-colors">
             {product.name}
@@ -129,11 +129,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
 
-        <div className="flex items-center space-x-2 pt-1">
+        <div className="flex items-center space-x-2 pt-0.5">
           {isAvailable && !isNaN(regPrice) && regPrice > 0 ? (
             <>
               {salePrice && salePrice < regPrice && (
-                <span className="text-sm text-neutral-200 line-through">
+                <span className="text-sm text-neutral-400 line-through">
                   ৳{product.regular_price}
                 </span>
               )}
@@ -148,7 +148,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
 
-        <div className="pt-1 md:pt-2">
+        <div className="pt-2 md:pt-3 mt-auto">
           {isAvailable ? (
             <Link 
               to={`/product/${product.slug}`}
