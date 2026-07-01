@@ -107,7 +107,7 @@ const CartDrawer = () => {
                           Out of Stock
                         </span>
                       ) : (
-                        <p className="text-xs font-bold text-brand uppercase tracking-wider pt-0.5">৳{item.price}</p>
+                        <p className="text-xs font-bold text-brand uppercase tracking-wider pt-0.5">৳{Math.round(parseFloat(item.price.toString())).toLocaleString()}</p>
                       )}
                       
                       <div className="flex items-center justify-between pt-2">

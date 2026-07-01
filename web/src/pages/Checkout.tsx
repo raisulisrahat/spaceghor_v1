@@ -925,7 +925,6 @@ const Checkout = () => {
             <div className="bg-white rounded-2xl p-8 border border-neutral-100 shadow-sm space-y-8">
               <div className="border-b border-neutral-50 pb-4">
                 <h3 className="text-lg font-bold text-neutral-900">অর্ডার সামারি</h3>
-                <p className="text-[11px] font-medium text-neutral-400 uppercase tracking-wider">অর্ডার কনফার্ম করার পূর্বে শেষ রিভিউ</p>
               </div>
               
               <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">

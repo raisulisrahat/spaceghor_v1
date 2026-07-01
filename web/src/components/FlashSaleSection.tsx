@@ -157,16 +157,16 @@ const FlashSaleSection = () => {
                   {/* Simplified Availability Progress: More Compact */}
                   <div className="px-0.5 space-y-1">
                     <div className="flex justify-between text-[9px] font-bold uppercase tracking-wider">
-                      <span className="text-neutral-400 font-black">{stock > 0 ? `${stock} Left` : 'Sold Out'}</span>
-                      <span className="text-brand">{soldPercentage}% Sold</span>
+                      {/* <span className="text-neutral-400 font-black">{stock > 0 ? `${stock} Left` : 'Sold Out'}</span> */}
+                      {/* <span className="text-brand">{soldPercentage}% Sold</span> */}
                     </div>
                     <div className="h-1 w-full bg-neutral-50 rounded-full overflow-hidden">
-                      <motion.div 
+                      {/* <motion.div 
                         initial={{ width: 0 }}
                         whileInView={{ width: `${soldPercentage}%` }}
                         transition={{ duration: 1.2, delay: 0.3 }}
                         className="h-full bg-brand" 
-                      />
+                      /> */}
                     </div>
                   </div>
                 </motion.div>

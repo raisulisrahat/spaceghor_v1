@@ -876,7 +876,7 @@ const ClassicFunnelLayout = ({
                                 <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mt-8 backdrop-blur-sm">
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-center text-white/90">
-                                            <span className="font-medium">{t('product')}</span>
+                                            <span className="font-medium hidden md:block">পণ্য</span>
                                             <div className='flex gap-4 items-center'>
                                                 <div className="w-16 h-16 rounded-xl overflow-hidden bg-white shrink-0">
                                                     <img src={resolveImageUrl(activeVariant?.image || product.image || product.images?.[0]?.image)} alt={product.name} className="w-full h-full object-cover" loading="eager" fetchPriority="high" />

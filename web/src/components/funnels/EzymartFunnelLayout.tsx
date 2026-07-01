@@ -983,7 +983,7 @@ const EzymartFunnelLayout = ({
 
                                 <div className="space-y-3 text-sm sm:text-base">
                                     <div className="flex justify-between items-center text-slate-300 font-bold">
-                                        <span>পণ্য</span>
+                                        <span className="hidden md:block">পণ্য</span>
                                         <div className='flex gap-3 items-center text-right justify-end max-w-[200px] sm:max-w-xs'>
                                             <span className="font-extrabold text-white truncate text-xs sm:text-sm block">
                                                 {product.name}

@@ -76,7 +76,7 @@ const Cart = () => {
                       {item.stock !== undefined && item.stock <= 0 ? (
                         <span className="text-neutral-400">To be announced</span>
                       ) : (
-                        `৳${item.price}`
+                        `৳${Math.round(parseFloat(item.price.toString())).toLocaleString()}`
                       )}
                     </p>
                   </div>

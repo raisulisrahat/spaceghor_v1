@@ -924,7 +924,7 @@ const EzyFunnelLayout = ({
 
                                 <div className="space-y-3 text-sm sm:text-base">
                                     <div className="flex justify-between items-center text-slate-300 font-bold">
-                                        <span>পণ্য</span>
+                                        <span className="hidden md:block">পণ্য</span>
                                         <div className='flex gap-3 items-center text-right justify-end max-w-[200px] sm:max-w-xs'>
 
                                             <div className="w-10 h-10 rounded-lg overflow-hidden bg-white shrink-0 border border-white/10 hidden sm:block">
