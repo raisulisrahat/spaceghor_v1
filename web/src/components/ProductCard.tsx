@@ -133,7 +133,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {isAvailable && !isNaN(regPrice) && regPrice > 0 ? (
             <>
               {salePrice && salePrice < regPrice && (
-                <span className="text-sm text-neutral-400 line-through">
+                <span className="text-sm text-neutral-200 line-through">
                   ৳{product.regular_price}
                 </span>
               )}

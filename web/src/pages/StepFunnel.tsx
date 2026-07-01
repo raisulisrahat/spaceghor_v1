@@ -323,6 +323,12 @@ const StepFunnel = () => {
         const cleanPhone = phone.replace(/\D/g, '');
         if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
             setPhoneError(true);
+            setTimeout(() => {
+                const el = document.getElementById('phone-input-container');
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
             return;
         }
         setPhoneError(false);
@@ -567,7 +573,7 @@ const StepFunnel = () => {
                                                 value={formData.customer_name}
                                                 onChange={handleChange}
                                             />
-                                            <div>
+                                            <div id="phone-input-container">
                                                 <input
                                                     type="tel"
                                                     name="phone_number"

@@ -92,7 +92,7 @@ const FlashSaleSection = () => {
 
           <div className="flex items-center gap-3">
             {isCarousel && (
-              <div className="hidden md:flex items-center space-x-1.5 mr-2">
+              <div className="hidden md:flex items-center space-x-1.5">
                 <button 
                   onClick={() => document.getElementById('flash-sale-scroll')?.scrollBy({ left: -240, behavior: 'smooth' })}
                   className="w-8 h-8 bg-white border border-neutral-100 text-neutral-600 rounded-full flex items-center justify-center transition-all hover:bg-neutral-900 hover:text-white active:scale-95 shadow-sm"
@@ -107,13 +107,6 @@ const FlashSaleSection = () => {
                 </button>
               </div>
             )}
-            <Link 
-              to="/flash-sale" 
-              className="group flex items-center space-x-2 bg-neutral-900 text-white hover:bg-brand px-4 py-1.5 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all shadow-md active:scale-95"
-            >
-              <span>View All</span>
-              <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
           </div>
         </div>
 
@@ -180,6 +173,17 @@ const FlashSaleSection = () => {
               );
             })}
           </div>
+        </div>
+
+        {/* View All Button at the bottom */}
+        <div className="pb-6 flex justify-center">
+          <Link 
+            to="/flash-sale" 
+            className="group flex items-center space-x-2 bg-neutral-900 text-white hover:bg-brand px-8 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
+          >
+            <span>View All</span>
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>

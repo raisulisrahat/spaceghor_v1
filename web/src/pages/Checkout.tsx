@@ -501,6 +501,12 @@ const Checkout = () => {
     const cleanPhone = phone.replace(/\D/g, '');
     if (cleanPhone.length !== 11 || !cleanPhone.startsWith('01')) {
       setPhoneError(true);
+      setTimeout(() => {
+        const el = document.getElementById('phone-input-container');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
       return;
     }
     setPhoneError(false);
@@ -748,7 +754,7 @@ const Checkout = () => {
                   </div>
 
                   {/* Phone */}
-                  <div className="space-y-2">
+                  <div id="phone-input-container" className="space-y-2">
                     <label className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 ml-1">মোবাইল নম্বর</label>
                     <input 
                       required
